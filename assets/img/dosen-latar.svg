@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 64" width="640" height="64" fill="none" stroke="#ffffff" stroke-opacity=".4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- topi toga -->
+  <path d="M10 28 38 16l28 12-28 12z"/><path d="M22 34v11c0 3 7 6 16 6s16-3 16-6V34"/><path d="M66 28v14"/>
+  <!-- buku terbuka -->
+  <path d="M96 24c8-4 16-4 24 0v28c-8-4-16-4-24 0zM120 24c8-4 16-4 24 0v28c-8-4-16-4-24 0z"/>
+  <!-- sertifikat -->
+  <rect x="176" y="18" width="52" height="34" rx="2"/><path d="M184 28h36M184 35h24"/><circle cx="214" cy="44" r="4"/>
+  <!-- grafik batang -->
+  <path d="M262 54V38M276 54V26M290 54V32M304 54V16M258 54h52"/>
+  <!-- dosen di depan papan -->
+  <rect x="340" y="16" width="56" height="30"/><path d="M348 26h24M348 34h16"/><circle cx="420" cy="26" r="6"/><path d="M408 52v-8a12 12 0 0 1 24 0v8"/>
+  <!-- tangga jabatan -->
+  <path d="M452 54h18V44h18V34h18V24h18"/><path d="M478 18l4-6 4 6"/>
+  <!-- medali -->
+  <circle cx="570" cy="30" r="12"/><path d="M563 40l-5 14 12-6 12 6-5-14"/>
+  <!-- gedung kampus -->
+  <path d="M600 52V28l16-10 16 10v24M608 52V38h16v14"/>
+</svg>

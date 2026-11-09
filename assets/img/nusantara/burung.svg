@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="90" viewBox="0 0 1200 90">
+  <defs><path id="b" d="M0 0 Q5 -6 10 0 Q15 -6 20 0"/></defs>
+  <g fill="none" stroke="#ffffff" stroke-width="1.7" stroke-linecap="round" opacity=".72">
+    <use xlink:href="#b" x="150" y="30"/><use xlink:href="#b" x="182" y="44"/><use xlink:href="#b" x="212" y="26"/>
+    <use xlink:href="#b" x="560" y="54"/><use xlink:href="#b" x="592" y="40"/>
+    <use xlink:href="#b" x="880" y="22"/><use xlink:href="#b" x="906" y="36"/><use xlink:href="#b" x="934" y="24"/><use xlink:href="#b" x="1010" y="60"/>
+  </g>
+</svg>

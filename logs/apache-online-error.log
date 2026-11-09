@@ -1,0 +1,261 @@
+PHP Warning:  PHP Startup: Unable to load dynamic library 'curl' (tried: C:\\xampp\\php\\ext\\curl (The specified module could not be found), C:\\xampp\\php\\ext\\php_curl.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_sqlite' (tried: C:\\xampp\\php\\ext\\pdo_sqlite (The specified module could not be found), C:\\xampp\\php\\ext\\php_pdo_sqlite.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'php_openssl.dll' (tried: C:\\xampp\\php\\ext\\php_openssl.dll (The specified module could not be found), C:\\xampp\\php\\ext\\php_php_openssl.dll.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'php_ftp.dll' (tried: C:\\xampp\\php\\ext\\php_ftp.dll (The specified module could not be found), C:\\xampp\\php\\ext\\php_php_ftp.dll.dll (The specified module could not be found)) in Unknown on line 0
+[Tue Oct 27 06:49:33.908784 2026] [mpm_winnt:notice] [pid 11168:tid 376] AH00455: Apache/2.4.58 (Win64) configured -- resuming normal operations
+[Tue Oct 27 06:49:33.908784 2026] [mpm_winnt:notice] [pid 11168:tid 376] AH00456: Apache Lounge VS17 Server built: Oct 18 2023 13:03:18
+[Tue Oct 27 06:49:33.908784 2026] [core:notice] [pid 11168:tid 376] AH00094: Command line: 'C:\\xampp\\apache\\bin\\httpd.exe -d C:/xampp/apache -f C:\\xampp\\htdocs\\simkinerja\\online\\apache-online.conf'
+[Tue Oct 27 06:49:33.914839 2026] [mpm_winnt:notice] [pid 11168:tid 376] AH00418: Parent: Created child process 28952
+PHP Warning:  PHP Startup: Unable to load dynamic library 'curl' (tried: C:\\xampp\\php\\ext\\curl (The specified module could not be found), C:\\xampp\\php\\ext\\php_curl.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_sqlite' (tried: C:\\xampp\\php\\ext\\pdo_sqlite (The specified module could not be found), C:\\xampp\\php\\ext\\php_pdo_sqlite.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'php_openssl.dll' (tried: C:\\xampp\\php\\ext\\php_openssl.dll (The specified module could not be found), C:\\xampp\\php\\ext\\php_php_openssl.dll.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'php_ftp.dll' (tried: C:\\xampp\\php\\ext\\php_ftp.dll (The specified module could not be found), C:\\xampp\\php\\ext\\php_php_ftp.dll.dll (The specified module could not be found)) in Unknown on line 0
+[Tue Oct 27 06:49:34.344932 2026] [mpm_winnt:notice] [pid 28952:tid 364] AH00354: Child: Starting 25 worker threads.
+[Tue Oct 27 06:49:35.218775 2026] [authz_core:error] [pid 28952:tid 896] [client 127.0.0.1:55915] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/config.php
+[Tue Oct 27 06:49:35.231695 2026] [authz_core:error] [pid 28952:tid 896] [client 127.0.0.1:55915] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/lib/db.php
+[Tue Oct 27 06:49:35.232701 2026] [authz_core:error] [pid 28952:tid 896] [client 127.0.0.1:55915] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/database/simkinerja.sql
+[Tue Oct 27 06:49:35.236755 2026] [authz_core:error] [pid 28952:tid 896] [client 127.0.0.1:55915] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/logs/galat.log
+[Tue Oct 27 06:49:35.236755 2026] [authz_core:error] [pid 28952:tid 896] [client 127.0.0.1:55915] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/online/apache-online.conf
+[Tue Oct 27 06:49:35.236755 2026] [authz_core:error] [pid 28952:tid 896] [client 127.0.0.1:55915] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/uploads/.htaccess
+PHP Warning:  PHP Startup: Unable to load dynamic library 'curl' (tried: C:\\xampp\\php\\ext\\curl (The specified module could not be found), C:\\xampp\\php\\ext\\php_curl.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_sqlite' (tried: C:\\xampp\\php\\ext\\pdo_sqlite (The specified module could not be found), C:\\xampp\\php\\ext\\php_pdo_sqlite.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'php_openssl.dll' (tried: C:\\xampp\\php\\ext\\php_openssl.dll (The specified module could not be found), C:\\xampp\\php\\ext\\php_php_openssl.dll.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'php_ftp.dll' (tried: C:\\xampp\\php\\ext\\php_ftp.dll (The specified module could not be found), C:\\xampp\\php\\ext\\php_php_ftp.dll.dll (The specified module could not be found)) in Unknown on line 0
+[Tue Oct 27 06:51:25.326211 2026] [mpm_winnt:notice] [pid 58512:tid 404] AH00455: Apache/2.4.58 (Win64) configured -- resuming normal operations
+[Tue Oct 27 06:51:25.326211 2026] [mpm_winnt:notice] [pid 58512:tid 404] AH00456: Apache Lounge VS17 Server built: Oct 18 2023 13:03:18
+[Tue Oct 27 06:51:25.326211 2026] [core:notice] [pid 58512:tid 404] AH00094: Command line: 'C:\\xampp\\apache\\bin\\httpd.exe -d C:/xampp/apache -f C:\\xampp\\htdocs\\simkinerja\\online\\apache-online.conf'
+[Tue Oct 27 06:51:25.332114 2026] [mpm_winnt:notice] [pid 58512:tid 404] AH00418: Parent: Created child process 61916
+PHP Warning:  PHP Startup: Unable to load dynamic library 'curl' (tried: C:\\xampp\\php\\ext\\curl (The specified module could not be found), C:\\xampp\\php\\ext\\php_curl.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_sqlite' (tried: C:\\xampp\\php\\ext\\pdo_sqlite (The specified module could not be found), C:\\xampp\\php\\ext\\php_pdo_sqlite.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'php_openssl.dll' (tried: C:\\xampp\\php\\ext\\php_openssl.dll (The specified module could not be found), C:\\xampp\\php\\ext\\php_php_openssl.dll.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'php_ftp.dll' (tried: C:\\xampp\\php\\ext\\php_ftp.dll (The specified module could not be found), C:\\xampp\\php\\ext\\php_php_ftp.dll.dll (The specified module could not be found)) in Unknown on line 0
+[Tue Oct 27 06:51:25.525508 2026] [mpm_winnt:notice] [pid 61916:tid 380] AH00354: Child: Starting 25 worker threads.
+[Tue Oct 27 06:51:26.678506 2026] [authz_core:error] [pid 61916:tid 908] [client 127.0.0.1:65083] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/config.php
+[Tue Oct 27 06:51:26.678506 2026] [authz_core:error] [pid 61916:tid 908] [client 127.0.0.1:65083] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/lib/db.php
+[Tue Oct 27 06:51:26.678506 2026] [authz_core:error] [pid 61916:tid 908] [client 127.0.0.1:65083] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/database/simkinerja.sql
+[Tue Oct 27 06:51:26.687315 2026] [authz_core:error] [pid 61916:tid 908] [client 127.0.0.1:65083] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/logs/galat.log
+[Tue Oct 27 06:51:26.687315 2026] [authz_core:error] [pid 61916:tid 908] [client 127.0.0.1:65083] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/online/apache-online.conf
+[Tue Oct 27 06:51:26.687315 2026] [authz_core:error] [pid 61916:tid 908] [client 127.0.0.1:65083] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/uploads/.htaccess
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+PHP Warning:  PHP Startup: Unable to load dynamic library 'curl' (tried: C:\\xampp\\php\\ext\\curl (The specified module could not be found), C:\\xampp\\php\\ext\\php_curl.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_sqlite' (tried: C:\\xampp\\php\\ext\\pdo_sqlite (The specified module could not be found), C:\\xampp\\php\\ext\\php_pdo_sqlite.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'php_openssl.dll' (tried: C:\\xampp\\php\\ext\\php_openssl.dll (The specified module could not be found), C:\\xampp\\php\\ext\\php_php_openssl.dll.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'php_ftp.dll' (tried: C:\\xampp\\php\\ext\\php_ftp.dll (The specified module could not be found), C:\\xampp\\php\\ext\\php_php_ftp.dll.dll (The specified module could not be found)) in Unknown on line 0
+[Tue Oct 27 13:20:22.471034 2026] [mpm_winnt:notice] [pid 5508:tid 380] AH00455: Apache/2.4.58 (Win64) configured -- resuming normal operations
+[Tue Oct 27 13:20:22.471034 2026] [mpm_winnt:notice] [pid 5508:tid 380] AH00456: Apache Lounge VS17 Server built: Oct 18 2023 13:03:18
+[Tue Oct 27 13:20:22.471034 2026] [core:notice] [pid 5508:tid 380] AH00094: Command line: 'C:\\xampp\\apache\\bin\\httpd.exe -d C:/xampp/apache -f C:\\xampp\\htdocs\\simkinerja\\online\\apache-online.conf'
+[Tue Oct 27 13:20:22.475094 2026] [mpm_winnt:notice] [pid 5508:tid 380] AH00418: Parent: Created child process 4760
+PHP Warning:  PHP Startup: Unable to load dynamic library 'curl' (tried: C:\\xampp\\php\\ext\\curl (The specified module could not be found), C:\\xampp\\php\\ext\\php_curl.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_sqlite' (tried: C:\\xampp\\php\\ext\\pdo_sqlite (The specified module could not be found), C:\\xampp\\php\\ext\\php_pdo_sqlite.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'php_openssl.dll' (tried: C:\\xampp\\php\\ext\\php_openssl.dll (The specified module could not be found), C:\\xampp\\php\\ext\\php_php_openssl.dll.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'php_ftp.dll' (tried: C:\\xampp\\php\\ext\\php_ftp.dll (The specified module could not be found), C:\\xampp\\php\\ext\\php_php_ftp.dll.dll (The specified module could not be found)) in Unknown on line 0
+[Tue Oct 27 13:20:22.689948 2026] [mpm_winnt:notice] [pid 4760:tid 348] AH00354: Child: Starting 25 worker threads.
+[Tue Oct 27 13:20:23.699634 2026] [authz_core:error] [pid 4760:tid 912] [client 127.0.0.1:63865] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/config.php
+[Tue Oct 27 13:20:23.716003 2026] [authz_core:error] [pid 4760:tid 912] [client 127.0.0.1:63865] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/lib/db.php
+[Tue Oct 27 13:20:23.718008 2026] [authz_core:error] [pid 4760:tid 912] [client 127.0.0.1:63865] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/database/simkinerja.sql
+[Tue Oct 27 13:20:23.721008 2026] [authz_core:error] [pid 4760:tid 912] [client 127.0.0.1:63865] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/logs/galat.log
+[Tue Oct 27 13:20:23.722683 2026] [authz_core:error] [pid 4760:tid 912] [client 127.0.0.1:63865] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/online/apache-online.conf
+[Tue Oct 27 13:20:23.726022 2026] [authz_core:error] [pid 4760:tid 912] [client 127.0.0.1:63865] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/uploads/.htaccess
+[Tue Oct 27 13:21:51.136950 2026] [authz_core:error] [pid 4760:tid 912] [client 127.0.0.1:49295] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/config.php
+[Tue Oct 27 13:21:51.144460 2026] [authz_core:error] [pid 4760:tid 912] [client 127.0.0.1:49295] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/lib/db.php
+[Tue Oct 27 13:21:51.146461 2026] [authz_core:error] [pid 4760:tid 912] [client 127.0.0.1:49295] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/database/simkinerja.sql
+[Tue Oct 27 13:21:51.147461 2026] [authz_core:error] [pid 4760:tid 912] [client 127.0.0.1:49295] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/logs/galat.log
+[Tue Oct 27 13:21:51.149970 2026] [authz_core:error] [pid 4760:tid 912] [client 127.0.0.1:49295] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/online/apache-online.conf
+[Tue Oct 27 13:21:51.152989 2026] [authz_core:error] [pid 4760:tid 912] [client 127.0.0.1:49295] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/uploads/.htaccess
+[Wed Oct 28 10:45:27.466622 2026] [core:warn] [pid 19568:tid 352] AH00098: pid file C:/xampp/htdocs/simkinerja/online/apache-online.pid overwritten -- Unclean shutdown of previous Apache run?
+PHP Warning:  PHP Startup: Unable to load dynamic library 'curl' (tried: C:\\xampp\\php\\ext\\curl (The specified module could not be found), C:\\xampp\\php\\ext\\php_curl.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_sqlite' (tried: C:\\xampp\\php\\ext\\pdo_sqlite (The specified module could not be found), C:\\xampp\\php\\ext\\php_pdo_sqlite.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'php_openssl.dll' (tried: C:\\xampp\\php\\ext\\php_openssl.dll (The specified module could not be found), C:\\xampp\\php\\ext\\php_php_openssl.dll.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'php_ftp.dll' (tried: C:\\xampp\\php\\ext\\php_ftp.dll (The specified module could not be found), C:\\xampp\\php\\ext\\php_php_ftp.dll.dll (The specified module could not be found)) in Unknown on line 0
+[Wed Oct 28 10:45:27.514784 2026] [mpm_winnt:notice] [pid 19568:tid 352] AH00455: Apache/2.4.58 (Win64) configured -- resuming normal operations
+[Wed Oct 28 10:45:27.514784 2026] [mpm_winnt:notice] [pid 19568:tid 352] AH00456: Apache Lounge VS17 Server built: Oct 18 2023 13:03:18
+[Wed Oct 28 10:45:27.514784 2026] [core:notice] [pid 19568:tid 352] AH00094: Command line: 'C:\\xampp\\apache\\bin\\httpd.exe -d C:/xampp/apache -f C:\\xampp\\htdocs\\simkinerja\\online\\apache-online.conf'
+[Wed Oct 28 10:45:27.520783 2026] [mpm_winnt:notice] [pid 19568:tid 352] AH00418: Parent: Created child process 43900
+PHP Warning:  PHP Startup: Unable to load dynamic library 'curl' (tried: C:\\xampp\\php\\ext\\curl (The specified module could not be found), C:\\xampp\\php\\ext\\php_curl.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_sqlite' (tried: C:\\xampp\\php\\ext\\pdo_sqlite (The specified module could not be found), C:\\xampp\\php\\ext\\php_pdo_sqlite.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'php_openssl.dll' (tried: C:\\xampp\\php\\ext\\php_openssl.dll (The specified module could not be found), C:\\xampp\\php\\ext\\php_php_openssl.dll.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'php_ftp.dll' (tried: C:\\xampp\\php\\ext\\php_ftp.dll (The specified module could not be found), C:\\xampp\\php\\ext\\php_php_ftp.dll.dll (The specified module could not be found)) in Unknown on line 0
+[Wed Oct 28 10:45:27.747277 2026] [mpm_winnt:notice] [pid 43900:tid 388] AH00354: Child: Starting 25 worker threads.
+[Wed Oct 28 10:45:28.758446 2026] [authz_core:error] [pid 43900:tid 884] [client 127.0.0.1:62508] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/config.php
+[Wed Oct 28 10:45:28.781907 2026] [authz_core:error] [pid 43900:tid 884] [client 127.0.0.1:62508] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/lib/db.php
+[Wed Oct 28 10:45:28.783906 2026] [authz_core:error] [pid 43900:tid 884] [client 127.0.0.1:62508] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/database/simkinerja.sql
+[Wed Oct 28 10:45:28.785905 2026] [authz_core:error] [pid 43900:tid 884] [client 127.0.0.1:62508] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/logs/galat.log
+[Wed Oct 28 10:45:28.787267 2026] [authz_core:error] [pid 43900:tid 884] [client 127.0.0.1:62508] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/online/apache-online.conf
+[Wed Oct 28 10:45:28.790665 2026] [authz_core:error] [pid 43900:tid 884] [client 127.0.0.1:62508] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/uploads/.htaccess
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+[Wed Oct 28 14:47:16.032108 2026] [core:warn] [pid 30548:tid 364] AH00098: pid file C:/xampp/htdocs/simkinerja/online/apache-online.pid overwritten -- Unclean shutdown of previous Apache run?
+PHP Warning:  PHP Startup: Unable to load dynamic library 'curl' (tried: C:\\xampp\\php\\ext\\curl (The specified module could not be found), C:\\xampp\\php\\ext\\php_curl.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_sqlite' (tried: C:\\xampp\\php\\ext\\pdo_sqlite (The specified module could not be found), C:\\xampp\\php\\ext\\php_pdo_sqlite.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'php_openssl.dll' (tried: C:\\xampp\\php\\ext\\php_openssl.dll (The specified module could not be found), C:\\xampp\\php\\ext\\php_php_openssl.dll.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'php_ftp.dll' (tried: C:\\xampp\\php\\ext\\php_ftp.dll (The specified module could not be found), C:\\xampp\\php\\ext\\php_php_ftp.dll.dll (The specified module could not be found)) in Unknown on line 0
+[Wed Oct 28 14:47:16.048201 2026] [mpm_winnt:notice] [pid 30548:tid 364] AH00455: Apache/2.4.58 (Win64) configured -- resuming normal operations
+[Wed Oct 28 14:47:16.048201 2026] [mpm_winnt:notice] [pid 30548:tid 364] AH00456: Apache Lounge VS17 Server built: Oct 18 2023 13:03:18
+[Wed Oct 28 14:47:16.048201 2026] [core:notice] [pid 30548:tid 364] AH00094: Command line: 'C:\\xampp\\apache\\bin\\httpd.exe -d C:/xampp/apache -f C:\\xampp\\htdocs\\simkinerja\\online\\apache-online.conf'
+[Wed Oct 28 14:47:16.051195 2026] [mpm_winnt:notice] [pid 30548:tid 364] AH00418: Parent: Created child process 63968
+PHP Warning:  PHP Startup: Unable to load dynamic library 'curl' (tried: C:\\xampp\\php\\ext\\curl (The specified module could not be found), C:\\xampp\\php\\ext\\php_curl.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_sqlite' (tried: C:\\xampp\\php\\ext\\pdo_sqlite (The specified module could not be found), C:\\xampp\\php\\ext\\php_pdo_sqlite.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'php_openssl.dll' (tried: C:\\xampp\\php\\ext\\php_openssl.dll (The specified module could not be found), C:\\xampp\\php\\ext\\php_php_openssl.dll.dll (The specified module could not be found)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'php_ftp.dll' (tried: C:\\xampp\\php\\ext\\php_ftp.dll (The specified module could not be found), C:\\xampp\\php\\ext\\php_php_ftp.dll.dll (The specified module could not be found)) in Unknown on line 0
+[Wed Oct 28 14:47:16.246515 2026] [mpm_winnt:notice] [pid 63968:tid 376] AH00354: Child: Starting 25 worker threads.
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+[Wed Oct 28 14:47:17.165479 2026] [authz_core:error] [pid 63968:tid 880] [client 127.0.0.1:62549] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/config.php
+[Wed Oct 28 14:47:17.184968 2026] [authz_core:error] [pid 63968:tid 880] [client 127.0.0.1:62549] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/lib/db.php
+[Wed Oct 28 14:47:17.186967 2026] [authz_core:error] [pid 63968:tid 880] [client 127.0.0.1:62549] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/database/simkinerja.sql
+[Wed Oct 28 14:47:17.187967 2026] [authz_core:error] [pid 63968:tid 880] [client 127.0.0.1:62549] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/logs/galat.log
+[Wed Oct 28 14:47:17.189967 2026] [authz_core:error] [pid 63968:tid 880] [client 127.0.0.1:62549] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/online/apache-online.conf
+[Wed Oct 28 14:47:17.192967 2026] [authz_core:error] [pid 63968:tid 880] [client 127.0.0.1:62549] AH01630: client denied by server configuration: C:/xampp/htdocs/simkinerja/uploads/.htaccess
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect
+VirtualProtect() failed [87] The parameter is incorrect

@@ -1,0 +1,56 @@
+DirectoryIndex index.php
+Options -Indexes
+
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "same-origin"
+</IfModule>
+
+<FilesMatch "\.(json|sql|md|log|bak|ini|old|orig|swp|zip|rar|7z|tar|gz|tgz|yml|yaml|lock|env|dist|inc|sh|bat|cmd)$">
+    Require all denied
+</FilesMatch>
+
+<Files "config.php">
+    Require all denied
+</Files>
+
+<FilesMatch "^\.(?!htaccess$)">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "\.(css|js|png|jpg|jpeg|gif|svg|ico|webp|woff2?)$">
+    Require all granted
+</FilesMatch>
+
+ServerSignature Off
+Options -Indexes -MultiViews -Includes -ExecCGI
+
+<LimitExcept GET POST HEAD>
+    Require all denied
+</LimitExcept>
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always unset X-Powered-By
+</IfModule>
+
+<FilesMatch "(?i)^(?!index\.php$).*\.(php[0-9]?|phtml|phar|pl|py|cgi|asp|aspx|jsp|exe|dll)$">
+    Require all denied
+</FilesMatch>
+<IfModule mod_php.c>
+    php_value upload_max_filesize 25M
+    php_value post_max_size 64M
+    php_value max_file_uploads 20
+    php_value memory_limit 256M
+    php_value max_execution_time 180
+    php_value max_input_time 180
+</IfModule>
+<IfModule mod_php7.c>
+    php_value upload_max_filesize 25M
+    php_value post_max_size 64M
+    php_value max_file_uploads 20
+    php_value memory_limit 256M
+    php_value max_execution_time 180
+    php_value max_input_time 180
+</IfModule>

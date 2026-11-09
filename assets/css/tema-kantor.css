@@ -1,0 +1,1639 @@
+html.tema-kantor { --gelap: #102544; --oranye: #c49a45; --oranye-600: #8a6a20; --oranye-50: #faf3e2; --toska: #3a8a5f; --toska-50: #e6f4ec; --kuning: #b86b4b; --kuning-50: #f8ece6; --merek-900: #0f2240; --merek-800: #0f2341; --merek-700: #102544; --merek-600: #12284b; --merek-500: #8aa1be; --merek-300: #c8d2de; --merek-100: #d5dde6; --merek-50: #f1f4f7; --krem: #e8dcc4; --krem-50: #fbf7ee; --emas: #c49a45; --emas-600: #8a6a20; --emas-50: #faf3e2; --teks: #1f2124; --teks-2: #4b4e54; --teks-3: #65686e; --teks-4: #9a9da2; --garis: #c3c6cc; --garis-2: #a7abb3; --latar: #f7f8f6; --putih: #ffffff; --hijau: #3a8a5f; --hijau-50: #e6f4ec; --biru: #3a6ea5; --biru-50: #edf2f8; --ungu: #102544; --ungu-50: #eaeef3; --merah: #c62828; --merah-50: #fdecec; --jingga: #b86b4b; --jingga-50: #f8ece6; --tautan: #8a6a20; --bayang: 0 1px 2px rgba(14,33,61,.05); --bayang-md: 0 1px 2px rgba(14,33,61,.05), 0 10px 26px -14px rgba(14,33,61,.22); --bayang-lg: 0 24px 60px -16px rgba(14,33,61,.35); }
+html:where(.tema-kantor), :where(html.tema-kantor) body { color: var(--teks); background: var(--latar); }
+:where(html.tema-kantor) a { color: var(--tautan); }
+:where(html.tema-kantor) .lemah { color: var(--teks-3); }
+:where(html.tema-kantor) .sisi { background: linear-gradient(180deg, #0f223e 0%, #0e213d 100%); color: #d6dee7; }
+:where(html.tema-kantor) .sisi::-webkit-scrollbar-thumb { background: rgba(255,255,255,.3); }
+:where(html.tema-kantor) .sisi-merek { border-bottom: 1px solid rgba(255,255,255,.22); }
+:where(html.tema-kantor) .sisi-merek img { background: transparent; filter: drop-shadow(0 2px 4px rgba(0,0,0,.35)); }
+:where(html.tema-kantor) .sisi-merek .nm { color: #fff; }
+:where(html.tema-kantor) .sisi-merek .nm span { color: #e8dcc4; }
+:where(html.tema-kantor) .sisi-merek .sub { color: rgba(255,255,255,.8); }
+:where(html.tema-kantor) .sisi-grup { color: rgba(255,255,255,.72); }
+:where(html.tema-kantor) .sisi-nav a { color: #d6dee7; }
+:where(html.tema-kantor) .sisi-nav a:hover { background: rgba(255,255,255,.09); color: #fff; }
+:where(html.tema-kantor) .sisi-nav a.aktif { background: #e8dcc4; color: #0e213d; box-shadow: 0 2px 8px rgba(0,0,0,.30); }
+:where(html.tema-kantor) .sisi-nav a.aktif .ikon { color: #0e213d; }
+:where(html.tema-kantor) .sisi-nav a.aktif .lencana { background: #0e213d; color: #e8dcc4; }
+:where(html.tema-kantor) .sisi-nav .lencana { background: #c49a45; color: #0e213d; }
+:where(html.tema-kantor) .no-siklus { border: 1.5px solid rgba(255,255,255,.75); color: #fff; }
+:where(html.tema-kantor) .sisi-nav a.aktif .no-siklus { background: #0e213d; border-color: #0e213d; color: #e8dcc4; }
+:where(html.tema-kantor) .sisi { background: radial-gradient(130% 55% at 0% 0%, rgba(255,255,255,.16) 0%, rgba(255,255,255,0) 62%),
+    radial-gradient(90% 40% at 100% 100%, rgba(196,154,69,.14) 0%, rgba(196,154,69,0) 70%),
+    linear-gradient(180deg, #0f2341 0%, #0f223f 52%, #0e203c 100%); box-shadow: inset -1px 0 0 rgba(255,255,255,.07), 4px 0 24px -12px rgba(14,33,61,.6); }
+:where(html.tema-kantor) .sisi-merek { background: linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,0)); box-shadow: inset 0 -1px 0 rgba(255,255,255,.14); }
+:where(html.tema-kantor) .sisi-grup-tarik:hover { color: #fff; }
+:where(html.tema-kantor) .sisi-sub-tombol { color: #d6dee7; }
+:where(html.tema-kantor) .sisi-sub-tombol:hover { background: rgba(255,255,255,.09); color: #fff; }
+:where(html.tema-kantor) .sisi-sub-isi { border-left: 1px solid rgba(255,255,255,.18); }
+:where(html.tema-kantor) .sisi-grup::after { background: linear-gradient(90deg, rgba(255,255,255,.28), rgba(255,255,255,0)); }
+:where(html.tema-kantor) .sisi-nav a { border: 1px solid rgba(255,255,255,.07); background: linear-gradient(180deg, rgba(255,255,255,.09) 0%, rgba(255,255,255,.02) 50%, rgba(255,255,255,.05) 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.13), 0 1px 2px rgba(0,0,0,.18); }
+:where(html.tema-kantor) .sisi-nav a::before { background: linear-gradient(110deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.28) 48%, rgba(255,255,255,0) 66%); }
+:where(html.tema-kantor) .sisi-nav a:hover { border-color: rgba(255,255,255,.22); background: linear-gradient(180deg, rgba(255,255,255,.2) 0%, rgba(255,255,255,.07) 50%, rgba(255,255,255,.12) 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 4px 12px -6px rgba(0,0,0,.5); }
+:where(html.tema-kantor) .sisi-nav a.aktif { color: #0f2341; border-color: #fff6dc; background: linear-gradient(180deg, #fffaf0 0%, #f4e8cb 46%, #e5d4a9 54%, #efe2c2 100%); box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(143,106,50,.25), 0 6px 16px -6px rgba(232,220,196,.6), 0 2px 6px rgba(0,0,0,.35); }
+:where(html.tema-kantor) .sisi-nav a.aktif .ikon { color: #5c4a1c; }
+:where(html.tema-kantor) .no-siklus { background: radial-gradient(circle at 32% 26%, rgba(255,255,255,.45), rgba(255,255,255,.08) 60%); box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 1px 3px rgba(0,0,0,.35); }
+:where(html.tema-kantor) .sisi-nav a.aktif .no-siklus { background: radial-gradient(circle at 32% 26%, #122a4e, #0e213d 70%); box-shadow: inset 0 1px 0 rgba(255,255,255,.35); }
+:where(html.tema-kantor) .sisi-nav .lencana { background: linear-gradient(180deg, #f1d58f 0%, #d1a64f 48%, #b88a33 52%, #d4aa56 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.55), 0 1px 3px rgba(0,0,0,.4); text-shadow: 0 1px 0 rgba(255,255,255,.35); }
+:where(html.tema-kantor) .sisi-nav a.aktif .lencana { background: linear-gradient(180deg, #0f2341, #0e213d); }
+:where(html.tema-kantor) .sisi-kaki { border-top: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.75); }
+:where(html.tema-kantor) .sisi-kaki .inst { color: #fff; }
+:where(html.tema-kantor) .sisi-kaki .hak { color: rgba(255,255,255,.7); }
+:where(html.tema-kantor) header.atas { background: rgba(255,255,255,.95); border-bottom: 1px solid var(--garis); box-shadow: 0 1px 0 rgba(196,154,69,.35); }
+:where(html.tema-kantor) header.atas .judul { color: var(--gelap); }
+:where(html.tema-kantor) header.atas .judul small { color: var(--teks-3); }
+:where(html.tema-kantor) .tombol-menu, :where(html.tema-kantor) .tombol-ciut { border: 1px solid var(--garis-2); color: var(--teks-2); }
+:where(html.tema-kantor) .tombol-ciut:hover, :where(html.tema-kantor) .tombol-menu:hover { background: #fff; border-color: var(--oranye); color: var(--gelap); }
+:where(html.tema-kantor) .pilih-periode { border: 1px solid var(--garis-2); background: #fff; color: var(--gelap); }
+:where(html.tema-kantor) .pilih-periode select { background: transparent; color: var(--teks); }
+:where(html.tema-kantor) .lonceng-tombol { border: 1px solid var(--garis-2); background: #fff; color: var(--teks-2); }
+:where(html.tema-kantor) .lonceng-tombol:hover, :where(html.tema-kantor) .lonceng.buka .lonceng-tombol { border-color: var(--oranye); color: var(--gelap); }
+:where(html.tema-kantor) .aset-bilah { background: radial-gradient(60% 140% at 0% 0%, rgba(255,255,255,.24) 0%, transparent 60%),
+    radial-gradient(50% 120% at 72% 120%, rgba(239,226,198,.4) 0%, transparent 70%),
+    linear-gradient(115deg, #6587b0 0%, #142e54 45%, #112749 100%); box-shadow: 0 12px 26px -18px rgba(14,33,61,.7); }
+:where(html.tema-kantor) .aset-bilah .sambut-latar::after { background: linear-gradient(180deg, rgba(14,32,60,.28), rgba(14,32,60,.16)); }
+:where(html.tema-kantor) .aset-bilah .sambut-latar .matahari { background: radial-gradient(circle at 80% 100%, rgba(255,214,130,.5) 0, rgba(255,214,130,0) 42%); }
+:where(html.tema-kantor) .aset-bilah .gambar { background: url("../img/aset-latar.svg") repeat-x center bottom / 640px 64px; }
+:where(html.tema-kantor) .aset-bilah .gambar.gambar-dosen { background-image: url("../img/dosen-latar.svg"); }
+:where(html.tema-kantor) .jad-bagian .tabel-bungkus { border: 1px solid var(--garis); }
+:where(html.tema-kantor) .tab-kecil a { border: 1px solid var(--garis-2); background: #fff; color: var(--teks-2); }
+:where(html.tema-kantor) .tab-kecil a:hover { border-color: var(--merek-700); color: var(--merek-800); }
+:where(html.tema-kantor) .tab-kecil a.aktif { background: var(--merek-800); border-color: var(--merek-800); color: #fff; }
+:where(html.tema-kantor) .alur-aset { background: #fff; border: 1px solid var(--garis); border-radius: var(--radius); }
+:where(html.tema-kantor) .alur-aset > div { color: var(--teks-3); border-left: 1px solid var(--garis); }
+:where(html.tema-kantor) .alur-aset i { background: #e7e8ea; color: var(--teks-3); }
+:where(html.tema-kantor) .alur-aset .lalu { color: var(--merek-800); }
+:where(html.tema-kantor) .alur-aset .lalu i { background: #3b8a66; color: #fff; }
+:where(html.tema-kantor) .alur-aset .kini { color: var(--gelap); background: #eef1f5; }
+:where(html.tema-kantor) .alur-aset .kini i { background: var(--merek-800); color: #fff; }
+:where(html.tema-kantor) .alur-aset .tolak { color: #b8493f; background: #fdf0ef; }
+:where(html.tema-kantor) .alur-aset .tolak i { background: #b8493f; color: #fff; }
+:where(html.tema-kantor) .aset-sub a { color: rgba(255,255,255,.9); text-shadow: 0 1px 3px rgba(14,31,58,.7); border: 1px solid transparent; }
+:where(html.tema-kantor) .aset-sub a:hover { border-color: rgba(255,255,255,.45); color: #fff; }
+:where(html.tema-kantor) .aset-sub a.aktif { border-color: rgba(255,255,255,.85); background: rgba(255,255,255,.16); color: #fff; }
+:where(html.tema-kantor) .aset-nav a { color: #fff; text-shadow: 0 1px 3px rgba(14,31,58,.7); }
+:where(html.tema-kantor) .aset-nav a:hover { background: rgba(255,255,255,.16); color: #fff; }
+:where(html.tema-kantor) .aset-nav a.aktif { background: rgba(255,255,255,.96); color: #0f2341; box-shadow: 0 4px 10px -5px rgba(14,32,60,.6); }
+:where(html.tema-kantor) .aset-kpi { background: #fff; border: 1px solid var(--garis); border-radius: var(--radius); box-shadow: var(--bayang); }
+:where(html.tema-kantor) .aset-kpi > div { border-left: 1px solid var(--garis); }
+:where(html.tema-kantor) .aset-kpi span { color: var(--teks-3); }
+:where(html.tema-kantor) .aset-kpi b { color: var(--gelap); }
+:where(html.tema-kantor) .aset-kpi b.merah { color: #b8493f; }
+:where(html.tema-kantor) .aset-kpi small { color: var(--teks-3); }
+:where(html.tema-kantor) .donat-angka { fill: var(--gelap); }
+:where(html.tema-kantor) .donat-ket { fill: var(--teks-3); }
+:where(html.tema-kantor) .legenda-aset li { border-bottom: 1px solid #eef0ec; }
+:where(html.tema-kantor) .legenda-aset em { color: var(--teks-3); }
+:where(html.tema-kantor) .legenda-baris { color: var(--teks-2); }
+:where(html.tema-kantor) .sumbu-teks { fill: #7b7e85; }
+:where(html.tema-kantor) .nilai-teks { fill: var(--teks); }
+:where(html.tema-kantor) .tumpuk-judul small { color: var(--teks-3); }
+:where(html.tema-kantor) .tumpuk-bar { background: #eceeea; }
+:where(html.tema-kantor) .tumpuk-ket { color: var(--teks-2); }
+:where(html.tema-kantor) .hbar > div { background: #eceeea; }
+:where(html.tema-kantor) .hbar i { background: #12294d; }
+:where(html.tema-kantor) .teks-merah { color: #b8493f; }
+@media (max-width: 760px) {
+:where(html.tema-kantor) .aset-kpi > div:nth-child(n+3) { border-top: 1px solid var(--garis); }
+}
+:where(html.tema-kantor) .galeri-aset figure { border: 1px solid var(--garis); background: #fff; }
+:where(html.tema-kantor) .galeri-aset figcaption { color: var(--teks-2); }
+:where(html.tema-kantor) .mini-aset { border: 1px solid var(--garis); background: #f3f3f4; }
+:where(html.tema-kantor) .mini-aset.kosong { color: var(--teks-3); }
+:where(html.tema-kantor) .info-aset span { color: var(--teks-3); }
+:where(html.tema-kantor) .segera p { color: var(--teks-2); }
+:where(html.tema-kantor) .lonceng-lencana { background: var(--merah); color: #fff; box-shadow: 0 0 0 2px #fff; }
+:where(html.tema-kantor) .lonceng-tarik { background: #fff; border: 1px solid var(--garis); border-radius: var(--radius); box-shadow: var(--bayang-lg); }
+:where(html.tema-kantor) .lt-kepala { border-bottom: 1px solid var(--garis); }
+:where(html.tema-kantor) .lt-kepala button { color: var(--tautan); }
+:where(html.tema-kantor) .lt-item { border-bottom: 1px solid #f0f1f3; color: var(--teks); }
+:where(html.tema-kantor) .lt-item:hover { background: var(--krem-50); }
+:where(html.tema-kantor) .lt-item.baru { background: var(--merek-50); box-shadow: inset 3px 0 0 var(--oranye); }
+:where(html.tema-kantor) .lt-ket { color: var(--teks-3); }
+:where(html.tema-kantor) .lt-kosong { color: var(--teks-3); }
+:where(html.tema-kantor) .lt-semua { border-top: 1px solid var(--garis); }
+:where(html.tema-kantor) .toast-undangan { background: var(--merek-800); color: #fff; border-radius: var(--radius); box-shadow: var(--bayang-lg); }
+:where(html.tema-kantor) .toast-undangan a { color: #f1d58f; }
+:where(html.tema-kantor) .pengguna-chip { background: #fff; border: 1px solid var(--garis); }
+:where(html.tema-kantor) .pengguna-chip:hover { border-color: var(--oranye); }
+:where(html.tema-kantor) .pengguna-chip .info span { color: var(--teks-3); }
+:where(html.tema-kantor) .pengguna-tarik { background: #fff; border: 1px solid var(--garis); border-radius: var(--radius); box-shadow: var(--bayang-lg); }
+:where(html.tema-kantor) .pt-kepala { border-bottom: 1px solid var(--garis); }
+:where(html.tema-kantor) .pengguna-tarik a, :where(html.tema-kantor) .pengguna-tarik button { color: var(--teks); }
+:where(html.tema-kantor) .pengguna-tarik a:hover, :where(html.tema-kantor) .pengguna-tarik button:hover { background: var(--krem-50); }
+:where(html.tema-kantor) .pengguna-tarik form button { color: var(--merah); }
+:where(html.tema-kantor) .avatar { background: var(--merek-700); color: #fff; }
+:where(html.tema-kantor) img.avatar.foto { background: #fff; border: 1px solid var(--garis); }
+:where(html.tema-kantor) .kartu { background: var(--putih); border: 1px solid var(--garis); border-radius: var(--radius); box-shadow: var(--bayang); }
+:where(html.tema-kantor) .kartu-kepala { border-bottom: 1px solid var(--garis); }
+:where(html.tema-kantor) .kartu-kepala h2 .ikon { color: var(--oranye); }
+:where(html.tema-kantor) .kartu-kepala .ket { color: var(--teks-3); }
+:where(html.tema-kantor) .kartu-kaki { border-top: 1px solid var(--garis); background: #fafbf9; border-radius: 0 0 var(--radius) var(--radius); }
+:where(html.tema-kantor) .sambut { color: #fff; background: radial-gradient(60% 120% at 0% 0%, rgba(255,255,255,.28) 0%, transparent 60%),
+    radial-gradient(50% 90% at 70% 110%, rgba(239,226,198,.45) 0%, transparent 70%),
+    linear-gradient(115deg, #6587b0 0%, #142e54 45%, #112749 100%); box-shadow: 0 18px 36px -20px rgba(14,33,61,.65); }
+:where(html.tema-kantor) .sambut::after { background: rgba(255,255,255,.12); }
+:where(html.tema-kantor) .sambut h1 { color: #fff; text-shadow: 0 1px 2px rgba(14,33,61,.25); }
+:where(html.tema-kantor) .sambut p { color: rgba(255,255,255,.92); }
+:where(html.tema-kantor) .sambut .salam { color: #fff; }
+:where(html.tema-kantor) .sambut .avatar { border: 3px solid rgba(255,255,255,.85); box-shadow: 0 4px 12px rgba(14,33,61,.3); }
+:where(html.tema-kantor) .sambut-info { border-left: 1px solid rgba(255,255,255,.4); }
+:where(html.tema-kantor) .sambut .chip { background: rgba(255,255,255,.22); border: 1px solid rgba(255,255,255,.35); }
+:where(html.tema-kantor) .sambut .btn-terang { background: rgba(255,255,255,.95); color: #0f2341; border-color: #fff; }
+:where(html.tema-kantor) .sambut .btn-terang:hover { background: #fff; }
+:where(html.tema-kantor) .sambut .btn-krem { box-shadow: 0 6px 14px -6px rgba(143,106,50,.7); }
+:where(html.tema-kantor) .jam-digital { background: rgba(255,255,255,.88); border: 1px solid rgba(255,255,255,.95); box-shadow: 0 8px 20px -12px rgba(14,33,61,.55); color: #0f223e; }
+:where(html.tema-kantor) .sambut-latar::after { background: linear-gradient(90deg, rgba(14,32,60,.42) 0%, rgba(14,32,60,.2) 36%, rgba(14,32,60,0) 70%); }
+:where(html.tema-kantor) .sambut-latar .matahari { background: radial-gradient(circle at 76% 88%, rgba(255,214,130,.55) 0, rgba(255,214,130,0) 40%); }
+:where(html.tema-kantor) .sambut-latar .lapis { background-size: var(--t) var(--h); }
+:where(html.tema-kantor) .sambut-latar .awan { background-image: url("../img/nusantara/awan.svg"); }
+:where(html.tema-kantor) .sambut-latar .burung { background-image: url("../img/nusantara/burung.svg"); }
+:where(html.tema-kantor) .sambut-latar .gunung { background-image: url("../img/nusantara/gunung.svg"); }
+:where(html.tema-kantor) .sambut-latar .candi { background-image: url("../img/nusantara/candi.svg"); }
+:where(html.tema-kantor) .sambut-latar .laut { background-image: url("../img/nusantara/laut.svg"); }
+:where(html.tema-kantor) .sambut-latar .laut2 { background-image: url("../img/nusantara/laut2.svg"); }
+:where(html.tema-kantor) .sambut-latar .batik { background-image: url("../img/nusantara/batik.svg"); }
+:where(html.tema-kantor) .siklus { background: #fff; border: 1px solid var(--garis); border-radius: var(--radius); box-shadow: var(--bayang); }
+:where(html.tema-kantor) .siklus-langkah { border-right: 1px solid var(--garis); }
+:where(html.tema-kantor) .siklus-langkah .bulat { background: var(--latar); color: var(--teks-3); border: 2px solid var(--garis-2); }
+:where(html.tema-kantor) .siklus-langkah small { color: var(--teks-3); }
+:where(html.tema-kantor) .siklus-langkah p { color: var(--teks-3); }
+:where(html.tema-kantor) .siklus-langkah.lewat .bulat { background: var(--merek-100); color: var(--merek-700); border-color: var(--merek-300); }
+:where(html.tema-kantor) .siklus-langkah.kini { background: linear-gradient(180deg, var(--krem-50), #fff); }
+:where(html.tema-kantor) .siklus-langkah.kini::before { background: var(--oranye); }
+:where(html.tema-kantor) .siklus-langkah.kini .bulat { background: var(--gelap); color: #fff; border-color: var(--gelap); box-shadow: 0 0 0 4px rgba(196,154,69,.25); }
+:where(html.tema-kantor) .siklus-langkah.kini small { color: var(--oranye-600); }
+:where(html.tema-kantor) .stat { --w: var(--merek-700); --r: var(--merek-50); background: #fff; border: 1px solid var(--garis); border-radius: var(--radius); box-shadow: var(--bayang); }
+:where(html.tema-kantor) .stat:hover { box-shadow: var(--bayang-md); }
+:where(html.tema-kantor) .stat .ik { background: var(--r); color: var(--w); }
+:where(html.tema-kantor) .stat .label { color: var(--teks-3); }
+:where(html.tema-kantor) .stat .nilai { color: var(--teks); }
+:where(html.tema-kantor) .stat .nilai small { color: var(--teks-3); }
+:where(html.tema-kantor) .stat .ket { color: var(--teks-3); }
+:where(html.tema-kantor) .stat { --w: var(--oranye-600); --r: var(--oranye-50); }
+:where(html.tema-kantor) .stat.biru { --w: #8a4a32; --r: #f8ece6; }
+:where(html.tema-kantor) .stat.emas { --w: #8a6a20; --r: #faf3e2; }
+:where(html.tema-kantor) .stat.ungu { --w: #102544; --r: #eaeef3; }
+:where(html.tema-kantor) .stat.merah { --w: #c62828; --r: #fdecec; }
+:where(html.tema-kantor) .stat.toska { --w: #2f7a52; --r: #e6f4ec; }
+:where(html.tema-kantor) .meter { background: #e9eaec; }
+:where(html.tema-kantor) .meter span { background: var(--oranye); }
+:where(html.tema-kantor) .meter-hijau span { background: #3a8a5f; }
+:where(html.tema-kantor) .meter-biru span { background: #3a6ea5; }
+:where(html.tema-kantor) .meter-emas span { background: #c49a45; }
+:where(html.tema-kantor) .meter-merah span { background: #c62828; }
+:where(html.tema-kantor) .lc { border: 1px solid transparent; }
+:where(html.tema-kantor) .lc-abu { background: #f0f1f3; color: #4b4e54; border-color: #dfe1e4; }
+:where(html.tema-kantor) .lc-hijau { background: #e6f4ec; color: #146b43; border-color: #c4e5d2; }
+:where(html.tema-kantor) .lc-biru { background: #edf2f8; color: #2f5d8c; border-color: #d3deea; }
+:where(html.tema-kantor) .lc-emas { background: #faf3e2; color: #765727; border-color: #e8dcc4; }
+:where(html.tema-kantor) .lc-kuning { background: #f8ece6; color: #8a4a32; border-color: #ecd2c6; }
+:where(html.tema-kantor) .lc-merah { background: #fdecec; color: #a51f1f; border-color: #f6caca; }
+:where(html.tema-kantor) .lc-ungu { background: #eaeef3; color: #102544; border-color: #d5dde6; }
+:where(html.tema-kantor) .lc-jingga { background: #f8ece6; color: #8a4a32; border-color: #ecd2c6; }
+:where(html.tema-kantor) .lc-titik::before { background: currentColor; }
+:where(html.tema-kantor) .btn { border-radius: var(--radius-sm); border: 1px solid transparent; }
+:where(html.tema-kantor) .btn-utama { background: var(--gelap); color: #fff; }
+:where(html.tema-kantor) .btn-utama:hover { background: #0f2341; }
+:where(html.tema-kantor) .btn-emas { background: linear-gradient(180deg, #d4b06a 0%, #c49a45 100%); color: var(--merek-900); border-color: #a8822f; }
+:where(html.tema-kantor) .btn-emas:hover { background: #a8822f; }
+:where(html.tema-kantor) .btn-garis { background: #fff; color: var(--teks); border-color: var(--garis-2); }
+:where(html.tema-kantor) .btn-garis:hover { border-color: var(--oranye); color: var(--gelap); background: var(--krem-50); }
+:where(html.tema-kantor) .btn-terang { background: rgba(255,255,255,.1); color: #fff; border-color: rgba(255,255,255,.24); }
+:where(html.tema-kantor) .btn-terang:hover { background: rgba(255,255,255,.18); }
+:where(html.tema-kantor) .btn-krem { background: linear-gradient(180deg, #d4b06a 0%, #c49a45 100%); color: var(--merek-900); border-color: #a8822f; }
+:where(html.tema-kantor) .btn-krem:hover { background: #a8822f; }
+:where(html.tema-kantor) .btn-bahaya { background: var(--merah); color: #fff; }
+:where(html.tema-kantor) .btn-bahaya:hover { background: #a51f1f; }
+:where(html.tema-kantor) .btn-sukses { background: var(--toska); color: #fff; }
+:where(html.tema-kantor) .btn-sukses:hover { background: #2f7a52; }
+:where(html.tema-kantor) .btn-hantu { color: var(--teks-2); }
+:where(html.tema-kantor) .btn-hantu:hover { background: var(--latar); color: var(--gelap); }
+:where(html.tema-kantor) label.fl { color: var(--teks-2); }
+:where(html.tema-kantor) .wajib { color: var(--merah); }
+:where(html.tema-kantor) input[type=text], :where(html.tema-kantor) input[type=password], :where(html.tema-kantor) input[type=number], :where(html.tema-kantor) input[type=date], :where(html.tema-kantor) input[type=time], :where(html.tema-kantor) input[type=email], :where(html.tema-kantor) input[type=url], :where(html.tema-kantor) input[type=search], :where(html.tema-kantor) select, :where(html.tema-kantor) textarea { color: var(--teks); background: #fff; border: 1px solid var(--garis-2); border-radius: var(--radius-sm); }
+:where(html.tema-kantor) input:focus, :where(html.tema-kantor) select:focus, :where(html.tema-kantor) textarea:focus { border-color: var(--oranye); box-shadow: 0 0 0 3px rgba(196,154,69,.2); }
+:where(html.tema-kantor) input[readonly] { background: var(--latar); color: var(--teks-2); }
+:where(html.tema-kantor) .per-tw span { background: #f3f3f4; color: var(--teks-2); }
+:where(html.tema-kantor) .per-tw span b { color: var(--teks-3); }
+:where(html.tema-kantor) .per-tw span.kini { background: var(--krem); color: var(--merek-900); }
+:where(html.tema-kantor) .tw-tab a { border: 1px solid var(--garis-2); background: #fff; color: var(--teks-2); }
+:where(html.tema-kantor) .tw-tab a b { color: var(--teks); }
+:where(html.tema-kantor) .tw-tab a span { color: var(--teks-3); }
+:where(html.tema-kantor) .tw-tab a:hover { border-color: var(--merek-500); }
+:where(html.tema-kantor) .tw-tab a.aktif { background: var(--merek-700); border-color: var(--merek-700); }
+:where(html.tema-kantor) .tw-tab a.aktif b, :where(html.tema-kantor) .tw-tab a.aktif > span:not(.lc) { color: #fff; }
+:where(html.tema-kantor) .nilai-tw div { background: var(--latar); }
+:where(html.tema-kantor) .nilai-tw span { color: var(--teks-3); }
+:where(html.tema-kantor) .bantuan { color: var(--teks-3); }
+:where(html.tema-kantor) .cek input { accent-color: var(--oranye); }
+:where(html.tema-kantor) .pilih-jenis label { border: 1.5px solid var(--garis-2); border-radius: var(--radius-sm); }
+:where(html.tema-kantor) .pilih-jenis label:hover { border-color: var(--oranye); }
+:where(html.tema-kantor) .pilih-jenis span { color: var(--teks-3); }
+:where(html.tema-kantor) .pilih-jenis label:has(input:checked) { border-color: var(--oranye); background: var(--krem-50); box-shadow: 0 0 0 3px rgba(196,154,69,.18); }
+:where(html.tema-kantor) .titik-rutin { background: #1fa463; }
+:where(html.tema-kantor) .titik-panitia { background: #2f7fe0; }
+:where(html.tema-kantor) .titik-insidental { background: #e5484d; }
+:where(html.tema-kantor) table.tabel th { color: var(--teks-3); background: #fafbf9; border-bottom: 1px solid var(--garis); }
+:where(html.tema-kantor) table.tabel td { border-bottom: 1px solid #f0f1f3; }
+:where(html.tema-kantor) table.tabel tbody tr:hover td { background: #fafbfc; }
+:where(html.tema-kantor) table.tabel .sub { color: var(--teks-3); }
+:where(html.tema-kantor) table.tabel tfoot td { background: #fafbf9; border-top: 1px solid var(--garis); }
+:where(html.tema-kantor) .orang > div span { color: var(--teks-3); }
+:where(html.tema-kantor) .tab { border-bottom: 1px solid var(--garis); }
+:where(html.tema-kantor) .tab a { color: var(--teks-3); border-bottom: 2px solid transparent; }
+:where(html.tema-kantor) .tab a:hover { color: var(--gelap); }
+:where(html.tema-kantor) .tab a.aktif { color: var(--gelap); border-bottom-color: var(--oranye); }
+:where(html.tema-kantor) .notif { border-radius: var(--radius-sm); }
+:where(html.tema-kantor) .notif-ok { background: #e3ecf6; border-color: #c1d3ea; color: #112749; }
+:where(html.tema-kantor) .notif-galat { background: var(--merah-50); border-color: #f6caca; color: #8f1d1d; }
+:where(html.tema-kantor) .notif-warn { background: #eef0f2; border-color: #cdd2d8; color: #4a5560; }
+:where(html.tema-kantor) .notif-info { background: #e8f2fe; border-color: #cbe1fc; color: #1a5fb4; }
+:where(html.tema-kantor) .kosong { color: var(--teks-3); }
+:where(html.tema-kantor) .kosong .ikon { color: var(--garis-2); }
+:where(html.tema-kantor) .kosong b { color: var(--teks-2); }
+:where(html.tema-kantor) .tirai { background: rgba(14,33,61,.5); }
+:where(html.tema-kantor) .modal { background: #fff; box-shadow: var(--bayang-lg); }
+:where(html.tema-kantor) .modal-kepala { border-bottom: 1px solid var(--garis); }
+:where(html.tema-kantor) .modal-kepala .tutup { color: var(--teks-3); }
+:where(html.tema-kantor) .modal-kepala .tutup:hover { background: var(--latar); }
+:where(html.tema-kantor) .modal-kaki { border-top: 1px solid var(--garis); background: #fafbf9; }
+:where(html.tema-kantor) .linimasa li::before { background: var(--garis); }
+:where(html.tema-kantor) .linimasa li::after { background: #fff; border: 2.5px solid #1fa463; }
+:where(html.tema-kantor) .linimasa li.j-panitia::after { border-color: #2f7fe0; }
+:where(html.tema-kantor) .linimasa li.j-insidental::after { border-color: #e5484d; }
+:where(html.tema-kantor) .linimasa .wkt { color: var(--teks-3); }
+:where(html.tema-kantor) .linimasa p { color: var(--teks-2); }
+:where(html.tema-kantor) .grafik-batang .tumpuk { background: #eeeff0; }
+:where(html.tema-kantor) .grafik-batang .tumpuk .rutin { background: #1fa463; }
+:where(html.tema-kantor) .grafik-batang .tumpuk .panitia { background: #2f7fe0; }
+:where(html.tema-kantor) .grafik-batang .tumpuk .insidental { background: #e5484d; }
+:where(html.tema-kantor) .grafik-batang .lbl { color: var(--teks-3); }
+:where(html.tema-kantor) .legenda { color: var(--teks-2); }
+:where(html.tema-kantor) .donat .tengah span { color: var(--teks-3); }
+:where(html.tema-kantor) .skor-besar .angka-besar { color: var(--gelap); }
+:where(html.tema-kantor) .skor-besar .ket { color: var(--teks-3); }
+:where(html.tema-kantor) .rinci dt { color: var(--teks-3); }
+:where(html.tema-kantor) .skala span { border: 1.5px solid var(--garis-2); color: var(--teks-2); }
+:where(html.tema-kantor) .skala label:hover span { border-color: var(--oranye); }
+:where(html.tema-kantor) .skala input:checked + span { background: var(--oranye); border-color: var(--oranye); color: #fff; box-shadow: 0 2px 8px rgba(196,154,69,.4); }
+:where(html.tema-kantor) .skala input:focus-visible + span { box-shadow: 0 0 0 3px rgba(196,154,69,.35); }
+:where(html.tema-kantor) .aspek { border-bottom: 1px dashed var(--garis); }
+:where(html.tema-kantor) .aspek p { color: var(--teks-3); }
+:where(html.tema-kantor) .izin-grup { border: 1px solid var(--garis); border-radius: var(--radius-sm); }
+:where(html.tema-kantor) .izin-grup h3 { color: var(--oranye-600); }
+:where(html.tema-kantor) .izin-grup .cek small { color: var(--teks-3); }
+:where(html.tema-kantor) .matriks td.tengah .ikon { color: var(--toska); }
+:where(html.tema-kantor) .matriks td.tengah .tidak { color: var(--garis-2); }
+:where(html.tema-kantor) .pesan-kartu { border: 1px solid var(--garis); border-radius: var(--radius-sm); background: #fff; }
+:where(html.tema-kantor) .pesan-kartu.baru { border-color: var(--oranye); background: var(--krem-50); }
+:where(html.tema-kantor) .pesan-kartu .kepala .wkt { color: var(--teks-3); }
+:where(html.tema-kantor) .pesan-kartu .tanggapan { background: var(--latar); border-left: 3px solid var(--oranye); }
+:where(html.tema-kantor) .anggota { border: 1px solid var(--garis); border-radius: var(--radius); background: #fff; }
+:where(html.tema-kantor) .anggota:hover { box-shadow: var(--bayang-md); border-color: var(--garis-2); }
+:where(html.tema-kantor) .anggota .angka-mini div { background: var(--latar); }
+:where(html.tema-kantor) .anggota .angka-mini span { color: var(--teks-3); }
+:where(html.tema-kantor) .anggota .legenda b { color: var(--teks); }
+:where(html.tema-kantor) .anggota .aksi-kartu .btn-ikon { background: #fff; border-color: var(--garis-2); color: var(--teks-2); }
+:where(html.tema-kantor) .anggota .aksi-kartu .btn-ikon:hover { border-color: var(--merek-500); color: var(--gelap); background: var(--merek-50); }
+:where(html.tema-kantor) .pita-langkah { border-radius: var(--radius-sm); background: var(--krem-50); border: 1px solid #eedfbd; }
+:where(html.tema-kantor) .pita-langkah .ikon { color: var(--emas-600); }
+:where(html.tema-kantor) body.masuk { background: #d9d4c8; }
+:where(html.tema-kantor) body.masuk::before { background: linear-gradient(rgba(255,255,255,.38), rgba(255,255,255,.38)), var(--foto) center / cover no-repeat; }
+:where(html.tema-kantor) body.masuk::after { background: var(--foto) left center / contain no-repeat; }
+:where(html.tema-kantor) .masuk-merek { background: rgba(255,255,255,.82); border: 1px solid rgba(255,255,255,.9); box-shadow: 0 8px 24px -12px rgba(14,33,61,.45); }
+:where(html.tema-kantor) .masuk-cahaya { background: radial-gradient(120% 95% at 50% 42%, rgba(14,32,60,0) 70%, rgba(14,32,60,.05) 100%); }
+:where(html.tema-kantor) .masuk-cahaya::before { background: radial-gradient(34% 40% at 28% 22%, rgba(255,214,140,.34), rgba(255,214,140,0) 70%),
+    radial-gradient(30% 36% at 72% 64%, rgba(255,236,190,.22), rgba(255,236,190,0) 70%); }
+:where(html.tema-kantor) .masuk-merek b { color: var(--merek-800); }
+:where(html.tema-kantor) .masuk-merek span { color: var(--teks-2); }
+:where(html.tema-kantor) .masuk-kartu { background: rgba(255,255,255,.88); border: 1px solid rgba(255,255,255,.95); box-shadow: 0 30px 60px -24px rgba(14,33,61,.55); }
+:where(html.tema-kantor) .masuk-kartu h2 { color: var(--merek-800); }
+:where(html.tema-kantor) .masuk-kartu h2 span { color: #c49a45; }
+:where(html.tema-kantor) .masuk-kartu p.sub { color: var(--teks-3); }
+:where(html.tema-kantor) .masuk-kartu .medan input { background: rgba(255,255,255,.95); }
+:where(html.tema-kantor) .masuk-kaki { color: #0f223e; text-shadow: 0 1px 2px rgba(255,255,255,.6); }
+:where(html.tema-kantor) .medan .ikon-bungkus { color: var(--teks-4); }
+:where(html.tema-kantor) .medan .mata { color: var(--teks-3); }
+:where(html.tema-kantor) .baris-bantu input { accent-color: var(--merek-700); }
+:where(html.tema-kantor) .catatan-akses { color: var(--teks-3); }
+:where(html.tema-kantor) a:focus-visible, :where(html.tema-kantor) button:focus-visible { outline: 2px solid var(--oranye); }
+:where(html.tema-kantor) .tabel-bungkus { background-color: #fff; background-image: linear-gradient(to right, #fff 30%, rgba(255,255,255,0)),
+    linear-gradient(to left, #fff 30%, rgba(255,255,255,0)),
+    radial-gradient(farthest-side at 0 50%, rgba(14,33,61,.16), rgba(14,33,61,0)),
+    radial-gradient(farthest-side at 100% 50%, rgba(14,33,61,.16), rgba(14,33,61,0)); }
+:where(html.tema-kantor) .rincian { border: 1px dashed var(--garis-2); border-radius: var(--radius-sm); background: #fcfdfc; }
+:where(html.tema-kantor) .rincian > summary { color: var(--teks-2); }
+:where(html.tema-kantor) .rincian[open] > summary { border-bottom: 1px dashed var(--garis); }
+:where(html.tema-kantor) .matriks th:first-child, :where(html.tema-kantor) .matriks td:first-child { background: #fff; box-shadow: 1px 0 0 var(--garis); }
+:where(html.tema-kantor) .matriks th:first-child { background: #fafbf9; }
+:where(html.tema-kantor) table.tabel.matriks thead th { background: #eef1f4; box-shadow: inset 0 -1px 0 var(--garis-2); }
+:where(html.tema-kantor) table.tabel.matriks tbody tr:nth-child(even) td { background-color: #fff; }
+:where(html.tema-kantor) table.tabel.matriks tbody tr:hover td { background-color: #f4f6f8; }
+:where(html.tema-kantor) table.tabel.matriks tbody tr:hover td:first-child { box-shadow: inset 3px 0 0 var(--garis-2); }
+:where(html.tema-kantor) table.tabel.matriks td.grup-izin, :where(html.tema-kantor) table.tabel.matriks tbody tr:hover td.grup-izin { background-color: #eef1f4; color: var(--merek-700); }
+@media (max-width: 1180px) {
+:where(html.tema-kantor) .siklus-langkah:nth-child(-n+2) { border-bottom: 1px solid var(--garis); }
+}
+@media (max-width: 860px) {
+:where(html.tema-kantor) .sisi { box-shadow: var(--bayang-lg); }
+:where(html.tema-kantor) .tirai-sisi { background: rgba(0,0,0,.35); }
+}
+@media (max-width: 560px) {
+:where(html.tema-kantor) .siklus-langkah { border-bottom: 1px solid var(--garis); }
+}
+:where(html.tema-kantor) .stat .ik, :where(html.tema-kantor) .stat.biru .ik, :where(html.tema-kantor) .stat.emas .ik, :where(html.tema-kantor) .stat.ungu .ik, :where(html.tema-kantor) .stat.toska .ik { background: var(--merek-50); color: var(--merek-700); }
+:where(html.tema-kantor) .stat.merah .ik { background: var(--merah-50); color: var(--merah); }
+:where(html.tema-kantor) .tabel-bungkus { border-radius: 0 0 var(--radius) var(--radius); }
+:where(html.tema-kantor) table.tabel { background: #fff; }
+:where(html.tema-kantor) table.tabel thead th, :where(html.tema-kantor) table.tabel tfoot td { color: var(--merek-800); background: #f1f3f6; border-bottom: 1px solid #d2d4d9; box-shadow: inset 0 1px 0 #fff; }
+:where(html.tema-kantor) table.tabel tfoot td { border-top: 1px solid #d2d4d9; }
+:where(html.tema-kantor) table.tabel tbody td { border-bottom: 1px solid #eeeff0; }
+:where(html.tema-kantor) table.tabel tbody tr:hover td { background-color: #f6f8fa; }
+:where(html.tema-kantor) table.tabel tbody tr:hover td:first-child { box-shadow: inset 3px 0 0 var(--merek-300); }
+:where(html.tema-kantor) table.tabel tr.baris-kelompok td, :where(html.tema-kantor) table.tabel tr.baris-kelompok:hover td { color: var(--merek-800); background: #e2e8ef; border-top: 1px solid #d2d4d9; border-bottom: 1px solid #d2d4d9; }
+:where(html.tema-kantor) table.tabel tr.baris-kelompok .lemah { color: var(--teks-3); }
+:where(html.tema-kantor) .status-titik { color: var(--teks-2); }
+:where(html.tema-kantor) .status-titik::before { background: var(--hijau); }
+:where(html.tema-kantor) table.tabel tr:target td { background: var(--emas-50); }
+:where(html.tema-kantor) .pilih-peserta { border: 1px solid var(--garis-2); border-radius: var(--radius-sm); }
+:where(html.tema-kantor) .tautan-kecil { color: var(--tautan); }
+:where(html.tema-kantor) .chip-unit span { border: 1px solid var(--garis-2); color: var(--teks-2); background: #fff; }
+:where(html.tema-kantor) .chip-unit:hover span { border-color: var(--merek-500); }
+:where(html.tema-kantor) .chip-unit input:indeterminate + span { border-color: var(--merek-700); background: var(--merek-50); color: var(--merek-700); }
+:where(html.tema-kantor) .chip-unit input:checked + span { background: var(--merek-700); border-color: var(--merek-700); color: #fff; }
+:where(html.tema-kantor) .chip-unit input:focus-visible + span { outline: 2px solid var(--oranye); }
+:where(html.tema-kantor) .peserta-unit { border-bottom: 1px solid var(--garis); }
+:where(html.tema-kantor) .peserta-item small { color: var(--teks-3); }
+:where(html.tema-kantor) .galeri-dok figure { border: 1px solid var(--garis); border-radius: var(--radius-sm); background: #fff; }
+:where(html.tema-kantor) .galeri-dok figcaption { color: var(--teks-2); }
+:where(html.tema-kantor) .form-unggah-dok { border-top: 1px dashed var(--garis-2); }
+:where(html.tema-kantor) .berita-acara { background: #fff; border: 1px solid var(--garis); border-radius: var(--radius); box-shadow: var(--bayang); color: #000; }
+:where(html.tema-kantor) .kop-yayasan { color: #102544; }
+:where(html.tema-kantor) .kop-univ { color: #102544; }
+:where(html.tema-kantor) .kop-garis { border-top: 3px solid #21612d; border-bottom: 1px solid #21612d; }
+:where(html.tema-kantor) .ba-tabel th, :where(html.tema-kantor) .ba-tabel td { border: 1px solid #000; }
+:where(html.tema-kantor) .ba-tabel th { background: #f0f0f0; }
+:where(html.tema-kantor) .ba-dok img { border: 1px solid #999; }
+:where(html.tema-kantor) .opsi-cetak label { border: 1px solid var(--garis-2); border-radius: var(--radius-sm); }
+:where(html.tema-kantor) .opsi-cetak label:hover { border-color: var(--merek-500); }
+:where(html.tema-kantor) .opsi-cetak label:has(input:checked) { border-color: var(--merek-700); background: var(--merek-50); }
+:where(html.tema-kantor) .opsi-cetak input { accent-color: var(--merek-700); }
+:where(html.tema-kantor) .opsi-cetak small { color: var(--teks-3); }
+:where(html.tema-kantor) .kartu-akun { border: 1.5px dashed var(--garis-2); border-radius: var(--radius); background: #fff; }
+:where(html.tema-kantor) .ka-kepala { border-bottom: 2px solid var(--merek-700); }
+:where(html.tema-kantor) .ka-kepala b { color: var(--merek-800); }
+:where(html.tema-kantor) .ka-kepala span { color: var(--teks-3); }
+:where(html.tema-kantor) .ka-nama span { color: var(--teks-3); }
+:where(html.tema-kantor) .ka-sandi { background: var(--krem-50); border: 1px solid var(--krem); }
+:where(html.tema-kantor) .ka-catatan { color: var(--teks-3); }
+:where(html.tema-kantor) .cetak-kop { border-bottom: 2px solid var(--merek-700); }
+:where(html.tema-kantor) .cetak-kop span { color: var(--teks-2); }
+@media print {
+html:where(.tema-kantor), :where(html.tema-kantor) body { background: #fff; color: #000; }
+:where(html.tema-kantor) .kartu, :where(html.tema-kantor) .stat, :where(html.tema-kantor) .anggota, :where(html.tema-kantor) .pesan-kartu, :where(html.tema-kantor) .siklus { border-color: #bbb; }
+:where(html.tema-kantor) .sambut { background: #fff !important; color: #000; border: 1px solid #bbb; }
+:where(html.tema-kantor) .sambut h1, :where(html.tema-kantor) .sambut p, :where(html.tema-kantor) .sambut .salam { color: #000; }
+:where(html.tema-kantor) .sambut .chip { background: #f0f1f3; border-color: #ccc; color: #000; }
+:where(html.tema-kantor) table.tabel { background: #fff; }
+:where(html.tema-kantor) table.tabel th, :where(html.tema-kantor) table.tabel tfoot td { background: #eee !important; color: #000; }
+:where(html.tema-kantor) table.tabel td { background: transparent !important; }
+:where(html.tema-kantor) table.tabel tr.baris-kelompok td { background: #dcdcdc !important; color: #000; }
+:where(html.tema-kantor) .ba-tabel th { background: #eee !important; }
+:where(html.tema-kantor) .kartu-akun { border-color: #777; }
+:where(html.tema-kantor) .per-tw span { background: #f0f1f3; }
+:where(html.tema-kantor) .lc { border-color: #999; }
+:where(html.tema-kantor) .meter { border: 1px solid #ccc; }
+}
+:where(html.tema-kantor) .kartu-kepala { background: linear-gradient(180deg, #f8f9fb, #f0f2f5); border-radius: var(--radius) var(--radius) 0 0; }
+:where(html.tema-kantor) table.tabel:not(.matriks) thead th { background: #e6ebf0; color: #0f2341; border-bottom: 2px solid #8da0b7; }
+:where(html.tema-kantor) table.tabel:not(.matriks) th + th, :where(html.tema-kantor) table.tabel:not(.matriks) td + td { border-left: 1px solid #e2e3e6; }
+:where(html.tema-kantor) table.tabel:not(.matriks) th + th { border-left-color: #cfd6df; }
+:where(html.tema-kantor) table.tabel:not(.matriks) tbody td { border-bottom: 1px solid #dfe0e3; }
+:where(html.tema-kantor) table.tabel:not(.matriks) tbody tr:nth-child(even):not(.baris-kelompok) td { background-color: #f9f9f9; }
+:where(html.tema-kantor) table.tabel:not(.matriks) tbody tr:not(.baris-kelompok):hover td { background-color: #edf1f5; }
+:where(html.tema-kantor) table.tabel:not(.matriks) tbody tr:last-child td { border-bottom: 1px solid #dfe0e3; }
+:where(html.tema-kantor) .aset-menu::before { background: #fff; border: 1px solid var(--garis); box-shadow: var(--bayang-lg); }
+:where(html.tema-kantor) .aset-menu a { color: var(--teks); }
+:where(html.tema-kantor) .aset-menu a:hover { background: #eef1f5; color: var(--merek-800); }
+:where(html.tema-kantor) .aset-menu a.aktif { background: #e2e8f0; color: var(--merek-800); }
+:where(html.tema-kantor) .aset-grup.ada-menu > a::after { border-right: 1.6px solid currentColor; border-bottom: 1.6px solid currentColor; }
+:where(html.tema-kantor) .aset-grup:hover > a:not(.aktif) { background: rgba(255,255,255,.16); color: #fff; }
+:where(html.tema-kantor) .sisi { background: radial-gradient(120% 46% at 0% 0%, rgba(124,163,211,.38) 0%, rgba(124,163,211,0) 62%),
+    radial-gradient(95% 42% at 100% 100%, rgba(224,178,84,.3) 0%, rgba(224,178,84,0) 70%),
+    linear-gradient(180deg, #112849 0%, #0f2442 46%, #0f223e 100%); box-shadow: inset -1px 0 0 rgba(255,255,255,.12), 4px 0 24px -12px rgba(14,33,61,.7); }
+:where(html.tema-kantor) .sisi-merek { background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.02)); box-shadow: inset 0 -1px 0 rgba(255,255,255,.22); }
+:where(html.tema-kantor) .sisi-grup { color: rgba(255,255,255,.92); }
+:where(html.tema-kantor) .sisi-grup::after { background: linear-gradient(90deg, rgba(255,255,255,.5), rgba(255,255,255,0)); }
+:where(html.tema-kantor) .sisi-nav a, :where(html.tema-kantor) .sisi-sub-tombol { color: #fff; }
+:where(html.tema-kantor) .sisi-nav a { border: 1px solid rgba(180,203,230,.4); background: linear-gradient(180deg, #132c52 0%, #12294b 47%, #102646 53%, #112849 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.38), inset 0 -1px 0 rgba(0,0,0,.28), 0 2px 6px rgba(0,0,0,.38); }
+:where(html.tema-kantor) .sisi-nav a:hover { border-color: rgba(214,226,241,.7); background: linear-gradient(180deg, #153059 0%, #31598a 47%, #12294c 53%, #2e5381 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -1px 0 rgba(0,0,0,.25), 0 5px 12px -5px rgba(0,0,0,.55); }
+:where(html.tema-kantor) .sisi-nav a.aktif { border-color: #fff3cf; color: #0f2341; background: linear-gradient(180deg, #fffbee 0%, #f6e7bf 46%, #e8cf8d 54%, #f1deaa 100%); box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(143,106,50,.35), 0 6px 16px -6px rgba(240,215,150,.75), 0 2px 6px rgba(0,0,0,.4); }
+:where(html.tema-kantor) .sisi-sub-tombol { border: 1px solid rgba(180,203,230,.4); background: linear-gradient(180deg, #132c52 0%, #12294b 47%, #102646 53%, #112849 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.38), 0 2px 6px rgba(0,0,0,.38); }
+:where(html.tema-kantor) .sisi-sub-tombol:hover { background: linear-gradient(180deg, #153059 0%, #31598a 47%, #12294c 53%, #2e5381 100%); }
+:where(html.tema-kantor) .sisi-kaki { border-top-color: rgba(255,255,255,.3); color: rgba(255,255,255,.88); }
+:where(html.tema-kantor) .sisi { background: linear-gradient(180deg, #0f2341 0%, #0e213d 100%); color: #d6dee7; }
+:where(html.tema-kantor) .sisi-merek { border-bottom: 1px solid rgba(255,255,255,.1); }
+:where(html.tema-kantor) .sisi-grup { color: rgba(255,255,255,.42); }
+:where(html.tema-kantor) .sisi-grup::after { background: linear-gradient(90deg, rgba(255,255,255,.14), rgba(255,255,255,0)); }
+:where(html.tema-kantor) .sisi-grup-tarik:hover { color: rgba(255,255,255,.8); }
+:where(html.tema-kantor) .sisi-nav a, :where(html.tema-kantor) .sisi-sub-tombol { color: #d6dee7; border: 1px solid transparent; }
+:where(html.tema-kantor) .sisi-nav a:hover, :where(html.tema-kantor) .sisi-sub-tombol:hover { background: rgba(255,255,255,.09); color: #fff; border-color: transparent; }
+:where(html.tema-kantor) .sisi-nav a.aktif { background: #e8dcc4; color: #0e213d; border-color: transparent; box-shadow: 0 2px 8px rgba(0,0,0,.30); }
+:where(html.tema-kantor) .sisi-nav a.aktif .ikon { color: #0e213d; }
+:where(html.tema-kantor) .sisi-nav .lencana { background: #c49a45; color: #0e213d; }
+:where(html.tema-kantor) .sisi-nav a.aktif .lencana { background: #0e213d; color: #e8dcc4; }
+:where(html.tema-kantor) .sisi-nav .no-siklus, :where(html.tema-kantor) .no-siklus { border: 1.5px solid rgba(255,255,255,.75); color: #fff; }
+:where(html.tema-kantor) .sisi-nav a.aktif .no-siklus { background: #0e213d; border-color: #0e213d; color: #e8dcc4; }
+:where(html.tema-kantor) .sisi-kaki { border-top-color: rgba(255,255,255,.1); color: rgba(255,255,255,.6); }
+:where(html.tema-kantor) .jad-kpi > div { background: #fff; border: 1px solid var(--garis); border-top: 3px solid var(--merek-700); box-shadow: 0 1px 2px rgba(14,33,61,.05); }
+:where(html.tema-kantor) .jad-kpi span { color: var(--teks-3); }
+:where(html.tema-kantor) .jad-kpi b { color: var(--gelap); }
+:where(html.tema-kantor) .jad-kpi small { color: var(--teks-3); }
+:where(html.tema-kantor) em.naik { color: #1d7a4d; }
+:where(html.tema-kantor) em.turun { color: #b8493f; }
+:where(html.tema-kantor) em.tetap { color: var(--teks-3); }
+:where(html.tema-kantor) .jad-panel { background: #fff; border: 1px solid var(--garis); box-shadow: 0 1px 2px rgba(14,33,61,.05); }
+:where(html.tema-kantor) .jad-panel header { border-bottom: 1px solid var(--garis); background: #f7f7f8; }
+:where(html.tema-kantor) .jad-panel .no { background: var(--merek-800); color: #fff; }
+:where(html.tema-kantor) .tabel-padat th { color: var(--merek-800); background: #eef1f4; border-top: 1px solid var(--garis); border-bottom: 1px solid #cdcfd4; }
+:where(html.tema-kantor) .tabel-padat td { border-bottom: 1px solid #e7e8eb; }
+:where(html.tema-kantor) .tabel-padat tr.terbaru td { background: #eef2f6; }
+:where(html.tema-kantor) .tabel-padat tr.terbaru td:first-child { box-shadow: inset 3px 0 0 var(--merek-700); }
+:where(html.tema-kantor) .tabel-padat td + td, :where(html.tema-kantor) .tabel-padat th + th { border-left: 1px solid #eeeff0; }
+:where(html.tema-kantor) .kartu-kepala.kepala-nusantara { background: radial-gradient(60% 140% at 0% 0%, rgba(255,255,255,.22) 0%, transparent 60%),
+    radial-gradient(50% 120% at 75% 120%, rgba(239,226,198,.4) 0%, transparent 70%),
+    linear-gradient(115deg, #6587b0 0%, #142e54 45%, #112749 100%); }
+:where(html.tema-kantor) .kepala-nusantara h2, :where(html.tema-kantor) .kepala-nusantara h2 .ikon { color: #fff; }
+:where(html.tema-kantor) .kepala-nusantara .btn { background: rgba(255,255,255,.92); }
+:where(html.tema-kantor) .kepala-nusantara .sambut-latar::after { background: linear-gradient(180deg, rgba(14,32,60,.2), rgba(14,32,60,.1)); }
+:where(html.tema-kantor) .kepala-nusantara .sambut-latar .matahari { background: radial-gradient(circle at 82% 100%, rgba(255,214,130,.5) 0, rgba(255,214,130,0) 45%); }
+:where(html.tema-kantor) .catat-ringkas .cr { background: #fff; border: 1px solid var(--garis); border-radius: var(--radius); border-left: 4px solid var(--c); box-shadow: 0 6px 16px -14px rgba(14,33,61,.5); }
+:where(html.tema-kantor) .catat-ringkas .cr-ikon { background: color-mix(in srgb, var(--c) 14%, #fff); color: var(--c); }
+:where(html.tema-kantor) .catat-ringkas b { color: var(--gelap); }
+:where(html.tema-kantor) .catat-ringkas small { color: var(--teks-3); }
+:where(html.tema-kantor) .cr-hijau { --c: #1fa463; }
+:where(html.tema-kantor) .cr-biru { --c: #2f7fe0; }
+:where(html.tema-kantor) .cr-emas { --c: #d99a1f; }
+:where(html.tema-kantor) .cr-merah { --c: #e5484d; }
+:where(html.tema-kantor) .cr-merah { --c: #1fa463; }
+:where(html.tema-kantor) .langkah { border-bottom: 1px solid var(--garis); }
+:where(html.tema-kantor) .langkah-kepala i { color: #fff; background: linear-gradient(135deg, #142e54, #102544); box-shadow: 0 3px 8px -3px rgba(15,34,62,.7); }
+:where(html.tema-kantor) .langkah-kepala b { color: var(--gelap); }
+:where(html.tema-kantor) .langkah-kepala small { background: var(--hijau-50); color: var(--hijau); }
+:where(html.tema-kantor) .pilih-jenis label { --c: #1fa463; border-top: 3px solid var(--c); background: #fff; }
+:where(html.tema-kantor) .pilih-jenis label.jenis-panitia { --c: #2f7fe0; }
+:where(html.tema-kantor) .pilih-jenis label.jenis-insidental { --c: #e5484d; }
+:where(html.tema-kantor) .pilih-jenis label:hover { border-color: var(--c); border-top-color: var(--c); box-shadow: 0 8px 18px -14px var(--c); }
+:where(html.tema-kantor) .pilih-jenis label:has(input:checked) { border-color: var(--c); background: color-mix(in srgb, var(--c) 8%, #fff); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 20%, transparent); }
+:where(html.tema-kantor) .pilih-jenis label:has(input:checked) b::after { background: var(--c); color: #fff; }
+:where(html.tema-kantor) .rincian { border-color: var(--garis); background: #f8f9fb; }
+:where(html.tema-kantor) .rincian > summary { color: var(--gelap); }
+:where(html.tema-kantor) .kartu-kaki { background: #f4f6f8; }
+:where(html.tema-kantor) .kartu-kaki .btn-utama { box-shadow: 0 8px 16px -10px rgba(15,34,62,.8); }
+:where(html.tema-kantor) .catat-dua .kepala-nusantara .ket { color: rgba(255,255,255,.85); }
+:where(html.tema-kantor) .catat-dua > .kartu, :where(html.tema-kantor) .catat-dua .tabel-bungkus, :where(html.tema-kantor) .catat-dua .tabel, :where(html.tema-kantor) .catat-dua .tabel tbody td { background: #fff; }
+:where(html.tema-kantor) .catat-dua .tabel thead, :where(html.tema-kantor) .catat-dua .tabel thead th { background: #fff; }
+:where(html.tema-kantor) .catat-dua .tabel tbody tr:hover td { background: #f7f8fa; }
+html.tema-kantor { --latar: #ffffff; --merek-50: #f6f8fa; --krem-50: #fffdf8; }
+html:where(.tema-kantor), :where(html.tema-kantor) body, :where(html.tema-kantor) .utama, :where(html.tema-kantor) .isi { background: #fff; }
+:where(html.tema-kantor) .kartu { box-shadow: 0 1px 3px rgba(14,33,61,.07); }
+:where(html.tema-kantor) .kartu-kepala:not(.kepala-nusantara) { background: #fff; }
+:where(html.tema-kantor) .kartu-kaki { background: #fff; }
+:where(html.tema-kantor) .rincian { background: #fff; }
+:where(html.tema-kantor) table.tabel thead th, :where(html.tema-kantor) table.tabel tfoot td, :where(html.tema-kantor) table.tabel th { background: #fff; border-bottom: 1px solid var(--garis); }
+:where(html.tema-kantor) .tabel-bungkus, :where(html.tema-kantor) table.tabel, :where(html.tema-kantor) table.tabel td { background: #fff; }
+:where(html.tema-kantor) header.atas { background: #fff; }
+:where(html.tema-kantor) .pilih-jenis label { background: #fff; }
+:where(html.tema-kantor) .rincian[open] > summary { border-bottom: 1px solid var(--garis); }
+:where(html.tema-kantor) .skala-ket { border-top: 1px solid var(--garis); }
+:where(html.tema-kantor) .skala-ket span { color: var(--c); background: color-mix(in srgb, var(--c) 12%, #fff); border: 1px solid color-mix(in srgb, var(--c) 28%, #fff); }
+:where(html.tema-kantor) .skala-ket b { background: var(--c); color: #fff; }
+:where(html.tema-kantor) .skala-ket .sk-1 { --c: #d64545; }
+:where(html.tema-kantor) .skala-ket .sk-2 { --c: #e0822b; }
+:where(html.tema-kantor) .skala-ket .sk-3 { --c: #c99a12; }
+:where(html.tema-kantor) .skala-ket .sk-4 { --c: #2f8fd0; }
+:where(html.tema-kantor) .skala-ket .sk-5 { --c: #1fa463; }
+@media all {
+:where(html.tema-kantor) table.tabel thead th, :where(html.tema-kantor) table.tabel.matriks thead th, :where(html.tema-kantor) table.tabel.matriks th:first-child, :where(html.tema-kantor) table.tabel tfoot th, :where(html.tema-kantor) .tabel-padat thead th, :where(html.tema-kantor) .tabel-padat th { color: #fff !important; background: repeating-linear-gradient(45deg, rgba(255,255,255,.045) 0 1px, transparent 1px 11px),
+      repeating-linear-gradient(-45deg, rgba(255,255,255,.045) 0 1px, transparent 1px 11px),
+      linear-gradient(180deg, #112748 0%, #0f2341 100%) !important; border-bottom: 2px solid rgba(196,154,69,.85) !important; }
+:where(html.tema-kantor) table.tabel thead th + th, :where(html.tema-kantor) table.tabel:not(.matriks) th + th, :where(html.tema-kantor) .tabel-padat th + th { border-left: 1px solid rgba(255,255,255,.14) !important; }
+:where(html.tema-kantor) table.tabel thead th a, :where(html.tema-kantor) .tabel-padat th a { color: #fff; }
+:where(html.tema-kantor) table.tabel thead th input[type="checkbox"] { accent-color: #c49a45; }
+}
+:where(html.tema-kantor) .pilih-hadir label { --c: #1fa463; }
+:where(html.tema-kantor) .pilih-hadir span { border: 1.5px solid var(--garis-2); background: #fff; color: var(--teks-2); }
+:where(html.tema-kantor) .pilih-hadir span::before { background: var(--c); }
+:where(html.tema-kantor) .pilih-hadir label:hover span { border-color: var(--c); }
+:where(html.tema-kantor) .pilih-hadir input:checked + span { border-color: var(--c); background: color-mix(in srgb, var(--c) 12%, #fff); color: var(--c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 18%, transparent); }
+:where(html.tema-kantor) .pilih-hadir input:focus-visible + span { outline: 2px solid var(--c); }
+:where(html.tema-kantor) .pilih-hadir .hadir-sakit { --c: #e5484d; }
+:where(html.tema-kantor) .pilih-hadir .hadir-izin { --c: #2f7fe0; }
+:where(html.tema-kantor) .pilih-hadir .hadir-cuti { --c: #d99a1f; }
+:where(html.tema-kantor) .pilih-hadir .hadir-dinas { --c: #7a4fd0; }
+:where(html.tema-kantor) table.tabel.matriks tr.izin-anak td:first-child b { color: var(--teks-2); }
+:where(html.tema-kantor) table.tabel.matriks tr.izin-anak td:first-child b::before { color: var(--teks-3); }
+:where(html.tema-kantor) .pilih-izin .izin-ikut { --c: #6c727e; }
+:where(html.tema-kantor) .pilih-izin .izin-ya { --c: #1fa463; }
+:where(html.tema-kantor) .pilih-izin .izin-tidak { --c: #e5484d; }
+:where(html.tema-kantor) .umpan-kartu .kepala-nusantara .ket { color: rgba(255,255,255,.85); }
+:where(html.tema-kantor) .grafik-batang .nilai-tren { stroke: #fff; }
+:where(html.tema-kantor) .aset-kpi > div { --c: #102544; border: 1px solid var(--garis); background: linear-gradient(135deg, color-mix(in srgb, var(--c) 7%, #fff) 0%, #fff 60%); box-shadow: 0 8px 20px -16px rgba(14,33,61,.55); }
+:where(html.tema-kantor) .aset-kpi > div::before { background: var(--c); }
+:where(html.tema-kantor) .aset-kpi > div:nth-child(1) { --c: #1c8a5a; }
+:where(html.tema-kantor) .aset-kpi > div:nth-child(2) { --c: #2f7fe0; }
+:where(html.tema-kantor) .aset-kpi > div:nth-child(3) { --c: #c48a1d; }
+:where(html.tema-kantor) .aset-kpi > div:nth-child(4) { --c: #c2453b; }
+:where(html.tema-kantor) .aset-kpi span { color: var(--c); }
+:where(html.tema-kantor) .aset-kpi b { color: #0f223f; }
+:where(html.tema-kantor) .aset-kpi b.merah { color: #c2453b; }
+:where(html.tema-kantor) .aset-kpi small { color: var(--teks-2); }
+@media (max-width: 760px) {
+:where(html.tema-kantor) .aset-kpi > div:nth-child(n) { border-top: 1px solid var(--garis); }
+}
+:where(html.tema-kantor) .aset-kpi > div:nth-child(4) { --c: #7a4fd0; }
+:where(html.tema-kantor) .aset-bilah .gambar.gambar-rapat { background-image: url("../img/rapat-latar.svg"); }
+:where(html.tema-kantor) .aset-nav .bilah-hitung { background: rgba(255,255,255,.22); color: #fff; }
+:where(html.tema-kantor) .aset-nav a.aktif .bilah-hitung { background: #102544; color: #fff; }
+:where(html.tema-kantor) .aset-nav .bilah-hitung.emas { background: #c49a45; color: #fff; }
+:where(html.tema-kantor) .aset-kpi > div::after { background: var(--hias) no-repeat right bottom / contain; }
+:where(html.tema-kantor) .aset-kpi > div:nth-child(1) { --hias: url("../img/nusantara/kpi-rumah-gadang.svg"); }
+:where(html.tema-kantor) .aset-kpi > div:nth-child(2) { --hias: url("../img/nusantara/kpi-borobudur.svg"); }
+:where(html.tema-kantor) .aset-kpi > div:nth-child(3) { --hias: url("../img/nusantara/kpi-gunungan.svg"); }
+:where(html.tema-kantor) .aset-kpi > div:nth-child(4) { --hias: url("../img/nusantara/kpi-pinisi.svg"); }
+:where(html.tema-kantor) .sisi { background: radial-gradient(120% 50% at 0% 0%, rgba(40,78,125,.30) 0%, rgba(40,78,125,0) 62%),
+  radial-gradient(90% 40% at 100% 100%, rgba(196,154,69,.16) 0%, rgba(196,154,69,0) 70%),
+  linear-gradient(180deg, #132c51 0%, #102544 52%, #0e213d 100%); }
+:where(html.tema-kantor) .sambut, :where(html.tema-kantor) .aset-bilah, :where(html.tema-kantor) .kartu-kepala.kepala-nusantara { background: radial-gradient(60% 140% at 0% 0%, rgba(255,255,255,.22) 0%, transparent 60%),
+  radial-gradient(50% 120% at 75% 120%, rgba(239,226,198,.38) 0%, transparent 70%),
+  linear-gradient(115deg, #122a4d 0%, #102544 48%, #0e213d 100%); }
+:where(html.tema-kantor) .btn-utama { background: linear-gradient(180deg, #11284a 0%, #102544 100%); border-color: #0f2340; }
+:where(html.tema-kantor) .btn-utama:hover { background: linear-gradient(180deg, #12294c 0%, #102646 100%); }
+@media all {
+:where(html.tema-kantor) table.tabel thead th, :where(html.tema-kantor) table.tabel.matriks thead th, :where(html.tema-kantor) table.tabel.matriks th:first-child, :where(html.tema-kantor) table.tabel tfoot th, :where(html.tema-kantor) .tabel-padat thead th, :where(html.tema-kantor) .tabel-padat th { background: repeating-linear-gradient(45deg, rgba(255,255,255,.045) 0 1px, transparent 1px 11px),
+      repeating-linear-gradient(-45deg, rgba(255,255,255,.045) 0 1px, transparent 1px 11px),
+      linear-gradient(180deg, #12284b 0%, #102544 100%) !important; }
+}
+@media all {
+:where(html.tema-kantor) table.tabel thead th, :where(html.tema-kantor) table.tabel.matriks thead th, :where(html.tema-kantor) table.tabel.matriks th:first-child, :where(html.tema-kantor) table.tabel tfoot th, :where(html.tema-kantor) .tabel-padat thead th, :where(html.tema-kantor) .tabel-padat th { background: repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 1px, transparent 1px 11px),
+      repeating-linear-gradient(-45deg, rgba(255,255,255,.05) 0 1px, transparent 1px 11px),
+      linear-gradient(180deg, #2a558a 0%, #142f57 100%) !important; border-bottom: 2px solid rgba(196,154,69,.7) !important; }
+}
+:where(html.tema-kantor) .pilih-jenis label { --c: #142f57; }
+:where(html.tema-kantor) .pilih-jenis label.jenis-panitia { --c: #3a6ea5; }
+:where(html.tema-kantor) .pilih-jenis label.jenis-insidental { --c: #c49a45; }
+:where(html.tema-kantor) .pilih-jenis label .titik-rutin { background: #142f57; }
+:where(html.tema-kantor) .pilih-jenis label .titik-panitia { background: #3a6ea5; }
+:where(html.tema-kantor) .pilih-jenis label .titik-insidental { background: #c49a45; }
+:where(html.tema-kantor) .pilih-jenis label:has(input:checked) { background: color-mix(in srgb, var(--c) 7%, #fff); }
+@media all {
+:where(html.tema-kantor) table.tabel tbody td, :where(html.tema-kantor) table.tabel:not(.matriks) tbody tr:nth-child(even):not(.baris-kelompok) td, :where(html.tema-kantor) table.tabel.matriks tbody td, :where(html.tema-kantor) .tabel-padat tbody td, :where(html.tema-kantor) .tabel-padat tr.terbaru td, :where(html.tema-kantor) .tabel-padat tbody tr:nth-child(even) td { background-color: #fff; }
+:where(html.tema-kantor) table.tabel tbody tr:not(.baris-kelompok):hover td, :where(html.tema-kantor) table.tabel:not(.matriks) tbody tr:not(.baris-kelompok):hover td, :where(html.tema-kantor) table.tabel.matriks tbody tr:hover td, :where(html.tema-kantor) .catat-dua .tabel tbody tr:hover td, :where(html.tema-kantor) .tabel-padat tbody tr:hover td { background-color: #fafafb; }
+:where(html.tema-kantor) table.tabel tbody td, :where(html.tema-kantor) .tabel-padat tbody td { border-bottom: 1px solid #ebecee; }
+:where(html.tema-kantor) table.tabel tr.baris-kelompok td, :where(html.tema-kantor) table.tabel tr.baris-kelompok:hover td { background-color: #f4f5f6 !important; color: var(--teks-2); }
+:where(html.tema-kantor) table.tabel.matriks td.grup-izin, :where(html.tema-kantor) table.tabel.matriks tbody tr:hover td.grup-izin { background-color: #f4f5f6; }
+:where(html.tema-kantor) .tabel-bungkus, :where(html.tema-kantor) table.tabel, :where(html.tema-kantor) table.tabel-dosen, :where(html.tema-kantor) .tabel-padat { background: #fff; }
+}
+:where(html.tema-kantor) .aset-kpi > div:nth-child(1) { --c: #142f57; }
+:where(html.tema-kantor) .aset-kpi > div:nth-child(2) { --c: #2a558a; }
+:where(html.tema-kantor) .aset-kpi > div:nth-child(3) { --c: #c49a45; }
+:where(html.tema-kantor) .aset-kpi > div:nth-child(4) { --c: #132b50; }
+:where(html.tema-kantor) .sisi-ciut { background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.22); color: #fff; }
+:where(html.tema-kantor) .sisi-ciut:hover { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.4); color: #fff; }
+:where(html.tema-kantor) .sisi-nav-beranda .sisi-ciut { background: rgba(16,37,68,.12); border-color: rgba(16,37,68,.25); color: var(--gelap); }
+:where(html.tema-kantor) .sisi-nav-beranda .sisi-ciut:hover { background: rgba(16,37,68,.22); border-color: rgba(16,37,68,.4); color: var(--gelap); }
+:where(html.tema-kantor) .sisi-nav-beranda .sisi-ciut { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.28); color: #fff; }
+:where(html.tema-kantor) .sisi-nav-beranda .sisi-ciut:hover { background: rgba(255,255,255,.22); border-color: rgba(255,255,255,.45); color: #fff; }
+:where(html.tema-kantor) .sisi-nav-beranda:has(a.aktif) .sisi-ciut { background: rgba(16,37,68,.10); border-color: rgba(16,37,68,.28); color: var(--gelap); }
+:where(html.tema-kantor) .sisi-nav-beranda:has(a.aktif) .sisi-ciut:hover { background: rgba(16,37,68,.20); border-color: rgba(16,37,68,.45); color: var(--gelap); }
+:where(html.tema-kantor) .sambut, :where(html.tema-kantor) .aset-bilah, :where(html.tema-kantor) .kartu-kepala.kepala-nusantara { background: radial-gradient(60% 140% at 0% 0%, rgba(255,255,255,.18) 0%, transparent 60%),
+  radial-gradient(55% 130% at 78% 120%, rgba(90,140,200,.34) 0%, transparent 70%),
+  linear-gradient(115deg, #132c52 0%, #112849 42%, #102544 72%, #0f223e 100%); }
+:where(html.tema-kantor) .sambut-latar .matahari, :where(html.tema-kantor) .aset-bilah .sambut-latar .matahari { background: radial-gradient(circle at 80% 100%, rgba(120,162,214,.38) 0, rgba(120,162,214,0) 46%); }
+:where(html.tema-kantor) .sambut-latar::after, :where(html.tema-kantor) .aset-bilah .sambut-latar::after { background: linear-gradient(90deg, rgba(14,32,60,.34) 0%, rgba(14,32,60,.14) 40%, rgba(14,32,60,0) 75%); }
+:where(html.tema-kantor) .sambut, :where(html.tema-kantor) .aset-bilah { box-shadow: 0 16px 32px -20px rgba(16,37,68,.7); }
+:where(html.tema-kantor) body.masuk { background: #102544; }
+:where(html.tema-kantor) body.masuk::before { background: radial-gradient(55% 65% at 88% 18%, rgba(90,140,200,.34) 0%, transparent 70%),
+  radial-gradient(70% 80% at 92% 105%, rgba(19,44,82,.65) 0%, transparent 72%),
+  linear-gradient(135deg, #132c52 0%, #112849 40%, #102544 70%, #0f223e 100%); }
+:where(html.tema-kantor) .masuk-kaki { color: rgba(255,255,255,.88); }
+:where(html.tema-kantor) .masuk-kartu { box-shadow: 0 30px 60px -24px rgba(13,31,58,.7); }
+:where(html.tema-kantor) body.masuk { background: #132d52; }
+:where(html.tema-kantor) body.masuk::before { background: radial-gradient(55% 65% at 30% 30%, rgba(120,162,214,.30) 0%, transparent 70%),
+  radial-gradient(60% 70% at 88% 18%, rgba(120,162,214,.30) 0%, transparent 70%),
+  linear-gradient(135deg, #1d508e 0%, #142f57 38%, #132b4f 70%, #112749 100%); }
+:where(html.tema-kantor) body.masuk::before { background: radial-gradient(70% 80% at 24% 40%, rgba(150,183,224,.30) 0%, transparent 70%),
+  radial-gradient(60% 70% at 88% 18%, rgba(120,162,214,.26) 0%, transparent 70%),
+  linear-gradient(135deg, #2a5a95 0%, #16325d 38%, #142d54 70%, #12294d 100%); }
+:where(html.tema-kantor) .masuk-hias .matahari { background: radial-gradient(circle at 76% 88%, rgba(150,187,232,.40) 0, rgba(150,187,232,0) 44%); }
+:where(html.tema-kantor) .masuk-kaki { color: #fff; text-shadow: 0 1px 3px rgba(14,32,60,.6); }
+:where(html.tema-kantor) .masuk-kartu { background: rgba(255,255,255,.92); }
+:where(html.tema-kantor) .foto-bukti-pratinjau img, :where(html.tema-kantor) .foto-bukti-lama img { border: 1px solid var(--garis); }
+:where(html.tema-kantor) .rincian { border: 1px solid #ead9b0; border-left: 4px solid #c49a45; background: #fffaf0; }
+:where(html.tema-kantor) .rincian > summary { color: #7a5a1c; }
+:where(html.tema-kantor) .rincian[open] > summary { border-bottom: 1px solid #f0e3c4; }
+:where(html.tema-kantor) .tabel-per-hari tr.baris-hari td { background: #e7f1ec !important; border-top: 2px solid #b9d6c8; color: #12294c; }
+:where(html.tema-kantor) .tabel-per-hari tr.baris-hari td .ikon { color: #1c8a5a; }
+:where(html.tema-kantor) .tabel-per-hari tr.baris-hari td span { color: var(--teks-3); }
+:where(html.tema-kantor) .tabel-per-hari tbody tr.hari-genap td { background: #fbfaf5; }
+:where(html.tema-kantor) .legenda-absen { color: var(--teks-2); }
+:where(html.tema-kantor) table.tabel.tabel-absensi th.ab-tgl, :where(html.tema-kantor) table.tabel.tabel-absensi td.ab-tgl { border-left: 1px solid #eeeff0; }
+:where(html.tema-kantor) table.tabel.tabel-absensi td.ab-tgl.libur { background: #f3f0e8 !important; }
+:where(html.tema-kantor) table.tabel.tabel-absensi th.ab-tgl.libur { background: linear-gradient(180deg, #8a6a32 0%, #6e5326 100%) !important; }
+:where(html.tema-kantor) table.tabel.tabel-absensi td.ab-nama { background: #fff; box-shadow: 1px 0 0 var(--garis); }
+:where(html.tema-kantor) table.tabel.tabel-absensi th.ab-jml, :where(html.tema-kantor) table.tabel.tabel-absensi td.ab-jml { border-left: 1px solid #e3e4e7; }
+:where(html.tema-kantor) table.tabel.tabel-absensi td.ab-jml { background: #f7f7f8; }
+:where(html.tema-kantor) .ab { color: #fff; }
+:where(html.tema-kantor) .ab-hadir { background: #1c8a5a; }
+:where(html.tema-kantor) .ab-sakit { background: #d64545; }
+:where(html.tema-kantor) .ab-izin { background: #2f7fe0; }
+:where(html.tema-kantor) .ab-cuti { background: #c48a1d; }
+:where(html.tema-kantor) .ab-dinas { background: #7a4fd0; }
+:where(html.tema-kantor) .ab.ab-kosong, :where(html.tema-kantor) span.ab-kosong { color: #b3b6bd; }
+:where(html.tema-kantor) .ab.ab-libur { background: #f3f0e8; border: 1px solid #e4ddc9; }
+@media print {
+:where(html.tema-kantor) .ab { color: #000 !important; border: 1px solid #999; }
+}
+:where(html.tema-kantor) .avatar.profil-besar { border: 3px solid #fff; box-shadow: 0 6px 18px -8px rgba(15,35,64,.45); }
+:where(html.tema-kantor) .profil-data .profil-judul b { color: var(--gelap); }
+:where(html.tema-kantor) .profil-data .profil-judul span { color: var(--teks-3); }
+:where(html.tema-kantor) .profil-rinci { color: var(--teks-3); border-top: 1px dashed var(--garis); }
+:where(html.tema-kantor) .profil-rinci b { color: var(--teks); }
+:where(html.tema-kantor) .profil-izin { border-top: 1px dashed var(--garis); }
+:where(html.tema-kantor) .chip-izin { background: #eef6f1; border: 1px solid #d3e6dc; color: #132c52; }
+:where(html.tema-kantor) .profil-aktivitas li { border-bottom: 1px solid #eeeff1; }
+:where(html.tema-kantor) .profil-aktivitas li span { color: var(--teks-3); }
+:where(html.tema-kantor) .profil-aktivitas li time { color: var(--teks-3); }
+:where(html.tema-kantor) .tabel-dok td.kiri a b { color: var(--merek-800); }
+:where(html.tema-kantor) .chip-dok { background: #eef4f8; border: 1px solid #d5e2ee; }
+:where(html.tema-kantor) .chip-dok a { color: #1f5f9e; }
+:where(html.tema-kantor) .chip-dok form button { color: #b8493f; }
+:where(html.tema-kantor) a.chip-dok.chip-link { background: #eef7f1; border-color: #cfe6d8; color: #1c6b4a; }
+:where(html.tema-kantor) .tabel-per-hari td.ab-durasi { color: var(--teks-2); }
+:where(html.tema-kantor) .tabel-per-hari td.ab-durasi b { color: #12294c; }
+:where(html.tema-kantor) .tabel-per-hari tfoot tr.baris-total td { background: #f2f7f4; border-top: 2px solid #b9d6c8; color: #12294c; }
+:where(html.tema-kantor) .tabel-per-hari tfoot tr.baris-total td:last-child { color: var(--teks-3); }
+@media print {
+:where(html.tema-kantor) .tabel-per-hari tr.baris-hari td { border-top: 1px solid #9fbfb0; }
+}
+:where(html.tema-kantor) .dok-cari-kotak { border: 1.5px solid var(--garis-2); background: #fff; }
+:where(html.tema-kantor) .dok-cari-kotak:focus-within { border-color: #1c8a5a; box-shadow: 0 0 0 3px rgba(28,138,90,.12); }
+:where(html.tema-kantor) .dok-cari-kotak .ikon { color: var(--teks-3); }
+:where(html.tema-kantor) .dok-cari-kotak input { background: transparent; }
+:where(html.tema-kantor) .dok-kategori a { border: 1px solid var(--garis); background: #fff; color: var(--teks-2); }
+:where(html.tema-kantor) .dok-kategori a b { color: var(--teks-3); }
+:where(html.tema-kantor) .dok-kategori a.aktif { background: #132c52; border-color: #132c52; color: #fff; }
+:where(html.tema-kantor) .dok-kategori a.aktif b { color: #e8dcc4; }
+:where(html.tema-kantor) .dok-ringkas { color: var(--teks-2); }
+:where(html.tema-kantor) .tabel-dokumen td.dok-judul b { color: var(--gelap); }
+:where(html.tema-kantor) .tabel-dokumen td.dok-judul .dok-ket { color: var(--teks-2); }
+:where(html.tema-kantor) .tabel-dokumen mark { background: #fff1b8; }
+:where(html.tema-kantor) .dok-kata i { background: #f2f2f4; color: var(--teks-2); border: 1px solid #e3e4e7; }
+:where(html.tema-kantor) .dok-kat { background: #eef4f1; color: #132c52; }
+:where(html.tema-kantor) .dok-kat-sop { background: #eaf2fd; color: #1f5f9e; }
+:where(html.tema-kantor) .dok-kat-panduan { background: #f3eefc; color: #5b3aa6; }
+:where(html.tema-kantor) .dok-kat-sk { background: #fdf3e2; color: #8a5a12; }
+:where(html.tema-kantor) .dok-kat-peraturan { background: #fdecea; color: #a83a32; }
+:where(html.tema-kantor) .dok-kat-akreditasi { background: #fff6d6; color: #7a5a00; }
+:where(html.tema-kantor) .dok-kat-laporan { background: #e8eef6; color: #142e56; }
+:where(html.tema-kantor) .dok-berkas small { color: var(--teks-3); }
+:where(html.tema-kantor) .dok-cetak-kaki { color: #555; }
+@media print {
+:where(html.tema-kantor) .dok-kata i { border-color: #ccc; }
+}
+:where(html.tema-kantor) .daftar-lihat-dok li { border-bottom: 1px solid #eeeff1; }
+:where(html.tema-kantor) .daftar-lihat-dok li b { color: var(--gelap); }
+:where(html.tema-kantor) .daftar-lihat-dok li span { color: var(--teks-3); }
+:where(html.tema-kantor) .rincian > summary::after { background: #f3e6c6 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237a5a1c' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") center / 16px no-repeat; }
+:where(html.tema-kantor) .rincian > summary:hover::after { background-color: #ecd9a8; }
+:where(html.tema-kantor) .rincian > summary .rincian-petunjuk { color: #a07b35; }
+:where(html.tema-kantor) .tabel-anggota thead th.grup-kolom { border-bottom: 1px solid rgba(255,255,255,.22); }
+:where(html.tema-kantor) .alur-pengembangan { border-left: 4px solid #c49a45; background: #fffaf0; }
+:where(html.tema-kantor) .alur-pengembangan > summary { color: #7a5a1c; }
+:where(html.tema-kantor) .alur-pengembangan > summary::after { background: #f3e6c6 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237a5a1c' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") center / 16px no-repeat; }
+:where(html.tema-kantor) .alur-pengembangan .rincian-petunjuk { color: #a07b35; }
+:where(html.tema-kantor) .alur-langkah li { background: #fff; border: 1px solid #ead9b0; }
+:where(html.tema-kantor) .alur-langkah li::before { color: #fff; background: linear-gradient(135deg, #142e54, #102544); }
+:where(html.tema-kantor) .alur-langkah li b { color: var(--gelap); }
+:where(html.tema-kantor) .alur-langkah li span { color: var(--teks-2); }
+:where(html.tema-kantor) .tabel-penjelasan tfoot td { background: #f4f8f6; }
+:where(html.tema-kantor) .tabel-predikat tr.aktif td { background: #fff4d9; }
+:where(html.tema-kantor) .tabel-predikat tr.aktif td:first-child { box-shadow: inset 3px 0 0 #c49a45; }
+:where(html.tema-kantor) .penjelasan-teks { background: #fffaf0; border: 1px solid #ead9b0; color: #5b4516; }
+:where(html.tema-kantor) .lonceng-tombol.berdering { border-color: var(--oranye); color: #b5731c; background: #fff8ec; }
+:where(html.tema-kantor) .rapb-disiapkan-ikon { background: var(--hijau-50); color: var(--hijau); }
+:where(html.tema-kantor) .rapb-disiapkan h2 { color: var(--gelap); }
+:where(html.tema-kantor) .rapb-disiapkan p { color: var(--teks-2); }
+:where(html.tema-kantor) .rapb-aksi { border-top: 1px dashed var(--garis); }
+:where(html.tema-kantor) .chip-prodi { border: 1px solid var(--garis-2); color: var(--teks-2); background: #fff; }
+:where(html.tema-kantor) .chip-prodi::before { background: #c9cbd0; }
+:where(html.tema-kantor) .chip-prodi.terisi { border-color: #bfe3cf; background: #effaf3; color: #146b43; }
+:where(html.tema-kantor) .chip-prodi.terisi::before { background: #1fa463; }
+:where(html.tema-kantor) .rapb-judul-lembar b { color: var(--gelap); }
+:where(html.tema-kantor) .rapb-judul-lembar span { color: #2e3137; }
+:where(html.tema-kantor) .rapb-per { background: #f6faf8; border: 1px solid var(--garis); }
+:where(html.tema-kantor) .tabel-rapb-format td.minus, :where(html.tema-kantor) .tabel-rekap-tengah td.minus { color: var(--merah); }
+:where(html.tema-kantor) .tabel-rapb-format .r-kode { color: var(--teks-2); }
+:where(html.tema-kantor) .tabel-rapb-format .r-bab td { background: #12294c; color: #fff; }
+:where(html.tema-kantor) .tabel-rapb-format .r-kepala td { color: var(--gelap); background: #eef5f2; }
+:where(html.tema-kantor) .tabel-rapb-format .r-grup td { color: #11284b; background: #fafcfb; }
+:where(html.tema-kantor) .tabel-rapb-format .r-total td { background: #f3f7f5; border-top: 1px solid #d2d4d9; }
+:where(html.tema-kantor) .tabel-rapb-format .r-total-besar td { background: #fff4d9; border-top: 2px solid #c49a45; color: #3d2f0e; }
+:where(html.tema-kantor) .tabel-rekap-upps td { border-left: 1px solid var(--garis); }
+:where(html.tema-kantor) .tabel-rekap-upps td:nth-child(4) { border-left: 2px solid #a5a9b2; }
+:where(html.tema-kantor) .tabel-rekap-upps .u-bab { color: var(--gelap); }
+:where(html.tema-kantor) .tabel-rekap-upps .u-sub { color: #11284b; }
+:where(html.tema-kantor) .tabel-rekap-upps .u-label { color: var(--teks-2); }
+:where(html.tema-kantor) .tabel-rekap-upps .u-jumlah { border-top: 1px solid #bcbfc6; }
+:where(html.tema-kantor) .tabel-rekap-upps .u-total { background: #f3f7f5; }
+:where(html.tema-kantor) .tabel-rekap-upps tfoot td { background: #fff4d9; border-top: 2px solid #c49a45; }
+:where(html.tema-kantor) .tabel-lkps .l-nomor th { background: #e9f1ee; color: #153058; }
+:where(html.tema-kantor) .tabel-lkps .l-judul td { background: #fafcfb; }
+:where(html.tema-kantor) .tabel-lkps .l-jumlah td { background: #f3f7f5; }
+:where(html.tema-kantor) .tabel-lkps .l-total td { background: #fff4d9; border-top: 2px solid #c49a45; }
+:where(html.tema-kantor) .tabel-lkps .l-rata { background: #f7f8fa; }
+:where(html.tema-kantor) .tabel-rapb-format tr.r-grup:hover td { background: #eef6f2; }
+:where(html.tema-kantor) .tabel-rapb-format tr.r-grup:focus-visible { outline: 2px solid #1c8a5a; }
+:where(html.tema-kantor) .tabel-rapb-format tr.r-grup td.uang { color: #11284b; }
+:where(html.tema-kantor) .tabel-rapb-format .r-panah { background: #e3efe9 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23142d54' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") center / 13px no-repeat; }
+:where(html.tema-kantor) .tabel-rapb-format tr.r-grup.buka .r-panah { background-color: #cfe6da; }
+:where(html.tema-kantor) .tabel-rapb-format .r-hitung { color: var(--teks-3); }
+:where(html.tema-kantor) .rp-isi { border: 1.5px solid var(--garis-2); background: #fff; }
+:where(html.tema-kantor) .rp-isi:focus-within { border-color: #1c8a5a; box-shadow: 0 0 0 3px rgba(28, 138, 90, .12); }
+:where(html.tema-kantor) .rp-isi i { color: #142d54; background: #eef6f2; border-right: 1px solid var(--garis); }
+:where(html.tema-kantor) .tabel-rapb-format .rp-isi input { background: transparent; }
+:where(html.tema-kantor) .rapb-kaki-lekat { background: rgba(255, 255, 255, .96); border-top: 1px solid var(--garis); box-shadow: 0 -6px 16px -10px rgba(0, 0, 0, .25); }
+:where(html.tema-kantor) .rapb-kaki-lekat .belum-simpan { color: #b5731c; }
+:where(html.tema-kantor) .rp-hasil { background: #f5f5f6; }
+:where(html.tema-kantor) .rp-hasil output { color: #2e3137; }
+:where(html.tema-kantor) .r-hasil.minus .rp-hasil output { color: var(--merah); }
+:where(html.tema-kantor) .r-hasil.minus .rp-hasil { border-color: #f0c4c4; background: #fff6f6; }
+:where(html.tema-kantor) .tabel-rapb-format, :where(html.tema-kantor) .tabel-rekap-upps, :where(html.tema-kantor) .tabel-lkps { border: 1.5px solid #a5a9b2; }
+:where(html.tema-kantor) .tabel-rapb-format th, :where(html.tema-kantor) .tabel-rekap-upps th, :where(html.tema-kantor) .tabel-lkps th { border: 1px solid rgba(255, 255, 255, .28) !important; }
+:where(html.tema-kantor) .tabel-rapb-format td, :where(html.tema-kantor) .tabel-rekap-upps td, :where(html.tema-kantor) .tabel-lkps td { border: 1px solid #cdcfd4 !important; }
+:where(html.tema-kantor) .tabel-rapb-format tbody tr.r-item:nth-child(even) td { background: #fafcfb; }
+:where(html.tema-kantor) .tabel-rapb-format tbody tr.r-item:hover td { background: #f1f8f4; }
+:where(html.tema-kantor) .tabel-rapb-format tr.r-grup td { border-top: 1.5px solid #a5a9b2 !important; }
+:where(html.tema-kantor) .tabel-rapb-format tr.r-total td, :where(html.tema-kantor) .tabel-rapb-format tr.r-total-besar td { border-top: 1.5px solid #a5a9b2 !important; border-bottom: 1.5px solid #a5a9b2 !important; }
+:where(html.tema-kantor) .tabel-rapb-format tr.r-total-besar td { border-top: 2px solid #c49a45 !important; }
+:where(html.tema-kantor) .tabel-rapb-format tr.r-bab td { border-color: #12294c !important; }
+:where(html.tema-kantor) .tabel-rekap-upps td:nth-child(4) { border-left: 2px solid #878d98 !important; }
+@media print {
+:where(html.tema-kantor) .tabel-rapb-format, :where(html.tema-kantor) .tabel-rekap-upps, :where(html.tema-kantor) .tabel-lkps { border: 1px solid #555; }
+:where(html.tema-kantor) .tabel-rapb-format td, :where(html.tema-kantor) .tabel-rekap-upps td, :where(html.tema-kantor) .tabel-lkps td, :where(html.tema-kantor) .tabel-rapb-format th, :where(html.tema-kantor) .tabel-rekap-upps th, :where(html.tema-kantor) .tabel-lkps th { border: 1px solid #777 !important; }
+}
+:where(html.tema-kantor) .tabel-rapb-format td, :where(html.tema-kantor) .tabel-rekap-upps td, :where(html.tema-kantor) .tabel-lkps td { border-color: #afb3bb !important; }
+:where(html.tema-kantor) .tabel-rapb-format, :where(html.tema-kantor) .tabel-rekap-upps, :where(html.tema-kantor) .tabel-lkps { border-color: #878d98; }
+:where(html.tema-kantor) .rapb-alat .rapb-status { border-top: 1px dashed var(--garis); }
+:where(html.tema-kantor) .tabel-lkps .rp-isi input { background: transparent; }
+:where(html.tema-kantor) .tabel-lkps .l-rata .rp-hasil { background: #eef6f2; }
+:where(html.tema-kantor) .tabel-lkps .l-total .rp-hasil { background: #fff1cc; border-color: #e3c37a; }
+:where(html.tema-kantor) .tabel-rekap-upps .rp-isi input { background: transparent; }
+:where(html.tema-kantor) .tabel-rekap-upps .rp-isi.manual { border-color: #d4a84b; box-shadow: 0 0 0 2px rgba(212, 168, 75, .18); }
+:where(html.tema-kantor) .tabel-rekap-upps .rp-isi.manual i { background: #fff1cc; color: #7a5a1c; }
+:where(html.tema-kantor) .tabel-rekap-upps .u-total .rp-hasil, :where(html.tema-kantor) .tabel-rekap-upps tfoot .rp-hasil { background: #fff1cc; border-color: #e3c37a; }
+@media print {
+:where(html.tema-kantor) .tabel-rapb-format, :where(html.tema-kantor) .tabel-rekap-upps, :where(html.tema-kantor) .tabel-lkps { border: 1px solid #555 !important; }
+:where(html.tema-kantor) .tabel-rapb-format th, :where(html.tema-kantor) .tabel-rapb-format td, :where(html.tema-kantor) .tabel-rekap-upps th, :where(html.tema-kantor) .tabel-rekap-upps td, :where(html.tema-kantor) .tabel-lkps th, :where(html.tema-kantor) .tabel-lkps td { border: 1px solid #666 !important; }
+:where(html.tema-kantor) .rp-isi i { color: #000 !important; }
+:where(html.tema-kantor) .rp-isi input, :where(html.tema-kantor) .rp-hasil output { color: #000 !important; }
+}
+:where(html.tema-kantor) .rp-isi { background: #fff !important; border: 1px solid #c9ccd1 !important; }
+:where(html.tema-kantor) .rp-isi i { background: transparent !important; color: #7a7f8a !important; }
+:where(html.tema-kantor) .rp-isi:focus-within { border-color: #1c8a5a !important; box-shadow: 0 0 0 3px rgba(28, 138, 90, .12) !important; }
+:where(html.tema-kantor) .rp-isi.rp-hasil { background: #f5f5f6 !important; border: 1px dashed #cdd0d5 !important; }
+:where(html.tema-kantor) .tabel-lkps .l-rata .rp-hasil, :where(html.tema-kantor) .tabel-rekap-upps .u-total .rp-hasil, :where(html.tema-kantor) .tabel-rekap-upps tfoot .rp-hasil, :where(html.tema-kantor) .tabel-lkps .l-total .rp-hasil { background: #f5f5f6 !important; border-color: #cdd0d5 !important; }
+:where(html.tema-kantor) .tabel-rekap-upps .rp-isi.manual { border: 1.5px solid #d4a84b !important; }
+:where(html.tema-kantor) .tabel-rekap-upps .rp-isi.manual i { background: transparent !important; color: #9a7428 !important; }
+:where(html.tema-kantor) .r-hasil.minus .rp-hasil { background: #fff6f6 !important; border-color: #f0c4c4 !important; }
+@media all {
+:where(html.tema-kantor) .tabel-lkps .rp-isi input, :where(html.tema-kantor) .tabel-lkps .rp-hasil output { color: #222427; }
+}
+:where(html.tema-kantor) .tabel-lkps td.l-no { background: #fff; }
+:where(html.tema-kantor) .rp-isi, :where(html.tema-kantor) .rp-isi.rp-hasil, :where(html.tema-kantor) .tabel-lkps .l-rata .rp-hasil, :where(html.tema-kantor) .tabel-rekap-upps .u-total .rp-hasil, :where(html.tema-kantor) .tabel-rekap-upps tfoot .rp-hasil, :where(html.tema-kantor) .tabel-lkps .l-total .rp-hasil, :where(html.tema-kantor) .r-hasil.minus .rp-hasil { background: transparent !important; }
+:where(html.tema-kantor) .rp-isi:focus-within { box-shadow: inset 0 0 0 2px #1c8a5a !important; background: #fff !important; }
+:where(html.tema-kantor) td.r-isi:not(.r-hasil):hover { background: #f4faf7 !important; }
+:where(html.tema-kantor) td.r-hasil { background: #f6f6f7 !important; }
+:where(html.tema-kantor) .tabel-lkps .l-total td.r-hasil, :where(html.tema-kantor) .tabel-rekap-upps .u-total.r-hasil, :where(html.tema-kantor) .tabel-rekap-upps tfoot td.r-hasil, :where(html.tema-kantor) .tabel-rapb-format tr.r-total-besar td { background: #fff4d9 !important; }
+:where(html.tema-kantor) .tabel-rekap-upps .rp-isi.manual { box-shadow: inset 0 0 0 1.5px #d4a84b !important; }
+:where(html.tema-kantor) td.r-hasil.minus { background: #fff6f6 !important; }
+:where(html.tema-kantor) .toast-gulir .notif { box-shadow: 0 10px 28px -10px rgba(0, 0, 0, .35); }
+:where(html.tema-kantor) .toast-gulir .notif { background-color: #fff !important; border: 1px solid #cfe3d8; }
+:where(html.tema-kantor) .toast-gulir .notif.notif-galat, :where(html.tema-kantor) .toast-gulir .notif.notif-warn { border-color: #f0c9a4; }
+:where(html.tema-kantor) .rapb-subbilah { background: linear-gradient(115deg, #e9f5f0 0%, #d3ebe1 55%, #c3e2d6 100%) !important; border: 1px solid #b7d8cb; box-shadow: 0 6px 16px -12px rgba(14,33,61,.55) !important; }
+:where(html.tema-kantor) .rapb-subbilah .sambut-latar .matahari { background: radial-gradient(circle at 85% 50%, rgba(255,255,255,.7) 0, rgba(255,255,255,0) 45%) !important; }
+:where(html.tema-kantor) .rapb-subbilah .aset-nav a { color: #12294c; }
+:where(html.tema-kantor) .rapb-subbilah .aset-nav a:hover { background: rgba(18,41,76,.10); color: #102646; }
+:where(html.tema-kantor) .rapb-subbilah .aset-nav a.aktif { background: linear-gradient(115deg, #142e54, #112749); color: #fff; box-shadow: 0 4px 10px -5px rgba(14,32,60,.6); }
+:where(html.tema-kantor) .rapb-judul-lembar span { color: #282a2f; }
+:where(html.tema-kantor) .tabel-rapb-format, :where(html.tema-kantor) .tabel-rekap-upps, :where(html.tema-kantor) .tabel-lkps { border: 2px solid #3f556f !important; }
+:where(html.tema-kantor) .tabel-rapb-format td, :where(html.tema-kantor) .tabel-rekap-upps td, :where(html.tema-kantor) .tabel-lkps td { border: 1px solid #a6abb4 !important; }
+:where(html.tema-kantor) .tabel-rapb-format thead th, :where(html.tema-kantor) .tabel-rekap-upps thead th, :where(html.tema-kantor) .tabel-lkps thead th { border-color: rgba(255,255,255,.35) !important; }
+:where(html.tema-kantor) .tabel-rapb-format tbody td, :where(html.tema-kantor) .tabel-rekap-upps tbody td, :where(html.tema-kantor) .tabel-lkps tbody td, :where(html.tema-kantor) .tabel-rapb-format tbody tr.r-item:nth-child(even) td, :where(html.tema-kantor) .tabel-rapb-format tr.r-grup td, :where(html.tema-kantor) .tabel-rapb-format tr.r-kepala td, :where(html.tema-kantor) .tabel-rapb-format tr.r-total td, :where(html.tema-kantor) .tabel-lkps .l-judul td, :where(html.tema-kantor) .tabel-lkps .l-jumlah td, :where(html.tema-kantor) .tabel-lkps td.l-no, :where(html.tema-kantor) .tabel-rekap-upps .u-total, :where(html.tema-kantor) td.r-hasil, :where(html.tema-kantor) td.r-hasil.minus, :where(html.tema-kantor) .tabel-lkps .l-rata, :where(html.tema-kantor) .tabel-rapb-format tbody tr.r-item:hover td, :where(html.tema-kantor) td.r-isi:not(.r-hasil):hover { background: #fff !important; }
+:where(html.tema-kantor) .rp-isi, :where(html.tema-kantor) .rp-isi.rp-hasil, :where(html.tema-kantor) .r-hasil .rp-hasil { background: transparent !important; }
+:where(html.tema-kantor) .tabel-rapb-format tr.r-grup:hover td { background: #f7fbf9 !important; }
+:where(html.tema-kantor) .tabel-rapb-format tr.r-total-besar td, :where(html.tema-kantor) .tabel-lkps .l-total td, :where(html.tema-kantor) .tabel-lkps .l-total td.r-hasil, :where(html.tema-kantor) .tabel-rekap-upps tfoot td, :where(html.tema-kantor) .tabel-rekap-upps tfoot td.r-hasil { background: #fff4d9 !important; }
+:where(html.tema-kantor) .tabel-rapb-format tr.r-bab td { background: #12294c !important; }
+@media print {
+:where(html.tema-kantor) .tabel-rapb-format, :where(html.tema-kantor) .tabel-rekap-upps, :where(html.tema-kantor) .tabel-lkps { border: 1.5px solid #222 !important; }
+}
+:where(html.tema-kantor) .tabel-rekap-upps td:nth-child(4) { border-left: 1px solid #a6abb4 !important; }
+:where(html.tema-kantor) .tabel-rekap-upps td[data-sisi-kanan] { border-left: 2px solid #3f556f !important; }
+@media print {
+:where(html.tema-kantor) .tabel-rekap-upps td[data-sisi-kanan] { border-left: 1.5px solid #222 !important; }
+}
+:where(html.tema-kantor) .tabel-rapb-format td.r-link { background: #fff; }
+:where(html.tema-kantor) .link-isi input { border: 1px solid #c9ccd1; background: #fff; }
+:where(html.tema-kantor) .link-isi input:focus { border-color: #1c8a5a; box-shadow: 0 0 0 3px rgba(28, 138, 90, .12); }
+:where(html.tema-kantor) .link-buka { color: #12294c; background: #eef6f2; }
+:where(html.tema-kantor) .link-buka:hover { background: #d8ece3; }
+:where(html.tema-kantor) body.publik { background: linear-gradient(135deg, #2a5a95 0%, #16325d 38%, #142d54 70%, #12294d 100%); }
+:where(html.tema-kantor) .publik-merek { color: #fff; }
+:where(html.tema-kantor) .publik-kartu { background: rgba(255,255,255,.96); box-shadow: 0 30px 60px -24px rgba(13,31,58,.6); }
+:where(html.tema-kantor) .publik-kartu h1 { color: var(--merek-800); }
+:where(html.tema-kantor) .publik-kartu p.sub { color: var(--teks-3); }
+:where(html.tema-kantor) .publik-kartu h2 { color: var(--merek-700); border-bottom: 1px solid var(--garis, #e3e5e8); }
+:where(html.tema-kantor) .publik-catatan { color: #fff; text-shadow: 0 1px 3px rgba(14,32,60,.5); }
+:where(html.tema-kantor) .link-publik-baris input { background: #fff; }
+:where(html.tema-kantor) .qr-aset-gambar { border: 1px solid #e0e2e5; background: #fff; }
+:where(html.tema-kantor) body.label-aset-hal { background: #eff0f1; }
+:where(html.tema-kantor) .label-alat { background: #fff; border-bottom: 1px solid #e0e2e5; }
+:where(html.tema-kantor) .label-kosong { color: var(--teks-3); }
+:where(html.tema-kantor) .label-aset { background: #fff; border: 0.3mm dashed #9a9fa8; }
+:where(html.tema-kantor) .label-aset-teks { color: #111; }
+:where(html.tema-kantor) .label-aset-inst { color: #444; }
+:where(html.tema-kantor) .label-aset-teks span { color: #444; }
+@media print {
+:where(html.tema-kantor) body.label-aset-hal { background: #fff; }
+}
+:where(html.tema-kantor) .pindai-layar { background: radial-gradient(circle at 50% 40%, #122a4d, #0f223e); }
+:where(html.tema-kantor) .pindai-bingkai i { border: 4px solid #fff; filter: drop-shadow(0 0 3px rgba(0,0,0,.45)); }
+:where(html.tema-kantor) .pindai-garis { background: linear-gradient(90deg, transparent, #7fb2f0, transparent); box-shadow: 0 0 10px #7fb2f0; }
+:where(html.tema-kantor) .pindai-layar.kena .pindai-bingkai i { border-color: #5ee6a8; }
+:where(html.tema-kantor) .pindai-layar.kena { box-shadow: inset 0 0 0 4px #5ee6a8; }
+:where(html.tema-kantor) .pindai-tirai { color: #e6ecf4; }
+:where(html.tema-kantor) .pindai-tirai-ikon { background: rgba(255,255,255,.1); }
+:where(html.tema-kantor) .pindai-alat .aktif { background: #fff4d9; border-color: #e0b354; }
+:where(html.tema-kantor) .pindai-manual { border-top: 1px dashed #d9dbde; }
+:where(html.tema-kantor) .pindai-kosong { color: var(--teks-3); }
+:where(html.tema-kantor) .pindai-gagal { background: #fdecec; color: #8a2a2a; }
+:where(html.tema-kantor) .pindai-gagal code { color: #5b2323; }
+:where(html.tema-kantor) .pindai-temu { border: 1px solid #d7e5e0; background: linear-gradient(180deg, #f6fbf9, #fff); }
+:where(html.tema-kantor) .pindai-temu-kepala b { color: var(--merek-800); }
+:where(html.tema-kantor) .pindai-temu-info dt { color: var(--teks-3); }
+:where(html.tema-kantor) .pindai-riwayat h3 { color: var(--teks-3); }
+:where(html.tema-kantor) .pindai-riwayat a { border: 1px solid #e5e6e9; }
+:where(html.tema-kantor) .pindai-riwayat a:hover { background: #f4f9f7; }
+:where(html.tema-kantor) .pindai-riwayat code { color: var(--teks-3); }
+:where(html.tema-kantor) .rincian-kegiatan .rk-judul { color: var(--merek-800); }
+:where(html.tema-kantor) .rk-daftar dt { color: var(--teks-3); }
+:where(html.tema-kantor) .rk-blok { border-top: 1px solid #e5e6e9; }
+:where(html.tema-kantor) .rk-blok b { color: var(--teks-3); }
+:where(html.tema-kantor) .rk-catatan p { color: #8a2a2a; }
+:where(html.tema-kantor) .kk-bulan a { border: 1px solid #dadcdf; background: #fff; }
+:where(html.tema-kantor) .kk-bulan a.ok { border-color: #8fd1b0; background: #eefaf3; }
+:where(html.tema-kantor) .kk-bulan a.ok::after { color: #1f8a57; }
+:where(html.tema-kantor) .kk-bulan a.aktif { background: var(--merek-700, #142d54); border-color: transparent; color: #fff; }
+:where(html.tema-kantor) .kk-nilai.kk-a, :where(html.tema-kantor) .kk-legenda .kk-a { background: #e3f6ec; color: #17734a; border-color: #9fd8bb; }
+:where(html.tema-kantor) .kk-nilai.kk-b, :where(html.tema-kantor) .kk-legenda .kk-b { background: #e8f0fb; color: #27509a; border-color: #a9c2ea; }
+:where(html.tema-kantor) .kk-nilai.kk-c, :where(html.tema-kantor) .kk-legenda .kk-c { background: #fdecec; color: #a12d2d; border-color: #eab0b0; }
+:where(html.tema-kantor) .kk-kini { background: #fff4d9; color: #8a5a00; }
+:where(html.tema-kantor) .kk-oleh td { background: #f7f8fa; }
+:where(html.tema-kantor) .kk-legenda { color: var(--teks-2, #444); }
+:where(html.tema-kantor) .kk-legenda b { border: 1px solid #dadcdf; }
+:where(html.tema-kantor) .kk-sarana tr.kk-saran td { background: #fffbef; }
+:where(html.tema-kantor) .kk-kontrol .kk-catatan { color: #8a5a00; }
+:where(html.tema-kantor) .kk-tambah { border-top: 1px dashed #d9dbde; }
+:where(html.tema-kantor) body.kk-cetak-hal { background: #eff0f1; }
+:where(html.tema-kantor) .kk-lembar { background: #fff; box-shadow: 0 6px 20px rgba(0,0,0,.08); color: #000; }
+:where(html.tema-kantor) .kk-grid th, :where(html.tema-kantor) .kk-grid td { border: 0.6px solid #000; }
+:where(html.tema-kantor) .kk-grid th { background: #f2f2f2; }
+@media print {
+:where(html.tema-kantor) body.kk-cetak-hal { background: #fff; }
+}
+:where(html.tema-kantor) .kk-saya { background: #fff8e8; border: 1px solid #f0dcaa; }
+:where(html.tema-kantor) .kk-saya a { background: #fff; border: 1px solid #e6cf92; }
+:where(html.tema-kantor) .kk-saya a.aktif { background: var(--merek-700, #142d54); color: #fff; border-color: transparent; }
+:where(html.tema-kantor) .kk-minggu span { color: var(--teks-3); }
+:where(html.tema-kantor) .kk-minggu a { border: 1px solid #dadcdf; }
+:where(html.tema-kantor) .kk-minggu a.aktif { background: #e8edf3; border-color: #8ca6c5; color: var(--merek-800, #12294b); }
+:where(html.tema-kantor) .kk-butir { border: 1px solid #e5e6e9; }
+:where(html.tema-kantor) .kk-pilih span { border: 1.5px solid #dadcdf; background: #fff; }
+:where(html.tema-kantor) .kk-pilih input:focus-visible + span { outline: 2px solid var(--merek-600, #15315b); }
+:where(html.tema-kantor) .kk-pilih .kk-a input:checked + span { background: #e3f6ec; border-color: #2f9e68; color: #17734a; }
+:where(html.tema-kantor) .kk-pilih .kk-b input:checked + span { background: #e8f0fb; border-color: #4a78c4; color: #27509a; }
+:where(html.tema-kantor) .kk-pilih .kk-c input:checked + span { background: #fdecec; border-color: #c84b4b; color: #a12d2d; }
+:where(html.tema-kantor) .kk-pilih .kk-x span { color: var(--teks-3); }
+:where(html.tema-kantor) .kk-pilih .kk-x input:checked + span { background: #f2f2f4; border-color: #abafb7; }
+@media (max-width: 640px) {
+:where(html.tema-kantor) .kk-sarana tr { border-bottom: 1px solid #e5e6e9; }
+:where(html.tema-kantor) .kk-sarana td:nth-child(n+4)::before { color: var(--teks-3); }
+}
+:where(html.tema-kantor) .notif.link-publik { background: linear-gradient(135deg, #fffbe6 0%, #fff1bf 100%); border: 1.5px solid #f2c14e; color: #6b4a00; box-shadow: 0 6px 18px -10px rgba(214, 160, 20, .55); }
+:where(html.tema-kantor) .notif.link-publik > svg { color: #d48a00; }
+:where(html.tema-kantor) .notif.link-publik b { color: #8a5a00; }
+:where(html.tema-kantor) .notif.link-publik .link-publik-baris input { border-color: #f2c14e; background: #fff; color: #5a3d00; }
+:where(html.tema-kantor) .notif.link-publik .btn-garis { background: #fff; border-color: #e9b93f; color: #7a5200; }
+:where(html.tema-kantor) .notif.link-publik .btn-garis:hover { background: #ffe9a8; }
+:where(html.tema-kantor) .notif.link-publik { color: #0d3b66; background: linear-gradient(180deg, #5fb4f0 0%, #8ccdf7 55%, #c4e6fb 100%); border: 1px solid #7cc0ee; box-shadow: 0 8px 22px -12px rgba(30, 110, 180, .6); }
+:where(html.tema-kantor) .notif.link-publik::before { background-image: radial-gradient(closest-side, rgba(255,255,255,.95), rgba(255,255,255,0)),
+    radial-gradient(closest-side, rgba(255,255,255,.9), rgba(255,255,255,0)),
+    radial-gradient(closest-side, rgba(255,255,255,.85), rgba(255,255,255,0)); }
+:where(html.tema-kantor) .notif.link-publik::after { background-image: radial-gradient(closest-side, rgba(255,255,255,.75), rgba(255,255,255,0)),
+    radial-gradient(closest-side, rgba(255,255,255,.7), rgba(255,255,255,0)); }
+:where(html.tema-kantor) .notif.link-publik > svg { color: #0b4f8a; }
+:where(html.tema-kantor) .notif.link-publik b { color: #083d6e; text-shadow: 0 1px 0 rgba(255,255,255,.6); }
+:where(html.tema-kantor) .notif.link-publik .link-publik-baris input { border-color: #9fd2f5; background: rgba(255,255,255,.95); color: #0d3b66; }
+:where(html.tema-kantor) .notif.link-publik .btn-garis { background: rgba(255,255,255,.92); border-color: #9fd2f5; color: #0b4f8a; }
+:where(html.tema-kantor) .notif.link-publik .btn-garis:hover { background: #fff; border-color: #5fb4f0; }
+:where(html.tema-kantor) .notif.link-publik { background: linear-gradient(180deg, #3fa0e6 0%, #6cbcf0 60%, #a9dbf8 100%); }
+:where(html.tema-kantor) .notif.link-publik b { color: #fff; text-shadow: 0 1px 2px rgba(8, 61, 110, .45); }
+:where(html.tema-kantor) .notif.link-publik > svg { color: #fff; }
+:where(html.tema-kantor) .aset-menu-ikon { background: #e8edf3; color: var(--merek-700, #142d54); }
+:where(html.tema-kantor) .aset-menu a:hover .aset-menu-ikon { background: #d3deeb; }
+:where(html.tema-kantor) .aset-menu a.aktif .aset-menu-ikon { background: var(--merek-700, #142d54); color: #fff; }
+:where(html.tema-kantor) .notif.link-publik b { color: #0b1a2a; text-shadow: 0 1px 2px rgba(255,255,255,.7); }
+:where(html.tema-kantor) .notif.link-publik > svg { color: #0b1a2a; }
+:where(html.tema-kantor) .notif.link-publik { background: linear-gradient(115deg, #2f8fdc 0%, #5db6f2 22%, #9fd8fb 42%, #6fc0f4 60%, #3a9be3 80%, #7cc9f6 100%); border-color: #6ab8ee; }
+:where(html.tema-kantor) .notif.link-publik::before { background-image: linear-gradient(100deg, transparent 0%, rgba(255,255,255,0) 35%, rgba(255,255,255,.35) 50%, rgba(255,255,255,0) 65%, transparent 100%); }
+:where(html.tema-kantor) .notif.link-publik { background: #4ea6e8 url("../img/langit.jpg") repeat-x; border-color: #8cc8f2; }
+:where(html.tema-kantor) .notif.link-publik::before { background-image: radial-gradient(120% 140% at 12% -20%, rgba(255,255,255,.55), rgba(255,255,255,0) 55%),
+    linear-gradient(100deg, transparent 0%, rgba(255,255,255,0) 38%, rgba(255,255,255,.28) 50%, rgba(255,255,255,0) 62%, transparent 100%); }
+:where(html.tema-kantor) .notif.link-publik b { color: #06121f; text-shadow: 0 0 6px rgba(255,255,255,.95), 0 1px 0 rgba(255,255,255,.9); }
+:where(html.tema-kantor) .notif.link-publik { background: #4ea6e8 url("../img/langit.jpg") no-repeat; }
+:where(html.tema-kantor) .notif.link-publik { background-color: #4f9a3a; background-image: url("../img/pemandangan.jpg"); border-color: #8cc56f; box-shadow: 0 8px 22px -12px rgba(40, 110, 40, .55); }
+:where(html.tema-kantor) .notif.link-publik .link-publik-baris input, :where(html.tema-kantor) .notif.link-publik .btn-garis { border-color: #b5dca0; color: #1f4d14; }
+:where(html.tema-kantor) .notif.link-publik .btn-garis:hover { border-color: #6fb04f; }
+:where(html.tema-kantor) .notif.link-publik { background-color: #4ea6e8; background-image: url("../img/langit.jpg"); border-color: #8cc8f2; box-shadow: 0 8px 22px -12px rgba(30, 110, 180, .6); }
+:where(html.tema-kantor) .notif.link-publik .link-publik-baris input, :where(html.tema-kantor) .notif.link-publik .btn-garis { border-color: #9fd2f5; color: #0b4f8a; }
+:where(html.tema-kantor) .notif.link-publik .link-publik-baris input { color: #0d3b66; }
+:where(html.tema-kantor) .notif.link-publik .btn-garis:hover { border-color: #5fb4f0; }
+:where(html.tema-kantor) .pengajuan-umpan { color: #2c5a8a; }
+:where(html.tema-kantor) .pilih-putusan span { border: 1.5px solid #dadcdf; background: #fff; }
+:where(html.tema-kantor) .pilih-putusan input:focus-visible + span { outline: 2px solid var(--merek-600, #15315b); }
+:where(html.tema-kantor) .pilih-putusan .setuju input:checked + span { background: #e3f6ec; border-color: #2f9e68; color: #17734a; }
+:where(html.tema-kantor) .pilih-putusan .tolak input:checked + span { background: #fdecec; border-color: #c84b4b; color: #a12d2d; }
+:where(html.tema-kantor) .kk-chip { background: #eef1f5; border: 1px solid #d3e6df; color: var(--merek-800, #12294b); }
+:where(html.tema-kantor) .kk-chip:hover { background: #dff0ea; }
+:where(html.tema-kantor) .kk-peringatan { border-left: 4px solid var(--merek-700); }
+:where(html.tema-kantor) .kk-peringatan > summary { color: var(--merek-700); }
+:where(html.tema-kantor) .kk-peringatan-isi h4 { color: var(--teks-3); }
+:where(html.tema-kantor) .kk-cs { border-top: 1px solid var(--garis); }
+:where(html.tema-kantor) .kk-cs > summary:hover, :where(html.tema-kantor) .kk-cs[open] > summary { background: var(--merek-50); }
+:where(html.tema-kantor) .kk-cs-angka { color: var(--teks-3); }
+:where(html.tema-kantor) .kk-cs-akhir { color: var(--teks-3); }
+:where(html.tema-kantor) .kk-cs-akhir.aktif { color: var(--hijau); }
+:where(html.tema-kantor) .kk-cs-isi { background: var(--merek-50); }
+:where(html.tema-kantor) .kk-cs-kolom h4 { color: var(--teks-3); }
+:where(html.tema-kantor) .kk-cs-baris { background: var(--putih); border: 1px solid var(--garis); }
+:where(html.tema-kantor) .kk-minggu-titik i { background: var(--latar); color: var(--teks-4); }
+:where(html.tema-kantor) .kk-minggu-titik i.ok { background: var(--hijau-50); color: var(--hijau); }
+:where(html.tema-kantor) .kk-akt { border-bottom: 1px dashed var(--garis); }
+:where(html.tema-kantor) .kk-akt:hover { background: var(--krem-50); }
+:where(html.tema-kantor) .kk-akt-waktu { color: var(--teks-3); }
+:where(html.tema-kantor) .lt-kepala .lt-tulis { border: 1px solid var(--oranye); color: var(--oranye-600); background: var(--oranye-50); }
+:where(html.tema-kantor) .lt-kaki .lt-semua + .lt-semua { border-left: 1px solid var(--garis); }
+:where(html.tema-kantor) .pengumuman-judul { color: var(--merek-700); }
+:where(html.tema-kantor) .pengumuman-kartu.penting { border-left: 4px solid var(--emas); }
+:where(html.tema-kantor) .pengumuman-kartu:target { box-shadow: 0 0 0 2px var(--oranye) !important; }
+:where(html.tema-kantor) .lt-umum .lt-judul::before { color: var(--oranye-600); }
+:where(html.tema-kantor) .rincian { border: 1px solid var(--garis); border-left: 4px solid var(--merek-700); background: var(--putih); }
+:where(html.tema-kantor) .rincian > summary:focus-visible { outline: 2px solid var(--merek-300); }
+:where(html.tema-kantor) .rincian > summary { color: var(--merek-700); }
+:where(html.tema-kantor) .rincian[open] > summary { border-bottom-color: var(--merek-100); }
+:where(html.tema-kantor) .rincian > summary::after { background: var(--merek-100) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23102544' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") center / 16px no-repeat; }
+:where(html.tema-kantor) .rincian > summary:hover::after { background-color: var(--merek-300); }
+:where(html.tema-kantor) .rincian > summary .rincian-petunjuk { color: var(--teks-3); }
+:where(html.tema-kantor) form.kegiatan-ramping .langkah::before { background: #a9b8cb; }
+:where(html.tema-kantor) table.tabel td, :where(html.tema-kantor) table.tabel tbody td, :where(html.tema-kantor) table.tabel:not(.matriks) tbody td, :where(html.tema-kantor) table.tabel:not(.matriks) tbody tr:last-child td, :where(html.tema-kantor) .tabel-padat td, :where(html.tema-kantor) .tabel-padat tbody td { border-bottom-color: #d8dadd; }
+:where(html.tema-kantor) table.tabel:not(.matriks) th + th, :where(html.tema-kantor) table.tabel:not(.matriks) td + td, :where(html.tema-kantor) .tabel-padat td + td, :where(html.tema-kantor) .tabel-padat th + th, :where(html.tema-kantor) table.tabel.tabel-absensi th.ab-tgl, :where(html.tema-kantor) table.tabel.tabel-absensi td.ab-tgl { border-left-color: #d8dadd; }
+:where(html.tema-kantor) .lt-item, :where(html.tema-kantor) .legenda-aset li, :where(html.tema-kantor) .profil-aktivitas li, :where(html.tema-kantor) .daftar-lihat-dok li { border-bottom-color: #dee0e3; }
+:where(html.tema-kantor) .qr-aset-gambar, :where(html.tema-kantor) .label-alat, :where(html.tema-kantor) .pindai-temu, :where(html.tema-kantor) .pindai-riwayat a, :where(html.tema-kantor) .kk-bulan a, :where(html.tema-kantor) .kk-legenda b, :where(html.tema-kantor) .kk-minggu a, :where(html.tema-kantor) .kk-butir, :where(html.tema-kantor) .dok-kata i, :where(html.tema-kantor) .kk-chip { border-color: #cbcdd2; }
+:where(html.tema-kantor) .rk-blok, :where(html.tema-kantor) .pindai-manual, :where(html.tema-kantor) .kk-tambah { border-top-color: #cbcdd2; }
+:where(html.tema-kantor) .kk-pilih span, :where(html.tema-kantor) .pilih-putusan span { border-color: #bec1c8; }
+:where(html.tema-kantor) .kk-cs, :where(html.tema-kantor) .kk-akt { border-color: var(--garis); }
+:where(html.tema-kantor) table.tabel.tabel-rapb-format th, :where(html.tema-kantor) table.tabel.tabel-rapb-format td, :where(html.tema-kantor) table.tabel.tabel-rekap-upps th, :where(html.tema-kantor) table.tabel.tabel-rekap-upps td, :where(html.tema-kantor) table.tabel.tabel-lkps th, :where(html.tema-kantor) table.tabel.tabel-lkps td, :where(html.tema-kantor) table.tabel.tabel-rapb th, :where(html.tema-kantor) table.tabel.tabel-rapb td, :where(html.tema-kantor) table.tabel.tabel-audit th, :where(html.tema-kantor) table.tabel.tabel-audit td, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah th, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah td { border: 1px solid #dfe3e8 !important; }
+@media all {
+:where(html.tema-kantor) table.tabel:not(.tabel-absensi):not(.matriks) th, :where(html.tema-kantor) table.tabel:not(.tabel-absensi):not(.matriks) td, :where(html.tema-kantor) table.tabel-padat th, :where(html.tema-kantor) table.tabel-padat td { border: 1px solid #dfe3e8 !important; }
+}
+:where(html.tema-kantor) table.tabel.tabel-absensi td.ab-jml, :where(html.tema-kantor) table.tabel.tabel-absensi td.ab-tgl { background: #fff !important; }
+@media all {
+:where(html.tema-kantor) table.tabel.tabel-rapb-format th, :where(html.tema-kantor) table.tabel.tabel-rapb-format td, :where(html.tema-kantor) table.tabel.tabel-rapb-format thead th, :where(html.tema-kantor) table.tabel.tabel-rapb-format tbody td, :where(html.tema-kantor) table.tabel.tabel-rapb-format tbody tr td, :where(html.tema-kantor) table.tabel.tabel-rapb-format tfoot td, :where(html.tema-kantor) table.tabel.tabel-rapb-format tfoot th, :where(html.tema-kantor) table.tabel.tabel-rekap-upps th, :where(html.tema-kantor) table.tabel.tabel-rekap-upps td, :where(html.tema-kantor) table.tabel.tabel-rekap-upps thead th, :where(html.tema-kantor) table.tabel.tabel-rekap-upps tbody td, :where(html.tema-kantor) table.tabel.tabel-rekap-upps tbody tr td, :where(html.tema-kantor) table.tabel.tabel-rekap-upps tfoot td, :where(html.tema-kantor) table.tabel.tabel-rekap-upps tfoot th, :where(html.tema-kantor) table.tabel.tabel-lkps th, :where(html.tema-kantor) table.tabel.tabel-lkps td, :where(html.tema-kantor) table.tabel.tabel-lkps thead th, :where(html.tema-kantor) table.tabel.tabel-lkps tbody td, :where(html.tema-kantor) table.tabel.tabel-lkps tbody tr td, :where(html.tema-kantor) table.tabel.tabel-lkps tfoot td, :where(html.tema-kantor) table.tabel.tabel-lkps tfoot th, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah th, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah td, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah thead th, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah tbody td, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah tbody tr td, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah tfoot td, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah tfoot th, :where(html.tema-kantor) table.tabel.tabel-rapb th, :where(html.tema-kantor) table.tabel.tabel-rapb td, :where(html.tema-kantor) table.tabel.tabel-rapb thead th, :where(html.tema-kantor) table.tabel.tabel-rapb tbody td, :where(html.tema-kantor) table.tabel.tabel-rapb tbody tr td, :where(html.tema-kantor) table.tabel.tabel-rapb tfoot td, :where(html.tema-kantor) table.tabel.tabel-rapb tfoot th, :where(html.tema-kantor) table.tabel.tabel-audit th, :where(html.tema-kantor) table.tabel.tabel-audit td, :where(html.tema-kantor) table.tabel.tabel-audit thead th, :where(html.tema-kantor) table.tabel.tabel-audit tbody td, :where(html.tema-kantor) table.tabel.tabel-audit tbody tr td, :where(html.tema-kantor) table.tabel.tabel-audit tfoot td, :where(html.tema-kantor) table.tabel.tabel-audit tfoot th { background: #fff !important; color: #1d1d1f !important; }
+:where(html.tema-kantor) table.tabel.tabel-rapb-format, :where(html.tema-kantor) table.tabel.tabel-rekap-upps, :where(html.tema-kantor) table.tabel.tabel-lkps, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah, :where(html.tema-kantor) table.tabel.tabel-rapb, :where(html.tema-kantor) table.tabel.tabel-audit { background: #fff !important; border: 1px solid #dfe3e8 !important; }
+}
+@media all {
+:where(html.tema-kantor) .lembar-rapb .tabel-bungkus { border-color: #dfe3e8 !important; }
+:where(html.tema-kantor) table.tabel.tabel-rapb-format td.minus, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah td.minus, :where(html.tema-kantor) table.tabel.tabel-rapb-format tbody td.minus { color: #c62828 !important; }
+}
+@media all {
+:where(html.tema-kantor) table.tabel.tabel-rapb-format, :where(html.tema-kantor) table.tabel.tabel-rapb-format th, :where(html.tema-kantor) table.tabel.tabel-rapb-format td, :where(html.tema-kantor) table.tabel.tabel-rapb-format thead th, :where(html.tema-kantor) table.tabel.tabel-rapb-format tbody td, :where(html.tema-kantor) table.tabel.tabel-rapb-format tbody tr td, :where(html.tema-kantor) table.tabel.tabel-rapb-format tfoot td, :where(html.tema-kantor) table.tabel.tabel-rekap-upps, :where(html.tema-kantor) table.tabel.tabel-rekap-upps th, :where(html.tema-kantor) table.tabel.tabel-rekap-upps td, :where(html.tema-kantor) table.tabel.tabel-rekap-upps thead th, :where(html.tema-kantor) table.tabel.tabel-rekap-upps tbody td, :where(html.tema-kantor) table.tabel.tabel-rekap-upps tbody tr td, :where(html.tema-kantor) table.tabel.tabel-rekap-upps tfoot td, :where(html.tema-kantor) table.tabel.tabel-lkps, :where(html.tema-kantor) table.tabel.tabel-lkps th, :where(html.tema-kantor) table.tabel.tabel-lkps td, :where(html.tema-kantor) table.tabel.tabel-lkps thead th, :where(html.tema-kantor) table.tabel.tabel-lkps tbody td, :where(html.tema-kantor) table.tabel.tabel-lkps tbody tr td, :where(html.tema-kantor) table.tabel.tabel-lkps tfoot td, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah th, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah td, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah thead th, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah tbody td, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah tbody tr td, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah tfoot td, :where(html.tema-kantor) table.tabel.tabel-rapb, :where(html.tema-kantor) table.tabel.tabel-rapb th, :where(html.tema-kantor) table.tabel.tabel-rapb td, :where(html.tema-kantor) table.tabel.tabel-rapb thead th, :where(html.tema-kantor) table.tabel.tabel-rapb tbody td, :where(html.tema-kantor) table.tabel.tabel-rapb tbody tr td, :where(html.tema-kantor) table.tabel.tabel-rapb tfoot td, :where(html.tema-kantor) table.tabel.tabel-audit, :where(html.tema-kantor) table.tabel.tabel-audit th, :where(html.tema-kantor) table.tabel.tabel-audit td, :where(html.tema-kantor) table.tabel.tabel-audit thead th, :where(html.tema-kantor) table.tabel.tabel-audit tbody td, :where(html.tema-kantor) table.tabel.tabel-audit tbody tr td, :where(html.tema-kantor) table.tabel.tabel-audit tfoot td, :where(html.tema-kantor) .lembar-rapb .tabel-bungkus { border-color: #aeb7c4 !important; }
+}
+:where(html.tema-kantor) .tabel-rapb-format .r-panah, :where(html.tema-kantor) .tabel-rapb-format tr.r-grup.buka .r-panah { background-color: #fff !important; }
+:where(html.tema-kantor) .rincian > summary::after, :where(html.tema-kantor) .rincian > summary:hover::after { background-color: #fff !important; }
+:where(html.tema-kantor) .grafik-jad .gj-kisi { stroke: #e3e7ed; }
+:where(html.tema-kantor) .grafik-jad .gj-dasar { stroke: #b9c2cf; }
+:where(html.tema-kantor) .grafik-jad .gj-sumbu { fill: #8a94a3; }
+:where(html.tema-kantor) .grafik-jad .gj-label { fill: #4a4f57; }
+:where(html.tema-kantor) .grafik-jad .gj-nilai { fill: #0b2545; stroke: #fff; }
+:where(html.tema-kantor) .grafik-jad .gj-seg { stroke: #fff; }
+:where(html.tema-kantor) .jad-panel .legenda-baris i.tren { border-top: 2px dashed currentColor; }
+@media all {
+:where(html.tema-kantor) table.tabel.tabel-rapb-format th, :where(html.tema-kantor) table.tabel.tabel-rapb-format td, :where(html.tema-kantor) table.tabel.tabel-rapb-format thead th, :where(html.tema-kantor) table.tabel.tabel-rapb-format tbody td, :where(html.tema-kantor) table.tabel.tabel-rapb-format tbody tr td, :where(html.tema-kantor) table.tabel.tabel-rapb-format td *, :where(html.tema-kantor) table.tabel.tabel-rapb-format th *, :where(html.tema-kantor) table.tabel.tabel-rapb-format input, :where(html.tema-kantor) table.tabel.tabel-rapb-format output, :where(html.tema-kantor) table.tabel.tabel-rapb-format .rp-isi i, :where(html.tema-kantor) table.tabel.tabel-rapb-format .rp-isi input, :where(html.tema-kantor) table.tabel.tabel-rapb-format .rp-hasil output, :where(html.tema-kantor) table.tabel.tabel-rapb-format .l-uraian, :where(html.tema-kantor) table.tabel.tabel-rapb-format .sub-judul, :where(html.tema-kantor) table.tabel.tabel-rapb-format .r-hitung, :where(html.tema-kantor) table.tabel.tabel-rapb-format .r-kode, :where(html.tema-kantor) table.tabel.tabel-rapb-format b, :where(html.tema-kantor) table.tabel.tabel-rekap-upps th, :where(html.tema-kantor) table.tabel.tabel-rekap-upps td, :where(html.tema-kantor) table.tabel.tabel-rekap-upps thead th, :where(html.tema-kantor) table.tabel.tabel-rekap-upps tbody td, :where(html.tema-kantor) table.tabel.tabel-rekap-upps tbody tr td, :where(html.tema-kantor) table.tabel.tabel-rekap-upps td *, :where(html.tema-kantor) table.tabel.tabel-rekap-upps th *, :where(html.tema-kantor) table.tabel.tabel-rekap-upps input, :where(html.tema-kantor) table.tabel.tabel-rekap-upps output, :where(html.tema-kantor) table.tabel.tabel-rekap-upps .rp-isi i, :where(html.tema-kantor) table.tabel.tabel-rekap-upps .rp-isi input, :where(html.tema-kantor) table.tabel.tabel-rekap-upps .rp-hasil output, :where(html.tema-kantor) table.tabel.tabel-rekap-upps .l-uraian, :where(html.tema-kantor) table.tabel.tabel-rekap-upps .sub-judul, :where(html.tema-kantor) table.tabel.tabel-rekap-upps .r-hitung, :where(html.tema-kantor) table.tabel.tabel-rekap-upps .r-kode, :where(html.tema-kantor) table.tabel.tabel-rekap-upps b, :where(html.tema-kantor) table.tabel.tabel-lkps th, :where(html.tema-kantor) table.tabel.tabel-lkps td, :where(html.tema-kantor) table.tabel.tabel-lkps thead th, :where(html.tema-kantor) table.tabel.tabel-lkps tbody td, :where(html.tema-kantor) table.tabel.tabel-lkps tbody tr td, :where(html.tema-kantor) table.tabel.tabel-lkps td *, :where(html.tema-kantor) table.tabel.tabel-lkps th *, :where(html.tema-kantor) table.tabel.tabel-lkps input, :where(html.tema-kantor) table.tabel.tabel-lkps output, :where(html.tema-kantor) table.tabel.tabel-lkps .rp-isi i, :where(html.tema-kantor) table.tabel.tabel-lkps .rp-isi input, :where(html.tema-kantor) table.tabel.tabel-lkps .rp-hasil output, :where(html.tema-kantor) table.tabel.tabel-lkps .l-uraian, :where(html.tema-kantor) table.tabel.tabel-lkps .sub-judul, :where(html.tema-kantor) table.tabel.tabel-lkps .r-hitung, :where(html.tema-kantor) table.tabel.tabel-lkps .r-kode, :where(html.tema-kantor) table.tabel.tabel-lkps b, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah th, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah td, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah thead th, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah tbody td, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah tbody tr td, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah td *, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah th *, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah input, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah output, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah .rp-isi i, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah .rp-isi input, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah .rp-hasil output, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah .l-uraian, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah .sub-judul, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah .r-hitung, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah .r-kode, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah b, :where(html.tema-kantor) table.tabel.tabel-rapb th, :where(html.tema-kantor) table.tabel.tabel-rapb td, :where(html.tema-kantor) table.tabel.tabel-rapb thead th, :where(html.tema-kantor) table.tabel.tabel-rapb tbody td, :where(html.tema-kantor) table.tabel.tabel-rapb tbody tr td, :where(html.tema-kantor) table.tabel.tabel-rapb td *, :where(html.tema-kantor) table.tabel.tabel-rapb th *, :where(html.tema-kantor) table.tabel.tabel-rapb input, :where(html.tema-kantor) table.tabel.tabel-rapb output, :where(html.tema-kantor) table.tabel.tabel-rapb .rp-isi i, :where(html.tema-kantor) table.tabel.tabel-rapb .rp-isi input, :where(html.tema-kantor) table.tabel.tabel-rapb .rp-hasil output, :where(html.tema-kantor) table.tabel.tabel-rapb .l-uraian, :where(html.tema-kantor) table.tabel.tabel-rapb .sub-judul, :where(html.tema-kantor) table.tabel.tabel-rapb .r-hitung, :where(html.tema-kantor) table.tabel.tabel-rapb .r-kode, :where(html.tema-kantor) table.tabel.tabel-rapb b, :where(html.tema-kantor) table.tabel.tabel-audit th, :where(html.tema-kantor) table.tabel.tabel-audit td, :where(html.tema-kantor) table.tabel.tabel-audit thead th, :where(html.tema-kantor) table.tabel.tabel-audit tbody td, :where(html.tema-kantor) table.tabel.tabel-audit tbody tr td, :where(html.tema-kantor) table.tabel.tabel-audit td *, :where(html.tema-kantor) table.tabel.tabel-audit th *, :where(html.tema-kantor) table.tabel.tabel-audit input, :where(html.tema-kantor) table.tabel.tabel-audit output, :where(html.tema-kantor) table.tabel.tabel-audit .rp-isi i, :where(html.tema-kantor) table.tabel.tabel-audit .rp-isi input, :where(html.tema-kantor) table.tabel.tabel-audit .rp-hasil output, :where(html.tema-kantor) table.tabel.tabel-audit .l-uraian, :where(html.tema-kantor) table.tabel.tabel-audit .sub-judul, :where(html.tema-kantor) table.tabel.tabel-audit .r-hitung, :where(html.tema-kantor) table.tabel.tabel-audit .r-kode, :where(html.tema-kantor) table.tabel.tabel-audit b { color: #000 !important; }
+:where(html.tema-kantor) table.tabel.tabel-rapb-format input::placeholder, :where(html.tema-kantor) table.tabel.tabel-rekap-upps input::placeholder, :where(html.tema-kantor) table.tabel.tabel-lkps input::placeholder, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah input::placeholder, :where(html.tema-kantor) table.tabel.tabel-rapb input::placeholder, :where(html.tema-kantor) table.tabel.tabel-audit input::placeholder { color: #000 !important; }
+:where(html.tema-kantor) table.tabel.tabel-rapb-format td.minus, :where(html.tema-kantor) table.tabel.tabel-rapb-format td.minus *, :where(html.tema-kantor) table.tabel.tabel-rekap-upps td.minus, :where(html.tema-kantor) table.tabel.tabel-rekap-upps td.minus *, :where(html.tema-kantor) table.tabel.tabel-lkps td.minus, :where(html.tema-kantor) table.tabel.tabel-lkps td.minus *, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah td.minus, :where(html.tema-kantor) table.tabel.tabel-rekap-tengah td.minus *, :where(html.tema-kantor) table.tabel.tabel-rapb td.minus, :where(html.tema-kantor) table.tabel.tabel-rapb td.minus *, :where(html.tema-kantor) table.tabel.tabel-audit td.minus, :where(html.tema-kantor) table.tabel.tabel-audit td.minus * { color: #c62828 !important; }
+}
+:where(html.tema-kantor) .rincian { border-left-color: var(--garis) !important; }
+@media all {
+:where(html.tema-kantor) table.tabel-rapb-format:not(#_) tr.r-bab td { background: #fff !important; color: #000 !important; }
+}
+:where(html.tema-kantor) .jad-subjudul { color: var(--gelap); }
+:where(html.tema-kantor) .jad-subjudul span { color: var(--teks-3); }
+:where(html.tema-kantor) .kk-peringatan { border-left-color: var(--garis) !important; }
+:where(html.tema-kantor) .lc, :where(html.tema-kantor) [class*="lc-"].lc, :where(html.tema-kantor) span.lc { background: #f1f3f6 !important; border-color: #d3d8df !important; color: #000 !important; }
+:where(html.tema-kantor) .lc::before { background: #000 !important; }
+@media all {
+html:where(.tema-kantor) .rp-isi, html:where(.tema-kantor) .rp-hasil, html:where(.tema-kantor) .r-hasil.minus .rp-hasil, html:where(.tema-kantor) .tabel-rekap-upps .rp-isi.manual, html:where(.tema-kantor) .tabel-lkps .rp-isi, html:where(.tema-kantor) .tabel-rekap-upps .rp-isi { background: transparent !important; }
+html:where(.tema-kantor) .rp-isi input { background: transparent !important; }
+html:where(.tema-kantor) .rp-isi:focus-within { box-shadow: inset 0 -2px 0 #1f5fbf !important; }
+}
+@media print {
+html:where(.tema-kantor) .rp-isi, html:where(.tema-kantor) .rp-hasil, html:where(.tema-kantor) .rp-isi.rp-hasil, html:where(.tema-kantor) .r-hasil .rp-hasil, html:where(.tema-kantor) .r-hasil.minus .rp-hasil, html:where(.tema-kantor) .tabel-rekap-upps .rp-isi.manual, html:where(.tema-kantor) .tabel-lkps .rp-isi, html:where(.tema-kantor) .tabel-rekap-upps .rp-isi, html:where(.tema-kantor) .tabel-lkps .l-rata .rp-hasil, html:where(.tema-kantor) .tabel-lkps .l-total .rp-hasil, html:where(.tema-kantor) .tabel-rekap-upps .u-total .rp-hasil, html:where(.tema-kantor) .tabel-rekap-upps tfoot .rp-hasil { background: transparent !important; }
+html:where(.tema-kantor) .rp-isi input, html:where(.tema-kantor) .rp-hasil output { background: transparent !important; }
+}
+:where(html.tema-kantor) .grafik-dua { border-bottom: 1px solid #eef1f5; }
+:where(html.tema-kantor) .jd-donat { border-left: 1px solid #eef1f5; }
+:where(html.tema-kantor) .jd-judul { color: #6b7280; }
+:where(html.tema-kantor) .jd-grafik-donat .gd-angka { fill: #0b2545; }
+:where(html.tema-kantor) .jd-grafik-donat .gd-ket { fill: #6b7280; }
+:where(html.tema-kantor) .jd-legenda li { color: #2e3137; }
+:where(html.tema-kantor) .jd-legenda b { color: #000; }
+:where(html.tema-kantor) .jd-legenda em { color: #6b7280; }
+:where(html.tema-kantor) .arsip-daftar { border: 1px solid #e3e7ed; }
+:where(html.tema-kantor) .arsip-daftar li { border-top: 1px solid #eef1f5; }
+:where(html.tema-kantor) .arsip-daftar li span { background: #f1f3f6; color: #9aa3af; }
+:where(html.tema-kantor) .arsip-daftar li.ada span { background: #e6f4ec; color: #1c8a5a; }
+:where(html.tema-kantor) .arsip-daftar li b { color: #1f2937; }
+:where(html.tema-kantor) .arsip-daftar li em { color: #9aa3af; }
+:where(html.tema-kantor) .arsip-sudah { color: #1c8a5a; }
+:where(html.tema-kantor) .publik-kartu .form-baris small.ket { color: #6b7280; }
+:where(html.tema-kantor) .arsip-progres { color: #0b2545; }
+:where(html.tema-kantor) .arsip-progres i { background: #e5e7eb; }
+:where(html.tema-kantor) .arsip-progres i b { background: #1c8a5a; }
+:where(html.tema-kantor) .btn-arsip.kosong { color: #9aa3af; }
+:where(html.tema-kantor) .arsip-item { border: 1px solid #dfe3e8; background: #fff; }
+:where(html.tema-kantor) .arsip-item:hover { border-color: #b9c6d8; }
+:where(html.tema-kantor) .arsip-item:has(input:checked) { border-color: #1f5fbf; background: #f3f7fd; }
+:where(html.tema-kantor) .arsip-item input { accent-color: #1f5fbf; }
+:where(html.tema-kantor) .arsip-no { background: #eef2f7; color: #0b2545; }
+:where(html.tema-kantor) .arsip-item:has(input:checked) .arsip-no { background: #1f5fbf; color: #fff; }
+:where(html.tema-kantor) .arsip-teks b { color: #111827; }
+:where(html.tema-kantor) .arsip-teks small { color: #6b7280; }
+:where(html.tema-kantor) .arsip-folder { border: 1px solid #cfdcf0; background: #f3f7fd; color: #1f5fbf; }
+:where(html.tema-kantor) .arsip-folder span { color: #6b7280; }
+:where(html.tema-kantor) .publik-kartu h2 small { color: #6b7280; }
+:where(html.tema-kantor) .publik-arsip .publik-kartu p.ket { color: #4b5563; }
+html:where(.tema-kantor):not(#_) .notif.link-publik { background: #fff !important; border: 1px solid #dfe3e8 !important; color: #1f2937 !important; }
+html:where(.tema-kantor):not(#_) .notif.link-publik > svg { color: #1f5fbf !important; }
+html:where(.tema-kantor):not(#_) .notif.link-publik b { color: #111827 !important; }
+html:where(.tema-kantor):not(#_) .notif.link-publik .link-publik-baris input { border-color: #dfe3e8 !important; background: #f8fafc !important; color: #0b2545 !important; }
+html:where(.tema-kantor):not(#_) .notif.link-publik .btn-garis { background: #fff !important; border-color: #dfe3e8 !important; color: #1f2937 !important; }
+html:where(.tema-kantor):not(#_) .notif.link-publik .btn-garis:hover { background: #f3f6fa !important; border-color: #c5ccd6 !important; }
+:where(html.tema-kantor) .info-barang-label { color: #1f5fbf; background: #eef4fd; }
+:where(html.tema-kantor) .info-barang-catatan { background: #f6f8fb; border: 1px solid #e3e7ed; color: #374151; }
+:where(html.tema-kantor) .info-barang-catatan svg { color: #1f5fbf; }
+:where(html.tema-kantor) .arsip-buka { color: #1f5fbf; }
+:where(html.tema-kantor) .arsip-jumlah { border: 1px solid #dfe3e8; background: #f6f8fb; color: #374151; }
+:where(html.tema-kantor) .arsip-jumlah:hover { border-color: #1f5fbf; color: #1f5fbf; }
+
+html.tema-kantor {
+  --gelap: #0b2545; --ungu: #0b2545; --ungu-50: #eef2f8;
+  --merek-900: #081b33; --merek-800: #0b2545; --merek-700: #0b2545; --merek-600: #13315c; --merek-500: #7d8ea8; --merek-300: #cfd6e1; --merek-100: #e4e9f1; --merek-50: #f3f5f9;
+  --oranye: #1f5fbf; --oranye-600: #1a4f9f; --oranye-50: #eef3fb; --tautan: #1a56b0;
+  --emas: #b8913a; --emas-600: #8f6d24; --emas-50: #f8f2e3;
+  --krem: #e6e8ec; --krem-50: #f6f7f9;
+  --teks: #1d1d1f; --teks-2: #3c3c43; --teks-3: #6e6e73; --teks-4: #8e8e93;
+  --garis: #dcdfe4; --garis-2: #c9cdd4; --latar: #f3f4f6; --putih: #ffffff;
+  --hijau: #2e7d5b; --hijau-50: #e8f3ee; --biru: #1f5fbf; --biru-50: #eef3fb;
+  --radius: 10px; --radius-sm: 7px; --radius-xs: 6px;
+  --bayang: 0 .5px 1.5px rgba(0,0,0,.08);
+  --bayang-md: 0 1px 2px rgba(0,0,0,.06), 0 8px 24px -10px rgba(11,37,69,.18);
+  --bayang-lg: 0 30px 70px -12px rgba(11,37,69,.35), 0 0 0 .5px rgba(0,0,0,.12);
+  --k-navy: #0b2545; --k-aksen: #1f5fbf; --k-emas: #b8913a; --k-panel: #ffffff; --k-isi: #f3f4f6; --k-garis: #e3e5e9;
+}
+html.tema-kantor body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+  color: #1d1d1f; -webkit-font-smoothing: antialiased; letter-spacing: -.003em;
+  background-color: #8aa2c2;
+  background-image:
+    radial-gradient(70% 55% at 15% 10%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 60%),
+    radial-gradient(60% 50% at 90% 85%, rgba(11,37,69,.55) 0%, rgba(11,37,69,0) 70%),
+    linear-gradient(165deg, #7f9cc4 0%, #a9bcd6 32%, #d4dce8 52%, #6b84a8 78%, #2f4566 100%);
+  background-attachment: fixed;
+}
+html.tema-kantor table, html.tema-kantor .stat .nilai, html.tema-kantor .angka, html.tema-kantor .uang { font-variant-numeric: tabular-nums; }
+
+.mac-lampu, .mac-cari, .mac-navigasi { display: none; }
+html.tema-kantor .mac-lampu { display: flex; gap: 8px; padding: 16px 18px 6px; }
+.mac-lampu i { width: 12px; height: 12px; border-radius: 50%; display: block; box-shadow: inset 0 0 0 .5px rgba(0,0,0,.2); }
+.mac-lampu i.m { background: #ff5f57; } .mac-lampu i.k { background: #febc2e; } .mac-lampu i.h { background: #28c840; cursor: pointer; }
+html.tema-kantor .mac-cari { display: flex; align-items: center; gap: 6px; margin: 8px 12px 6px; padding: 0 9px; height: 30px; border-radius: 8px; background: rgba(0,0,0,.06); color: #6e6e73; }
+html.tema-kantor .mac-cari input { flex: 1; min-width: 0; height: 100%; border: 0 !important; background: transparent !important; box-shadow: none !important; padding: 0 !important; font-size: .84rem; color: #1d1d1f; outline: none; }
+html.tema-kantor .mac-cari:focus-within { background: #fff; box-shadow: 0 0 0 3px rgba(31,95,191,.3); }
+html.tema-kantor .tata-letak.ringkas .mac-cari { display: none; }
+
+html.tema-kantor .sisi { background: rgba(233,237,244,.72) !important; -webkit-backdrop-filter: saturate(180%) blur(30px); backdrop-filter: saturate(180%) blur(30px); color: #1d1d1f !important; box-shadow: inset -1px 0 0 rgba(0,0,0,.08) !important; }
+html.tema-kantor .sisi::-webkit-scrollbar-thumb { background: rgba(0,0,0,.15); }
+html.tema-kantor .sisi-merek { background: none !important; box-shadow: none !important; border-bottom: 0 !important; padding: 8px 18px 10px; }
+html.tema-kantor .sisi-merek img { animation: none; filter: none; width: 46px; height: 46px; flex-basis: 46px; padding: 5px; border-radius: 50%; background: linear-gradient(180deg, #fff, #e9edf3) !important; box-shadow: 0 1px 3px rgba(0,0,0,.18), inset 0 0 0 .5px rgba(0,0,0,.08); }
+html.tema-kantor .sisi-merek .nm { color: #1d1d1f; font-weight: 650; font-size: 1rem; letter-spacing: -.01em; }
+html.tema-kantor .sisi-merek .nm span { color: var(--k-emas); }
+html.tema-kantor .sisi-merek .sub { color: #6e6e73; font-size: .76rem; }
+html.tema-kantor .sisi-grup { color: #8e8e93 !important; font-size: .68rem; font-weight: 600; letter-spacing: .02em; padding-top: 12px; }
+html.tema-kantor .sisi-grup::after { background: none !important; }
+html.tema-kantor .sisi-grup-tarik:hover { color: #1d1d1f !important; }
+html.tema-kantor .sisi-nav { padding: 1px 12px; }
+html.tema-kantor .sisi-nav a, html.tema-kantor .sisi-sub-tombol { color: #1d1d1f !important; background: none !important; border: 0 !important; box-shadow: none !important; border-radius: 7px; padding-top: 6px; padding-bottom: 6px; margin-bottom: 1px; font-weight: 500; font-size: .88rem; }
+html.tema-kantor .sisi-nav a::before { display: none !important; }
+html.tema-kantor .sisi-nav a:hover, html.tema-kantor .sisi-sub-tombol:hover { background: rgba(0,0,0,.05) !important; }
+html.tema-kantor .sisi-nav a.aktif { background: #1f5fbf !important; color: #fff !important; }
+html.tema-kantor .sisi-nav a { --w: #1f5fbf; }
+html.tema-kantor .sisi-nav a[href$="h=dashboard"] { --w: #1f5fbf; }
+html.tema-kantor .sisi-nav a[href*="h=kegiatan"] { --w: #e08a1e; }
+html.tema-kantor .sisi-nav a[href*="h=pantau"] { --w: #2e9d63; }
+html.tema-kantor .sisi-nav a[href*="h=umpan"] { --w: #d9465f; }
+html.tema-kantor .sisi-nav a[href*="h=evaluasi"] { --w: #7a52c7; }
+html.tema-kantor .sisi-nav a[href*="h=pengembangan"] { --w: #b8913a; }
+html.tema-kantor .sisi-nav a[href*="h=laporan"] { --w: #4b5bd6; }
+html.tema-kantor .sisi-nav a[href*="h=absensi"] { --w: #d9463b; }
+html.tema-kantor .sisi-nav a[href*="h=rapb"] { --w: #1f8a4c; }
+html.tema-kantor .sisi-nav a[href*="h=jad"] { --w: #2c8fc4; }
+html.tema-kantor .sisi-nav a[href*="h=aset"] { --w: #c97a1a; }
+html.tema-kantor .sisi-nav a[href*="h=rapat"] { --w: #0b2545; }
+html.tema-kantor .sisi-nav a[href*="h=hibah"] { --w: #2a9d97; }
+html.tema-kantor .sisi-nav a[href*="h=pengguna"] { --w: #6e6e73; }
+html.tema-kantor .sisi-nav a[href*="h=peran"] { --w: #1f5fbf; }
+html.tema-kantor .sisi-nav a[href*="h=unit"] { --w: #8a6d4b; }
+html.tema-kantor .sisi-nav a[href*="h=periode"] { --w: #6e6e73; }
+html.tema-kantor .sisi-nav a > .ikon:first-child, html.tema-kantor .sisi-nav .no-siklus {
+  width: 24px !important; height: 24px !important; flex: 0 0 24px; padding: 4px; box-sizing: border-box; border-radius: 6px !important;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--w) 80%, #fff), var(--w)) !important; color: #fff !important; opacity: 1 !important;
+  border: 0 !important; box-shadow: inset 0 0 0 .5px rgba(0,0,0,.12), 0 .5px 1px rgba(0,0,0,.2) !important;
+  display: inline-grid; place-items: center; font-style: normal; font-size: .72rem; font-weight: 700;
+}
+html.tema-kantor .sisi-nav .lencana { background: #d9463b !important; color: #fff !important; box-shadow: none !important; text-shadow: none !important; }
+html.tema-kantor .sisi-nav a.aktif .lencana { background: #fff !important; color: #1f5fbf !important; }
+html.tema-kantor .sisi-sub-isi { border-left-color: rgba(0,0,0,.1) !important; }
+html.tema-kantor .sisi-kaki { border-top: 0 !important; color: #8e8e93 !important; }
+html.tema-kantor .sisi-kaki .inst { color: #6e6e73 !important; }
+html.tema-kantor .sisi-kaki .hak { color: #8e8e93 !important; }
+html.tema-kantor .sisi-ciut, html.tema-kantor .sisi-nav-beranda .sisi-ciut { background: rgba(0,0,0,.05) !important; border-color: transparent !important; color: #3c3c43 !important; }
+html.tema-kantor .sisi-nav-beranda:has(a.aktif) .sisi-ciut { background: rgba(255,255,255,.2) !important; border-color: transparent !important; color: #fff !important; }
+
+html.tema-kantor header.atas { background: rgba(246,247,249,.85) !important; -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0,0,0,.08) !important; box-shadow: none !important; }
+html.tema-kantor header.atas .judul { color: #1d1d1f; font-weight: 650; font-size: 1.22rem; letter-spacing: -.02em; }
+html.tema-kantor header.atas .judul small { color: #6e6e73; font-weight: 400; }
+html.tema-kantor .mac-navigasi { display: inline-flex; gap: 2px; margin-right: 6px; }
+html.tema-kantor .mac-navigasi button { width: 30px; height: 30px; border: 0; border-radius: 7px; background: none; color: #6e6e73; cursor: pointer; display: grid; place-items: center; }
+html.tema-kantor .mac-navigasi button:hover { background: rgba(0,0,0,.06); color: #1d1d1f; }
+html.tema-kantor .pengguna-chip, html.tema-kantor .lonceng-tombol, html.tema-kantor .tombol-cetak, html.tema-kantor .pilih-periode { background: #fff !important; border: .5px solid rgba(0,0,0,.14) !important; box-shadow: 0 .5px 1.5px rgba(0,0,0,.1) !important; }
+html.tema-kantor .pengguna-tarik, html.tema-kantor .lonceng-tarik { border-radius: 11px; border: .5px solid rgba(0,0,0,.15) !important; box-shadow: var(--bayang-lg) !important; background: rgba(250,250,252,.94) !important; -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); }
+
+html.tema-kantor .utama, html.tema-kantor main.isi { background: var(--k-isi); }
+html.tema-kantor .kartu { background: var(--k-panel) !important; border: 1px solid var(--k-garis) !important; border-radius: 10px; box-shadow: 0 .5px 1px rgba(0,0,0,.04) !important; }
+html.tema-kantor .kartu-kepala, html.tema-kantor .kartu-kepala:not(.kepala-nusantara) { background: transparent !important; border-bottom: 1px solid var(--k-garis) !important; border-radius: 10px 10px 0 0; }
+html.tema-kantor .kartu-kepala h2 { color: #1d1d1f; font-weight: 650; font-size: .98rem; letter-spacing: -.01em; }
+html.tema-kantor .kartu-kepala h2 .ikon { color: var(--k-navy); }
+html.tema-kantor .kartu-kaki { background: #fafbfc !important; border-top: 1px solid var(--k-garis) !important; border-radius: 0 0 10px 10px; }
+html.tema-kantor .kepala-nusantara .btn { background: #fff; }
+
+html.tema-kantor .sambut, html.tema-kantor .aset-bilah, html.tema-kantor .kartu-kepala.kepala-nusantara {
+  background-color: #0b2545 !important;
+  background-image:
+    repeating-radial-gradient(circle at 88% 130%, rgba(255,255,255,.07) 0 1px, transparent 1px 8px),
+    repeating-radial-gradient(circle at 8% -40%, rgba(214,178,94,.10) 0 1px, transparent 1px 10px),
+    linear-gradient(120deg, #0b2545 0%, #13315c 55%, #1d4f91 100%) !important;
+  background-size: 160% 160%, 160% 160%, 100% 100% !important;
+  animation: kantorGuilloche 40s ease-in-out infinite alternate !important;
+  border: 0 !important; border-radius: 12px; box-shadow: inset 0 -2px 0 rgba(184,145,58,.85), 0 10px 26px -16px rgba(11,37,69,.55) !important;
+}
+@keyframes kantorGuilloche { 0% { background-position: 0% 0%, 100% 0%, center; } 100% { background-position: 60% 40%, 40% 60%, center; } }
+html.tema-kantor .sambut h1, html.tema-kantor .sambut .salam, html.tema-kantor .sambut p { color: #fff !important; }
+html.tema-kantor .sambut .chip { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.22); color: #fff; }
+html.tema-kantor .sambut .aksi .btn, html.tema-kantor .sambut .btn-krem { background: linear-gradient(180deg, #d4b26a, #b8913a) !important; color: #0b2545 !important; border-color: transparent !important; box-shadow: 0 2px 8px -3px rgba(0,0,0,.4) !important; border-radius: 7px; font-weight: 600; }
+html.tema-kantor .jam-digital { background: rgba(255,255,255,.95) !important; border: 0 !important; border-radius: 10px; color: #0b2545 !important; }
+html.tema-kantor .jam-digital * { color: #0b2545; }
+html.tema-kantor .aset-nav > .aset-grup > a, html.tema-kantor .aset-nav > a, html.tema-kantor .aset-sub a { color: #fff; text-shadow: none; }
+html.tema-kantor .aset-nav > .aset-grup > a:hover { background: rgba(255,255,255,.12); }
+html.tema-kantor .aset-nav > .aset-grup > a.aktif { background: #fff; color: #0b2545; box-shadow: 0 2px 8px -4px rgba(0,0,0,.5); }
+html.tema-kantor .aset-nav a.aktif .bilah-hitung { background: #0b2545; color: #fff; }
+html.tema-kantor .aset-sub a.aktif { background: rgba(255,255,255,.16); border-color: rgba(214,178,94,.9); }
+
+@media all {
+  html.tema-kantor table.tabel thead th, html.tema-kantor table.tabel.matriks thead th, html.tema-kantor table.tabel.matriks th:first-child, html.tema-kantor table.tabel tfoot th, html.tema-kantor .tabel-padat thead th, html.tema-kantor .tabel-padat th {
+    background: #f6f7f9 !important; color: #3c3c43 !important; border-bottom: 1px solid #dcdfe4 !important; font-weight: 600; font-size: .78rem; letter-spacing: .01em;
+  }
+  html.tema-kantor table.tabel thead th + th, html.tema-kantor table.tabel:not(.matriks) th + th, html.tema-kantor .tabel-padat th + th { border-left: 1px solid #e6e8ec !important; }
+  html.tema-kantor table.tabel thead th a, html.tema-kantor .tabel-padat th a { color: #1d1d1f !important; }
+  html.tema-kantor table.tabel thead th input[type="checkbox"] { accent-color: #1f5fbf; }
+}
+html.tema-kantor table.tabel td, html.tema-kantor table.tabel tbody td, html.tema-kantor .tabel-padat td { border-bottom-color: #eceef1 !important; }
+html.tema-kantor table.tabel:not(.matriks) td + td { border-left-color: #f0f1f4 !important; }
+html.tema-kantor table.tabel tbody tr:hover td, html.tema-kantor .catat-dua .tabel tbody tr:hover td { background: #f7f9fc !important; }
+
+html.tema-kantor .btn { border-radius: 7px; font-weight: 500; }
+html.tema-kantor .btn-utama, html.tema-kantor .btn-utama:hover { background: linear-gradient(180deg, #1d4f91, #13315c) !important; border-color: #0b2545 !important; color: #fff !important; box-shadow: inset 0 .5px 0 rgba(255,255,255,.25), 0 1px 2px rgba(11,37,69,.35) !important; }
+html.tema-kantor .btn-utama:hover { background: linear-gradient(180deg, #2459a0, #163a6b) !important; }
+html.tema-kantor .btn-garis { background: #fff !important; border: .5px solid rgba(0,0,0,.16) !important; color: #1d1d1f !important; box-shadow: 0 .5px 1.5px rgba(0,0,0,.12) !important; }
+html.tema-kantor .btn-garis:hover { background: #f6f7f9 !important; }
+html.tema-kantor .btn-sukses { background: linear-gradient(180deg, #389468, #2e7d5b) !important; border-color: #2a7052 !important; color: #fff !important; }
+
+html.tema-kantor input[type=text], html.tema-kantor input[type=password], html.tema-kantor input[type=number], html.tema-kantor input[type=date], html.tema-kantor input[type=time], html.tema-kantor input[type=email], html.tema-kantor input[type=url], html.tema-kantor input[type=search], html.tema-kantor select, html.tema-kantor textarea {
+  border-radius: 7px; border: 1px solid #d1d5db; background-color: #fff;
+}
+html.tema-kantor input:focus, html.tema-kantor select:focus, html.tema-kantor textarea:focus { border-color: #1f5fbf !important; box-shadow: 0 0 0 3px rgba(31,95,191,.22) !important; }
+html.tema-kantor input[type=checkbox], html.tema-kantor input[type=radio] { accent-color: #1f5fbf; }
+
+html.tema-kantor .langkah-kepala i { background: #0b2545 !important; box-shadow: none !important; }
+html.tema-kantor form.kegiatan-ramping .langkah::before { background: #dfe3ea; }
+html.tema-kantor .langkah-kepala small { background: #eef2f8; color: #13315c; }
+html.tema-kantor .pilih-jenis label { --c: #2e7d5b; border-radius: 9px; }
+html.tema-kantor .pilih-jenis label.jenis-panitia { --c: #1f5fbf; }
+html.tema-kantor .pilih-jenis label.jenis-insidental { --c: #b8913a; }
+html.tema-kantor .pilih-jenis label .titik-rutin { background: #2e7d5b; } html.tema-kantor .pilih-jenis label .titik-panitia { background: #1f5fbf; } html.tema-kantor .pilih-jenis label .titik-insidental { background: #b8913a; }
+html.tema-kantor .rincian { border: 1px solid #e3e5e9 !important; border-left: 3px solid #0b2545 !important; border-radius: 9px; background: #fff !important; }
+html.tema-kantor .rincian > summary { color: #1d1d1f; }
+
+html.tema-kantor .stat { background: #fff !important; border: 1px solid var(--k-garis) !important; border-radius: 10px; box-shadow: none !important; }
+html.tema-kantor .stat .ik { background: #eef2f8 !important; color: #0b2545 !important; border-radius: 9px; }
+html.tema-kantor .stat.emas .ik { background: #f8f2e3 !important; color: #8f6d24 !important; }
+html.tema-kantor .stat.merah .ik { background: #fdecec !important; color: #b42318 !important; }
+html.tema-kantor .stat .nilai { color: #0b2545; letter-spacing: -.02em; }
+
+html.tema-kantor .tab a.aktif { color: #0b2545; border-bottom-color: #b8913a; }
+html.tema-kantor .notif { border-radius: 9px; }
+html.tema-kantor .tirai { background: rgba(11,37,69,.28); }
+html.tema-kantor .modal { border-radius: 12px; box-shadow: var(--bayang-lg); }
+html.tema-kantor .modal-kaki { background: #fafbfc; border-radius: 0 0 12px 12px; }
+html.tema-kantor .lt-item.baru { background: #eef3fb; box-shadow: inset 3px 0 0 #1f5fbf; }
+html.tema-kantor .lt-kepala .lt-tulis { border-color: #1f5fbf; color: #1f5fbf; background: #eef3fb; }
+html.tema-kantor .kk-peringatan { border-left-color: #b8913a !important; }
+html.tema-kantor .siklus-langkah.kini .bulat, html.tema-kantor .tw-tab a.aktif, html.tema-kantor .tab-kecil a.aktif { background: #0b2545 !important; color: #fff !important; }
+
+html.tema-kantor body.masuk::before { background: transparent !important; filter: none !important; }
+
+@media (min-width: 1000px) {
+  html.tema-kantor body:not(.masuk) { padding: 26px 28px; height: 100vh; box-sizing: border-box; overflow: hidden; }
+  html.tema-kantor .tata-letak { height: 100%; min-height: 0 !important; border-radius: 14px; overflow: hidden; background: var(--k-isi); box-shadow: 0 30px 70px -12px rgba(11,37,69,.45), 0 0 0 .5px rgba(0,0,0,.18); }
+  html.tema-kantor .sisi { position: relative !important; top: auto; height: auto !important; align-self: stretch; }
+  html.tema-kantor .utama { height: 100%; overflow-y: auto; }
+  html.tema-kantor .utama::-webkit-scrollbar { width: 10px; }
+  html.tema-kantor .utama::-webkit-scrollbar-thumb { background: rgba(0,0,0,.18); border-radius: 10px; border: 3px solid var(--k-isi); }
+}
+@media (max-width: 999px) { html.tema-kantor .mac-lampu, html.tema-kantor .mac-navigasi { display: none; } }
+@media (prefers-reduced-motion: reduce) { html.tema-kantor .sambut, html.tema-kantor .aset-bilah, html.tema-kantor .kartu-kepala.kepala-nusantara { animation: none !important; } }
+@media print {
+  html.tema-kantor body { background: #fff !important; padding: 0 !important; height: auto !important; overflow: visible !important; }
+  html.tema-kantor .tata-letak, html.tema-kantor .utama { height: auto !important; overflow: visible !important; box-shadow: none !important; border-radius: 0; }
+  html.tema-kantor .sambut, html.tema-kantor .aset-bilah, html.tema-kantor .kartu-kepala.kepala-nusantara { background: #fff !important; animation: none !important; box-shadow: none !important; }
+  html.tema-kantor .sambut h1, html.tema-kantor .sambut p, html.tema-kantor .sambut .salam { color: #000 !important; }
+}
+
+.pilih-tema-grup { padding: 6px 14px 8px; border-top: 1px solid var(--garis); border-bottom: 1px solid var(--garis); }
+.pilih-tema-grup > small { display: block; font-size: .7rem; color: var(--teks-3); margin-bottom: 6px; }
+.pilih-tema-pilihan { display: flex; gap: 10px; }
+.pilih-tema-pilihan button { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 0; background: none; border: 0; font: inherit; font-size: .72rem; color: var(--teks-2); cursor: pointer; }
+.pilih-tema-pilihan button i { width: 60px; height: 38px; border-radius: 7px; display: block; box-shadow: 0 0 0 1px var(--garis-2); }
+.pilih-tema-pilihan button[data-tema="kantor"] i { background: linear-gradient(90deg, #e3e8f0 0 30%, #fff 30%), #fff; box-shadow: inset 0 9px 0 #0b2545, 0 0 0 1px var(--garis-2); }
+.pilih-tema-pilihan button[data-tema="hijau"] i { background: linear-gradient(90deg, #033e3e 0 30%, #f7f8f6 30%); }
+.pilih-tema-pilihan button.aktif i { box-shadow: 0 0 0 2px var(--oranye); }
+.pilih-tema-pilihan button[data-tema="kantor"].aktif i { box-shadow: inset 0 9px 0 #0b2545, 0 0 0 2px var(--oranye); }
+.pilih-tema-pilihan button.aktif { color: var(--teks); font-weight: 600; }
+
+html.tema-kantor .aset-menu a, html.tema-kantor .aset-nav .aset-menu a { color: #1d1d1f !important; text-shadow: none !important; font-weight: 600; background: transparent; }
+html.tema-kantor .aset-menu a:hover { background: #eef2f8 !important; color: #0b2545 !important; }
+html.tema-kantor .aset-menu a.aktif { background: #e4e9f1 !important; color: #0b2545 !important; font-weight: 700; }
+html.tema-kantor .aset-menu .aset-menu-ikon { background: #eef2f8; color: #0b2545; }
+html.tema-kantor .aset-menu a.aktif .aset-menu-ikon { background: #0b2545; color: #fff; }
+
+html.tema-kantor { --teks-2: #1d1d1f; --teks-3: #4a4a4f; --teks-4: #6e6e73; }
+html.tema-kantor .fl, html.tema-kantor .form-baris > label, html.tema-kantor .saring label { color: #1d1d1f !important; font-weight: 600; }
+html.tema-kantor .kartu-kepala:not(.kepala-nusantara) h2, html.tema-kantor .langkah-kepala b, html.tema-kantor header.atas .judul { color: #000 !important; }
+html.tema-kantor .stat .label { color: #1d1d1f !important; font-weight: 700; }
+html.tema-kantor .stat .nilai { color: #000 !important; }
+@media all { html.tema-kantor table.tabel thead th, html.tema-kantor .tabel-padat thead th, html.tema-kantor .tabel-padat th, html.tema-kantor table.tabel.matriks th:first-child, html.tema-kantor table.tabel tfoot th { color: #000 !important; font-weight: 700; } }
+html.tema-kantor table.tabel tbody td { color: #1d1d1f; }
+html.tema-kantor table.tabel td b, html.tema-kantor table.tabel td strong { color: #000; }
+html.tema-kantor .sisi-nav a, html.tema-kantor .sisi-sub-tombol { color: #000 !important; }
+html.tema-kantor .sisi-nav a.aktif { color: #fff !important; }
+html.tema-kantor .sisi-grup { color: #4a4a4f !important; font-weight: 700; }
+html.tema-kantor .sisi-merek .nm { color: #000; }
+html.tema-kantor .pilih-jenis label b, html.tema-kantor .pilih-hadir span { color: #1d1d1f; }
+html.tema-kantor .pilih-jenis label span { color: #4a4a4f; }
+html.tema-kantor .rincian > summary, html.tema-kantor .kk-peringatan > summary { color: #000 !important; }
+html.tema-kantor .lt-judul, html.tema-kantor .pengguna-tarik b, html.tema-kantor .modal-kepala h2 { color: #000; }
+html.tema-kantor .kartu-kepala.kepala-nusantara { border-radius: 10px 10px 0 0 !important; border-bottom: 0 !important; }
+html.tema-kantor .kepala-nusantara h2, html.tema-kantor .kepala-nusantara h2 .ikon { color: #fff !important; }
+html.tema-kantor .kepala-nusantara .ket { color: rgba(255,255,255,.85) !important; }
+html.tema-kantor .kepala-nusantara .btn { background: rgba(255,255,255,.95) !important; color: #0b2545 !important; }
+html.tema-kantor .catat-dua > .kartu > .kartu-kepala.kepala-nusantara { height: 96px; min-height: 96px; }
+html.tema-kantor .sambut-latar .awan { background-image: url("../img/nusantara/awan.svg"); opacity: .55; }
+html.tema-kantor .sambut-latar .burung { opacity: .6; }
+html.tema-kantor .sambut-latar .gunung { background-image: url("../img/kantor/gunung.svg") !important; opacity: .75 !important; }
+html.tema-kantor .sambut-latar .candi { background-image: url("../img/kantor/candi.svg") !important; opacity: .85 !important; }
+html.tema-kantor .sambut-latar .laut { background-image: url("../img/kantor/laut.svg") !important; opacity: .9 !important; }
+html.tema-kantor .sambut-latar .laut2 { background-image: url("../img/kantor/laut2.svg") !important; opacity: .9 !important; }
+html.tema-kantor .sambut-latar .batik { background-image: url("../img/kantor/batik.svg") !important; opacity: 1; }
+html.tema-kantor .sambut-latar .matahari { background: radial-gradient(circle at 80% 100%, rgba(214,178,94,.45) 0, rgba(214,178,94,0) 45%) !important; }
+html.tema-kantor .sambut-latar::after { display: block; background: linear-gradient(90deg, rgba(8,27,51,.55) 0%, rgba(8,27,51,.2) 45%, rgba(8,27,51,0) 75%) !important; }
+html.tema-kantor .kepala-nusantara .sambut-latar::after { background: linear-gradient(90deg, rgba(8,27,51,.5) 0%, rgba(8,27,51,.15) 50%, rgba(8,27,51,0) 80%) !important; }
+html.tema-kantor .aset-bilah .gambar { display: none !important; }
+html.tema-kantor .sambut, html.tema-kantor .aset-bilah, html.tema-kantor .kartu-kepala.kepala-nusantara { box-shadow: 0 10px 26px -16px rgba(11,37,69,.55) !important; }
+html.tema-kantor .pilih-hadir { display: inline-flex; flex-wrap: wrap; gap: 2px; padding: 3px; background: #eceef2; border-radius: 9px; box-shadow: inset 0 0 0 .5px rgba(0,0,0,.06); }
+html.tema-kantor .pilih-hadir span { border: 0 !important; background: transparent !important; box-shadow: none !important; padding: 6px 18px !important; border-radius: 7px; color: #3c3c43 !important; font-weight: 500; font-size: .84rem; transition: background .15s, color .15s; }
+html.tema-kantor .pilih-hadir span::before { display: none !important; }
+html.tema-kantor .pilih-hadir label:hover span { background: rgba(255,255,255,.55) !important; color: #1d1d1f !important; }
+html.tema-kantor .pilih-hadir input:checked + span { background: #fff !important; color: #0b2545 !important; font-weight: 650; box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 0 0 .5px rgba(0,0,0,.06) !important; }
+html.tema-kantor .pilih-hadir input:focus-visible + span { outline: 2px solid #1f5fbf; outline-offset: 1px; }
+
+html.tema-kantor .pilih-jenis { gap: 12px; }
+html.tema-kantor .pilih-jenis label { position: relative; display: block; padding: 13px 16px 13px 44px !important; background: #fff !important; border: 1px solid #d6dae1 !important; border-top: 1px solid #d6dae1 !important; border-radius: 10px; box-shadow: none !important; transform: none !important; cursor: pointer; transition: border-color .15s, background .15s, box-shadow .15s; }
+html.tema-kantor .pilih-jenis label::before { content: ""; position: absolute; left: 16px; top: 15px; width: 16px; height: 16px; box-sizing: border-box; border-radius: 50%; border: 1.5px solid #aeb6c2; background: #fff; transition: border .15s; }
+html.tema-kantor .pilih-jenis label:hover { border-color: #9aa6b8 !important; }
+html.tema-kantor .pilih-jenis .titik { display: none !important; }
+html.tema-kantor .pilih-jenis b { display: block; font-size: .9rem; font-weight: 650; color: #1d1d1f !important; margin-bottom: 2px; }
+html.tema-kantor .pilih-jenis span { display: block; font-size: .78rem; color: #5b5f66 !important; line-height: 1.45; }
+html.tema-kantor .pilih-jenis label:has(input:checked) { border-color: #0b2545 !important; background: #f4f7fb !important; box-shadow: inset 0 0 0 1px #0b2545 !important; }
+html.tema-kantor .pilih-jenis label:has(input:checked)::before { border: 5px solid #0b2545; }
+html.tema-kantor .pilih-jenis label:has(input:checked) b { color: #0b2545 !important; }
+html.tema-kantor .pilih-jenis label:has(input:checked) b::after { display: none !important; content: none !important; }
+html.tema-kantor .pilih-jenis label:has(input:focus-visible) { box-shadow: 0 0 0 3px rgba(31,95,191,.25) !important; }
+
+html.tema-kantor .sambut, html.tema-kantor .aset-bilah, html.tema-kantor .kartu-kepala.kepala-nusantara {
+  background-color: #0b2545 !important;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
+    radial-gradient(55% 140% at 88% 115%, rgba(214,178,94,.22) 0%, rgba(214,178,94,0) 60%),
+    linear-gradient(115deg, #0b2545 0%, #12305a 50%, #1a4682 100%) !important;
+  background-size: 28px 28px, 28px 28px, 100% 100%, 100% 100% !important;
+  animation: kantorKisi 24s linear infinite !important;
+}
+@keyframes kantorKisi { from { background-position: 0 0, 0 0, center, center; } to { background-position: 28px 0, 28px 0, center, center; } }
+html.tema-kantor .sambut-latar .awan, html.tema-kantor .sambut-latar .burung, html.tema-kantor .sambut-latar .perahu, html.tema-kantor .sambut-latar .laut, html.tema-kantor .sambut-latar .laut2 { display: none !important; }
+html.tema-kantor .sambut-latar .gunung { background-image: url("../img/kantor/grafik.svg") !important; opacity: .95 !important; }
+html.tema-kantor .sambut-latar .candi { background-image: url("../img/kantor/gedung.svg") !important; opacity: 1 !important; }
+html.tema-kantor .sambut .sambut-latar .gunung, html.tema-kantor .sambut .sambut-latar .candi { opacity: .9 !important; }
+html.tema-kantor .sambut-latar .matahari { background: radial-gradient(circle at 82% 110%, rgba(214,178,94,.35) 0, rgba(214,178,94,0) 42%) !important; }
+html.tema-kantor .sambut-latar::after { background: linear-gradient(90deg, rgba(8,27,51,.82) 0%, rgba(8,27,51,.55) 30%, rgba(8,27,51,.1) 65%, rgba(8,27,51,0) 100%) !important; }
+html.tema-kantor .kepala-nusantara .sambut-latar::after { background: linear-gradient(90deg, rgba(8,27,51,.75) 0%, rgba(8,27,51,.35) 35%, rgba(8,27,51,0) 70%) !important; }
+html.tema-kantor .sambut .avatar { border-color: rgba(214,178,94,.85) !important; }
+html.tema-kantor .sambut-info { border-left-color: rgba(214,178,94,.35) !important; }
+@media (prefers-reduced-motion: reduce) { html.tema-kantor .sambut, html.tema-kantor .aset-bilah, html.tema-kantor .kartu-kepala.kepala-nusantara { animation: none !important; } }
+
+html.tema-kantor .sambut-latar .gunung { z-index: 2; }
+html.tema-kantor .sambut .sambut-latar .candi { --t: 620px !important; --h: 62px !important; bottom: 14px !important; opacity: .95 !important; }
+html.tema-kantor .sambut .sambut-latar .gunung { --t: 560px !important; --h: 84px !important; bottom: 16px !important; opacity: 1 !important; }
+html.tema-kantor .kepala-nusantara .sambut-latar .candi { --t: 520px !important; --h: 46px !important; bottom: 12px !important; }
+html.tema-kantor .kepala-nusantara .sambut-latar .gunung { --t: 460px !important; --h: 64px !important; bottom: 12px !important; opacity: 1 !important; }
+
+html.tema-kantor { --sidebar: 272px; }
+html.tema-kantor .sisi-nav a > span:not(.lencana) { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 1280px) { html.tema-kantor { --sidebar: 250px; } }
+
+html.tema-kantor .pilih-periode { height: 32px; padding: 0 6px 0 10px !important; border-radius: 8px; display: inline-flex; align-items: center; gap: 4px; box-sizing: border-box; }
+html.tema-kantor .pilih-periode select, html.tema-kantor .pilih-periode select:focus { height: 28px; padding: 0 4px !important; border: 0 !important; background-color: transparent !important; box-shadow: none !important; font-size: .82rem; font-weight: 600; }
+html.tema-kantor .pilih-periode:focus-within { box-shadow: 0 0 0 3px rgba(31,95,191,.22) !important; }
+
+html.tema-kantor .sambut .sambut-latar .candi { --t: 1300px !important; --h: 70px !important; opacity: .9 !important; }
+html.tema-kantor .sambut .sambut-latar .gunung { --t: 1300px !important; --h: 84px !important; }
+html.tema-kantor .kepala-nusantara .sambut-latar .candi { --t: 1100px !important; --h: 54px !important; }
+html.tema-kantor .kepala-nusantara .sambut-latar .gunung { --t: 1100px !important; --h: 66px !important; }
+
+@media (min-width: 1000px) {
+  html.tema-kantor.layar-penuh body:not(.masuk) { padding: 0 !important; }
+  html.tema-kantor.layar-penuh .tata-letak { border-radius: 0 !important; box-shadow: none !important; }
+}
+html.tema-kantor.layar-penuh .mac-lampu i.h { box-shadow: inset 0 0 0 .5px rgba(0,0,0,.2), 0 0 0 2px rgba(40,200,64,.35); }
+.mac-lampu i.h { position: relative; }
+.mac-lampu i.h::after { content: ''; position: absolute; inset: 3px; border-radius: 50%; background: rgba(0,60,10,.55); opacity: 0; transition: opacity .15s; }
+.mac-lampu:hover i.h::after { opacity: 1; }
+
+html.tema-kantor .sambut .sambut-latar .candi { --t: 1600px !important; --h: 76px !important; opacity: 1 !important; }
+html.tema-kantor .kepala-nusantara .sambut-latar .candi { --t: 1500px !important; --h: 64px !important; opacity: 1 !important; }
+html.tema-kantor .sambut-latar::after { background: linear-gradient(90deg, rgba(8,27,51,.7) 0%, rgba(8,27,51,.35) 28%, rgba(8,27,51,0) 55%) !important; }
+
+html.tema-kantor .sambut-latar .candi { filter: drop-shadow(0 -1px 0 rgba(214,178,94,.7)) drop-shadow(0 0 6px rgba(214,178,94,.18)); }
+html.tema-kantor .sambut .sambut-latar .candi { --h: 86px !important; }
+html.tema-kantor .kepala-nusantara .sambut-latar .candi { --h: 70px !important; }
+
+.bingkai-penuh { position: fixed; inset: 0; z-index: 2147483000; background: #f3f4f6; }
+.bingkai-penuh iframe { display: block; width: 100%; height: 100%; border: 0; }
+html.bingkai-aktif, html.bingkai-aktif body { overflow: hidden !important; }
+html.dalam-bingkai .mac-lampu i.h { box-shadow: inset 0 0 0 .5px rgba(0,0,0,.2), 0 0 0 2px rgba(40,200,64,.4); }
+@media (min-width: 1000px) { html.dalam-bingkai body:not(.masuk) { padding: 0 !important; } html.dalam-bingkai .tata-letak { border-radius: 0 !important; box-shadow: none !important; } }
+
+html.tema-kantor .sambut-latar .candi { background-image: url("../img/kantor/lilin.svg") !important; filter: none !important; opacity: 1 !important; }
+html.tema-kantor .sambut .sambut-latar .candi { --t: 1400px !important; --h: 70px !important; bottom: 20px !important; }
+html.tema-kantor .kepala-nusantara .sambut-latar .candi { --t: 1300px !important; --h: 56px !important; bottom: 14px !important; }
+html.tema-kantor .sambut .sambut-latar .gunung { --t: 1400px !important; --h: 84px !important; bottom: 14px !important; }
+html.tema-kantor .kepala-nusantara .sambut-latar .gunung { --t: 1300px !important; --h: 70px !important; bottom: 12px !important; }
+html.tema-kantor .sambut-latar::before { content: ""; position: absolute; z-index: 0; right: 150px; top: 50%; width: 300px; height: 300px; margin-top: -150px; background: url("../img/kantor/roset.svg") center / contain no-repeat; opacity: .5; animation: kantorRoset 160s linear infinite; pointer-events: none; }
+html.tema-kantor .kepala-nusantara .sambut-latar::before { right: 8%; width: 240px; height: 240px; margin-top: -120px; opacity: .4; }
+html.tema-kantor .aset-bilah .sambut-latar::before { right: 4%; width: 220px; height: 220px; margin-top: -110px; opacity: .35; }
+@keyframes kantorRoset { to { transform: rotate(360deg); } }
+html.tema-kantor .sambut, html.tema-kantor .aset-bilah, html.tema-kantor .kartu-kepala.kepala-nusantara {
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px),
+    radial-gradient(45% 160% at 80% 50%, rgba(212,178,106,.16) 0%, rgba(212,178,106,0) 65%),
+    radial-gradient(60% 120% at 0% 0%, rgba(80,130,210,.25) 0%, rgba(80,130,210,0) 60%),
+    linear-gradient(115deg, #0a2140 0%, #102c55 45%, #163a6e 100%) !important;
+  background-size: 32px 32px, 32px 32px, 100% 100%, 100% 100%, 100% 100% !important;
+}
+@keyframes kantorKisi { from { background-position: 0 0, 0 0, center, center, center; } to { background-position: 32px 0, 32px 0, center, center, center; } }
+@media (prefers-reduced-motion: reduce) { html.tema-kantor .sambut-latar::before { animation: none; } }
+
+html.tema-kantor .tabel-rapb-format .r-bab td, html.tema-kantor table.tabel.tabel-rapb-format tbody tr.r-bab td { background: #0b2545 !important; color: #fff !important; }
+
+html.tema-kantor .catat-dua > .kartu > .kartu-kepala.kepala-nusantara, html.tema-kantor .kartu-kepala.kepala-nusantara { height: 58px !important; min-height: 58px !important; padding-top: 0 !important; padding-bottom: 0 !important; }
+html.tema-kantor .kepala-nusantara .sambut-latar .candi { --h: 30px !important; bottom: 12px !important; }
+html.tema-kantor .kepala-nusantara .sambut-latar .gunung { --h: 38px !important; bottom: 10px !important; }
+html.tema-kantor .kepala-nusantara .sambut-latar .batik { --h: 10px !important; --t: 20px !important; }
+html.tema-kantor .kepala-nusantara .sambut-latar::before { width: 150px; height: 150px; margin-top: -75px; right: 10%; }
+
+html.tema-kantor table.tabel.tabel-rapb-format th, html.tema-kantor table.tabel.tabel-rapb-format td, html.tema-kantor table.tabel.tabel-rapb-format tbody td, html.tema-kantor table.tabel.tabel-rapb-format tbody tr td, html.tema-kantor table.tabel.tabel-rekap-upps th, html.tema-kantor table.tabel.tabel-rekap-upps td, html.tema-kantor table.tabel.tabel-rekap-upps tbody td, html.tema-kantor table.tabel.tabel-rekap-upps tbody tr td, html.tema-kantor table.tabel.tabel-lkps th, html.tema-kantor table.tabel.tabel-lkps td, html.tema-kantor table.tabel.tabel-lkps tbody td, html.tema-kantor table.tabel.tabel-lkps tbody tr td, html.tema-kantor table.tabel.tabel-rapb th, html.tema-kantor table.tabel.tabel-rapb td, html.tema-kantor table.tabel.tabel-rapb tbody td, html.tema-kantor table.tabel.tabel-rapb tbody tr td, html.tema-kantor table.tabel.tabel-audit th, html.tema-kantor table.tabel.tabel-audit td, html.tema-kantor table.tabel.tabel-audit tbody td, html.tema-kantor table.tabel.tabel-audit tbody tr td, html.tema-kantor table.tabel.tabel-rekap-tengah th, html.tema-kantor table.tabel.tabel-rekap-tengah td, html.tema-kantor table.tabel.tabel-rekap-tengah tbody td, html.tema-kantor table.tabel.tabel-rekap-tengah tbody tr td { border: 1px solid #dfe3e8 !important; }
+@media all { html.tema-kantor table.tabel.tabel-rapb-format thead th, html.tema-kantor table.tabel.tabel-rekap-upps thead th, html.tema-kantor table.tabel.tabel-lkps thead th, html.tema-kantor table.tabel.tabel-rapb thead th, html.tema-kantor table.tabel.tabel-audit thead th, html.tema-kantor table.tabel.tabel-rekap-tengah thead th { border: 1px solid #dfe3e8 !important; } }
+
+@media all { html.tema-kantor table.tabel:not(.tabel-absensi):not(.matriks) th, html.tema-kantor table.tabel:not(.tabel-absensi):not(.matriks) td, html.tema-kantor table.tabel:not(.tabel-absensi):not(.matriks) thead th, html.tema-kantor table.tabel:not(.tabel-absensi):not(.matriks) tbody td, html.tema-kantor .tabel-padat th, html.tema-kantor .tabel-padat td { border: 1px solid #dfe3e8 !important; font-size: .82rem !important; } html.tema-kantor table.tabel:not(.tabel-absensi):not(.matriks) td .sub, html.tema-kantor table.tabel:not(.tabel-absensi):not(.matriks) td .lc { font-size: .7rem !important; } }
+
+html.tema-kantor .sambut, html.tema-kantor .aset-bilah, html.tema-kantor .kartu-kepala.kepala-nusantara {
+  background-color: #1f5fbf !important;
+  background-image:
+    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px),
+    radial-gradient(45% 160% at 80% 50%, rgba(212,178,106,.18) 0%, rgba(212,178,106,0) 65%),
+    radial-gradient(60% 120% at 0% 0%, rgba(255,255,255,.12) 0%, rgba(255,255,255,0) 60%),
+    linear-gradient(115deg, #1a52a8 0%, #1f5fbf 50%, #2a6dcc 100%) !important;
+  background-size: 32px 32px, 32px 32px, 100% 100%, 100% 100%, 100% 100% !important;
+}
+html.tema-kantor .sambut-latar::after { background: linear-gradient(90deg, rgba(14,52,110,.55) 0%, rgba(14,52,110,.25) 30%, rgba(14,52,110,0) 60%) !important; }
+html.tema-kantor .kepala-nusantara .sambut-latar::after { background: linear-gradient(90deg, rgba(14,52,110,.5) 0%, rgba(14,52,110,.18) 40%, rgba(14,52,110,0) 70%) !important; }
+html.tema-kantor .aset-nav > .aset-grup > a.aktif { color: #1f5fbf; }
+html.tema-kantor .sambut, html.tema-kantor .aset-bilah, html.tema-kantor .kartu-kepala.kepala-nusantara { box-shadow: 0 10px 24px -16px rgba(31,95,191,.7) !important; }
+
+html.tema-kantor .sambut, html.tema-kantor .aset-bilah, html.tema-kantor .kartu-kepala.kepala-nusantara {
+  background-image:
+    url("../img/kantor/pola.svg"),
+    radial-gradient(45% 160% at 80% 50%, rgba(212,178,106,.18) 0%, rgba(212,178,106,0) 65%),
+    radial-gradient(60% 120% at 0% 0%, rgba(255,255,255,.12) 0%, rgba(255,255,255,0) 60%),
+    linear-gradient(115deg, #1a52a8 0%, #1f5fbf 50%, #2a6dcc 100%) !important;
+  background-size: 480px 120px, 100% 100%, 100% 100%, 100% 100% !important;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat !important;
+  animation: kantorPola 60s linear infinite !important;
+}
+html.tema-kantor .kartu-kepala.kepala-nusantara { background-size: 360px 90px, 100% 100%, 100% 100%, 100% 100% !important; }
+@keyframes kantorPola { from { background-position: 0 0, center, center, center; } to { background-position: 480px 0, center, center, center; } }
+@media (prefers-reduced-motion: reduce) { html.tema-kantor .sambut, html.tema-kantor .aset-bilah, html.tema-kantor .kartu-kepala.kepala-nusantara { animation: none !important; } }
+
+html.tema-kantor .kartu-kepala.kepala-nusantara { animation-name: kantorPolaKecil !important; animation-duration: 45s !important; }
+@keyframes kantorPolaKecil { from { background-position: 0 0, center, center, center; } to { background-position: 360px 0, center, center, center; } }
+
+html.tema-kantor table.tabel.tabel-absensi td.ab-jml, html.tema-kantor table.tabel.tabel-absensi td.ab-tgl, html.tema-kantor table.tabel.tabel-absensi tbody td { background: #fff !important; }
+
+html.tema-kantor .pengguna-chip { height: 32px; padding: 2px 12px 2px 2px !important; gap: 8px; box-sizing: border-box; border-radius: 999px; }
+html.tema-kantor .pengguna-chip .avatar { width: 26px !important; height: 26px !important; flex: 0 0 26px !important; font-size: .64rem !important; }
+html.tema-kantor .pengguna-chip .info b { font-size: .78rem; line-height: 1.1; }
+html.tema-kantor .pengguna-chip .info span { font-size: .64rem; line-height: 1.1; }
+html.tema-kantor .lonceng-tombol { width: 32px !important; height: 32px !important; }
+html.tema-kantor .tombol-cetak { height: 32px; padding-top: 0 !important; padding-bottom: 0 !important; display: inline-flex; align-items: center; }
+
+html.tema-kantor .jam-digital { background: transparent !important; box-shadow: none !important; border: 0 !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+html.tema-kantor .jam-digital, html.tema-kantor .jam-digital * { color: #fff !important; text-shadow: 0 1px 3px rgba(0,0,0,.35); }
+
+@media all {
+html.tema-kantor table.tabel.tabel-rapb-format th, html.tema-kantor table.tabel.tabel-rapb-format td, html.tema-kantor table.tabel.tabel-rapb-format thead th, html.tema-kantor table.tabel.tabel-rapb-format tbody td, html.tema-kantor table.tabel.tabel-rapb-format tbody tr td, html.tema-kantor table.tabel.tabel-rapb-format tfoot td, html.tema-kantor table.tabel.tabel-rapb-format tfoot th, html.tema-kantor table.tabel.tabel-rekap-upps th, html.tema-kantor table.tabel.tabel-rekap-upps td, html.tema-kantor table.tabel.tabel-rekap-upps thead th, html.tema-kantor table.tabel.tabel-rekap-upps tbody td, html.tema-kantor table.tabel.tabel-rekap-upps tbody tr td, html.tema-kantor table.tabel.tabel-rekap-upps tfoot td, html.tema-kantor table.tabel.tabel-rekap-upps tfoot th, html.tema-kantor table.tabel.tabel-lkps th, html.tema-kantor table.tabel.tabel-lkps td, html.tema-kantor table.tabel.tabel-lkps thead th, html.tema-kantor table.tabel.tabel-lkps tbody td, html.tema-kantor table.tabel.tabel-lkps tbody tr td, html.tema-kantor table.tabel.tabel-lkps tfoot td, html.tema-kantor table.tabel.tabel-lkps tfoot th, html.tema-kantor table.tabel.tabel-rekap-tengah th, html.tema-kantor table.tabel.tabel-rekap-tengah td, html.tema-kantor table.tabel.tabel-rekap-tengah thead th, html.tema-kantor table.tabel.tabel-rekap-tengah tbody td, html.tema-kantor table.tabel.tabel-rekap-tengah tbody tr td, html.tema-kantor table.tabel.tabel-rekap-tengah tfoot td, html.tema-kantor table.tabel.tabel-rekap-tengah tfoot th, html.tema-kantor table.tabel.tabel-rapb th, html.tema-kantor table.tabel.tabel-rapb td, html.tema-kantor table.tabel.tabel-rapb thead th, html.tema-kantor table.tabel.tabel-rapb tbody td, html.tema-kantor table.tabel.tabel-rapb tbody tr td, html.tema-kantor table.tabel.tabel-rapb tfoot td, html.tema-kantor table.tabel.tabel-rapb tfoot th, html.tema-kantor table.tabel.tabel-audit th, html.tema-kantor table.tabel.tabel-audit td, html.tema-kantor table.tabel.tabel-audit thead th, html.tema-kantor table.tabel.tabel-audit tbody td, html.tema-kantor table.tabel.tabel-audit tbody tr td, html.tema-kantor table.tabel.tabel-audit tfoot td, html.tema-kantor table.tabel.tabel-audit tfoot th { background: #fff !important; background-image: none !important; color: #1d1d1f !important; }
+html.tema-kantor table.tabel.tabel-rapb-format, html.tema-kantor table.tabel.tabel-rekap-upps, html.tema-kantor table.tabel.tabel-lkps, html.tema-kantor table.tabel.tabel-rekap-tengah, html.tema-kantor table.tabel.tabel-rapb, html.tema-kantor table.tabel.tabel-audit { background: #fff !important; border: 1px solid #dfe3e8 !important; box-shadow: none !important; }
+html.tema-kantor .tabel-rapb-format .r-bab td { font-weight: 800 !important; letter-spacing: .06em; }
+}
+
+@media all { html.tema-kantor .lembar-rapb .tabel-bungkus { border-color: #dfe3e8 !important; } html.tema-kantor table.tabel.tabel-rapb-format tbody td.minus, html.tema-kantor table.tabel.tabel-rekap-tengah tbody td.minus { color: #c62828 !important; } }
+
+@media all { html.tema-kantor table.tabel.tabel-rapb-format, html.tema-kantor table.tabel.tabel-rapb-format th, html.tema-kantor table.tabel.tabel-rapb-format td, html.tema-kantor table.tabel.tabel-rapb-format thead th, html.tema-kantor table.tabel.tabel-rapb-format tbody td, html.tema-kantor table.tabel.tabel-rapb-format tbody tr td, html.tema-kantor table.tabel.tabel-rapb-format tfoot td, html.tema-kantor table.tabel.tabel-rekap-upps, html.tema-kantor table.tabel.tabel-rekap-upps th, html.tema-kantor table.tabel.tabel-rekap-upps td, html.tema-kantor table.tabel.tabel-rekap-upps thead th, html.tema-kantor table.tabel.tabel-rekap-upps tbody td, html.tema-kantor table.tabel.tabel-rekap-upps tbody tr td, html.tema-kantor table.tabel.tabel-rekap-upps tfoot td, html.tema-kantor table.tabel.tabel-lkps, html.tema-kantor table.tabel.tabel-lkps th, html.tema-kantor table.tabel.tabel-lkps td, html.tema-kantor table.tabel.tabel-lkps thead th, html.tema-kantor table.tabel.tabel-lkps tbody td, html.tema-kantor table.tabel.tabel-lkps tbody tr td, html.tema-kantor table.tabel.tabel-lkps tfoot td, html.tema-kantor table.tabel.tabel-rekap-tengah, html.tema-kantor table.tabel.tabel-rekap-tengah th, html.tema-kantor table.tabel.tabel-rekap-tengah td, html.tema-kantor table.tabel.tabel-rekap-tengah thead th, html.tema-kantor table.tabel.tabel-rekap-tengah tbody td, html.tema-kantor table.tabel.tabel-rekap-tengah tbody tr td, html.tema-kantor table.tabel.tabel-rekap-tengah tfoot td, html.tema-kantor table.tabel.tabel-rapb, html.tema-kantor table.tabel.tabel-rapb th, html.tema-kantor table.tabel.tabel-rapb td, html.tema-kantor table.tabel.tabel-rapb thead th, html.tema-kantor table.tabel.tabel-rapb tbody td, html.tema-kantor table.tabel.tabel-rapb tbody tr td, html.tema-kantor table.tabel.tabel-rapb tfoot td, html.tema-kantor table.tabel.tabel-audit, html.tema-kantor table.tabel.tabel-audit th, html.tema-kantor table.tabel.tabel-audit td, html.tema-kantor table.tabel.tabel-audit thead th, html.tema-kantor table.tabel.tabel-audit tbody td, html.tema-kantor table.tabel.tabel-audit tbody tr td, html.tema-kantor table.tabel.tabel-audit tfoot td, html.tema-kantor .lembar-rapb .tabel-bungkus { border-color: #aeb7c4 !important; } }
+
+html.tema-kantor .tabel-rapb-format .r-panah, html.tema-kantor .tabel-rapb-format tr.r-grup.buka .r-panah, html.tema-kantor .rincian > summary::after, html.tema-kantor .rincian > summary:hover::after { background-color: #fff !important; }
+
+@media all { html.tema-kantor table.tabel.tabel-rapb-format th, html.tema-kantor table.tabel.tabel-rapb-format td, html.tema-kantor table.tabel.tabel-rapb-format thead th, html.tema-kantor table.tabel.tabel-rapb-format tbody td, html.tema-kantor table.tabel.tabel-rapb-format tbody tr td, html.tema-kantor table.tabel.tabel-rapb-format td *, html.tema-kantor table.tabel.tabel-rapb-format th *, html.tema-kantor table.tabel.tabel-rapb-format input, html.tema-kantor table.tabel.tabel-rapb-format output, html.tema-kantor table.tabel.tabel-rapb-format .rp-isi i, html.tema-kantor table.tabel.tabel-rapb-format .rp-isi input, html.tema-kantor table.tabel.tabel-rapb-format .rp-hasil output, html.tema-kantor table.tabel.tabel-rapb-format .l-uraian, html.tema-kantor table.tabel.tabel-rapb-format .sub-judul, html.tema-kantor table.tabel.tabel-rapb-format .r-hitung, html.tema-kantor table.tabel.tabel-rapb-format .r-kode, html.tema-kantor table.tabel.tabel-rapb-format b, html.tema-kantor table.tabel.tabel-rekap-upps th, html.tema-kantor table.tabel.tabel-rekap-upps td, html.tema-kantor table.tabel.tabel-rekap-upps thead th, html.tema-kantor table.tabel.tabel-rekap-upps tbody td, html.tema-kantor table.tabel.tabel-rekap-upps tbody tr td, html.tema-kantor table.tabel.tabel-rekap-upps td *, html.tema-kantor table.tabel.tabel-rekap-upps th *, html.tema-kantor table.tabel.tabel-rekap-upps input, html.tema-kantor table.tabel.tabel-rekap-upps output, html.tema-kantor table.tabel.tabel-rekap-upps .rp-isi i, html.tema-kantor table.tabel.tabel-rekap-upps .rp-isi input, html.tema-kantor table.tabel.tabel-rekap-upps .rp-hasil output, html.tema-kantor table.tabel.tabel-rekap-upps .l-uraian, html.tema-kantor table.tabel.tabel-rekap-upps .sub-judul, html.tema-kantor table.tabel.tabel-rekap-upps .r-hitung, html.tema-kantor table.tabel.tabel-rekap-upps .r-kode, html.tema-kantor table.tabel.tabel-rekap-upps b, html.tema-kantor table.tabel.tabel-lkps th, html.tema-kantor table.tabel.tabel-lkps td, html.tema-kantor table.tabel.tabel-lkps thead th, html.tema-kantor table.tabel.tabel-lkps tbody td, html.tema-kantor table.tabel.tabel-lkps tbody tr td, html.tema-kantor table.tabel.tabel-lkps td *, html.tema-kantor table.tabel.tabel-lkps th *, html.tema-kantor table.tabel.tabel-lkps input, html.tema-kantor table.tabel.tabel-lkps output, html.tema-kantor table.tabel.tabel-lkps .rp-isi i, html.tema-kantor table.tabel.tabel-lkps .rp-isi input, html.tema-kantor table.tabel.tabel-lkps .rp-hasil output, html.tema-kantor table.tabel.tabel-lkps .l-uraian, html.tema-kantor table.tabel.tabel-lkps .sub-judul, html.tema-kantor table.tabel.tabel-lkps .r-hitung, html.tema-kantor table.tabel.tabel-lkps .r-kode, html.tema-kantor table.tabel.tabel-lkps b, html.tema-kantor table.tabel.tabel-rekap-tengah th, html.tema-kantor table.tabel.tabel-rekap-tengah td, html.tema-kantor table.tabel.tabel-rekap-tengah thead th, html.tema-kantor table.tabel.tabel-rekap-tengah tbody td, html.tema-kantor table.tabel.tabel-rekap-tengah tbody tr td, html.tema-kantor table.tabel.tabel-rekap-tengah td *, html.tema-kantor table.tabel.tabel-rekap-tengah th *, html.tema-kantor table.tabel.tabel-rekap-tengah input, html.tema-kantor table.tabel.tabel-rekap-tengah output, html.tema-kantor table.tabel.tabel-rekap-tengah .rp-isi i, html.tema-kantor table.tabel.tabel-rekap-tengah .rp-isi input, html.tema-kantor table.tabel.tabel-rekap-tengah .rp-hasil output, html.tema-kantor table.tabel.tabel-rekap-tengah .l-uraian, html.tema-kantor table.tabel.tabel-rekap-tengah .sub-judul, html.tema-kantor table.tabel.tabel-rekap-tengah .r-hitung, html.tema-kantor table.tabel.tabel-rekap-tengah .r-kode, html.tema-kantor table.tabel.tabel-rekap-tengah b, html.tema-kantor table.tabel.tabel-rapb th, html.tema-kantor table.tabel.tabel-rapb td, html.tema-kantor table.tabel.tabel-rapb thead th, html.tema-kantor table.tabel.tabel-rapb tbody td, html.tema-kantor table.tabel.tabel-rapb tbody tr td, html.tema-kantor table.tabel.tabel-rapb td *, html.tema-kantor table.tabel.tabel-rapb th *, html.tema-kantor table.tabel.tabel-rapb input, html.tema-kantor table.tabel.tabel-rapb output, html.tema-kantor table.tabel.tabel-rapb .rp-isi i, html.tema-kantor table.tabel.tabel-rapb .rp-isi input, html.tema-kantor table.tabel.tabel-rapb .rp-hasil output, html.tema-kantor table.tabel.tabel-rapb .l-uraian, html.tema-kantor table.tabel.tabel-rapb .sub-judul, html.tema-kantor table.tabel.tabel-rapb .r-hitung, html.tema-kantor table.tabel.tabel-rapb .r-kode, html.tema-kantor table.tabel.tabel-rapb b, html.tema-kantor table.tabel.tabel-audit th, html.tema-kantor table.tabel.tabel-audit td, html.tema-kantor table.tabel.tabel-audit thead th, html.tema-kantor table.tabel.tabel-audit tbody td, html.tema-kantor table.tabel.tabel-audit tbody tr td, html.tema-kantor table.tabel.tabel-audit td *, html.tema-kantor table.tabel.tabel-audit th *, html.tema-kantor table.tabel.tabel-audit input, html.tema-kantor table.tabel.tabel-audit output, html.tema-kantor table.tabel.tabel-audit .rp-isi i, html.tema-kantor table.tabel.tabel-audit .rp-isi input, html.tema-kantor table.tabel.tabel-audit .rp-hasil output, html.tema-kantor table.tabel.tabel-audit .l-uraian, html.tema-kantor table.tabel.tabel-audit .sub-judul, html.tema-kantor table.tabel.tabel-audit .r-hitung, html.tema-kantor table.tabel.tabel-audit .r-kode, html.tema-kantor table.tabel.tabel-audit b { color: #000 !important; } html.tema-kantor table.tabel.tabel-rapb-format td.minus, html.tema-kantor table.tabel.tabel-rapb-format td.minus *, html.tema-kantor table.tabel.tabel-rekap-upps td.minus, html.tema-kantor table.tabel.tabel-rekap-upps td.minus *, html.tema-kantor table.tabel.tabel-lkps td.minus, html.tema-kantor table.tabel.tabel-lkps td.minus *, html.tema-kantor table.tabel.tabel-rekap-tengah td.minus, html.tema-kantor table.tabel.tabel-rekap-tengah td.minus *, html.tema-kantor table.tabel.tabel-rapb td.minus, html.tema-kantor table.tabel.tabel-rapb td.minus *, html.tema-kantor table.tabel.tabel-audit td.minus, html.tema-kantor table.tabel.tabel-audit td.minus * { color: #c62828 !important; } }
+
+html.tema-kantor .sambut { min-height: 0 !important; padding-top: 10px !important; padding-bottom: 12px !important; }
+html.tema-kantor .sambut .avatar { width: 44px !important; height: 44px !important; flex: 0 0 44px !important; font-size: .9rem !important; border-width: 2px !important; }
+html.tema-kantor .sambut h1 { font-size: 1.22rem !important; margin: 0 !important; line-height: 1.2; }
+html.tema-kantor .sambut .salam { font-size: .74rem !important; margin-bottom: 0 !important; }
+html.tema-kantor .sambut p { font-size: .8rem !important; }
+html.tema-kantor .sambut .baris { gap: 12px !important; }
+html.tema-kantor .sambut-info { gap: 6px !important; }
+html.tema-kantor .sambut .chip { padding: 2px 10px !important; font-size: .72rem !important; }
+html.tema-kantor .sambut .aksi .btn, html.tema-kantor .sambut .btn-krem { padding: 5px 12px !important; font-size: .78rem !important; }
+html.tema-kantor .jam-digital { padding: 0 !important; }
+html.tema-kantor .sambut .sambut-latar .candi { --h: 48px !important; bottom: 12px !important; }
+html.tema-kantor .sambut .sambut-latar .gunung { --h: 58px !important; bottom: 10px !important; }
+html.tema-kantor .sambut .sambut-latar .batik { --h: 10px !important; --t: 20px !important; }
+html.tema-kantor .sambut-latar::before { width: 200px; height: 200px; margin-top: -100px; }
+
+html.tema-kantor header.atas { height: 56px !important; min-height: 56px !important; padding-top: 0 !important; padding-bottom: 0 !important; align-items: center !important; }
+html.tema-kantor header.atas .kanan { align-items: center !important; align-self: center; }
+
+html.tema-kantor .pilih-jenis label { padding: 8px 14px 8px 40px !important; }
+html.tema-kantor .pilih-jenis label::before { left: 14px; top: 10px; width: 15px; height: 15px; }
+html.tema-kantor .pilih-jenis label:has(input:checked)::before { border-width: 4.5px; }
+html.tema-kantor .pilih-jenis b { margin-bottom: 0 !important; font-size: .86rem; line-height: 1.3; }
+html.tema-kantor .pilih-jenis span { font-size: .74rem !important; line-height: 1.35 !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+html.tema-kantor .rincian, html.tema-kantor form.kegiatan-ramping .rincian { border: 1px solid #dfe3e8 !important; border-left: 1px solid #dfe3e8 !important; border-radius: 10px !important; }
+
+@media all {
+  html.tema-kantor table.tabel thead th, html.tema-kantor table.tabel.matriks thead th, html.tema-kantor table.tabel tfoot th, html.tema-kantor .tabel-padat thead th, html.tema-kantor .tabel-padat th {
+    background: linear-gradient(180deg, #eef3fa 0%, #e2eaf5 100%) !important; color: #13315c !important; font-weight: 700 !important;
+    border-color: #c9d5e6 !important; border-bottom: 1px solid #b7c6dc !important;
+  }
+  html.tema-kantor table.tabel thead th a, html.tema-kantor .tabel-padat th a { color: #13315c !important; }
+}
+
+@media all {
+  html.tema-kantor table.tabel:not(.tabel-absensi) th, html.tema-kantor table.tabel:not(.tabel-absensi) td, html.tema-kantor table.tabel-padat th, html.tema-kantor table.tabel-padat td { font-size: .82rem !important; }
+  html.tema-kantor table.tabel:not(.tabel-absensi) td *, html.tema-kantor table.tabel:not(.tabel-absensi) th *, html.tema-kantor table.tabel-padat td *, html.tema-kantor table.tabel-padat th *,
+  html.tema-kantor table.tabel:not(.tabel-absensi) td .btn, html.tema-kantor table.tabel:not(.tabel-absensi) td .btn-kecil, html.tema-kantor table.tabel:not(.tabel-absensi) td .lc, html.tema-kantor table.tabel:not(.tabel-absensi) td .sub, html.tema-kantor table.tabel:not(.tabel-absensi) td .kecil, html.tema-kantor table.tabel:not(.tabel-absensi) th .sub-judul { font-size: .82rem !important; }
+  html.tema-kantor table.tabel:not(.tabel-absensi) td .lc { padding-top: 1px; padding-bottom: 1px; }
+}
+
+@media all { html.tema-kantor table.tabel.tabel-dosen tbody tr td { text-align: left !important; } }
+
+@media all {
+  html.tema-kantor table:not(#_) thead th, html.tema-kantor table:not(#_) tfoot th, html.tema-kantor table.tabel-padat:not(#_) th, html.tema-kantor table.tabel:not(#_) > tbody > tr > th {
+    background: linear-gradient(180deg, #eef3fa 0%, #e2eaf5 100%) !important; color: #13315c !important; font-weight: 700 !important;
+  }
+  html.tema-kantor table:not(#_) thead th *, html.tema-kantor table:not(#_) thead th a { color: #13315c !important; }
+}
+
+@media all { html.tema-kantor table.tabel-rapb-format:not(#_) tbody tr.r-bab td, html.tema-kantor table.tabel-rapb-format:not(#_) tr.r-bab td { background: #fff !important; color: #000 !important; font-weight: 800 !important; } }
+
+html.tema-kantor .kk-peringatan, html.tema-kantor details.kk-peringatan { border: 1px solid var(--k-garis) !important; border-left: 1px solid var(--k-garis) !important; }
+
+html.tema-kantor .berita-acara { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif !important; }
+
+html.tema-kantor .aset-nav > .aset-grup > a, html.tema-kantor .aset-nav > a { font-size: 12.5px !important; font-weight: 600 !important; }
+html.tema-kantor .aset-sub a, html.tema-kantor .aset-menu a { font-size: 12.5px !important; }
+html.tema-kantor .saring .fl, html.tema-kantor .form-baris > .fl { font-size: 12px !important; }
+html.tema-kantor .saring select, html.tema-kantor .saring input, html.tema-kantor .saring .btn { font-size: 12.5px !important; }
+html.tema-kantor .btn { font-size: 12.5px; }
+
+html.tema-kantor .berita-acara .kop-surat { font-family: "Times New Roman", Times, serif !important; }
+html.tema-kantor .berita-acara .kop-yayasan { font-family: Tahoma, "Segoe UI", sans-serif !important; }
+
+html.tema-kantor .rincian, html.tema-kantor form.kegiatan-ramping .rincian { padding: 0 !important; overflow: hidden; border-color: #c9d5e6 !important; }
+html.tema-kantor .rincian > summary, html.tema-kantor form.kegiatan-ramping .rincian > summary { padding: 6px 14px !important; min-height: 0 !important; background: linear-gradient(180deg, #eef3fa 0%, #e2eaf5 100%); color: #13315c !important; font-weight: 700; font-size: .84rem; }
+html.tema-kantor .rincian > summary .rincian-petunjuk { color: #4a6286 !important; }
+html.tema-kantor .rincian > summary::after { width: 22px !important; height: 22px !important; background-color: #fff !important; background-size: 13px !important; }
+html.tema-kantor .rincian[open] > summary { margin-bottom: 10px !important; border-bottom: 1px solid #c9d5e6 !important; }
+html.tema-kantor .rincian > :not(summary) { margin-left: 14px; margin-right: 14px; }
+html.tema-kantor .rincian[open] { padding-bottom: 10px !important; }
+
+html.tema-kantor .kartu-kaki .btn, html.tema-kantor form.kegiatan-ramping > .kartu-kaki .btn { padding: 6px 14px !important; font-size: 12.5px !important; min-height: 0 !important; line-height: 1.3; gap: 6px; }
+html.tema-kantor .kartu-kaki .btn svg { width: 14px; height: 14px; }
+
+html.tema-kantor .tw-tab a { padding: 4px 14px !important; }
+
+html.tema-kantor .lc, html.tema-kantor span.lc, html.tema-kantor table td .lc { background: #f1f3f6 !important; border-color: #d3d8df !important; color: #000 !important; }
+html.tema-kantor .lc::before { background: #000 !important; }
+
+html.tema-kantor .saring .fl { font-size: 11.5px !important; margin-bottom: 3px !important; }
+html.tema-kantor .saring select, html.tema-kantor .saring input[type=text], html.tema-kantor .saring input[type=search], html.tema-kantor .saring input[type=date], html.tema-kantor .saring input[type=number], html.tema-kantor .saring input[type=month] { height: 32px !important; padding: 4px 10px !important; font-size: 12.5px !important; box-sizing: border-box; }
+html.tema-kantor .saring .btn { height: 32px !important; padding: 0 12px !important; font-size: 12.5px !important; display: inline-flex; align-items: center; gap: 6px; }
+html.tema-kantor .saring .btn svg { width: 14px; height: 14px; }
+html.tema-kantor .saring .form-baris { margin-bottom: 0 !important; }
+html.tema-kantor .saring { gap: 8px 10px !important; align-items: flex-end; }
+
+.saring .fl, html.tema-kantor .saring .fl { font-size: 11px !important; }
+.saring select, .saring input[type=text], .saring input[type=search], .saring input[type=date], .saring input[type=number], .saring input[type=month],
+html.tema-kantor .saring select, html.tema-kantor .saring input[type=text], html.tema-kantor .saring input[type=search], html.tema-kantor .saring input[type=date], html.tema-kantor .saring input[type=number] { height: 30px !important; font-size: 11.5px !important; padding: 3px 8px !important; }
+.saring .btn, html.tema-kantor .saring .btn, .saring > div .btn, html.tema-kantor .saring > div .btn { height: 30px !important; font-size: 11.5px !important; padding: 0 10px !important; }
+.saring .btn svg, .saring > div .btn svg { width: 13px !important; height: 13px !important; }
+
+.saring .fl, html.tema-kantor .saring .fl { font-size: 10.5px !important; margin-bottom: 2px !important; }
+.saring select, .saring input[type=text], .saring input[type=search], .saring input[type=date], .saring input[type=number], .saring input[type=month],
+html.tema-kantor .saring select, html.tema-kantor .saring input[type=text], html.tema-kantor .saring input[type=search], html.tema-kantor .saring input[type=date], html.tema-kantor .saring input[type=number] { height: 28px !important; font-size: 11px !important; padding: 2px 8px !important; }
+.saring .btn, html.tema-kantor .saring .btn, .saring > div .btn, html.tema-kantor .saring > div .btn { height: 28px !important; font-size: 11px !important; padding: 0 9px !important; }
+.saring .btn svg, .saring > div .btn svg { width: 12px !important; height: 12px !important; }
+
+@media screen and (min-width: 1000px) {
+  html.tema-kantor body:not(.masuk) { zoom: .8; height: 125vh !important; }
+}
+
+@media all { html.tema-kantor table.tabel.tabel-rapb-format thead th, html.tema-kantor table.tabel.tabel-rapb-format th, html.tema-kantor table.tabel.tabel-rekap-upps thead th, html.tema-kantor table.tabel.tabel-rekap-upps th, html.tema-kantor table.tabel.tabel-lkps thead th, html.tema-kantor table.tabel.tabel-lkps th, html.tema-kantor table.tabel.tabel-rekap-tengah thead th, html.tema-kantor table.tabel.tabel-rekap-tengah th, html.tema-kantor table.tabel.tabel-rapb thead th, html.tema-kantor table.tabel.tabel-rapb th, html.tema-kantor table.tabel.tabel-audit thead th, html.tema-kantor table.tabel.tabel-audit th { padding-top: 4px !important; padding-bottom: 4px !important; line-height: 1.2 !important; } html.tema-kantor table.tabel.tabel-rapb-format tbody td, html.tema-kantor table.tabel.tabel-rekap-upps tbody td, html.tema-kantor table.tabel.tabel-lkps tbody td, html.tema-kantor table.tabel.tabel-rekap-tengah tbody td, html.tema-kantor table.tabel.tabel-rapb tbody td, html.tema-kantor table.tabel.tabel-audit tbody td { padding-top: 4px !important; padding-bottom: 4px !important; line-height: 1.3; } }
+
+@media all {
+  html.tema-kantor .rp-isi, html.tema-kantor .rp-hasil, html.tema-kantor .r-hasil.minus .rp-hasil, html.tema-kantor .tabel-rekap-upps .rp-isi.manual, html.tema-kantor .tabel-lkps .rp-isi, html.tema-kantor .tabel-rekap-upps .rp-isi { border: 0 !important; box-shadow: none !important; background: transparent !important; border-radius: 0 !important; }
+  html.tema-kantor .rp-isi i { background: none !important; border: 0 !important; }
+  html.tema-kantor .rp-isi input { border: 0 !important; box-shadow: none !important; background: transparent !important; outline: none; }
+  html.tema-kantor .rp-isi:focus-within { box-shadow: inset 0 -2px 0 #1f5fbf !important; }
+}

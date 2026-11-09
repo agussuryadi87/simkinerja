@@ -1,0 +1,1036 @@
+{
+    "urut": 128,
+    "urut_posisi": 4,
+    "posisi": [
+        {
+            "id": 1,
+            "nama": "Rektorat"
+        },
+        {
+            "id": 2,
+            "nama": "Fakultas FEB"
+        },
+        {
+            "id": 4,
+            "nama": "Fakultas FIKes"
+        }
+    ],
+    "karyawan": [
+        {
+            "id": 1,
+            "nama": "Dr. Ir. Larisang, M.T., IPU",
+            "jabatan": "Rektor",
+            "keterangan": "Karyawan + Dosen",
+            "posisi_id": 4,
+            "no_urut": 1
+        },
+        {
+            "id": 2,
+            "nama": "Dr. Fitri Sari Dewi, S.KM., M.KKK",
+            "jabatan": "Warek I",
+            "keterangan": "Karyawan + Dosen",
+            "posisi_id": 1,
+            "no_urut": 2
+        },
+        {
+            "id": 3,
+            "nama": "Dr. Andi Auliya R, SE., M.AK",
+            "jabatan": "Warek II",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 3
+        },
+        {
+            "id": 4,
+            "nama": "Dr. Sumardin, SE., M.Si",
+            "jabatan": "Warek III",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 4
+        },
+        {
+            "id": 5,
+            "nama": "Dr. Sabri, SE., MM",
+            "jabatan": "Dekan FEB",
+            "keterangan": "",
+            "posisi_id": 2,
+            "no_urut": 5
+        },
+        {
+            "id": 6,
+            "nama": "Dr. Ir. Sanusi, ST., M.Eng., IPM",
+            "jabatan": "Dekan FST",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 6
+        },
+        {
+            "id": 7,
+            "nama": "Hengky Oktarizal, SKM., MKM",
+            "jabatan": "Dekan FIKes",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 7
+        },
+        {
+            "id": 8,
+            "nama": "Leni Utami, S.Si., M.KM",
+            "jabatan": "Ka. Biro Akademik dan Adm. Kemahasiswaan",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 8
+        },
+        {
+            "id": 9,
+            "nama": "Andi Hidayatul Fadlilah, SE., M.Si., AK.",
+            "jabatan": "Ka. Biro Adm. Umum dan Keuangan",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 9
+        },
+        {
+            "id": 10,
+            "nama": "dr. Hj. Elsusi Martha, MKM",
+            "jabatan": "Ka. Biro Kemahasiswaan, Alumni dan Kerjasama",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 10
+        },
+        {
+            "id": 11,
+            "nama": "Roni Saputra, M.Si",
+            "jabatan": "Ka. LPMI",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 11
+        },
+        {
+            "id": 12,
+            "nama": "Dr. Ice Irawati, SKM., M.Kes",
+            "jabatan": "Ka. LPPM",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 12
+        },
+        {
+            "id": 13,
+            "nama": "Dr. Muhammad Ropianto, S.Kom., M.Kom",
+            "jabatan": "Ka. LPTI",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 13
+        },
+        {
+            "id": 14,
+            "nama": "Dr. Mulyadi, SE., MM",
+            "jabatan": "Wakil Dekan I FEB",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 14
+        },
+        {
+            "id": 15,
+            "nama": "Ita Mustika, SE., M.Ak",
+            "jabatan": "Wakil Dekan II FEB",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 15
+        },
+        {
+            "id": 16,
+            "nama": "Okta Vesa, S.Kom., M.Kom",
+            "jabatan": "Wakil Dekan I FST",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 16
+        },
+        {
+            "id": 17,
+            "nama": "Andi Hepy Susanti, SE., MM",
+            "jabatan": "Wakil Dekan II FST",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 17
+        },
+        {
+            "id": 18,
+            "nama": "Herdianti, M.Kes",
+            "jabatan": "Wadek I FIKes",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 18
+        },
+        {
+            "id": 19,
+            "nama": "Rizqi Ulla Amaliah, SKM., MKKK",
+            "jabatan": "Wadek II FIKes",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 19
+        },
+        {
+            "id": 20,
+            "nama": "M. Fadli Luran, SE., MM",
+            "jabatan": "Kabid BAAK",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 20
+        },
+        {
+            "id": 21,
+            "nama": "Adnan, S.E., M.M",
+            "jabatan": "Kabid. Adm. dan Layanan Kemahasiswaan",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 21
+        },
+        {
+            "id": 22,
+            "nama": "Maisyita Risma Suryani, SKL",
+            "jabatan": "Kabid Keuangan",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 22
+        },
+        {
+            "id": 23,
+            "nama": "Nurmayunita, SE., MM",
+            "jabatan": "Kabid. SDM",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 23
+        },
+        {
+            "id": 24,
+            "nama": "Agus Suryadi, M.Kom",
+            "jabatan": "Kabid Perencanaan dan Pengembangan",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 24
+        },
+        {
+            "id": 25,
+            "nama": "dr. Andi Khairunnisa",
+            "jabatan": "Kabid. Sapras",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 25
+        },
+        {
+            "id": 26,
+            "nama": "Dr. Abdul Rohmad Basar, S.Kom., M.Kom",
+            "jabatan": "Kabid Kemahasiswaan",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 26
+        },
+        {
+            "id": 27,
+            "nama": "Ahmadi, SKM., M.KL",
+            "jabatan": "Kabid Pusat Karir dan Kewirausahaan",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 27
+        },
+        {
+            "id": 28,
+            "nama": "Andi Akbar, SE., MM",
+            "jabatan": "Kabid. Humas",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 28
+        },
+        {
+            "id": 29,
+            "nama": "Amirullah, S.Kom., MM",
+            "jabatan": "Kabid. Kerjasama",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 29
+        },
+        {
+            "id": 30,
+            "nama": "Agus Sutiandi, A.md., Ak.",
+            "jabatan": "Kabid. Kerjasama Internasional",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 30
+        },
+        {
+            "id": 31,
+            "nama": "Maya Richmayanti, SE., M.AK",
+            "jabatan": "Ka. Prodi S1 Akuntansi",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 31
+        },
+        {
+            "id": 32,
+            "nama": "Septa Diana Nabella, SE., MM",
+            "jabatan": "Ka. Prodi S1 Manajemen",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 32
+        },
+        {
+            "id": 33,
+            "nama": "Dr. Hendri Herman, SE., M.Si",
+            "jabatan": "Ka. Prodi S2 Manajemen",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 33
+        },
+        {
+            "id": 34,
+            "nama": "Dr. Army Trilidia Devega, S.Kom, M.Pd",
+            "jabatan": "Ka. Prodi TF dan SI",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 34
+        },
+        {
+            "id": 35,
+            "nama": "Ir. Herman, ST., MT",
+            "jabatan": "Ka. Prodi TI",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 35
+        },
+        {
+            "id": 36,
+            "nama": "Albertus Laurensius Setyabudhi, ST.,  M.MT, IPM",
+            "jabatan": "Ka. Prodi TL dan TP",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 36
+        },
+        {
+            "id": 37,
+            "nama": "Trisna Dewita, SKM., M.Kes",
+            "jabatan": "Ketua Program Studi K3",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 37
+        },
+        {
+            "id": 38,
+            "nama": "M. Kafit, SKM",
+            "jabatan": "Ketua Program Studi Kesling",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 38
+        },
+        {
+            "id": 39,
+            "nama": "Ardi Arsala",
+            "jabatan": "Ketua Program Studi Kesmas",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 39
+        },
+        {
+            "id": 40,
+            "nama": "Hasan Husen, S.IP",
+            "jabatan": "Kepala Perpustakaan",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 40
+        },
+        {
+            "id": 41,
+            "nama": "Chinta Yolanda Sari, SKM.,M.KM",
+            "jabatan": "Kabid. Akreditasi dan Dokumentasi",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 41
+        },
+        {
+            "id": 42,
+            "nama": "Wan Intan Parisma, M.KM",
+            "jabatan": "Kabid. Evaluasi dan Audit Mutu",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 42
+        },
+        {
+            "id": 43,
+            "nama": "Yandra Rivaldo, S.E., M.M",
+            "jabatan": "Kabid. Penelitian",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 43
+        },
+        {
+            "id": 44,
+            "nama": "Novi Hendri Adi, S.Pd., M.Pd.T",
+            "jabatan": "Kabid. Penelitian dan PKM",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 44
+        },
+        {
+            "id": 45,
+            "nama": "Indah Kusuma Dewi, S.Kom., M.Kom",
+            "jabatan": "Kabid. Sosialisasi & Kerjasama Mutu",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 45
+        },
+        {
+            "id": 46,
+            "nama": "Nanda Jarti, S.Kom., M.Kom",
+            "jabatan": "Kabid HKI dan Publikasi",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 46
+        },
+        {
+            "id": 47,
+            "nama": "Khoerun Nisa Safitri, S.T., M.T",
+            "jabatan": "Kabid PKM",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 47
+        },
+        {
+            "id": 48,
+            "nama": "Andi Awaluddin, S.Kom",
+            "jabatan": "Ka. TU UIS",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 48
+        },
+        {
+            "id": 49,
+            "nama": "Khadijah, S.E., M.Ak",
+            "jabatan": "Sekprodi S1 Akuntansi",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 49
+        },
+        {
+            "id": 50,
+            "nama": "Ina Kurniati, S.E., M.M",
+            "jabatan": "Sekprodi S1 Manajemen",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 50
+        },
+        {
+            "id": 51,
+            "nama": "M. Tarmizi, S.E., M.M",
+            "jabatan": "Sekprodi S2 Manajemen",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 51
+        },
+        {
+            "id": 52,
+            "nama": "Atman Lucky F, S.Kom., M. Kom",
+            "jabatan": "Sekprodi TF dan SI",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 52
+        },
+        {
+            "id": 53,
+            "nama": "Rizky Prakasa Hasibuan, S.T., M.T",
+            "jabatan": "Sekprodi TI",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 53
+        },
+        {
+            "id": 54,
+            "nama": "Amelia Rachmi Nasution, M.T",
+            "jabatan": "Sekprodi TL dan TP",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 54
+        },
+        {
+            "id": 55,
+            "nama": "Trisna Jayati, M.KM",
+            "jabatan": "Sekprodi K3",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 55
+        },
+        {
+            "id": 56,
+            "nama": "Al Hafez Husein, SKM",
+            "jabatan": "Sekprodi Kesling",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 56
+        },
+        {
+            "id": 57,
+            "nama": "Juhanda Kartika Wijaya, SKL",
+            "jabatan": "Sekprodi Kesmas",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 57
+        },
+        {
+            "id": 58,
+            "nama": "Andi Muamar, S.Kom",
+            "jabatan": "Ka. Lab. Komputer",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 58
+        },
+        {
+            "id": 59,
+            "nama": "Fajar, SKM., M.Kes",
+            "jabatan": "Gugus Kendali Mutu",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 59
+        },
+        {
+            "id": 60,
+            "nama": "Ujang Amir Hamzah, S.Tr.Kom",
+            "jabatan": "Humas",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 60
+        },
+        {
+            "id": 61,
+            "nama": "M. Firnanda, ST",
+            "jabatan": "ICT",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 61
+        },
+        {
+            "id": 62,
+            "nama": "Mutiara Ayu Mawaddah, S.Kom",
+            "jabatan": "Ka. Humas dan Publikasi FT",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 62
+        },
+        {
+            "id": 63,
+            "nama": "Hj. Dewi Permatasari, S.E., M.M",
+            "jabatan": "Ka. UPMI",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 63
+        },
+        {
+            "id": 64,
+            "nama": "Afrina, S.Kom, M.Si",
+            "jabatan": "Ka. UPMI",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 64
+        },
+        {
+            "id": 65,
+            "nama": "Dr. Andika Prasetya N, S.E., M.M",
+            "jabatan": "Ka. UPPM",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 65
+        },
+        {
+            "id": 66,
+            "nama": "Ir. Ery Sugito, S.T., M.T",
+            "jabatan": "Ka. UPPM",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 66
+        },
+        {
+            "id": 67,
+            "nama": "Andi Saidah, S.E., M.M",
+            "jabatan": "Kasir Keuangan",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 67
+        },
+        {
+            "id": 68,
+            "nama": "Jamal",
+            "jabatan": "Labor",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 68
+        },
+        {
+            "id": 69,
+            "nama": "Andi Ricky Hamur, SE",
+            "jabatan": "Staff - Support Layanan Ijazah",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 69
+        },
+        {
+            "id": 70,
+            "nama": "Andi Amin Suryawan, SE",
+            "jabatan": "Staff BAAK",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 70
+        },
+        {
+            "id": 71,
+            "nama": "Muhamad Albar, S.Kom",
+            "jabatan": "Staff BAAK",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 71
+        },
+        {
+            "id": 72,
+            "nama": "Maeta Nila Sari",
+            "jabatan": "Staff BAAK",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 72
+        },
+        {
+            "id": 73,
+            "nama": "Raga Prasandi",
+            "jabatan": "Staff BKAK",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 73
+        },
+        {
+            "id": 74,
+            "nama": "Intan Zatura",
+            "jabatan": "Staff BKAK",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 74
+        },
+        {
+            "id": 75,
+            "nama": "Azmil Fauzi Farisca, S.H., M.H",
+            "jabatan": "Staff Dokumentasi dan ICT",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 75
+        },
+        {
+            "id": 76,
+            "nama": "Nopan Iswandi, S.Kom",
+            "jabatan": "Staff Humas",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 76
+        },
+        {
+            "id": 77,
+            "nama": "Habib Armanda, S.Kom",
+            "jabatan": "Staff Humas BKAK",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 77
+        },
+        {
+            "id": 78,
+            "nama": "Andi Amin Amirul Mukminin, S.Kom",
+            "jabatan": "Staff Humas dan Publikasi FT",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 78
+        },
+        {
+            "id": 79,
+            "nama": "Rusdianto, S.Kom",
+            "jabatan": "Staff ICT",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 79
+        },
+        {
+            "id": 80,
+            "nama": "Andi Mahdi Syahraini",
+            "jabatan": "Staff Kemahasiswaan",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 80
+        },
+        {
+            "id": 81,
+            "nama": "Rasmin Nurjading, M.Kes",
+            "jabatan": "Staff Kemahasiswaan",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 81
+        },
+        {
+            "id": 82,
+            "nama": "Marda Lisa, S.Ak",
+            "jabatan": "Staff Kerjasama",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 82
+        },
+        {
+            "id": 83,
+            "nama": "Taslimahudin, S.Sos",
+            "jabatan": "Staff Kerjasama dan Humas",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 83
+        },
+        {
+            "id": 84,
+            "nama": "Shinta Wahyuni, S.E., M.M",
+            "jabatan": "Staff Keuangan",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 84
+        },
+        {
+            "id": 85,
+            "nama": "Zhalfa Putri Elisa, S.E., M.M",
+            "jabatan": "Staff Keuangan",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 85
+        },
+        {
+            "id": 86,
+            "nama": "Andi Humaimah, S.KM",
+            "jabatan": "Staff Keuangan",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 86
+        },
+        {
+            "id": 87,
+            "nama": "Maisarah Pertiwi, S.M",
+            "jabatan": "Staff Keuangan",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 87
+        },
+        {
+            "id": 88,
+            "nama": "Andi Aulia Vitrizky, A.Md., Ak.",
+            "jabatan": "Staff Keuangan",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 88
+        },
+        {
+            "id": 89,
+            "nama": "Salsabila Rivania, S.Ak",
+            "jabatan": "Staff Keuangan",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 89
+        },
+        {
+            "id": 90,
+            "nama": "Andi Suhriyanti, S.Farm",
+            "jabatan": "Staff Labor",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 90
+        },
+        {
+            "id": 91,
+            "nama": "M. Isra Yuzul Abdullah",
+            "jabatan": "Staff Labor Teknik Proses Produksi",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 91
+        },
+        {
+            "id": 92,
+            "nama": "Mardinur",
+            "jabatan": "Staff Labor TF",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 92
+        },
+        {
+            "id": 93,
+            "nama": "Lutfia, S.T",
+            "jabatan": "Staff Labor TI",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 93
+        },
+        {
+            "id": 94,
+            "nama": "Marlina Umar, S.Kom",
+            "jabatan": "Staff LPPM",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 94
+        },
+        {
+            "id": 95,
+            "nama": "Dicky Ashrul Ibrahim, S.Kom",
+            "jabatan": "Staff LPTI",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 95
+        },
+        {
+            "id": 96,
+            "nama": "Dimas Pradipto, S.Kom",
+            "jabatan": "Staff LPTI",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 96
+        },
+        {
+            "id": 97,
+            "nama": "Nisyfu Nurbayanti",
+            "jabatan": "Staff Perpustakaan",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 97
+        },
+        {
+            "id": 98,
+            "nama": "Lailatul Qadry, S.Kom",
+            "jabatan": "Staff Pusat Karir",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 98
+        },
+        {
+            "id": 99,
+            "nama": "Apriadi",
+            "jabatan": "Staff Sapras",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 99
+        },
+        {
+            "id": 100,
+            "nama": "Choirul Anam, S.Kom",
+            "jabatan": "Staff Sapras",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 100
+        },
+        {
+            "id": 101,
+            "nama": "Andi Taher, S.E., M.M",
+            "jabatan": "Staff Sapras",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 101
+        },
+        {
+            "id": 102,
+            "nama": "Ishak, S.E., M.M",
+            "jabatan": "Staff SDM",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 102
+        },
+        {
+            "id": 103,
+            "nama": "Rosalina, SE",
+            "jabatan": "Staff SDM",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 103
+        },
+        {
+            "id": 104,
+            "nama": "Rahman Syahputra, S.Sos., MM",
+            "jabatan": "Staff TU S1",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 104
+        },
+        {
+            "id": 105,
+            "nama": "Nofri Yudi Arifin, M.Kom",
+            "jabatan": "Staff UPPM",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 105
+        },
+        {
+            "id": 106,
+            "nama": "M. Ansar, S.E., M.M",
+            "jabatan": "Tata Usaha",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 106
+        },
+        {
+            "id": 107,
+            "nama": "Perawaty Selfia Nasution, Amd., KL",
+            "jabatan": "Tata Usaha",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 107
+        },
+        {
+            "id": 108,
+            "nama": "Novela Sari, SKM., M.Kes",
+            "jabatan": "UPMI",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 108
+        },
+        {
+            "id": 109,
+            "nama": "Anita Pramawati, SKM., M.Si",
+            "jabatan": "UPPM",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 109
+        },
+        {
+            "id": 110,
+            "nama": "Muri",
+            "jabatan": "CS",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 110
+        },
+        {
+            "id": 111,
+            "nama": "Juliansyah",
+            "jabatan": "CS",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 111
+        },
+        {
+            "id": 112,
+            "nama": "Sabri",
+            "jabatan": "CS",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 112
+        },
+        {
+            "id": 113,
+            "nama": "Jimmy",
+            "jabatan": "CS",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 113
+        },
+        {
+            "id": 114,
+            "nama": "Edi Susanto",
+            "jabatan": "CS",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 114
+        },
+        {
+            "id": 115,
+            "nama": "Sri Winarsih",
+            "jabatan": "CS",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 115
+        },
+        {
+            "id": 116,
+            "nama": "Andi Hairil",
+            "jabatan": "CS",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 116
+        },
+        {
+            "id": 117,
+            "nama": "Syamsul Rizal",
+            "jabatan": "CS",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 117
+        },
+        {
+            "id": 118,
+            "nama": "Ahmad Nur",
+            "jabatan": "CS",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 118
+        },
+        {
+            "id": 119,
+            "nama": "Azmi",
+            "jabatan": "CS",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 119
+        },
+        {
+            "id": 120,
+            "nama": "Agustiawan",
+            "jabatan": "CS",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 120
+        },
+        {
+            "id": 121,
+            "nama": "M. Said",
+            "jabatan": "CS",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 121
+        },
+        {
+            "id": 122,
+            "nama": "Ridho",
+            "jabatan": "CS",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 122
+        },
+        {
+            "id": 123,
+            "nama": "Randy",
+            "jabatan": "CS",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 123
+        },
+        {
+            "id": 124,
+            "nama": "Misbatul Hasanah",
+            "jabatan": "CS",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 124
+        },
+        {
+            "id": 125,
+            "nama": "Salasiah",
+            "jabatan": "CS",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 125
+        },
+        {
+            "id": 126,
+            "nama": "Rudi",
+            "jabatan": "CS",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 126
+        },
+        {
+            "id": 127,
+            "nama": "Mukhirzin",
+            "jabatan": "CS",
+            "keterangan": "",
+            "posisi_id": 0,
+            "no_urut": 127
+        }
+    ]
+}

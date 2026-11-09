@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="960" height="110" viewBox="0 0 960 110">
+  <defs>
+    <path id="pr" d="M-16 0 V-14 H-12 V-28 H-8 V-42 H-5 V-58 H-2 V-76 L0 -96 L2 -76 V-58 H5 V-42 H8 V-28 H12 V-14 H16 V0 Z"/>
+    <path id="gp" d="M0 0 V-74 H-4 V-62 H-8 V-52 H-13 V-44 H-18 V-38 H-22 V0 Z"/>
+    <path id="st" d="M-6 0 Q-6 -10 0 -12 Q6 -10 6 0 Z"/>
+  </defs>
+  <g fill="#071a31" stroke="#071a31" opacity=".55">
+    <!-- Borobudur -->
+    <rect x="100" y="96" width="200" height="14"/><rect x="120" y="84" width="160" height="12"/><rect x="140" y="72" width="120" height="12"/>
+    <rect x="158" y="62" width="84" height="10"/><rect x="172" y="54" width="56" height="8"/>
+    <path d="M184 54 Q184 36 200 30 Q216 36 216 54 Z"/><rect x="198" y="18" width="4" height="14"/>
+    <use xlink:href="#st" x="170" y="62"/><use xlink:href="#st" x="186" y="62"/><use xlink:href="#st" x="214" y="62"/><use xlink:href="#st" x="230" y="62"/>
+    <use xlink:href="#st" x="148" y="72"/><use xlink:href="#st" x="252" y="72"/><use xlink:href="#st" x="128" y="84"/><use xlink:href="#st" x="272" y="84"/>
+    <!-- Gapura bentar -->
+    <use xlink:href="#gp" x="352" y="110"/><use xlink:href="#gp" transform="translate(368 110) scale(-1 1)"/>
+    <!-- Prambanan -->
+    <use xlink:href="#pr" transform="translate(520 110)"/>
+    <use xlink:href="#pr" transform="translate(476 110) scale(.72)"/>
+    <use xlink:href="#pr" transform="translate(564 110) scale(.72)"/>
+    <!-- Kelapa -->
+    <path d="M626 110 Q634 86 624 62" fill="none" stroke-width="3"/>
+    <path d="M624 62 Q606 58 594 68 M624 62 Q612 50 596 52 M624 62 Q638 52 652 56 M624 62 Q640 60 650 72 M624 62 Q624 48 618 40" fill="none" stroke-width="2.4"/>
+    <path d="M668 110 Q674 92 666 74" fill="none" stroke-width="2.4"/>
+    <path d="M666 74 Q652 70 644 78 M666 74 Q656 64 644 66 M666 74 Q678 66 690 70 M666 74 Q680 74 686 84" fill="none" stroke-width="2"/>
+    <!-- Rumah Gadang -->
+    <rect x="716" y="90" width="88" height="20"/>
+    <path d="M708 90 Q716 70 726 62 Q728 50 722 40 Q736 52 742 64 H778 Q784 52 798 40 Q792 50 794 62 Q804 70 812 90 Z"/>
+    <!-- Pura Meru -->
+    <rect x="868" y="100" width="24" height="10"/>
+    <path d="M860 100 H900 L894 90 H866 Z M866 90 H894 L890 80 H870 Z M870 80 H890 L887 70 H873 Z M873 70 H887 L885 61 H875 Z M879 61 H881 V50 H879 Z"/>
+  </g>
+</svg>
