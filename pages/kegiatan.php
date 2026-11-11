@@ -28,16 +28,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($op === 'simpan_cs' && $adalahCs) {
         $id = (int) post('id');
         $lama = $id ? $ambil($id) : null;
+        $kehadiran = array_key_exists(post('kehadiran'), KEHADIRAN_KERJA) ? post('kehadiran') : 'masuk';
+        $absen = $kehadiran !== 'masuk';
+        $jenisKerja = !$absen && array_key_exists(post('jenis'), JENIS_KERJA) ? post('jenis') : 'rutin';
+        $rutin = !$absen && $jenisKerja === 'rutin';
         $ruangTugas = array_column(cs_ruang_tugas(), null, 'id');
         $tanggal = post('tanggal');
         $ruangId = (int) post('ruang_id');
-        $mulai = normalisasi_jam(post('jam_mulai'));
-        $selesai = normalisasi_jam(post('jam_selesai'));
+        $mulai = $absen ? '' : normalisasi_jam(post('jam_mulai'));
+        $selesai = $absen ? '' : normalisasi_jam(post('jam_selesai'));
         $centang = [];
-        foreach ((array) ($_POST['butir'] ?? []) as $b) {
-            $b = (int) $b;
-            if (isset(KK_URAIAN_RUANG[$b])) {
-                $centang[$b] = $b;
+        foreach ((array) ($_POST['butir'] ?? []) as $bt) {
+            $bt = (int) $bt;
+            if (isset(KK_URAIAN_RUANG[$bt])) {
+                $centang[$bt] = $bt;
             }
         }
         $centang = array_values($centang);
@@ -47,9 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($id && !$lama) {
             $galat[] = 'Catatan tidak ditemukan.';
         }
-        if (!isset($ruangTugas[$ruangId])) {
-            $galat[] = 'Pilih ruangan yang ditugaskan kepada Anda.';
-        }
         if (!tanggal_sah($tanggal)) {
             $galat[] = 'Tanggal tidak sah.';
         } elseif ($tanggal < $periode['mulai'] || $tanggal > $periode['selesai']) {
@@ -57,17 +58,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } elseif ($tanggal > date('Y-m-d')) {
             $galat[] = 'Pekerjaan yang belum dilaksanakan belum dapat dicatat.';
         }
-        if ($mulai === '' || $selesai === '' || !jam_sah($mulai) || !jam_sah($selesai)) {
-            $galat[] = 'Isi jam mulai dan jam selesai dengan format jam yang benar.';
-        } elseif ($selesai <= $mulai) {
-            $galat[] = 'Jam selesai harus setelah jam mulai.';
+        if (!$absen) {
+            if ($mulai === '' || $selesai === '' || !jam_sah($mulai) || !jam_sah($selesai)) {
+                $galat[] = 'Isi jam mulai dan jam selesai dengan format jam yang benar.';
+            } elseif ($selesai <= $mulai) {
+                $galat[] = 'Jam selesai harus setelah jam mulai.';
+            }
         }
-        if (!$centang) {
-            $galat[] = 'Centang minimal satu butir pekerjaan yang sudah dikerjakan.';
+        if ($rutin) {
+            if (!isset($ruangTugas[$ruangId])) {
+                $galat[] = 'Pilih ruangan yang ditugaskan kepada Anda.';
+            }
+            if (!$centang) {
+                $galat[] = 'Centang minimal satu butir pekerjaan yang sudah dikerjakan.';
+            }
+        } elseif (!$absen) {
+            if (post('judul') === '') {
+                $galat[] = 'Nama kegiatan wajib diisi.';
+            }
+            if ($jenisKerja === 'panitia' && post('kepanitiaan') === '') {
+                $galat[] = 'Nama kepanitiaan wajib diisi untuk kerja panitia.';
+            }
+            if ($jenisKerja === 'insidental' && post('pemberi_tugas') === '') {
+                $galat[] = 'Pemberi tugas wajib diisi untuk kerja insidental.';
+            }
         }
         $fotoBaru = [];
         $hapusFoto = array_values(array_filter((array) ($_POST['hapus_foto'] ?? []), 'is_string'));
-        if (!$galat) {
+        if (!$galat && !$absen) {
             $lamaFoto = $id ? foto_kegiatan_semua($id) : [];
             $kuota = max(0, FOTO_KEGIATAN_MAKS - count(array_diff($lamaFoto, $hapusFoto)));
             $unggah = unggah_foto_kegiatan_banyak($_FILES['foto_unggah'] ?? [], $saya, $kuota);
@@ -82,25 +100,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             kembali_ke('kegiatan', $id ? ['aksi' => 'ubah', 'id' => $id] : []);
         }
         if (!$id) {
-            foreach (cs_harian_semua() as $kid => $d) {
-                if ((int) ($d['ruang_id'] ?? 0) === $ruangId && ($d['tanggal'] ?? '') === $tanggal && $ambil((int) $kid)) {
-                    $id = (int) $kid;
-                    $lama = $ambil($id);
-                    break;
+            if ($absen) {
+                $ada = row("SELECT id FROM kegiatan WHERE pengguna_id = ? AND periode_id = ? AND tanggal = ? AND kehadiran <> 'masuk' ORDER BY id LIMIT 1", [$saya, $pid, $tanggal]);
+                $id = $ada ? (int) $ada['id'] : 0;
+            } elseif ($rutin) {
+                foreach (cs_harian_semua() as $kid => $d) {
+                    if ((int) ($d['ruang_id'] ?? 0) === $ruangId && ($d['tanggal'] ?? '') === $tanggal && $ambil((int) $kid)) {
+                        $id = (int) $kid;
+                        break;
+                    }
                 }
             }
         }
-        $namaRuang = (string) $ruangTugas[$ruangId]['nama'];
         $langsung = !punya_atasan($saya);
-        $data = [
-            'jenis' => 'rutin', 'kehadiran' => 'masuk', 'tanggal' => $tanggal, 'jam_mulai' => $mulai, 'jam_selesai' => $selesai,
-            'judul' => mb_substr('Kebersihan harian · ' . $namaRuang, 0, 255),
-            'uraian' => cs_ringkas_uraian($namaRuang, $centang, $catatanCs),
-            'hasil' => count($centang) . '/' . count(KK_URAIAN_RUANG) . ' butir terpenuhi', 'volume' => 1, 'satuan' => 'ruangan',
-            'kepanitiaan' => '', 'peran_panitia' => '', 'nomor_sk' => '', 'pemberi_tugas' => '', 'tautan_bukti' => '',
+        $dasar = [
+            'tanggal' => $tanggal, 'kehadiran' => $kehadiran, 'volume' => 1, 'satuan' => 'kegiatan',
+            'kepanitiaan' => '', 'peran_panitia' => '', 'nomor_sk' => '', 'pemberi_tugas' => '', 'tautan_bukti' => '', 'hasil' => '',
             'status' => $langsung ? 'disetujui' : 'diajukan',
             'diverifikasi_oleh' => $langsung ? $saya : null, 'diverifikasi_pada' => $langsung ? date('Y-m-d H:i:s') : null,
         ];
+        if ($absen) {
+            $namaRuang = '';
+            $data = array_merge($dasar, [
+                'jenis' => 'rutin', 'jam_mulai' => null, 'jam_selesai' => null, 'volume' => 0, 'satuan' => '',
+                'judul' => $kehadiran === 'dinas' ? 'Tugas dinas luar' : 'Tidak masuk kerja', 'uraian' => '',
+            ]);
+        } elseif ($rutin) {
+            $namaRuang = (string) $ruangTugas[$ruangId]['nama'];
+            $data = array_merge($dasar, [
+                'jenis' => 'rutin', 'jam_mulai' => $mulai, 'jam_selesai' => $selesai, 'satuan' => 'ruangan',
+                'judul' => mb_substr('Kebersihan harian · ' . $namaRuang, 0, 255),
+                'uraian' => cs_ringkas_uraian($namaRuang, $centang, $catatanCs),
+                'hasil' => count($centang) . '/' . count(KK_URAIAN_RUANG) . ' butir terpenuhi',
+            ]);
+        } else {
+            $namaRuang = '';
+            $data = array_merge($dasar, [
+                'jenis' => $jenisKerja, 'jam_mulai' => $mulai, 'jam_selesai' => $selesai,
+                'judul' => mb_substr(post('judul'), 0, 255), 'uraian' => mb_substr(post_teks('uraian'), 0, 5000),
+                'kepanitiaan' => $jenisKerja === 'panitia' ? mb_substr(post('kepanitiaan'), 0, 255) : '',
+                'peran_panitia' => $jenisKerja === 'panitia' ? mb_substr(post('peran_panitia'), 0, 100) : '',
+                'nomor_sk' => mb_substr(post('nomor_sk'), 0, 100),
+                'pemberi_tugas' => $jenisKerja === 'insidental' ? mb_substr(post('pemberi_tugas'), 0, 150) : '',
+            ]);
+        }
         try {
             if ($id) {
                 update('kegiatan', $data, 'id = ?', [$id]);
@@ -108,18 +151,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 $id = insert('kegiatan', $data + ['periode_id' => $pid, 'pengguna_id' => $saya]);
             }
-            cs_harian_simpan((int) $id, ['ruang_id' => $ruangId, 'tanggal' => $tanggal, 'butir' => $centang, 'catatan' => $catatanCs]);
-            pasang_foto_kegiatan($fotoBaru, (int) $id, $hapusFoto);
-            catat_log('catatan_harian_cs', 'kegiatan', (int) $id, $namaRuang . ' ' . count($centang) . '/' . count(KK_URAIAN_RUANG));
-            flash('Catatan harian <b>' . e($namaRuang) . '</b> tersimpan (' . count($centang) . ' dari ' . count(KK_URAIAN_RUANG) . ' butir) dan kehadiran Anda tercatat hadir pada ' . e(tanggal_id($tanggal)) . '.');
+            cs_harian_simpan((int) $id, $rutin ? ['ruang_id' => $ruangId, 'tanggal' => $tanggal, 'butir' => $centang, 'catatan' => $catatanCs] : null);
+            if ($absen) {
+                hapus_foto_kegiatan((int) $id);
+            } else {
+                pasang_foto_kegiatan($fotoBaru, (int) $id, $hapusFoto);
+            }
+            catat_log('catatan_harian_cs', 'kegiatan', (int) $id, $data['judul']);
+            if ($absen) {
+                flash('Keterangan <b>' . e(KEHADIRAN_KERJA[$kehadiran]['label']) . '</b> pada ' . e(tanggal_id($tanggal)) . ' tersimpan.');
+            } elseif ($rutin) {
+                flash('Catatan harian <b>' . e($namaRuang) . '</b> tersimpan (' . count($centang) . ' dari ' . count(KK_URAIAN_RUANG) . ' butir) dan kehadiran Anda tercatat hadir pada ' . e(tanggal_id($tanggal)) . '.');
+            } else {
+                flash('Kegiatan <b>' . e($data['judul']) . '</b> tersimpan dan kehadiran Anda tercatat hadir pada ' . e(tanggal_id($tanggal)) . '.');
+            }
         } catch (PDOException $ex) {
             error_log('Gagal menyimpan catatan harian CS: ' . $ex->getMessage());
             buang_foto_sementara($fotoBaru);
             flash('Catatan belum tersimpan karena kendala basis data. Silakan coba lagi.', 'galat');
         }
-        kembali_ke('kegiatan', ['bln' => substr($tanggal, 0, 7), 'cs_tgl' => $tanggal, 'cs_ruang' => $ruangId]);
+        kembali_ke('kegiatan', ['bln' => substr($tanggal, 0, 7)] + ($rutin ? ['cs_tgl' => $tanggal, 'cs_ruang' => $ruangId] : []));
     }
-
     if ($op === 'simpan' && !$adalahCs) {
         $id = (int) post('id');
         $lama = $id ? $ambil($id) : null;
@@ -518,64 +570,88 @@ $saringAktif = ($_GET['tampil'] ?? '') === 'riwayat'
             }
         }
     }
+    $csKehadiran = $csEdit && isset(KEHADIRAN_KERJA[$csEdit['kehadiran'] ?? '']) ? (string) $csEdit['kehadiran'] : 'masuk';
+    $csJenis = $csEdit && $csKehadiran === 'masuk' ? ($csData ? 'rutin' : (array_key_exists($csEdit['jenis'], JENIS_KERJA) ? (string) $csEdit['jenis'] : 'rutin')) : 'rutin';
+    $csLain = $csEdit && !$csData && $csKehadiran === 'masuk' ? $csEdit : [];
     $csCentang = array_map('intval', (array) ($csData['butir'] ?? []));
     $csTanggal = $csTglPilih;
     $csMulai = $csEdit && $csEdit['jam_mulai'] ? jam_isian($csEdit['jam_mulai']) : '07.00';
     $csSelesai = $csEdit && $csEdit['jam_selesai'] ? jam_isian($csEdit['jam_selesai']) : '15.00';
-    $csNamaRuangPilih = '';
-    foreach ($csRuang as $r) {
-        if ((int) $r['id'] === $csRuangPilih) {
-            $csNamaRuangPilih = $r['nama'];
-        }
-    }
     ?>
-    <form method="post" action="<?= e(url('kegiatan')) ?>" class="kartu form-cs-harian" enctype="multipart/form-data" data-cs-form data-cs-url="<?= e(url('kegiatan')) ?>">
+    <form method="post" action="<?= e(url('kegiatan')) ?>" class="kartu form-cs-harian kegiatan-ramping" enctype="multipart/form-data" data-cs-form data-wadah-jenis data-cs-url="<?= e(url('kegiatan')) ?>">
       <?= csrf_field() ?>
       <input type="hidden" name="op" value="simpan_cs">
       <input type="hidden" name="id" value="<?= (int) ($csEdit['id'] ?? 0) ?>">
       <div class="kartu-kepala kepala-nusantara"><div class="sambut-latar" aria-hidden="true"><div class="matahari"></div><div class="lapis awan"></div><div class="lapis burung"></div><div class="lapis gunung"></div><div class="lapis candi"></div><div class="lapis laut"></div><div class="perahu"><img src="<?= e(base_url('assets/img/nusantara/pinisi.svg')) ?>" alt=""></div><div class="lapis laut2"></div><div class="lapis batik"></div></div>
-        <div><h2><?= ikon('kebersihan', 18) ?> <?= $csEdit ? 'Ubah catatan harian' : 'Catatan harian kebersihan' ?></h2></div>
+        <div><h2><?= ikon('kebersihan', 18) ?> <?= $csEdit ? 'Ubah catatan harian' : 'Catatan harian' ?></h2></div>
         <?php if ($csEdit): ?><div class="aksi"><a class="btn btn-garis btn-kecil" href="<?= e(url('kegiatan')) ?>"><?= ikon('kembali', 15) ?> Batal ubah</a></div><?php endif; ?>
       </div>
       <div class="kartu-isi">
         <?php if (!$csRuang): ?>
-          <div class="notif notif-warn"><?= ikon('seru', 17) ?><div>Belum ada ruangan aktif di data Sarana dan Prasarana. Hubungi Ka. Bid Sarana dan Prasarana.</div></div>
-        <?php else: ?>
+          <div class="notif notif-warn"><?= ikon('seru', 17) ?><div>Belum ada ruangan yang ditugaskan kepada Anda, jadi catatan kebersihan ruangan belum dapat diisi. Hubungi Ka. Bid Sarana dan Prasarana agar ruangan ditugaskan.</div></div>
+        <?php endif; ?>
+        <div class="cs-pilihan">
+          <div class="form-baris"><label class="fl">Kehadiran <span class="wajib">*</span></label><?= pilih_kehadiran($csKehadiran) ?></div>
+          <div class="form-baris" data-hanya-kerja><label class="fl">Jenis pekerjaan <span class="wajib">*</span></label>
+            <div class="pilih-jenis">
+              <?php foreach (JENIS_KERJA as $kj => $j): ?>
+                <label class="jenis-<?= $kj ?>"><input type="radio" name="jenis" value="<?= $kj ?>" <?= $kj === $csJenis ? 'checked' : '' ?>>
+                  <b><i class="titik titik-<?= $kj ?>"></i><?= e($j['label']) ?></b><span><?= e($j['ket']) ?></span></label>
+              <?php endforeach; ?>
+            </div>
+          </div>
+        </div>
+
         <div class="cs-baris-atas">
           <div class="form-baris"><label class="fl" for="csTanggal">Tanggal <span class="wajib">*</span></label>
             <input type="date" id="csTanggal" name="tanggal" required value="<?= e($csTanggal) ?>" min="<?= e($periode['mulai']) ?>" max="<?= e(min($periode['selesai'], $hariIni)) ?>"></div>
-          <div class="form-baris"><label class="fl" for="csRuang">Ruangan <span class="wajib">*</span></label>
-            <select id="csRuang" name="ruang_id" required><?php foreach ($csRuang as $r): ?><option value="<?= (int) $r['id'] ?>" <?= (int) $r['id'] === $csRuangPilih ? 'selected' : '' ?>><?= e($r['nama']) ?></option><?php endforeach; ?></select></div>
-          <div class="form-baris"><label class="fl" for="csMulai">Jam mulai <span class="wajib">*</span></label>
+          <div class="form-baris" data-hanya-kerja data-jenis="rutin"><label class="fl" for="csRuang">Ruangan <span class="wajib">*</span></label>
+            <select id="csRuang" name="ruang_id" required><?php if (!$csRuang): ?><option value="">Belum ada ruangan ditugaskan</option><?php endif; ?><?php foreach ($csRuang as $r): ?><option value="<?= (int) $r['id'] ?>" <?= (int) $r['id'] === $csRuangPilih ? 'selected' : '' ?>><?= e($r['nama']) ?></option><?php endforeach; ?></select></div>
+          <div class="form-baris" data-hanya-kerja><label class="fl" for="csMulai">Jam mulai <span class="wajib">*</span></label>
             <input type="text" id="csMulai" name="jam_mulai" required data-jam inputmode="numeric" maxlength="5" autocomplete="off" value="<?= e($csMulai) ?>"></div>
-          <div class="form-baris"><label class="fl" for="csSelesai">Jam selesai <span class="wajib">*</span></label>
+          <div class="form-baris" data-hanya-kerja><label class="fl" for="csSelesai">Jam selesai <span class="wajib">*</span></label>
             <input type="text" id="csSelesai" name="jam_selesai" required data-jam inputmode="numeric" maxlength="5" autocomplete="off" value="<?= e($csSelesai) ?>"></div>
         </div>
 
-        <div class="cs-checklist-kepala"><b>Checklist pekerjaan hari ini</b>
-          <span class="lemah" data-cs-hitung>0 dari <?= count(KK_URAIAN_RUANG) ?> butir</span>
-          <button type="button" class="btn btn-garis btn-kecil" data-cs-semua>Centang semua</button></div>
-        <div class="tabel-bungkus"><table class="tabel cs-checklist">
-          <thead><tr><th class="kolom-no">No</th><th>Uraian</th><th class="cs-kolom-cek">Dikerjakan</th></tr></thead>
-          <tbody>
-          <?php foreach (KK_URAIAN_RUANG as $no => $uraian): ?>
-            <tr><td class="kolom-no"><?= $no ?></td><td><label for="csButir<?= $no ?>"><?= e($uraian) ?></label></td>
-              <td class="cs-kolom-cek"><input type="checkbox" id="csButir<?= $no ?>" name="butir[]" value="<?= $no ?>" <?= in_array($no, $csCentang, true) ? 'checked' : '' ?> data-cs-butir></td></tr>
-          <?php endforeach; ?>
-          </tbody></table></div>
+        <div data-hanya-kerja data-jenis="panitia insidental" class="cs-lain">
+          <div class="form-baris"><label class="fl" for="csJudul">Apa yang Anda kerjakan? <span class="wajib">*</span></label>
+            <input type="text" id="csJudul" name="judul" maxlength="255" required value="<?= e((string) ($csLain['judul'] ?? '')) ?>" placeholder="Contoh: Menyiapkan ruangan untuk kegiatan wisuda"></div>
+          <div class="form-grid" data-jenis="panitia" data-hanya-kerja>
+            <div class="form-baris"><label class="fl" for="csPanitia">Nama kepanitiaan <span class="wajib">*</span></label>
+              <input type="text" id="csPanitia" name="kepanitiaan" maxlength="255" value="<?= e((string) ($csLain['kepanitiaan'] ?? '')) ?>" placeholder="Contoh: Panitia Wisuda Periode II 2026"></div>
+            <div class="form-baris"><label class="fl" for="csPeran">Peran dalam panitia</label>
+              <input type="text" id="csPeran" name="peran_panitia" maxlength="100" value="<?= e((string) ($csLain['peran_panitia'] ?? '')) ?>" placeholder="Anggota seksi perlengkapan"></div>
+            <div class="form-baris"><label class="fl" for="csSk">Nomor SK / surat tugas</label>
+              <input type="text" id="csSk" name="nomor_sk" maxlength="100" value="<?= e((string) ($csLain['nomor_sk'] ?? '')) ?>"></div>
+          </div>
+          <div class="form-baris" data-jenis="insidental" data-hanya-kerja><label class="fl" for="csPemberi">Pemberi tugas <span class="wajib">*</span></label>
+            <input type="text" id="csPemberi" name="pemberi_tugas" maxlength="150" value="<?= e((string) ($csLain['pemberi_tugas'] ?? '')) ?>" placeholder="Contoh: Kepala Biro / Wakil Rektor II"></div>
+          <div class="form-baris"><label class="fl" for="csUraian">Uraian pekerjaan</label>
+            <textarea id="csUraian" name="uraian" rows="3" maxlength="5000" placeholder="Rincian langkah yang dikerjakan"><?= e((string) ($csLain['uraian'] ?? '')) ?></textarea></div>
+        </div>
 
-        <div class="form-baris"><label class="fl" for="csCatatan">Catatan (opsional)</label>
-          <textarea id="csCatatan" name="catatan_cs" rows="2" maxlength="1000" placeholder="Misalnya kendala atau temuan di ruangan"><?= e((string) ($csData['catatan'] ?? '')) ?></textarea></div>
+        <div data-hanya-kerja data-jenis="rutin" class="cs-rutin">
+          <div class="cs-checklist-kepala"><b>Checklist pekerjaan hari ini</b>
+            <span class="lemah" data-cs-hitung>0 dari <?= count(KK_URAIAN_RUANG) ?> butir</span>
+            <button type="button" class="btn btn-garis btn-kecil" data-cs-semua>Centang semua</button></div>
+          <div class="tabel-bungkus"><table class="tabel cs-checklist">
+            <thead><tr><th class="kolom-no">No</th><th>Uraian</th><th class="cs-kolom-cek">Dikerjakan</th></tr></thead>
+            <tbody>
+            <?php foreach (KK_URAIAN_RUANG as $no => $uraian): ?>
+              <tr><td class="kolom-no"><?= $no ?></td><td><label for="csButir<?= $no ?>"><?= e($uraian) ?></label></td>
+                <td class="cs-kolom-cek"><input type="checkbox" id="csButir<?= $no ?>" name="butir[]" value="<?= $no ?>" <?= in_array($no, $csCentang, true) ? 'checked' : '' ?> data-cs-butir></td></tr>
+            <?php endforeach; ?>
+            </tbody></table></div>
+          <div class="form-baris"><label class="fl" for="csCatatan">Catatan (opsional)</label>
+            <textarea id="csCatatan" name="catatan_cs" rows="2" maxlength="1000" placeholder="Misalnya kendala atau temuan di ruangan"><?= e((string) ($csData['catatan'] ?? '')) ?></textarea></div>
+        </div>
 
-        <?= medan_foto_kegiatan($csEdit ? (int) $csEdit['id'] : null) ?>
-        <?php endif; ?>
+        <div data-hanya-kerja><?= medan_foto_kegiatan($csEdit ? (int) $csEdit['id'] : null) ?></div>
       </div>
-      <?php if ($csRuang): ?>
       <div class="kartu-kaki">
-        <button type="submit" class="btn btn-utama"><?= ikon('simpan', 15) ?> Simpan catatan harian</button>
-        <span class="lemah kecil">Setiap catatan yang disimpan otomatis dihitung hadir pada tanggal tersebut.</span>
+        <button type="submit" class="btn btn-utama"><?= ikon('simpan', 15) ?> Simpan</button>
+        <span class="lemah kecil" data-hanya-kerja>Setiap catatan yang disimpan otomatis dihitung hadir pada tanggal tersebut.</span>
       </div>
-      <?php endif; ?>
     </form>
     <?php else: ?>
 

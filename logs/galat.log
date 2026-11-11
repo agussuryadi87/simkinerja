@@ -942,3 +942,26 @@ Stack trace:
 #0 C:\Users\USER\AppData\Local\Temp\claude\bd0271cfc44c1315\5010ccf5-c8b0-469b-9be8-41392bfaabae\scratchpad\cek_foto_cs.php(6): tautan_foto_kegiatan(301)
 #1 {main}
   thrown in C:\xampp\htdocs\simkinerja\lib\helpers.php on line 482
+[11-Nov-2026 14:59:25 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[11-Nov-2026 14:59:33 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[11-Nov-2026 14:59:47 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[11-Nov-2026 14:59:54 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[11-Nov-2026 15:02:15 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[11-Nov-2026 15:03:20 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[11-Nov-2026 15:04:08 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[11-Nov-2026 15:04:15 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[11-Nov-2026 15:05:33 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[11-Nov-2026 15:10:39 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[11-Nov-2026 15:11:05 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[11-Nov-2026 15:11:35 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[11-Nov-2026 15:11:57 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[11-Nov-2026 15:13:33 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[11-Nov-2026 15:14:01 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[11-Nov-2026 15:14:17 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[11-Nov-2026 15:14:32 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[11-Nov-2026 15:14:35 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[11-Nov-2026 15:14:38 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[11-Nov-2026 15:16:25 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[11-Nov-2026 15:16:34 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[11-Nov-2026 15:22:55 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[11-Nov-2026 15:22:57 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it

@@ -488,9 +488,8 @@ function medan_foto_kegiatan(?int $kegiatanId): string
     $lama = $kegiatanId ? foto_kegiatan_semua($kegiatanId) : [];
     $h = '<div class="form-baris foto-bukti" data-foto-bukti data-maks="' . FOTO_KEGIATAN_MAKS . '"><label class="fl">Foto bukti kegiatan <span class="foto-hitung" data-foto-hitung></span></label>'
        . '<div class="foto-bukti-tombol">'
-       . '<button type="button" class="btn btn-garis btn-kecil" data-foto-kamera>' . ikon('kamera', 15) . ' Ambil foto</button>'
+       . '<label class="btn btn-garis btn-kecil" data-foto-kamera><input type="file" data-foto-kamera-hp accept="image/*" capture="environment" hidden>' . ikon('kamera', 15) . ' Ambil foto</label>'
        . '<label class="btn btn-garis btn-kecil"><input type="file" data-foto-galeri accept="image/jpeg,image/png,image/webp" multiple hidden>' . ikon('gambar', 15) . ' Pilih dari galeri</label>'
-       . '<input type="file" data-foto-kamera-hp accept="image/*" capture="environment" hidden>'
        . '<input type="file" name="foto_unggah[]" data-foto-keluar multiple hidden>'
        . '</div>'
        . '<div class="foto-bukti-daftar" data-foto-daftar>';

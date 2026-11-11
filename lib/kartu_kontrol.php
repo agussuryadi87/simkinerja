@@ -2,12 +2,10 @@
 
 const KK_HALAMAN = ['aset_kk_rekap' => 'Monitoring CS', 'aset_kk_ruang' => 'Kebersihan Ruangan', 'aset_kk_ac' => 'Pemeliharaan AC', 'aset_kk_sarana' => 'Inventaris Sarana'];
 
-const KK_HALAMAN_CS = ['aset_kk_ruang', 'aset_kk_ac', 'aset_kk_sarana', 'aset_kk_rekap', 'aset_kebersihan', 'aset_sarana', 'aset_prasarana', 'aset_pindai'];
+const KK_HALAMAN_CS = ['aset_kk_ruang', 'aset_kk_ac', 'aset_kk_sarana', 'aset_kk_rekap', 'aset_kebersihan', 'aset_sarana', 'aset_prasarana'];
 
 const KK_NAV_CS = [
-    'Kartu Kontrol' => ['aset_kk_ruang' => 'Kebersihan Ruangan', 'aset_kk_ac' => 'Pemeliharaan AC', 'aset_kk_sarana' => 'Inventaris Sarana', 'aset_kk_rekap' => 'Pekerjaan Saya'],
-    'Lapor Kerusakan' => ['aset_sarana' => 'Kerusakan Sarana', 'aset_prasarana' => 'Kerusakan Prasarana'],
-    'Pindai QR'     => ['aset_pindai' => 'Pindai QR'],
+    'Pemeliharaan & CS' => ['aset_kk_rekap' => 'Pekerjaan Saya', 'aset_kk_ruang' => 'Kebersihan Ruangan', 'aset_kk_ac' => 'Pemeliharaan AC', 'aset_kk_sarana' => 'Inventaris Sarana', 'aset_sarana' => 'Kerusakan Sarana', 'aset_prasarana' => 'Kerusakan Prasarana'],
 ];
 
 const KK_URAIAN_RUANG = [
@@ -322,7 +320,7 @@ function cs_ruang_tugas(): array
 {
     $ids = kk_ruang_saya(kk_penugasan('ruang'));
     if (!$ids) {
-        return rows('SELECT id, kode, nama FROM aset_ruang WHERE aktif = 1 ORDER BY nama');
+        return [];
     }
     return rows('SELECT id, kode, nama FROM aset_ruang WHERE aktif = 1 AND id IN (' . in_placeholder($ids) . ') ORDER BY nama', array_values($ids));
 }

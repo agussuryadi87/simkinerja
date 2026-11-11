@@ -1234,6 +1234,7 @@ html:where(.tema-kantor):not(#_) .kk-cat-isi small { color: #6b7684; }
 @media (max-width: 860px) {
 html:where(.tema-kantor):not(#_) .kk-sel[data-label]::before { color: #8b95a3; }
 }
+:where(html.tema-kantor) .foto-tanpa-pratinjau { border: 1px dashed var(--garis); color: var(--teks-3); }
 
 html.tema-kantor {
   --gelap: #0b2545; --ungu: #0b2545; --ungu-50: #eef2f8;
