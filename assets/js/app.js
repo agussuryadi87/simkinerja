@@ -319,21 +319,27 @@
       baru.forEach(function (b, i) {
         var kotak = document.createElement('div');
         kotak.className = 'foto-mini baru';
-        var im = document.createElement('img');
-        im.src = b.url;
-        im.alt = 'Foto baru ' + (i + 1);
+        if (b.pratinjau) {
+          var im = document.createElement('img');
+          im.src = b.pratinjau;
+          im.alt = 'Foto baru ' + (i + 1);
+          kotak.appendChild(im);
+        } else {
+          var ph = document.createElement('div');
+          ph.className = 'foto-tanpa-pratinjau';
+          ph.textContent = b.berkas.name;
+          kotak.appendChild(ph);
+        }
         var tb = document.createElement('button');
         tb.type = 'button';
         tb.className = 'foto-buang';
         tb.setAttribute('aria-label', 'Buang foto');
         tb.textContent = '×';
         tb.addEventListener('click', function () {
-          URL.revokeObjectURL(b.url);
           baru.splice(baru.indexOf(b), 1);
           pesan('');
           sinkron();
         });
-        kotak.appendChild(im);
         kotak.appendChild(tb);
         daftarEl.appendChild(kotak);
       });
@@ -343,34 +349,72 @@
       [tombolKamera, galeri && galeri.parentNode].forEach(function (t) {
         if (!t) return;
         t.classList.toggle('nonaktif', penuh);
-        if (t.tagName === 'BUTTON') t.disabled = penuh;
       });
     }
-    function tambahBlob(blob, nama) {
+    function tambahBerkas(berkas, pratinjau) {
       if (sisa() <= 0) { pesan('Maksimal ' + maks + ' foto.'); return; }
-      var berkas = new File([blob], nama, { type: 'image/jpeg' });
-      baru.push({ berkas: berkas, url: URL.createObjectURL(blob) });
+      baru.push({ berkas: berkas, pratinjau: pratinjau || '' });
       pesan('');
       sinkron();
     }
-    function olahBerkas(f) {
-      if (!/^image\/(jpeg|png|webp)$/.test(f.type)) { pesan('Format ' + f.name + ' tidak didukung. Gunakan JPG, PNG, atau WEBP.'); return; }
-      if (f.size > batasByte) { pesan(f.name + ' melebihi 50 MB.'); return; }
-      var url = URL.createObjectURL(f), img = new Image();
-      img.onload = function () {
-        var skala = Math.min(1, 1600 / Math.max(img.width, img.height));
-        var c = document.createElement('canvas');
-        c.width = Math.round(img.width * skala);
-        c.height = Math.round(img.height * skala);
-        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-        URL.revokeObjectURL(url);
+    function jenisSah(f) {
+      return /^image\/(jpeg|png|webp)$/.test(f.type) || (f.type === '' && /\.(jpe?g|png|webp)$/i.test(f.name));
+    }
+    function bacaGambar(f) {
+      return new Promise(function (selesai, gagal) {
+        if (window.createImageBitmap) {
+          window.createImageBitmap(f).then(selesai, function () { dariPembaca(); });
+        } else {
+          dariPembaca();
+        }
+        function dariPembaca() {
+          var p = new FileReader();
+          p.onload = function () {
+            var im = new Image();
+            im.onload = function () { selesai(im); };
+            im.onerror = function () { gagal(new Error('baca')); };
+            im.src = p.result;
+          };
+          p.onerror = function () { gagal(new Error('baca')); };
+          p.readAsDataURL(f);
+        }
+      });
+    }
+    function lebarSumber(s) { return s.width || s.naturalWidth || 0; }
+    function tinggiSumber(s) { return s.height || s.naturalHeight || 0; }
+    function gambarKeBerkas(sumber, nama) {
+      var w = lebarSumber(sumber), h = tinggiSumber(sumber);
+      var skala = Math.min(1, 1600 / Math.max(w, h));
+      var c = document.createElement('canvas');
+      c.width = Math.max(1, Math.round(w * skala));
+      c.height = Math.max(1, Math.round(h * skala));
+      c.getContext('2d').drawImage(sumber, 0, 0, c.width, c.height);
+      var kecil = document.createElement('canvas');
+      var sk = Math.min(1, 240 / Math.max(c.width, c.height));
+      kecil.width = Math.max(1, Math.round(c.width * sk));
+      kecil.height = Math.max(1, Math.round(c.height * sk));
+      kecil.getContext('2d').drawImage(c, 0, 0, kecil.width, kecil.height);
+      var pratinjau = kecil.toDataURL('image/jpeg', 0.7);
+      return new Promise(function (selesai, gagal) {
         c.toBlob(function (b) {
-          if (!b) { pesan('Foto tidak dapat diproses.'); return; }
-          tambahBlob(b, 'foto-bukti-' + Date.now() + '.jpg');
+          if (!b) { gagal(new Error('blob')); return; }
+          selesai({ berkas: new File([b], nama, { type: 'image/jpeg' }), pratinjau: pratinjau });
         }, 'image/jpeg', 0.85);
-      };
-      img.onerror = function () { URL.revokeObjectURL(url); pesan('Foto tidak dapat dibaca.'); };
-      img.src = url;
+      });
+    }
+    function olahBerkas(f) {
+      if (f.size > batasByte) { pesan(f.name + ' melebihi 50 MB.'); return; }
+      if (!jenisSah(f)) {
+        pesan('Format foto tidak didukung (' + (f.type || f.name) + '). Gunakan JPG, PNG, atau WEBP. Pada iPhone, atur kamera ke "Paling Kompatibel".');
+        return;
+      }
+      bacaGambar(f).then(function (sumber) {
+        return gambarKeBerkas(sumber, 'foto-bukti-' + Date.now() + '.jpg');
+      }).then(function (hasil) {
+        tambahBerkas(hasil.berkas, hasil.pratinjau);
+      }).catch(function () {
+        tambahBerkas(f, '');
+      });
     }
     function olahDaftar(inp) {
       var fs = Array.prototype.slice.call(inp.files || []);
@@ -404,31 +448,28 @@
       tirai.querySelector('[data-ambil]').addEventListener('click', function () {
         if (!video.videoWidth) return;
         if (sisa() <= 0) { info.textContent = 'Maksimal ' + maks + ' foto tercapai.'; return; }
-        var skala = Math.min(1, 1600 / Math.max(video.videoWidth, video.videoHeight));
-        var c = document.createElement('canvas');
-        c.width = Math.round(video.videoWidth * skala);
-        c.height = Math.round(video.videoHeight * skala);
-        c.getContext('2d').drawImage(video, 0, 0, c.width, c.height);
-        c.toBlob(function (b) {
-          if (b) tambahBlob(b, 'kamera-' + Date.now() + '.jpg');
+        gambarKeBerkas(video, 'kamera-' + Date.now() + '.jpg').then(function (hasil) {
+          tambahBerkas(hasil.berkas, hasil.pratinjau);
           info.textContent = sisa() > 0 ? 'Foto tersimpan. Sisa ' + sisa() + ' foto.' : 'Maksimal ' + maks + ' foto tercapai.';
           if (sisa() <= 0) tutup();
-        }, 'image/jpeg', 0.85);
+        }).catch(function () { info.textContent = 'Foto gagal diambil. Coba lagi.'; });
       });
       navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false }).then(function (s) {
         aliran = s;
         video.srcObject = s;
       }).catch(function () {
         tutup();
-        pesan('Kamera tidak dapat diakses. Izinkan akses kamera pada peramban atau gunakan Pilih dari galeri.');
+        if (kameraHp) { kameraHp.click(); } else { pesan('Kamera tidak dapat diakses. Izinkan akses kamera pada peramban atau gunakan Pilih dari galeri.'); }
       });
     }
-    if (tombolKamera) tombolKamera.addEventListener('click', function () {
-      if (sisa() <= 0) { pesan('Maksimal ' + maks + ' foto.'); return; }
-      var sentuh = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
-      if (!sentuh && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) bukaWebcam();
-      else if (kameraHp) kameraHp.click();
-      else pesan('Kamera tidak tersedia di peramban ini.');
+    if (tombolKamera) tombolKamera.addEventListener('click', function (ev) {
+      if (ev.target && ev.target.tagName === 'INPUT') return;
+      if (sisa() <= 0) { ev.preventDefault(); pesan('Maksimal ' + maks + ' foto.'); return; }
+      var sentuh = (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) || ('ontouchstart' in window && navigator.maxTouchPoints > 0);
+      if (!sentuh && navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.isSecureContext) {
+        ev.preventDefault();
+        bukaWebcam();
+      }
     });
     sinkron();
   });
@@ -1286,6 +1327,8 @@
   var tgl = form.querySelector('[name="tanggal"]'), ruang = form.querySelector('[name="ruang_id"]');
   function muat() {
     if (!tgl || !ruang || !tgl.value || !ruang.value) return;
+    var hadir = form.querySelector('input[name="kehadiran"]:checked'), jenis = form.querySelector('input[name="jenis"]:checked');
+    if ((hadir && hadir.value !== 'masuk') || (jenis && jenis.value !== 'rutin')) return;
     var url = form.getAttribute('data-cs-url') || location.pathname;
     var sambung = url.indexOf('?') === -1 ? '?' : '&';
     location.href = url + sambung + 'cs_tgl=' + encodeURIComponent(tgl.value) + '&cs_ruang=' + encodeURIComponent(ruang.value);

@@ -225,13 +225,18 @@ function izin_peran(int $peranId): array
 function izin_pengguna(int $penggunaId, int $peranId, ?array $penyesuaian = null): array
 {
     $izin = izin_peran($peranId);
+    $kodePeranIzin = (string) val('SELECT kode FROM peran WHERE id = ?', [$peranId], '');
+    if ($kodePeranIzin === 'cs') {
+        $izin = array_values(array_diff($izin, ['modul_aset']));
+        $izin[] = 'aset_kontrol';
+    }
     $bendera = row('SELECT akses_aset, akses_jad, akses_keu FROM pengguna WHERE id = ?', [$penggunaId]) ?: [];
     foreach (['akses_aset' => 'modul_aset', 'akses_jad' => 'modul_jad', 'akses_keu' => 'modul_keu'] as $kolom => $kode) {
         if ((int) ($bendera[$kolom] ?? 0) === 1) {
             $izin[] = $kode;
         }
     }
-    if ((string) val('SELECT kode FROM peran WHERE id = ?', [$peranId], '') === 'cs') {
+    if ($kodePeranIzin === 'cs') {
         $izin[] = 'kegiatan_isi';
     }
     foreach ($penyesuaian ?? izin_penyesuaian($penggunaId) as $kode => $boleh) {

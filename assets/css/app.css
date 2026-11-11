@@ -3689,3 +3689,17 @@ html:not(#_) .kk-cat-foto .sub { margin: 0; }
 }
 
 .saring .pilih-bulan { margin-left: auto; }
+
+.form-cs-harian fieldset.cs-set { border: 0; margin: 0; padding: 0; min-width: 0; }
+.form-cs-harian fieldset.cs-set[disabled] { opacity: .55; }
+
+.foto-bukti-tombol label[data-foto-kamera], .foto-bukti-tombol label.btn { cursor: pointer; }
+.foto-tanpa-pratinjau { width: 120px; height: 90px; border: 1px dashed var(--garis); border-radius: 10px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 6px; font-size: .7rem; word-break: break-all; color: var(--teks-3); box-sizing: border-box; }
+
+.form-cs-harian .cs-pilihan { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px 32px; margin-bottom: 16px; }
+.form-cs-harian .cs-pilihan > .form-baris { margin: 0; }
+.form-cs-harian .cs-lain, .form-cs-harian .cs-rutin { margin-top: 4px; }
+
+html:not(#_) body[data-hal="kegiatan"] .isi form.form-cs-harian.kegiatan-ramping > .kartu-isi { display: block !important; grid-template-columns: none !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.form-cs-harian .cs-baris-atas { display: grid !important; grid-template-columns: 1.1fr 1.6fr .7fr .7fr !important; gap: 12px 16px !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.form-cs-harian .form-baris { width: auto; max-width: none; }
