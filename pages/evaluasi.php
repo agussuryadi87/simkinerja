@@ -243,6 +243,7 @@ $tahunan = nilai_tahunan($evTw);
             <tr><td>Hari kerja dengan kegiatan terverifikasi</td><td class="angka"><b><?= angka($capaian['hari_tercatat']) ?></b> hari</td></tr>
             <tr><td>Kegiatan terverifikasi dari seluruh kegiatan</td><td class="angka"><b><?= angka($capaian['kegiatan_ok']) ?></b> dari <?= angka($capaian['kegiatan_total']) ?></td></tr>
             <tr><td>Jam kerja terverifikasi</td><td class="angka"><b><?= angka_ringkas($capaian['jam'], 1) ?></b> jam</td></tr>
+            <tr><td>Jam kerja tercatat dari target <?= angka($capaian['target_jam'] ?? 0) ?> jam per triwulan</td><td class="angka"><b><?= angka_ringkas($capaian['jam_diakui'] ?? 0, 1) ?></b> jam</td></tr>
             <?php endif; ?>
           </tbody>
           <tfoot><tr><td>Capaian pencatatan TW<?= $tw ?></td><td class="angka"><?= $nc === null ? '-' : angka($nc, 1) . '%' ?><?= $nc === null ? '' : meter($nc) ?></td></tr></tfoot>

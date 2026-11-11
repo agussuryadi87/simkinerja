@@ -1,0 +1,55 @@
+{
+    "22": [
+        {
+            "nama_barang": "Meja dosen",
+            "kategori": "furnitur",
+            "jumlah": 2,
+            "satuan": "unit",
+            "estimasi_harga": 1250000
+        },
+        {
+            "nama_barang": "Papan tulis putih 120x240",
+            "kategori": "alat_kantor",
+            "jumlah": 2,
+            "satuan": "buah",
+            "estimasi_harga": 950000
+        },
+        {
+            "nama_barang": "Proyektor 4000 lumen",
+            "kategori": "audio_visual",
+            "jumlah": 1,
+            "satuan": "unit",
+            "estimasi_harga": 7500000
+        },
+        {
+            "nama_barang": "Layar proyektor 100 inci",
+            "kategori": "audio_visual",
+            "jumlah": 1,
+            "satuan": "unit",
+            "estimasi_harga": 1200000
+        }
+    ],
+    "23": [
+        {
+            "nama_barang": "Monitor 24 inci",
+            "kategori": "komputer",
+            "jumlah": 10,
+            "satuan": "unit",
+            "estimasi_harga": 1800000
+        },
+        {
+            "nama_barang": "Switch jaringan 24 port",
+            "kategori": "komputer",
+            "jumlah": 1,
+            "satuan": "unit",
+            "estimasi_harga": 2400000
+        },
+        {
+            "nama_barang": "Kabel LAN Cat6 (roll 305 m)",
+            "kategori": "komputer",
+            "jumlah": 2,
+            "satuan": "roll",
+            "estimasi_harga": 1650000
+        }
+    ]
+}

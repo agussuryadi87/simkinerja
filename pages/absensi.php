@@ -85,7 +85,7 @@ $subjudul = $judulBulan;
 <div class="kartu">
   <div class="kartu-kepala">
     <div><h2><?= ikon('kalender', 18) ?> Rekap kehadiran &middot; <?= e($judulBulan) ?></h2>
-      <p class="ket"><?= count($pegawai) ?> pegawai &middot; <?= $jmlHari ?> hari kalender &middot; <?= $hariKerja ?> hari kerja (Senin-Jumat)</p></div>
+      <p class="ket"><?= count($pegawai) ?> pegawai &middot; <?= $jmlHari ?> hari kalender &middot; <?= $hariKerja ?> hari kerja (Senin-Jumat), Sabtu dan Minggu ditandai abu-abu</p></div>
     <ul class="legenda-absen">
       <?php foreach ($kode as $k => [$sing, $label]): ?><li><i class="ab ab-<?= $k ?>"><?= $sing ?></i><?= e($label) ?></li><?php endforeach; ?>
       <li><i class="ab ab-kosong">&ndash;</i>Belum ada catatan</li>
@@ -97,10 +97,10 @@ $subjudul = $judulBulan;
   <div class="tabel-bungkus"><table class="tabel tabel-absensi">
     <thead>
       <tr><th rowspan="2" class="ab-no">No</th><th rowspan="2" class="ab-nama">Nama pegawai</th>
-        <th colspan="<?= $hariKerja ?>"><?= e($judulBulan) ?></th>
+        <th colspan="<?= $jmlHari ?>"><?= e($judulBulan) ?></th>
         <th colspan="<?= count($kode) ?>">Jumlah</th></tr>
       <tr>
-        <?php for ($d = 1; $d <= $jmlHari; $d++): if ($libur[$d]) { continue; } ?><th class="ab-tgl"><?= $d ?><small><?= $namaHari[(int) date('N', strtotime($bulan . '-' . str_pad((string) $d, 2, '0', STR_PAD_LEFT)))] ?></small></th><?php endfor; ?>
+        <?php for ($d = 1; $d <= $jmlHari; $d++): ?><th class="ab-tgl<?= $libur[$d] ? ' ab-akhir-pekan' : '' ?>"><?= $d ?><small><?= $namaHari[(int) date('N', strtotime($bulan . '-' . str_pad((string) $d, 2, '0', STR_PAD_LEFT)))] ?></small></th><?php endfor; ?>
         <?php foreach ($kode as $k => [$sing]): ?><th class="ab-jml"><?= $sing ?></th><?php endforeach; ?>
       </tr>
     </thead>
@@ -113,8 +113,8 @@ $subjudul = $judulBulan;
             $tgl = $bulan . '-' . str_pad((string) $d, 2, '0', STR_PAD_LEFT);
             $isi = $peta[$id][$d] ?? null;
             if ($isi) { $jumlah[$isi]++; }
-            if ($libur[$d]) { continue; } ?>
-          <td class="ab-tgl"><?php if ($isi): ?><i class="ab ab-<?= $isi ?>" title="<?= e($kode[$isi][1] . ' - ' . tanggal_id($tgl)) ?>"><?= $kode[$isi][0] ?></i><?php elseif ($tgl <= $hariIni): ?><span class="ab-kosong">&ndash;</span><?php endif; ?></td>
+            ?>
+          <td class="ab-tgl<?= $libur[$d] ? ' ab-akhir-pekan' : '' ?>"><?php if ($isi): ?><i class="ab ab-<?= $isi ?>" title="<?= e($kode[$isi][1] . ' - ' . tanggal_id($tgl)) ?>"><?= $kode[$isi][0] ?></i><?php elseif ($tgl <= $hariIni && !$libur[$d]): ?><span class="ab-kosong">&ndash;</span><?php endif; ?></td>
         <?php endfor; ?>
         <?php foreach ($kode as $k => $x): ?><td class="ab-jml"><b><?= $jumlah[$k] ?: '' ?></b></td><?php endforeach; ?>
       </tr>

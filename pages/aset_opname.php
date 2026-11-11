@@ -182,7 +182,7 @@ $penginput = aset_penginput('aset_opname', $daftar);
   <?php if (!$daftar): ?><?= sel_kosong('Belum ada opname') ?>
   <?php else: ?>
   <div class="tabel-bungkus"><table class="tabel">
-    <thead><tr><th>Nomor / tanggal</th><th>Ruangan</th><th>Petugas</th><th class="angka">Barang</th><th class="angka">Selisih</th><th>Status</th><th>Diinput oleh</th></tr></thead>
+    <thead><tr><th>Nomor / tanggal</th><th>Ruangan</th><th>Petugas</th><th class="angka">Barang</th><th class="angka">Selisih</th><th>Status</th><th>Diinput oleh</th><th class="no-cetak kolom-aksi">Aksi</th></tr></thead>
     <tbody>
     <?php foreach ($daftar as $o): ?>
       <tr>
@@ -193,6 +193,11 @@ $penginput = aset_penginput('aset_opname', $daftar);
         <td class="angka<?= (int) $o['jml_selisih'] ? ' teks-merah' : '' ?>"><?= $o['status'] === 'selesai' || (int) $o['jml_selisih'] ? angka($o['jml_selisih']) : '-' ?></td>
         <td><?= $o['status'] === 'selesai' ? lencana('Selesai', 'hijau') : lencana('Berjalan', 'biru') ?></td>
         <td><?= aset_sel_penginput($penginput[(int) $o['id']] ?? null) ?></td>
+        <td class="no-cetak"><div class="aksi-baris">
+          <a class="btn btn-hantu btn-ikon" href="<?= e(url('aset_opname', ['aksi' => 'lihat', 'id' => $o['id']])) ?>" title="<?= $o['status'] === 'selesai' ? 'Lihat hasil' : 'Isi / ubah hasil' ?>"><?= ikon($o['status'] === 'selesai' ? 'mata' : 'sunting', 15) ?></a>
+          <form method="post" data-konfirmasi="Hapus opname <?= e($o['nomor']) ?> beserta seluruh hasil pemeriksaannya?"><?= csrf_field() ?><input type="hidden" name="op" value="hapus"><input type="hidden" name="id" value="<?= (int) $o['id'] ?>">
+            <button class="btn btn-hantu btn-ikon" type="submit" title="Hapus"><?= ikon('hapus', 15) ?></button></form>
+        </div></td>
       </tr>
     <?php endforeach; ?>
     </tbody></table></div>

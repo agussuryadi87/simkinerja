@@ -374,7 +374,8 @@ $ruangFilter = $fRuang ? row('SELECT id, nama FROM aset_ruang WHERE id = ?', [$f
   <div class="kartu-kepala">
     <div><h2><?= ikon('aset', 18) ?> Inventaris barang<?= $ruangFilter ? ' · ' . e($ruangFilter['nama']) : '' ?></h2>
       <p class="ket"><?= angka($total) ?> jenis barang · total nilai perolehan <?= e(aset_rupiah($nilai)) ?><?= $total > 300 ? ' · menampilkan 300 pertama, persempit pencarian' : '' ?></p></div>
-    <div class="aksi no-cetak"><a class="btn btn-garis btn-kecil" target="_blank" rel="noopener" title="Cetak label QR untuk barang yang sedang ditampilkan"
+    <div class="aksi no-cetak"><a class="btn btn-garis btn-kecil" href="<?= e(url('aset_foto_cek')) ?>" title="Periksa mengapa foto tidak tampil"><?= ikon('kamera', 15) ?> Cek foto</a>
+      <a class="btn btn-garis btn-kecil" target="_blank" rel="noopener" title="Cetak label QR untuk barang yang sedang ditampilkan"
         href="<?= e(url('aset_barang', array_filter(['aksi' => 'label', 'cari' => $cari, 'kategori' => $fKategori, 'kondisi' => $fKondisi, 'ruang' => $fRuang ?: null, 'status' => $fStatus]))) ?>"><?= ikon('cetak', 15) ?> Cetak label QR</a>
       <button class="btn btn-utama btn-kecil" type="button" data-buka="tiraiBarang" data-reset data-judul="Tambah barang"
         data-isi='<?= e(json_encode(['id' => '', 'kategori' => 'furnitur', 'kondisi' => 'baik', 'jumlah' => '1', 'satuan' => 'unit', 'ruang_id' => $fRuang ?: ''])) ?>'><?= ikon('tambah', 15) ?> Tambah barang</button></div>
@@ -401,6 +402,8 @@ $ruangFilter = $fRuang ? row('SELECT id, nama FROM aset_ruang WHERE id = ?', [$f
         <td class="no-cetak"><div class="aksi-baris">
           <button class="btn btn-hantu btn-ikon" type="button" title="Ubah" data-buka="tiraiBarang" data-judul="Ubah barang" data-isi='<?= $dataModal($b) ?>'><?= ikon('sunting', 15) ?></button>
           <a class="btn btn-hantu btn-ikon" href="<?= e(url('aset_barang', ['aksi' => 'lihat', 'id' => $b['id']])) ?>" title="Lihat"><?= ikon('mata', 15) ?></a>
+          <form method="post" data-konfirmasi="Hapus permanen barang <?= e($b['nama']) ?> beserta fotonya? Tindakan ini tidak dapat dibatalkan."><?= csrf_field() ?><input type="hidden" name="op" value="hapus"><input type="hidden" name="id" value="<?= (int) $b['id'] ?>">
+            <button class="btn btn-hantu btn-ikon" type="submit" title="Hapus"><?= ikon('hapus', 15) ?></button></form>
         </div></td>
       </tr>
     <?php endforeach; ?>

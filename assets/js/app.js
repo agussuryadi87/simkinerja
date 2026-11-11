@@ -287,44 +287,150 @@
   });
 
   $$('[data-foto-bukti]').forEach(function (medan) {
-    var masukan = $$('input[type="file"]', medan);
-    var pratinjau = medan.querySelector('.foto-bukti-pratinjau');
-    var gambar = pratinjau ? pratinjau.querySelector('img') : null;
-    function kosongkan() {
-      masukan.forEach(function (i) { i.value = ''; });
-      if (pratinjau) pratinjau.hidden = true;
-      if (gambar) gambar.removeAttribute('src');
+    var maks = parseInt(medan.getAttribute('data-maks'), 10) || 3;
+    var batasByte = 50 * 1024 * 1024;
+    var galeri = medan.querySelector('[data-foto-galeri]');
+    var kameraHp = medan.querySelector('[data-foto-kamera-hp]');
+    var tombolKamera = medan.querySelector('[data-foto-kamera]');
+    var keluar = medan.querySelector('[data-foto-keluar]');
+    var daftarEl = medan.querySelector('[data-foto-daftar]');
+    var galatEl = medan.querySelector('[data-foto-galat]');
+    var hitungEl = medan.querySelector('[data-foto-hitung]');
+    var baru = [];
+    function lamaTersisa() {
+      return $$('.foto-mini.lama', medan).filter(function (m) {
+        var c = m.querySelector('input[type="checkbox"]');
+        return !(c && c.checked);
+      }).length;
     }
-    masukan.forEach(function (inp) {
-      inp.addEventListener('change', function () {
-        var f = inp.files && inp.files[0];
-        masukan.forEach(function (lain) { if (lain !== inp) lain.value = ''; });
-        if (!f || !/^image\//.test(f.type)) return;
-        var pembaca = new FileReader(), img = new Image();
-        img.onload = function () {
-          var skala = Math.min(1, 1600 / Math.max(img.width, img.height));
-          var c = document.createElement('canvas');
-          c.width = Math.round(img.width * skala);
-          c.height = Math.round(img.height * skala);
-          c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-          if (gambar) gambar.src = c.toDataURL('image/jpeg', 0.7);
-          if (pratinjau) pratinjau.hidden = false;
-          c.toBlob(function (b) {
-            if (b && b.size < f.size) {
-              try {
-                var dt = new DataTransfer();
-                dt.items.add(new File([b], 'foto-bukti.jpg', { type: 'image/jpeg' }));
-                inp.files = dt.files;
-              } catch (e) {}
-            }
-          }, 'image/jpeg', 0.85);
-        };
-        pembaca.onload = function () { img.src = pembaca.result; };
-        pembaca.readAsDataURL(f);
+    function sisa() { return maks - lamaTersisa() - baru.length; }
+    function pesan(t) {
+      if (!galatEl) return;
+      galatEl.textContent = t || '';
+      galatEl.hidden = !t;
+    }
+    function sinkron() {
+      try {
+        var dt = new DataTransfer();
+        baru.forEach(function (b) { dt.items.add(b.berkas); });
+        keluar.files = dt.files;
+      } catch (e) {}
+      $$('.foto-mini.baru', daftarEl).forEach(function (n) { n.parentNode.removeChild(n); });
+      baru.forEach(function (b, i) {
+        var kotak = document.createElement('div');
+        kotak.className = 'foto-mini baru';
+        var im = document.createElement('img');
+        im.src = b.url;
+        im.alt = 'Foto baru ' + (i + 1);
+        var tb = document.createElement('button');
+        tb.type = 'button';
+        tb.className = 'foto-buang';
+        tb.setAttribute('aria-label', 'Buang foto');
+        tb.textContent = '×';
+        tb.addEventListener('click', function () {
+          URL.revokeObjectURL(b.url);
+          baru.splice(baru.indexOf(b), 1);
+          pesan('');
+          sinkron();
+        });
+        kotak.appendChild(im);
+        kotak.appendChild(tb);
+        daftarEl.appendChild(kotak);
       });
+      var total = lamaTersisa() + baru.length;
+      if (hitungEl) hitungEl.textContent = '(' + total + '/' + maks + ')';
+      var penuh = sisa() <= 0;
+      [tombolKamera, galeri && galeri.parentNode].forEach(function (t) {
+        if (!t) return;
+        t.classList.toggle('nonaktif', penuh);
+        if (t.tagName === 'BUTTON') t.disabled = penuh;
+      });
+    }
+    function tambahBlob(blob, nama) {
+      if (sisa() <= 0) { pesan('Maksimal ' + maks + ' foto.'); return; }
+      var berkas = new File([blob], nama, { type: 'image/jpeg' });
+      baru.push({ berkas: berkas, url: URL.createObjectURL(blob) });
+      pesan('');
+      sinkron();
+    }
+    function olahBerkas(f) {
+      if (!/^image\/(jpeg|png|webp)$/.test(f.type)) { pesan('Format ' + f.name + ' tidak didukung. Gunakan JPG, PNG, atau WEBP.'); return; }
+      if (f.size > batasByte) { pesan(f.name + ' melebihi 50 MB.'); return; }
+      var url = URL.createObjectURL(f), img = new Image();
+      img.onload = function () {
+        var skala = Math.min(1, 1600 / Math.max(img.width, img.height));
+        var c = document.createElement('canvas');
+        c.width = Math.round(img.width * skala);
+        c.height = Math.round(img.height * skala);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(url);
+        c.toBlob(function (b) {
+          if (!b) { pesan('Foto tidak dapat diproses.'); return; }
+          tambahBlob(b, 'foto-bukti-' + Date.now() + '.jpg');
+        }, 'image/jpeg', 0.85);
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); pesan('Foto tidak dapat dibaca.'); };
+      img.src = url;
+    }
+    function olahDaftar(inp) {
+      var fs = Array.prototype.slice.call(inp.files || []);
+      inp.value = '';
+      var lolos = fs.slice(0, Math.max(0, sisa()));
+      if (fs.length > lolos.length) pesan('Maksimal ' + maks + ' foto; sebagian foto tidak dimasukkan.');
+      lolos.forEach(olahBerkas);
+    }
+    if (galeri) galeri.addEventListener('change', function () { olahDaftar(galeri); });
+    if (kameraHp) kameraHp.addEventListener('change', function () { olahDaftar(kameraHp); });
+    $$('.foto-mini.lama input[type="checkbox"]', medan).forEach(function (c) {
+      c.addEventListener('change', function () { pesan(''); sinkron(); });
     });
-    var batal = medan.querySelector('[data-foto-batal]');
-    if (batal) batal.addEventListener('click', kosongkan);
+
+    function bukaWebcam() {
+      var aliran = null;
+      var tirai = document.createElement('div');
+      tirai.className = 'foto-modal';
+      tirai.innerHTML = '<div class="foto-modal-kotak"><video autoplay playsinline muted></video><div class="foto-modal-aksi"><button type="button" class="btn btn-utama" data-ambil>Ambil foto</button><button type="button" class="btn btn-garis" data-tutup>Selesai</button></div><small class="foto-modal-info"></small></div>';
+      document.body.appendChild(tirai);
+      var video = tirai.querySelector('video'), info = tirai.querySelector('.foto-modal-info');
+      function tutup() {
+        if (aliran) aliran.getTracks().forEach(function (t) { t.stop(); });
+        if (tirai.parentNode) tirai.parentNode.removeChild(tirai);
+        document.removeEventListener('keydown', esc);
+      }
+      function esc(e) { if (e.key === 'Escape') tutup(); }
+      document.addEventListener('keydown', esc);
+      tirai.addEventListener('click', function (e) { if (e.target === tirai) tutup(); });
+      tirai.querySelector('[data-tutup]').addEventListener('click', tutup);
+      tirai.querySelector('[data-ambil]').addEventListener('click', function () {
+        if (!video.videoWidth) return;
+        if (sisa() <= 0) { info.textContent = 'Maksimal ' + maks + ' foto tercapai.'; return; }
+        var skala = Math.min(1, 1600 / Math.max(video.videoWidth, video.videoHeight));
+        var c = document.createElement('canvas');
+        c.width = Math.round(video.videoWidth * skala);
+        c.height = Math.round(video.videoHeight * skala);
+        c.getContext('2d').drawImage(video, 0, 0, c.width, c.height);
+        c.toBlob(function (b) {
+          if (b) tambahBlob(b, 'kamera-' + Date.now() + '.jpg');
+          info.textContent = sisa() > 0 ? 'Foto tersimpan. Sisa ' + sisa() + ' foto.' : 'Maksimal ' + maks + ' foto tercapai.';
+          if (sisa() <= 0) tutup();
+        }, 'image/jpeg', 0.85);
+      });
+      navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false }).then(function (s) {
+        aliran = s;
+        video.srcObject = s;
+      }).catch(function () {
+        tutup();
+        pesan('Kamera tidak dapat diakses. Izinkan akses kamera pada peramban atau gunakan Pilih dari galeri.');
+      });
+    }
+    if (tombolKamera) tombolKamera.addEventListener('click', function () {
+      if (sisa() <= 0) { pesan('Maksimal ' + maks + ' foto.'); return; }
+      var sentuh = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+      if (!sentuh && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) bukaWebcam();
+      else if (kameraHp) kameraHp.click();
+      else pesan('Kamera tidak tersedia di peramban ini.');
+    });
+    sinkron();
   });
 
   $$('[data-pilih-semua]').forEach(function (induk) {
@@ -444,6 +550,93 @@
     var t = Math.round(Math.abs(n)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     return n < 0 ? '(' + t + ')' : t;
   };
+  document.addEventListener('change', function (ev) {
+    var sel = ev.target;
+    if (!sel.matches || !sel.matches('select[data-alasan-hapus]')) return;
+    var tirai = sel.closest('.tirai');
+    var wadah = tirai && tirai.querySelector('.hapus-detail');
+    if (!wadah) return;
+    var peta = {};
+    try { peta = JSON.parse(wadah.getAttribute('data-labels')) || {}; } catch (e) {}
+    var medan = peta[sel.value] || {};
+    $$('[data-medan]', wadah).forEach(function (baris) {
+      var kunci = baris.getAttribute('data-medan');
+      var ada = Object.prototype.hasOwnProperty.call(medan, kunci);
+      baris.hidden = !ada;
+      var lb = baris.querySelector('.fl');
+      if (ada && lb) lb.textContent = medan[kunci];
+      var kolom = baris.querySelector('input,textarea');
+      if (kolom && kunci === 'harga_jual') kolom.required = ada;
+    });
+  });
+  $$('[data-item-wadah]').forEach(function (wadah) {
+    var tirai = wadah.closest('.tirai');
+    var contoh = wadah.querySelector('[data-item]').cloneNode(true);
+    var tombolTambah = tirai.querySelector('[data-item-tambah]');
+    var totalEl = tirai.querySelector('[data-item-total]');
+    var angkaRibuan = function (t) {
+      var m = String(t).replace(/[^0-9]/g, '');
+      return m ? m.replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '';
+    };
+    function baris() { return $$('[data-item]', wadah); }
+    function segarkan() {
+      var semua = baris(), jumlahAda = 0, total = 0, adaHarga = false;
+      semua.forEach(function (b, i) {
+        b.querySelector('[data-item-nomor]').textContent = 'Barang ' + (i + 1);
+        b.querySelector('[data-item-hapus]').hidden = semua.length < 2;
+        var nama = b.querySelector('[name="item_nama[]"]');
+        nama.required = i === 0;
+        var jml = parseInt(b.querySelector('[name="item_jumlah[]"]').value, 10) || 0;
+        var hrg = parseInt(b.querySelector('[name="item_harga[]"]').value.replace(/[^0-9]/g, ''), 10) || 0;
+        if (nama.value.trim() !== '') jumlahAda++;
+        if (hrg > 0) { adaHarga = true; total += hrg * jml; }
+      });
+      if (totalEl) {
+        totalEl.textContent = semua.length + ' barang' + (adaHarga ? ' · total estimasi Rp ' + angkaRibuan(Math.round(total)) : '');
+      }
+    }
+    function tambah(data) {
+      var b = contoh.cloneNode(true);
+      if (data) {
+        b.querySelector('[name="item_nama[]"]').value = data.nama_barang || '';
+        b.querySelector('[name="item_kategori[]"]').value = data.kategori || 'lainnya';
+        b.querySelector('[name="item_jumlah[]"]').value = data.jumlah || 1;
+        b.querySelector('[name="item_satuan[]"]').value = data.satuan || 'unit';
+        b.querySelector('[name="item_harga[]"]').value = angkaRibuan(data.harga || '');
+      }
+      wadah.appendChild(b);
+      segarkan();
+      return b;
+    }
+    function isi(items) {
+      $$('[data-item]', wadah).forEach(function (b) { b.parentNode.removeChild(b); });
+      if (items && items.length) items.forEach(tambah); else tambah(null);
+    }
+    wadah.addEventListener('input', function (ev) {
+      if (ev.target.matches('[name="item_harga[]"]')) ev.target.value = angkaRibuan(ev.target.value);
+      segarkan();
+    });
+    wadah.addEventListener('click', function (ev) {
+      var hapus = ev.target.closest('[data-item-hapus]');
+      if (!hapus) return;
+      var b = hapus.closest('[data-item]');
+      if (baris().length > 1) { b.parentNode.removeChild(b); segarkan(); }
+    });
+    if (tombolTambah) tombolTambah.addEventListener('click', function () {
+      var b = tambah(null);
+      var n = b.querySelector('[name="item_nama[]"]');
+      if (n) n.focus();
+    });
+    document.addEventListener('click', function (ev) {
+      var pembuka = ev.target.closest('[data-buka="' + tirai.id + '"]');
+      if (!pembuka) return;
+      var items = [];
+      try { items = (JSON.parse(pembuka.getAttribute('data-isi') || '{}').items) || []; } catch (e) {}
+      isi(items);
+    });
+    wadah.removeChild(wadah.querySelector('[data-item]'));
+    tambah(null);
+  });
   $$('input[data-uang]').forEach(function (inp) {
     inp.addEventListener('input', function () {
       var mentah = inp.value.replace(/[^0-9]/g, '');
@@ -1055,4 +1248,47 @@
     });
   };
   if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', tandai); } else { tandai(); }
+})();
+(function () {
+  document.addEventListener('error', function (ev) {
+    var im = ev.target;
+    if (!im || im.tagName !== 'IMG' || !im.classList.contains('mini-aset')) return;
+    var ganti = document.createElement('span');
+    ganti.className = im.className + ' kosong';
+    ganti.title = 'Foto tidak dapat dimuat. Buka Inventaris barang lalu Cek foto untuk mengetahui penyebabnya.';
+    ganti.textContent = '!';
+    if (im.parentNode) im.parentNode.replaceChild(ganti, im);
+  }, true);
+})();
+
+(function () {
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  $$('[data-cs-form]').forEach(function (form) {
+    var kotak = $$('[data-cs-butir]', form), hitung = form.querySelector('[data-cs-hitung]'), semua = form.querySelector('[data-cs-semua]');
+    function segarkan() {
+      var n = kotak.filter(function (c) { return c.checked; }).length;
+      if (hitung) hitung.textContent = n + ' dari ' + kotak.length + ' butir';
+      if (semua) semua.textContent = n === kotak.length ? 'Hapus semua centang' : 'Centang semua';
+    }
+    kotak.forEach(function (c) { c.addEventListener('change', segarkan); });
+    if (semua) semua.addEventListener('click', function () {
+      var penuh = kotak.every(function (c) { return c.checked; });
+      kotak.forEach(function (c) { c.checked = !penuh; });
+      segarkan();
+    });
+    segarkan();
+  });
+})();
+
+(function () {
+  var form = document.querySelector('[data-cs-form]');
+  if (!form) return;
+  var tgl = form.querySelector('[name="tanggal"]'), ruang = form.querySelector('[name="ruang_id"]');
+  function muat() {
+    if (!tgl || !ruang || !tgl.value || !ruang.value) return;
+    var url = form.getAttribute('data-cs-url') || location.pathname;
+    var sambung = url.indexOf('?') === -1 ? '?' : '&';
+    location.href = url + sambung + 'cs_tgl=' + encodeURIComponent(tgl.value) + '&cs_ruang=' + encodeURIComponent(ruang.value);
+  }
+  [tgl, ruang].forEach(function (el) { if (el) el.addEventListener('change', muat); });
 })();

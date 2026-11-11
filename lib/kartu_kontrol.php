@@ -295,6 +295,59 @@ function kk_pj_ruang(array $ruang, array $penugasan): string
     return $nama ? implode(', ', $nama) : (string) ($ruang['penanggung_jawab'] ?? '');
 }
 
+const CS_HARIAN_BERKAS = 'cs-harian.json';
+
+function cs_pengguna(): bool
+{
+    return uid() > 0 && (string) (user()['peran_kode'] ?? '') === 'cs';
+}
+
+function cs_harian_semua(): array
+{
+    return aset_publik_baca(CS_HARIAN_BERKAS);
+}
+
+function cs_harian_simpan(int $kegiatanId, ?array $data): void
+{
+    aset_publik_ubah(CS_HARIAN_BERKAS, static function (array &$d) use ($kegiatanId, $data): void {
+        if ($data === null) {
+            unset($d[(string) $kegiatanId]);
+        } else {
+            $d[(string) $kegiatanId] = $data;
+        }
+    });
+}
+
+function cs_ruang_tugas(): array
+{
+    $ids = kk_ruang_saya(kk_penugasan('ruang'));
+    if (!$ids) {
+        return rows('SELECT id, kode, nama FROM aset_ruang WHERE aktif = 1 ORDER BY nama');
+    }
+    return rows('SELECT id, kode, nama FROM aset_ruang WHERE aktif = 1 AND id IN (' . in_placeholder($ids) . ') ORDER BY nama', array_values($ids));
+}
+
+function cs_ringkas_uraian(string $ruang, array $centang, string $catatan): string
+{
+    $ya = [];
+    $belum = [];
+    foreach (KK_URAIAN_RUANG as $no => $uraian) {
+        if (in_array($no, $centang, true)) {
+            $ya[] = $no . '. ' . $uraian;
+        } else {
+            $belum[] = $no . '. ' . $uraian;
+        }
+    }
+    $t = 'Ruangan: ' . $ruang . "\nButir terpenuhi (" . count($ya) . '/' . count(KK_URAIAN_RUANG) . "):\n" . ($ya ? implode("\n", $ya) : '-');
+    if ($belum) {
+        $t .= "\nBelum terpenuhi:\n" . implode("\n", $belum);
+    }
+    if ($catatan !== '') {
+        $t .= "\nCatatan: " . $catatan;
+    }
+    return mb_substr($t, 0, 5000);
+}
+
 function kk_ruang_saya(array $penugasan): array
 {
     $saya = uid();

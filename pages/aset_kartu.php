@@ -300,6 +300,24 @@ if ($jenisKK === 'rekap') {
     $subjudul = $pengelola ? 'Monitoring petugas CS' : 'Pekerjaan saya';
     $jumlahPeringatan = count($peringatan['ruang']) + count($peringatan['ac']) + count($peringatan['cs']) + count($peringatan['tanpa_pj']);
     $labelJenis = ['Kebersihan' => 'hijau', 'Inventaris' => 'emas', 'AC' => 'ungu', 'Catatan harian' => 'abu', 'Lapor kerusakan' => 'jingga'];
+    $awalTgl = $awalBulan . '-01';
+    $akhirTgl = date('Y-m-t', strtotime($awalTgl));
+    $catHarian = [];
+    $idCs = array_map('intval', array_keys($rekapCs));
+    if ($idCs) {
+        foreach (rows(
+            "SELECT id, pengguna_id, tanggal, judul, hasil, status FROM kegiatan WHERE pengguna_id IN (" . in_placeholder($idCs) . ") AND tanggal BETWEEN ? AND ? AND judul LIKE 'Kebersihan harian%'" . sql_bukan_draft() . ' ORDER BY tanggal DESC, id DESC',
+            array_merge($idCs, [$awalTgl, $akhirTgl])
+        ) as $c) {
+            $catHarian[(int) $c['pengguna_id']][] = $c;
+        }
+    }
+    $batang = static function (int $a, int $b): string {
+        if ($b <= 0) { return '<span class="lemah">-</span>'; }
+        $p = (int) round($a / $b * 100);
+        $w = $p >= 100 ? 'hijau' : ($p >= 50 ? 'emas' : 'jingga');
+        return '<span class="kk-bar kk-bar-' . $w . '"><i style="width:' . min(100, $p) . '%"></i></span><small>' . $a . '/' . $b . ' Â· ' . $p . '%</small>';
+    };
     ?>
     <form method="get" class="saring no-cetak">
       <input type="hidden" name="h" value="<?= e($h) ?>">
@@ -341,17 +359,34 @@ if ($jenisKK === 'rekap') {
           <p class="ket">Klik nama petugas untuk melihat rinciannya.</p></div></div>
         <?php if (!$rekapCs): ?><?= sel_kosong('Belum ada petugas CS') ?><?php else: ?>
         <div class="kk-daftar-cs">
-        <?php foreach ($rekapCs as $pid => $x): ?>
+        <div class="kk-cs-kepala" aria-hidden="true"><span>Petugas</span><span>Catatan harian</span><span>Kebersihan ruangan</span><span>Inventaris sarana</span><span>Pemeliharaan AC</span><span>Terakhir aktif</span><span></span></div>
+        <?php foreach ($rekapCs as $pid => $x):
+            $cH = $catHarian[$pid] ?? [];
+            $hariCs = count(array_unique(array_column($cH, 'tanggal')));
+            $fotoCs = 0;
+            foreach ($cH as $c) { $fotoCs += count(foto_kegiatan_semua((int) $c['id'])); } ?>
           <details class="kk-cs"<?= !$pengelola ? ' open' : '' ?>>
             <summary>
-              <span class="orang"><?= avatar($x['nama'], 'kecil') ?><b><?= e($x['nama']) ?></b></span>
-              <span class="kk-cs-angka" title="Minggu kebersihan dinilai"><?= ikon('kebersihan', 13) ?> <?= $persen($x['r_isi'], $x['r_target']) ?: '<i class="lemah">-</i>' ?></span>
-              <span class="kk-cs-angka" title="Sarana diperiksa"><?= ikon('catatan', 13) ?> <?= $persen($x['s_isi'], $x['s_target']) ?: '<i class="lemah">-</i>' ?></span>
-              <span class="kk-cs-angka" title="Pemeriksaan AC"><?= ikon('ac', 13) ?> <?= $x['ac'] ? lencana((string) $x['a_cek'], $x['a_cek'] ? 'hijau' : 'abu') : '<i class="lemah">-</i>' ?></span>
-              <span class="kk-cs-akhir <?= isset($aktifHariIni[$pid]) ? 'aktif' : '' ?>"><?= isset($terakhirPid[$pid]) ? e(kk_waktu(['waktu' => $terakhirPid[$pid]])) : 'belum aktif' ?></span>
+              <span class="orang kk-sel-nama"><?= avatar($x['nama'], 'kecil') ?><span><b><?= e($x['nama']) ?></b><small>Cleaning Service</small></span></span>
+              <span class="kk-sel" data-label="Catatan harian"><?php if ($cH): ?><b class="kk-besar"><?= $hariCs ?></b> hari<small><?= count($cH) ?> catatan Â· <?= $fotoCs ?> foto</small><?php else: ?><span class="lemah">Belum ada</span><?php endif; ?></span>
+              <span class="kk-sel" data-label="Kebersihan ruangan"><?= $batang($x['r_isi'], $x['r_target']) ?></span>
+              <span class="kk-sel" data-label="Inventaris sarana"><?= $batang($x['s_isi'], $x['s_target']) ?></span>
+              <span class="kk-sel" data-label="Pemeliharaan AC"><?= $x['ac'] ? '<b class="kk-besar">' . (int) $x['a_cek'] . '</b> cek' : '<span class="lemah">-</span>' ?></span>
+              <span class="kk-sel kk-cs-akhir <?= isset($aktifHariIni[$pid]) ? 'aktif' : '' ?>" data-label="Terakhir aktif"><?= isset($terakhirPid[$pid]) ? e(kk_waktu(['waktu' => $terakhirPid[$pid]])) : 'Belum aktif' ?></span>
+              <span class="kk-panah" aria-hidden="true"></span>
             </summary>
             <div class="kk-cs-isi">
               <div class="kk-cs-kolom">
+                <h4>Catatan harian bulan ini</h4>
+                <?php if (!$cH): ?><p class="lemah kecil">Belum ada catatan harian pada bulan ini.</p><?php endif; ?>
+                <?php foreach (array_slice($cH, 0, 10) as $c): ?>
+                  <div class="kk-cat">
+                    <span class="kk-cat-tgl"><?= e(tanggal_pendek($c['tanggal'])) ?></span>
+                    <span class="kk-cat-isi"><b><?= e(trim(preg_replace('/^Kebersihan harian\s*Â·\s*/u', '', (string) $c['judul']))) ?></b><small><?= e($c['hasil']) ?></small></span>
+                    <span class="kk-cat-foto"><?= tautan_foto_kegiatan((int) $c['id']) ?: '<span class="lemah kecil">tanpa foto</span>' ?></span>
+                  </div>
+                <?php endforeach; ?>
+                <?php if (count($cH) > 10): ?><p class="kecil lemah">+ <?= count($cH) - 10 ?> catatan lain pada bulan ini. Lihat selengkapnya di Pemantauan Tim.</p><?php endif; ?>
                 <h4>Kebersihan ruangan</h4>
                 <?php if (!$x['ruang']): ?><p class="lemah kecil">Belum ditugaskan.</p><?php endif; ?>
                 <?php foreach ($x['ruang'] as $rid => $rr): ?><a class="kk-cs-baris" href="<?= e(url('aset_kk_ruang', ['ruang' => $rid, 'tahun' => $tahun, 'bulan' => $bulan])) ?>"><span><?= e($rr['nama']) ?></span>
@@ -522,6 +557,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             });
             catat_log('isi_kk_ac', 'aset_barang', $barangId, $baris['deskripsi']);
             flash('Pemeriksaan AC dicatat.');
+            $balik();
+        }
+        if ($op === 'ubah_baris') {
+            $bid = post('baris');
+            $tgl = post('tgl');
+            $baru = ['tgl' => $tgl, 'deskripsi' => kk_teks('deskripsi', 200), 'arus' => kk_teks('arus', 30), 'tegangan' => kk_teks('tegangan', 30), 'tekanan' => kk_teks('tekanan', 30), 'remaks' => kk_teks('remaks', 300)];
+            if (!tanggal_sah($tgl) || (int) substr($tgl, 0, 4) !== $tahun || $baru['deskripsi'] === '') {
+                flash('Isi tanggal (di tahun ' . $tahun . ') dan deskripsi pekerjaan.', 'galat');
+                $balik();
+            }
+            $hasil = kk_ubah('ac', $tahun, static function (array &$d) use ($barangId, $bid, $baru, $pengelola, $saya): bool {
+                foreach ((array) ($d[(string) $barangId]['baris'] ?? []) as $i => $b) {
+                    if (($b['id'] ?? '') === $bid && ($pengelola || ((int) ($b['oleh']['id'] ?? 0) === $saya && empty($b['kontrol'])))) {
+                        $d[(string) $barangId]['baris'][$i] = $baru + $b;
+                        usort($d[(string) $barangId]['baris'], static function ($a, $c) { return strcmp($a['tgl'], $c['tgl']); });
+                        return true;
+                    }
+                }
+                return false;
+            });
+            if ($hasil) {
+                catat_log('ubah_kk_ac', 'aset_barang', $barangId, $baru['deskripsi']);
+            }
+            flash($hasil ? 'Baris pemeriksaan diperbarui.' : 'Baris tidak dapat diubah (sudah diparaf atau bukan isian Anda).', $hasil ? 'ok' : 'warn');
             $balik();
         }
         if ($op === 'hapus') {
@@ -731,7 +790,7 @@ $kunciBulan = (string) $bulan;
             <?php endfor; ?>
             <td class="kecil"><?= $terakhir ? e($terakhir['nama']) . '<div class="lemah">' . e(kk_waktu($terakhir)) . '</div>' : '<span class="lemah">-</span>' ?></td>
             <td><?= !empty($d['kontrol'][$kunciBulan]) ? lencana('Diparaf', 'hijau') : lencana('Belum', 'abu') ?></td>
-            <td class="kolom-aksi"><a class="btn btn-utama btn-kecil" href="<?= e(url($h, ['ruang' => $r['id'], 'bulan' => $bulan, 'tahun' => $tahun])) ?>">Buka</a></td></tr>
+            <td class="kolom-aksi"><a class="btn btn-utama btn-kecil" href="<?= e(url($h, ['ruang' => $r['id'], 'bulan' => $bulan, 'tahun' => $tahun])) ?>"><?= ikon('sunting', 14) ?> Isi / Ubah</a></td></tr>
         <?php endforeach; ?>
         </tbody></table></div>
       <?php endif; ?>
@@ -800,7 +859,7 @@ $kunciBulan = (string) $bulan;
             <td class="kecil"><?= e(trim($u['merek'] . ' ' . $u['model']) ?: '-') ?></td><td class="tengah"><?= count($brs) ?></td>
             <td class="kecil"><?= $akhir ? e(tanggal_pendek($akhir['tgl'])) . '<div class="lemah">' . e($akhir['deskripsi']) . '</div>' : '<span class="lemah">-</span>' ?></td>
             <td class="tengah"><?= $belum ? lencana((string) $belum, 'emas') : '<span class="lemah">-</span>' ?></td>
-            <td class="kolom-aksi"><a class="btn btn-utama btn-kecil" href="<?= e(url($h, ['barang' => $u['id'], 'tahun' => $tahun])) ?>">Buka</a></td></tr>
+            <td class="kolom-aksi"><a class="btn btn-utama btn-kecil" href="<?= e(url($h, ['barang' => $u['id'], 'tahun' => $tahun])) ?>"><?= ikon('sunting', 14) ?> Isi / Ubah</a></td></tr>
         <?php endforeach; ?>
         </tbody></table></div>
       <?php endif; ?>
@@ -842,6 +901,7 @@ $kunciBulan = (string) $bulan;
             <td class="kecil"><?= e($b['remaks'] ?: '-') ?></td><td class="kecil"><?= e($b['oleh']['nama'] ?? '-') ?></td>
             <td><?= !empty($b['kontrol']) ? lencana('Diparaf', 'hijau') : lencana('Belum', 'abu') ?></td>
             <td class="kolom-aksi"><?php if ($pengelola || ((int) ($b['oleh']['id'] ?? 0) === $saya && empty($b['kontrol']))): ?>
+              <button class="btn btn-hantu btn-ikon" type="button" title="Ubah" data-buka="tiraiUbahBaris" data-judul="Ubah pemeriksaan" data-isi='<?= e(json_encode(['baris' => $b['id'], 'tgl' => $b['tgl'], 'deskripsi' => $b['deskripsi'], 'arus' => $b['arus'], 'tegangan' => $b['tegangan'], 'tekanan' => $b['tekanan'], 'remaks' => $b['remaks']])) ?>'><?= ikon('sunting', 15) ?></button>
               <form method="post" data-konfirmasi="Hapus baris pemeriksaan ini?"><?= csrf_field() ?><input type="hidden" name="op" value="hapus"><input type="hidden" name="barang" value="<?= $barangId ?>"><input type="hidden" name="tahun" value="<?= $tahun ?>"><input type="hidden" name="baris" value="<?= e($b['id']) ?>">
                 <button class="btn btn-hantu btn-ikon" type="submit" title="Hapus"><?= ikon('hapus', 15) ?></button></form><?php endif; ?></td></tr>
         <?php endforeach; ?>
@@ -861,6 +921,21 @@ $kunciBulan = (string) $bulan;
         <div class="form-baris"><label class="fl" for="kkRem">Remaks</label><input type="text" id="kkRem" name="remaks" maxlength="300" placeholder="Kondisi / catatan hasil pemeriksaan"></div>
         <button class="btn btn-utama" type="submit"><?= ikon('tambah', 15) ?> Simpan pemeriksaan</button>
       </form>
+      <div class="tirai" id="tiraiUbahBaris" hidden><div class="modal"><form method="post">
+        <?= csrf_field() ?><input type="hidden" name="op" value="ubah_baris"><input type="hidden" name="barang" value="<?= $barangId ?>"><input type="hidden" name="tahun" value="<?= $tahun ?>"><input type="hidden" name="baris" value="">
+        <div class="modal-kepala"><h2>Ubah pemeriksaan</h2><button type="button" class="tutup" data-tutup aria-label="Tutup"><?= ikon('tutup', 16) ?></button></div>
+        <div class="modal-isi">
+          <div class="form-grid-3">
+            <div class="form-baris"><label class="fl" for="ubTgl">Tanggal <span class="wajib">*</span></label><input type="date" id="ubTgl" name="tgl" required min="<?= $tahun ?>-01-01" max="<?= $tahun ?>-12-31"></div>
+            <div class="form-baris" style="grid-column:span 2"><label class="fl" for="ubDesk">Description <span class="wajib">*</span></label><input type="text" id="ubDesk" name="deskripsi" maxlength="200" required></div>
+            <div class="form-baris"><label class="fl" for="ubArus">Arus (Ampere)</label><input type="text" id="ubArus" name="arus" maxlength="30"></div>
+            <div class="form-baris"><label class="fl" for="ubTeg">Tegangan (Volt)</label><input type="text" id="ubTeg" name="tegangan" maxlength="30"></div>
+            <div class="form-baris"><label class="fl" for="ubTek">Tekanan (psi)</label><input type="text" id="ubTek" name="tekanan" maxlength="30"></div>
+          </div>
+          <div class="form-baris"><label class="fl" for="ubRem">Remaks</label><input type="text" id="ubRem" name="remaks" maxlength="300"></div>
+        </div>
+        <div class="modal-kaki"><button type="button" class="btn btn-garis" data-tutup>Batal</button><button type="submit" class="btn btn-utama"><?= ikon('simpan', 15) ?> Simpan</button></div>
+      </form></div></div>
     </div>
   <?php endif; ?>
 
@@ -881,7 +956,7 @@ $kunciBulan = (string) $bulan;
             <td class="tengah"><?= $tot ?></td><td class="tengah"><?= $n === 0 ? '<span class="lemah">-</span>' : lencana($n . '/' . max($tot, $n), $n >= $tot ? 'hijau' : 'emas') ?></td>
             <td class="kecil"><?= $terakhir ? e($terakhir['nama']) . '<div class="lemah">' . e(kk_waktu($terakhir)) . '</div>' : '<span class="lemah">-</span>' ?></td>
             <td><?= !empty($d['kontrol'][$kunciBulan]) ? lencana('Diparaf', 'hijau') : lencana('Belum', 'abu') ?></td>
-            <td class="kolom-aksi"><a class="btn btn-utama btn-kecil" href="<?= e(url($h, ['ruang' => $r['id'], 'bulan' => $bulan, 'tahun' => $tahun])) ?>">Buka</a></td></tr>
+            <td class="kolom-aksi"><a class="btn btn-utama btn-kecil" href="<?= e(url($h, ['ruang' => $r['id'], 'bulan' => $bulan, 'tahun' => $tahun])) ?>"><?= ikon('sunting', 14) ?> Isi / Ubah</a></td></tr>
         <?php endforeach; ?>
         </tbody></table></div>
       <?php endif; ?>

@@ -11,14 +11,13 @@ if (!tanggal_sah($dari)) $dari = $periode['mulai'];
 if (!tanggal_sah($sampai)) $sampai = $periode['selesai'];
 if ($dari > $sampai) [$dari, $sampai] = [$sampai, $dari];
 $twLap = (int) ($_GET['tw'] ?? 0);
-if ($twLap >= 1 && $twLap <= 4) {
-    [$dari, $sampai] = tw_rentang($periode, $twLap);
-} else {
-    $twLap = 0;
+if ($twLap < 1 || $twLap > 4) {
+    $twLap = isset($_GET['dari']) && tanggal_sah((string) $_GET['dari']) ? tw_dari_tanggal($periode, (string) $_GET['dari']) : tw_berjalan($periode);
 }
+[$dari, $sampai] = tw_rentang($periode, $twLap);
 $pilihTw = static function () use ($twLap, $periode): string {
     $h = '<div class="form-baris"><label class="fl">Triwulan</label><select name="tw" data-pilih-tw>'
-       . '<option value="">Sepanjang periode / tanggal bebas</option>';
+       . '';
     for ($t = 1; $t <= 4; $t++) {
         $h .= '<option value="' . $t . '"' . ($twLap === $t ? ' selected' : '') . '>' . e(tw_label($periode, $t)) . '</option>';
     }
@@ -68,8 +67,6 @@ if ($pegawaiId) {
       <form method="get" class="saring" style="margin:0">
         <input type="hidden" name="h" value="laporan"><input type="hidden" name="p" value="<?= $pegawaiId ?>">
         <?= $pilihTw() ?>
-        <div class="form-baris"><label class="fl">Dari</label><input type="date" name="dari" value="<?= e($dari) ?>"></div>
-        <div class="form-baris"><label class="fl">Sampai</label><input type="date" name="sampai" value="<?= e($sampai) ?>"></div>
         <button class="btn btn-garis" type="submit"><?= ikon('filter', 15) ?> Terapkan</button>
       </form>
       <div style="margin-left:auto;display:flex;gap:8px">
@@ -98,8 +95,8 @@ if ($pegawaiId) {
             <dt>Jumlah kegiatan</dt><dd><?= $ring['total'] ?> (rutin <?= $ring['rutin'] ?>, panitia <?= $ring['panitia'] ?>, insidental <?= $ring['insidental'] ?>)</dd>
             <dt>Terverifikasi</dt><dd><?= $ring['disetujui'] ?> kegiatan</dd>
             <dt>Jam kerja tercatat</dt><dd><?= angka_ringkas($ring['jam'], 1) ?> jam</dd>
-            <?php $tjP = target_jam_kerja($dari, $sampai); $kjP = keterangan_jam_kerja((float) $ring['jam'], (float) $tjP['jam']); ?>
-            <dt>Target jam kerja</dt><dd><?= $tjP['jam'] > 0 ? angka($tjP['jam']) . ' jam (' . $tjP['bulan'] . ' bulan x ' . JAM_KERJA_BULANAN . ' jam)' : '-' ?></dd>
+            <?php $tjP = target_jam_kerja($dari, $sampai); $kjP = !empty($capaian['dikosongkan']) ? keterangan_jam_kerja(0.0, 0.0) : keterangan_jam_kerja((float) ($capaian['jam_diakui'] ?? 0), (float) $tjP['jam']); ?>
+            <dt>Target jam kerja</dt><dd><?= $tjP['jam'] > 0 ? angka($tjP['jam']) . ' jam (' . JAM_KERJA_HARIAN . ' jam x ' . HARI_KERJA_SEPEKAN . ' hari x ' . PEKAN_SEBULAN . ' minggu x ' . $tjP['bulan'] . ' bulan)' : '-' ?></dd>
             <dt>Ketercapaian jam</dt><dd><?= $kjP['persen'] === null ? '-' : angka($kjP['persen'], 1) . '% · ' . lencana($kjP['label'], $kjP['warna']) ?></dd>
             <dt>Nilai tahunan</dt><dd><?= $tahunan === null ? 'Belum ada TW final' : angka($tahunan, 2) . ' (' . e(predikat_nilai($tahunan)['label']) . ')' ?></dd>
           </dl>
@@ -205,7 +202,7 @@ foreach ($pegawai as $p) {
         'r' => $ring[$id],
         'hari' => $cap['hari_tercatat'],
         'hari_kerja' => $cap['hari_kerja'],
-        'ket_jam' => keterangan_jam_kerja((float) $ring[$id]['jam'], (float) $targetJam['jam']),
+        'ket_jam' => !empty($cap['dikosongkan']) ? keterangan_jam_kerja(0.0, 0.0) : keterangan_jam_kerja((float) ($cap['jam_diakui'] ?? 0), (float) $targetJam['jam']),
         'capaian' => $cap['persen'],
         'kosong' => !empty($cap['dikosongkan']),
         'cap_final' => !empty($cap['final']),
@@ -222,7 +219,7 @@ if (($_GET['unduh'] ?? '') === 'csv') {
     $f = fopen('php://output', 'w');
     fwrite($f, "\xEF\xBB\xBF");
     fputcsv($f, ['Nama', 'Jabatan', 'Unit', 'Rutin', 'Kepanitiaan', 'Insidental', 'Jum. Kegiatan', 'Terverifikasi', 'Jum. Jam kerja',
-                 'Target jam (' . JAM_KERJA_BULANAN . ' jam/bulan)', 'Ketercapaian jam (%)', 'Keterangan jam', 'Capaian pencatatan (%)', 'Nilai TW1', 'Nilai TW2', 'Nilai TW3', 'Nilai TW4',
+                 'Target jam (' . JAM_KERJA_HARIAN . ' jam x ' . HARI_KERJA_SEPEKAN . ' hari x ' . PEKAN_SEBULAN . ' minggu x ' . $targetJam['bulan'] . ' bulan)', 'Ketercapaian jam (%)', 'Keterangan jam', 'Capaian pencatatan (%)', 'Nilai TW1', 'Nilai TW2', 'Nilai TW3', 'Nilai TW4',
                  $twLap ? 'Nilai TW' . $twLap : 'Nilai tahunan', 'Predikat'], ';');
     foreach ($data as $d) {
         $baris = [$d['nama'], $d['jabatan'], $d['unit_nama'], $d['r']['rutin'], $d['r']['panitia'], $d['r']['insidental'],
@@ -255,8 +252,6 @@ $subjudul = tanggal_id($dari) . ' s.d. ' . tanggal_id($sampai);
   <div class="form-baris"><label class="fl">Unit</label>
     <select name="unit"><?= opsi_unit($unitFilter, 'Semua unit') ?></select></div>
   <?= $pilihTw() ?>
-  <div class="form-baris"><label class="fl">Dari</label><input type="date" name="dari" value="<?= e($dari) ?>"></div>
-  <div class="form-baris"><label class="fl">Sampai</label><input type="date" name="sampai" value="<?= e($sampai) ?>"></div>
   <button class="btn btn-garis" type="submit"><?= ikon('filter', 15) ?> Terapkan</button>
   <div style="margin-left:auto;display:flex;gap:8px">
     <a class="btn btn-garis" href="<?= e(url('laporan', ['unit' => $unitFilter ?: null, 'tw' => $twLap ?: null, 'dari' => $twLap ? null : $dari, 'sampai' => $twLap ? null : $sampai, 'unduh' => 'csv'])) ?>"><?= ikon('unduh', 15) ?> Unduh CSV</a>
@@ -321,7 +316,7 @@ $subjudul = tanggal_id($dari) . ' s.d. ' . tanggal_id($sampai);
   <div class="kartu-kepala"><h2><?= ikon('rekap', 18) ?> Rekapitulasi kinerja pegawai</h2></div>
   <div class="tabel-bungkus"><table class="tabel tabel-rekap-tengah">
     <thead><tr><th class="kolom-no">No</th><th>Pegawai</th><th class="angka">Rutin</th><th class="angka">Kepanitiaan</th><th class="angka">Insidental</th><th class="angka">Jum. Kegiatan</th>
-      <th class="angka">Jum. Jam kerja</th><th class="angka" title="<?= JAM_KERJA_HARIAN ?> jam x <?= HARI_KERJA_SEPEKAN ?> hari x <?= PEKAN_SEBULAN ?> minggu = <?= JAM_KERJA_BULANAN ?> jam per bulan">Target jam<span class="sub-judul"><?= JAM_KERJA_BULANAN ?> jam/bulan</span></th><th style="min-width:120px">Capaian</th>
+      <th class="angka">Jum. Jam kerja</th><th class="angka" title="<?= JAM_KERJA_HARIAN ?> jam per hari x <?= HARI_KERJA_SEPEKAN ?> hari kerja (Senin-Jumat) x <?= PEKAN_SEBULAN ?> minggu x <?= $targetJam['bulan'] ?> bulan dalam satu triwulan">Target jam<span class="sub-judul"><?= JAM_KERJA_HARIAN ?> jam x <?= HARI_KERJA_SEPEKAN ?> hari x <?= PEKAN_SEBULAN ?> mgg x <?= $targetJam['bulan'] ?> bln</span></th><th style="min-width:120px">Capaian</th>
       <th class="tengah">TW1</th><th class="tengah">TW2</th><th class="tengah">TW3</th><th class="tengah">TW4</th>
       <th class="angka"><?= $twLap ? 'Nilai TW' . $twLap : 'Nilai tahunan' ?></th><th>Predikat</th><th class="no-cetak kolom-aksi">Aksi</th></tr></thead>
     <tbody>

@@ -89,15 +89,67 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         catat_log('kembali_aset', 'aset_mutasi', $mid, $kondisi);
         flash('Pengembalian dicatat' . ($kondisi !== 'baik' ? '. Kondisi barang diperbarui menjadi ' . strtolower(ASET_KONDISI[$kondisi]['label']) . '.' : '.'));
         kembali_ke('aset_mutasi', ['tampil' => 'pinjam']);
-    } elseif ($op === 'hapus') {
-        $m = row('SELECT * FROM aset_mutasi WHERE id = ?', [$mid]);
-        if (!$m || $m['jenis'] === 'pindah') {
-            flash('Riwayat pemindahan tidak dapat dihapus.', 'warn');
+    } elseif ($op === 'ubah_pinjam') {
+        $m = row("SELECT * FROM aset_mutasi WHERE id = ? AND jenis = 'pinjam'", [$mid]);
+        if (!$m) {
+            flash('Catatan peminjaman tidak ditemukan.', 'warn');
+            kembali_ke('aset_mutasi', ['tampil' => 'pinjam']);
+        }
+        $data = [
+            'peminjam'      => mb_substr(post('peminjam'), 0, 150),
+            'unit_peminjam' => mb_substr(post('unit_peminjam'), 0, 150),
+            'keterangan'    => mb_substr(post_teks('keterangan'), 0, 3000),
+        ];
+        $galat = [];
+        if ($data['peminjam'] === '') {
+            $galat[] = 'Nama peminjam wajib diisi.';
+        }
+        if ($m['status'] === 'dipinjam') {
+            $tgl = post('tanggal');
+            $kembali = aset_tanggal_sah_atau_null(post('rencana_kembali'));
+            $jml = max(1, (int) post('jumlah', '1'));
+            $brg = row('SELECT jumlah, satuan FROM aset_barang WHERE id = ?', [$m['barang_id']]);
+            $lain = (int) val("SELECT COALESCE(SUM(jumlah), 0) FROM aset_mutasi WHERE jenis = 'pinjam' AND status = 'dipinjam' AND barang_id = ? AND id <> ?", [$m['barang_id'], $mid], 0);
+            if ($brg && $jml > (int) $brg['jumlah'] - $lain) {
+                $galat[] = 'Jumlah melebihi yang tersedia (' . ((int) $brg['jumlah'] - $lain) . ' ' . $brg['satuan'] . ').';
+            }
+            if (!tanggal_sah($tgl)) {
+                $galat[] = 'Tanggal pinjam tidak sah.';
+            } elseif ($kembali && $kembali < $tgl) {
+                $galat[] = 'Rencana kembali tidak boleh sebelum tanggal pinjam.';
+            }
+            $data += ['jumlah' => $jml, 'tanggal' => $tgl, 'rencana_kembali' => $kembali];
+        }
+        if ($galat) {
+            flash(implode('<br>', array_map('e', $galat)), 'galat');
         } else {
-            q('DELETE FROM aset_mutasi WHERE id = ?', [$mid]);
-            flash('Catatan peminjaman dihapus.');
+            update('aset_mutasi', $data, 'id = ?', [$mid]);
+            catat_log('ubah_pinjam_aset', 'aset_mutasi', $mid, $data['peminjam']);
+            flash('Catatan peminjaman diperbarui.');
         }
         kembali_ke('aset_mutasi', ['tampil' => 'pinjam']);
+    } elseif ($op === 'ubah_pindah') {
+        $m = row("SELECT * FROM aset_mutasi WHERE id = ? AND jenis = 'pindah'", [$mid]);
+        $tgl = post('tanggal');
+        if (!$m) {
+            flash('Riwayat pemindahan tidak ditemukan.', 'warn');
+        } elseif (!tanggal_sah($tgl)) {
+            flash('Tanggal pemindahan tidak sah.', 'galat');
+        } else {
+            update('aset_mutasi', ['tanggal' => $tgl, 'keterangan' => mb_substr(post_teks('keterangan'), 0, 3000)], 'id = ?', [$mid]);
+            catat_log('ubah_pindah_aset', 'aset_mutasi', $mid, '');
+            flash('Riwayat pemindahan diperbarui.');
+        }
+        kembali_ke('aset_mutasi', ['tampil' => 'pindah']);
+    } elseif ($op === 'hapus') {
+        $m = row('SELECT * FROM aset_mutasi WHERE id = ?', [$mid]);
+        if (!$m) {
+            flash('Catatan tidak ditemukan.', 'warn');
+            kembali_ke('aset_mutasi');
+        }
+        q('DELETE FROM aset_mutasi WHERE id = ?', [$mid]);
+        flash($m['jenis'] === 'pindah' ? 'Riwayat pemindahan dihapus. Lokasi barang saat ini tidak berubah.' : 'Catatan peminjaman dihapus.');
+        kembali_ke('aset_mutasi', ['tampil' => $m['jenis'] === 'pindah' ? 'pindah' : 'pinjam']);
     }
     tolak_akses();
 }
@@ -155,14 +207,19 @@ $penginput = aset_penginput('aset_mutasi', $daftar);
   <?php if (!$daftar): ?><?= sel_kosong($tampil === 'pinjam' ? 'Belum ada peminjaman' : 'Belum ada pemindahan') ?>
   <?php elseif ($tampil === 'pindah'): ?>
   <div class="tabel-bungkus"><table class="tabel">
-    <thead><tr><th>Tanggal</th><th>Barang</th><th>Dari</th><th>Ke</th><th>Keterangan</th><th>Diinput oleh</th></tr></thead>
+    <thead><tr><th>Tanggal</th><th>Barang</th><th>Dari</th><th>Ke</th><th>Keterangan</th><th>Diinput oleh</th><th class="no-cetak kolom-aksi">Aksi</th></tr></thead>
     <tbody>
     <?php foreach ($daftar as $m): ?>
       <tr><td class="nowrap"><?= e(tanggal_pendek($m['tanggal'])) ?></td>
         <td><a href="<?= e(url('aset_barang', ['aksi' => 'lihat', 'id' => $m['barang_id']])) ?>"><b><?= e($m['barang_nama']) ?></b></a><div class="kecil lemah"><code><?= e($m['barang_kode']) ?></code></div></td>
         <td><?= e($m['dari_nama'] ?: '-') ?></td><td><?= e($m['ke_nama'] ?: '-') ?></td>
         <td class="kecil"><?= e($m['keterangan'] ?: '-') ?></td>
-        <td><?= aset_sel_penginput($penginput[(int) $m['id']] ?? null) ?></td></tr>
+        <td><?= aset_sel_penginput($penginput[(int) $m['id']] ?? null) ?></td>
+        <td class="no-cetak"><div class="aksi-baris">
+          <button class="btn btn-hantu btn-ikon" type="button" title="Ubah" data-buka="tiraiUbahPindah" data-judul="Ubah riwayat pemindahan" data-isi='<?= e(json_encode(['id' => (int) $m['id'], 'tanggal' => $m['tanggal'], 'keterangan' => $m['keterangan']])) ?>'><?= ikon('sunting', 15) ?></button>
+          <form method="post" data-konfirmasi="Hapus riwayat pemindahan ini? Lokasi barang saat ini tidak akan berubah."><?= csrf_field() ?><input type="hidden" name="op" value="hapus"><input type="hidden" name="id" value="<?= (int) $m['id'] ?>">
+            <button class="btn btn-hantu btn-ikon" type="submit" title="Hapus"><?= ikon('hapus', 15) ?></button></form>
+        </div></td></tr>
     <?php endforeach; ?>
     </tbody></table></div>
   <?php else: ?>
@@ -179,6 +236,7 @@ $penginput = aset_penginput('aset_mutasi', $daftar);
             <?php else: ?><?= $telat ? lencana('Terlambat', 'merah') : lencana('Dipinjam', 'biru') ?><?php endif; ?></td>
         <td><?= aset_sel_penginput($penginput[(int) $m['id']] ?? null) ?></td>
         <td class="no-cetak"><div class="aksi-baris">
+          <button class="btn btn-hantu btn-ikon" type="button" title="Ubah" data-buka="tiraiUbahPinjam" data-judul="Ubah catatan peminjaman" data-isi='<?= e(json_encode(['id' => (int) $m['id'], 'jumlah' => (string) (int) $m['jumlah'], 'tanggal' => $m['tanggal'], 'peminjam' => $m['peminjam'], 'unit_peminjam' => $m['unit_peminjam'], 'rencana_kembali' => $m['rencana_kembali'] ?? '', 'keterangan' => $m['keterangan'], 'terkunci' => $m['status'] === 'dipinjam' ? '0' : '1'])) ?>'><?= ikon('sunting', 15) ?></button>
           <?php if ($m['status'] === 'dipinjam'): ?>
             <button class="btn btn-garis btn-kecil" type="button" data-buka="tiraiKembali" data-judul="Pengembalian barang" data-isi='<?= e(json_encode(['id' => (int) $m['id'], 'tanggal_kembali' => $sekarang, 'kondisi_kembali' => 'baik', 'keterangan' => $m['keterangan']])) ?>'>Dikembalikan</button>
           <?php endif; ?>
@@ -215,6 +273,34 @@ $penginput = aset_penginput('aset_mutasi', $daftar);
       <div class="form-baris"><label class="fl" for="pjKembali">Rencana kembali</label><input type="date" id="pjKembali" name="rencana_kembali"></div>
     </div>
     <div class="form-baris"><label class="fl" for="pjKet">Keperluan / keterangan</label><textarea id="pjKet" name="keterangan" rows="2" maxlength="3000"></textarea></div>
+  </div>
+  <div class="modal-kaki"><button type="button" class="btn btn-garis" data-tutup>Batal</button><button type="submit" class="btn btn-utama"><?= ikon('simpan', 15) ?> Simpan</button></div>
+</form></div></div>
+
+<div class="tirai" id="tiraiUbahPinjam" hidden><div class="modal"><form method="post">
+  <?= csrf_field() ?><input type="hidden" name="op" value="ubah_pinjam"><input type="hidden" name="id" value="">
+  <div class="modal-kepala"><h2>Ubah catatan peminjaman</h2><button type="button" class="tutup" data-tutup aria-label="Tutup"><?= ikon('tutup', 16) ?></button></div>
+  <div class="modal-isi">
+    <div class="form-grid">
+      <div class="form-baris"><label class="fl" for="upJml">Jumlah</label><input type="number" id="upJml" name="jumlah" min="1" value="1"></div>
+      <div class="form-baris"><label class="fl" for="upTgl">Tanggal pinjam</label><input type="date" id="upTgl" name="tanggal" required></div>
+      <div class="form-baris"><label class="fl" for="upNama">Peminjam <span class="wajib">*</span></label><input type="text" id="upNama" name="peminjam" maxlength="150" required></div>
+      <div class="form-baris"><label class="fl" for="upUnit">Unit / bagian</label><input type="text" id="upUnit" name="unit_peminjam" maxlength="150"></div>
+      <div class="form-baris"><label class="fl" for="upKembali">Rencana kembali</label><input type="date" id="upKembali" name="rencana_kembali"></div>
+    </div>
+    <div class="form-baris"><label class="fl" for="upKet">Keperluan / keterangan</label><textarea id="upKet" name="keterangan" rows="2" maxlength="3000"></textarea></div>
+    <p class="kecil lemah">Jumlah, tanggal, dan rencana kembali hanya tersimpan selama barang masih dipinjam.</p>
+  </div>
+  <div class="modal-kaki"><button type="button" class="btn btn-garis" data-tutup>Batal</button><button type="submit" class="btn btn-utama"><?= ikon('simpan', 15) ?> Simpan</button></div>
+</form></div></div>
+
+<div class="tirai" id="tiraiUbahPindah" hidden><div class="modal sempit"><form method="post">
+  <?= csrf_field() ?><input type="hidden" name="op" value="ubah_pindah"><input type="hidden" name="id" value="">
+  <div class="modal-kepala"><h2>Ubah riwayat pemindahan</h2><button type="button" class="tutup" data-tutup aria-label="Tutup"><?= ikon('tutup', 16) ?></button></div>
+  <div class="modal-isi">
+    <div class="form-baris"><label class="fl" for="upnTgl">Tanggal</label><input type="date" id="upnTgl" name="tanggal" required></div>
+    <div class="form-baris"><label class="fl" for="upnKet">Keterangan</label><textarea id="upnKet" name="keterangan" rows="2" maxlength="3000"></textarea></div>
+    <p class="kecil lemah">Ruangan asal dan tujuan tidak dapat diubah. Untuk memindahkan lagi, gunakan Pindahkan barang.</p>
   </div>
   <div class="modal-kaki"><button type="button" class="btn btn-garis" data-tutup>Batal</button><button type="submit" class="btn btn-utama"><?= ikon('simpan', 15) ?> Simpan</button></div>
 </form></div></div>

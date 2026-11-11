@@ -372,21 +372,53 @@ function hapus_foto_kegiatan(int $kegiatanId): void
     peta_foto_kegiatan(true);
 }
 
-function pasang_foto_kegiatan(string $sementara, int $kegiatanId): void
+const FOTO_KEGIATAN_MAKS = 3;
+const FOTO_KEGIATAN_MAKS_BYTE = 52428800;
+
+function foto_kegiatan_semua(int $kegiatanId): array
+{
+    $hasil = [];
+    foreach (@glob(APP_ROOT . '/uploads/kegiatan/k' . $kegiatanId . '-*') ?: [] as $jalur) {
+        if (foto_kegiatan_sah(basename($jalur))) {
+            $hasil[] = basename($jalur);
+        }
+    }
+    sort($hasil);
+    return $hasil;
+}
+
+function pasang_foto_kegiatan(array $sementara, int $kegiatanId, array $hapus = []): void
 {
     $dir = APP_ROOT . '/uploads/kegiatan';
-    if (!preg_match('/^s\d+-[a-f0-9]{16}\.(jpg|png|webp)$/', $sementara, $m) || !is_file($dir . '/' . $sementara)) {
-        return;
+    $ada = foto_kegiatan_semua($kegiatanId);
+    foreach ($hapus as $nama) {
+        if (in_array($nama, $ada, true)) {
+            @unlink($dir . '/' . $nama);
+        }
     }
-    hapus_foto_kegiatan($kegiatanId);
-    @rename($dir . '/' . $sementara, $dir . '/k' . $kegiatanId . '-' . bin2hex(random_bytes(8)) . '.' . $m[1]);
+    $sisa = foto_kegiatan_semua($kegiatanId);
+    foreach ($sementara as $s) {
+        if (!is_string($s) || !preg_match('/^s\d+-[a-f0-9]{16}\.(jpg|png|webp)$/', $s, $m) || !is_file($dir . '/' . $s)) {
+            continue;
+        }
+        if (count($sisa) >= FOTO_KEGIATAN_MAKS) {
+            @unlink($dir . '/' . $s);
+            continue;
+        }
+        $baru = 'k' . $kegiatanId . '-' . bin2hex(random_bytes(8)) . '.' . $m[1];
+        if (@rename($dir . '/' . $s, $dir . '/' . $baru)) {
+            $sisa[] = $baru;
+        }
+    }
     peta_foto_kegiatan(true);
 }
 
-function buang_foto_sementara(?string $sementara): void
+function buang_foto_sementara($sementara): void
 {
-    if ($sementara !== null && preg_match('/^s\d+-[a-f0-9]{16}\.(jpg|png|webp)$/', $sementara)) {
-        @unlink(APP_ROOT . '/uploads/kegiatan/' . $sementara);
+    foreach ((array) $sementara as $s) {
+        if (is_string($s) && preg_match('/^s\d+-[a-f0-9]{16}\.(jpg|png|webp)$/', $s)) {
+            @unlink(APP_ROOT . '/uploads/kegiatan/' . $s);
+        }
     }
 }
 
@@ -400,7 +432,7 @@ function unggah_foto_kegiatan(array $berkas, int $penggunaId): array
         return ['galat' => $kode === UPLOAD_ERR_INI_SIZE || $kode === UPLOAD_ERR_FORM_SIZE
             ? 'Ukuran foto bukti terlalu besar.' : 'Foto bukti gagal diunggah. Silakan coba lagi.'];
     }
-    $cek = validasi_foto($berkas['tmp_name'], (int) $berkas['size']);
+    $cek = validasi_foto($berkas['tmp_name'], (int) $berkas['size'], FOTO_KEGIATAN_MAKS_BYTE);
     if (isset($cek['galat'])) {
         return ['galat' => 'Foto bukti: ' . $cek['galat']];
     }
@@ -415,20 +447,60 @@ function unggah_foto_kegiatan(array $berkas, int $penggunaId): array
     return ['file' => $nama];
 }
 
-function medan_foto_kegiatan(?string $fotoLama): string
+function unggah_foto_kegiatan_banyak(array $berkas, int $penggunaId, int $kuota): array
 {
-    $h = '<div class="form-baris foto-bukti" data-foto-bukti><label class="fl">Foto bukti kegiatan</label>'
-       . '<div class="foto-bukti-tombol">'
-       . '<label class="btn btn-garis btn-kecil foto-kamera"><input type="file" name="foto_kamera" accept="image/*" capture="environment" hidden>' . ikon('kamera', 15) . ' Ambil foto</label>'
-       . '<label class="btn btn-garis btn-kecil"><input type="file" name="foto_galeri" accept="image/jpeg,image/png,image/webp" hidden>' . ikon('gambar', 15) . ' Pilih dari galeri</label>'
-       . '</div>'
-       . '<div class="foto-bukti-pratinjau" hidden><img alt="Pratinjau foto bukti"><button type="button" class="btn btn-hantu btn-kecil" data-foto-batal>' . ikon('tutup', 14) . ' Batalkan</button></div>';
-    if (foto_kegiatan_sah($fotoLama)) {
-        $url = url_berkas('kegiatan', (string) $fotoLama);
-        $h .= '<div class="foto-bukti-lama"><a href="' . e($url) . '" target="_blank" rel="noopener"><img src="' . e($url) . '" alt="Foto bukti tersimpan"></a>'
-            . '<label class="cek"><input type="checkbox" name="hapus_foto" value="1"> Hapus foto ini</label></div>';
+    $files = [];
+    if (!isset($berkas['name']) || !is_array($berkas['name'])) {
+        return ['files' => $files];
     }
-    return $h . '<small class="lemah">JPG, PNG, atau WEBP. Foto otomatis diperkecil sebelum dikirim.</small></div>';
+    foreach (array_keys($berkas['name']) as $i) {
+        if (($berkas['error'][$i] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
+            continue;
+        }
+        if (count($files) >= $kuota) {
+            break;
+        }
+        $satu = ['name' => $berkas['name'][$i] ?? '', 'tmp_name' => $berkas['tmp_name'][$i] ?? '', 'error' => $berkas['error'][$i] ?? UPLOAD_ERR_NO_FILE, 'size' => $berkas['size'][$i] ?? 0];
+        $h = unggah_foto_kegiatan($satu, $penggunaId);
+        if (isset($h['galat'])) {
+            buang_foto_sementara($files);
+            return ['galat' => $h['galat']];
+        }
+        if (isset($h['file'])) {
+            $files[] = $h['file'];
+        }
+    }
+    return ['files' => $files];
+}
+
+function tautan_foto_kegiatan(int $kegiatanId): string
+{
+    $semua = foto_kegiatan_semua($kegiatanId);
+    $h = '';
+    foreach ($semua as $i => $nama) {
+        $label = count($semua) > 1 ? 'Foto ' . ($i + 1) : 'Foto bukti';
+        $h .= '<span class="sub"><a href="' . e(url_berkas('kegiatan', $nama)) . '" target="_blank" rel="noopener">' . ikon('kamera', 13) . ' ' . $label . '</a></span>';
+    }
+    return $h;
+}
+function medan_foto_kegiatan(?int $kegiatanId): string
+{
+    $lama = $kegiatanId ? foto_kegiatan_semua($kegiatanId) : [];
+    $h = '<div class="form-baris foto-bukti" data-foto-bukti data-maks="' . FOTO_KEGIATAN_MAKS . '"><label class="fl">Foto bukti kegiatan <span class="foto-hitung" data-foto-hitung></span></label>'
+       . '<div class="foto-bukti-tombol">'
+       . '<button type="button" class="btn btn-garis btn-kecil" data-foto-kamera>' . ikon('kamera', 15) . ' Ambil foto</button>'
+       . '<label class="btn btn-garis btn-kecil"><input type="file" data-foto-galeri accept="image/jpeg,image/png,image/webp" multiple hidden>' . ikon('gambar', 15) . ' Pilih dari galeri</label>'
+       . '<input type="file" data-foto-kamera-hp accept="image/*" capture="environment" hidden>'
+       . '<input type="file" name="foto_unggah[]" data-foto-keluar multiple hidden>'
+       . '</div>'
+       . '<div class="foto-bukti-daftar" data-foto-daftar>';
+    foreach ($lama as $nama) {
+        $url = url_berkas('kegiatan', $nama);
+        $h .= '<div class="foto-mini lama"><a href="' . e($url) . '" target="_blank" rel="noopener"><img src="' . e($url) . '" alt="Foto bukti tersimpan"></a>'
+            . '<label class="cek"><input type="checkbox" name="hapus_foto[]" value="' . e($nama) . '"> Hapus</label></div>';
+    }
+    return $h . '</div><small class="lemah foto-galat" data-foto-galat hidden></small>'
+        . '<small class="lemah">Maksimal ' . FOTO_KEGIATAN_MAKS . ' foto dari kamera atau unggahan, tiap foto hingga 50 MB (JPG, PNG, atau WEBP). Foto otomatis diperkecil sebelum dikirim.</small></div>';
 }
 
 function url_berkas(string $jenis, string $nama): string
@@ -488,12 +560,29 @@ function kirim_berkas_unggahan(string $jenis, string $nama): void
     while (ob_get_level() > 0) {
         ob_end_clean();
     }
+    @ini_set('zlib.output_compression', '0');
+    @ini_set('output_buffering', '0');
+    if (function_exists('apache_setenv')) {
+        @apache_setenv('no-gzip', '1');
+    }
+    header_remove('Content-Encoding');
+    header_remove('Content-Length');
     header('Content-Type: ' . $mime);
     header('Content-Length: ' . filesize($jalur));
     header('Content-Disposition: ' . ($unduh ? 'attachment' : 'inline') . '; filename="' . $nama . '"');
     header('Cache-Control: private, max-age=3600');
     header('X-Content-Type-Options: nosniff');
-    readfile($jalur);
+    header('Content-Encoding: identity');
+    $h = @fopen($jalur, 'rb');
+    if ($h) {
+        while (!feof($h)) {
+            echo fread($h, 65536);
+            flush();
+        }
+        fclose($h);
+    } else {
+        readfile($jalur);
+    }
     exit;
 }
 

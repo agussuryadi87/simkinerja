@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMidYMax meet">
+  <path d="M100 4 C118 38 148 66 166 116 C178 150 170 180 152 194 L48 194 C30 180 22 150 34 116 C52 66 82 38 100 4 Z" fill="#1c0f06" fill-opacity=".62" stroke="#e8c06a" stroke-opacity=".9" stroke-width="2.4" stroke-linejoin="round"/>
+  <g fill="none" stroke="#e8c06a" stroke-opacity=".9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M78 96 C66 82 86 70 94 84 C100 96 82 106 72 98 C64 90 74 82 82 88"/>
+    <path d="M122 96 C134 82 114 70 106 84 C100 96 118 106 128 98 C136 90 126 82 118 88"/>
+    <path d="M100 58 C90 46 106 36 110 50 C114 62 94 68 88 56"/>
+    <path d="M58 150 C46 138 62 124 72 134 C80 144 66 154 58 146"/>
+    <path d="M142 150 C154 138 138 124 128 134 C120 144 134 154 142 146"/>
+    <path d="M88 194 V166 Q100 150 112 166 V194"/>
+    <path d="M100 150 V128"/>
+    <path d="M92 178 Q100 170 108 178"/>
+    <path d="M46 112 C40 98 54 90 58 102"/>
+    <path d="M154 112 C160 98 146 90 142 102"/>
+  </g>
+</svg>

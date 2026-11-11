@@ -187,7 +187,7 @@ $ringPeriode = ringkasan_kegiatan($pid, $timIds);
     <div class="kartu"><?= sel_kosong('Belum ada anggota tim') ?></div>
   <?php else: ?>
   <div class="saring no-cetak">
-    <div class="form-baris" style="flex:1"><label class="fl" for="cariTim">Cari anggota tim</label>
+    <div class="form-baris" style="flex:0 1 340px;max-width:340px"><label class="fl" for="cariTim">Cari anggota tim</label>
       <input type="search" id="cariTim" placeholder="Ketik nama, jabatan, atau unit" autocomplete="off"></div>
     <span class="kecil lemah" id="infoCariTim" style="padding-bottom:10px"><?= count($tim) ?> anggota</span>
     <form method="get" class="pilih-bulan">
@@ -205,14 +205,19 @@ $ringPeriode = ringkasan_kegiatan($pid, $timIds);
     <a class="btn btn-garis" style="margin-bottom:2px" href="<?= e(url('pantau', ['tab' => 'verifikasi'])) ?>"><?= ikon('evaluasi', 15) ?> Menunggu verifikasi
       <?= $antre['kegiatan'] > 0 ? lencana((string) $antre['kegiatan'], 'emas') : '' ?></a>
   </div>
-  <div class="kartu">
+  <?php
+  $timCs = array_values(array_filter($tim, static function ($t) { return $t['peran_kode'] === 'cs'; }));
+  $timLain = array_values(array_filter($tim, static function ($t) { return $t['peran_kode'] !== 'cs'; }));
+  $grupTim = static function (array $anggota, string $judulGrup, string $ikonGrup) use ($bulan, $ringBulan, $ringPeriode, $namaBulan): void { ?>
+  <div class="kartu kartu-tim-grup">
+  <div class="kartu-kepala"><div><h2><?= ikon($ikonGrup, 18) ?> <?= e($judulGrup) ?></h2><p class="ket"><?= count($anggota) ?> orang</p></div></div>
   <div class="tabel-bungkus"><table class="tabel tabel-tim-tengah tabel-anggota">
     <thead>
       <tr><th rowspan="2" class="kolom-no">No</th><th rowspan="2">Pegawai</th><th colspan="2" class="grup-kolom">Bulan <?= e($namaBulan($bulan)) ?></th><th colspan="4" class="grup-kolom">Tahun kinerja berjalan</th><th rowspan="2">Verifikasi</th><th rowspan="2" class="no-cetak kolom-aksi">Aksi</th></tr>
       <tr><th class="sub-kolom">Jum. Kegiatan</th><th class="sub-kolom">Jum. Jam kerja</th><th class="sub-kolom">Total</th><th class="sub-kolom">Rutin</th><th class="sub-kolom">Kepanitiaan</th><th class="sub-kolom">Insidental</th></tr>
     </thead>
     <tbody>
-    <?php foreach ($tim as $t): $id = (int) $t['id']; $rb = $ringBulan[$id]; $rp = $ringPeriode[$id]; ?>
+    <?php foreach ($anggota as $t): $id = (int) $t['id']; $rb = $ringBulan[$id]; $rp = $ringPeriode[$id]; ?>
       <tr data-cari="<?= e(mb_strtolower($t['nama'] . ' ' . ($t['jabatan'] ?? '') . ' ' . ($t['unit_nama'] ?? '') . ' ' . ($t['peran_nama'] ?? ''))) ?>">
         <td class="kolom-no"></td>
         <td><div class="orang"><?= avatar($t['nama'], 'kecil') ?><div><b><?= e($t['nama']) ?></b>
@@ -239,6 +244,10 @@ $ringPeriode = ringkasan_kegiatan($pid, $timIds);
     </tbody>
   </table></div>
   </div>
+  <?php };
+  if ($timLain) { $grupTim($timLain, 'Pegawai', 'grup'); }
+  if ($timCs) { $grupTim($timCs, 'Petugas Cleaning Service (CS)', 'kebersihan'); }
+  ?>
   <?php endif; ?>
 
 <?php elseif ($tab === 'verifikasi'): ?>
@@ -279,7 +288,7 @@ $ringPeriode = ringkasan_kegiatan($pid, $timIds);
             <?php if ($k['kepanitiaan']): ?><span class="sub"><?= ikon('grup', 13) ?> <?= e($k['kepanitiaan']) ?></span><?php endif; ?>
             <?php if ($k['pemberi_tugas']): ?><span class="sub"><?= ikon('petir', 13) ?> <?= e($k['pemberi_tugas']) ?></span><?php endif; ?>
             <?php if ($k['hasil']): ?><span class="sub">Hasil: <?= e($k['hasil']) ?></span><?php endif; ?>
-            <?php if ($k['tautan_bukti']): ?><span class="sub"><a href="<?= e($k['tautan_bukti']) ?>" target="_blank" rel="noopener"><?= ikon('tautan', 13) ?> Bukti</a></span><?php endif; ?><?php if ($fotoK = foto_kegiatan((int) $k['id'])): ?><span class="sub"><a href="<?= e(url_berkas('kegiatan', $fotoK)) ?>" target="_blank" rel="noopener"><?= ikon('kamera', 13) ?> Foto bukti</a></span><?php endif; ?></td>
+            <?php if ($k['tautan_bukti']): ?><span class="sub"><a href="<?= e($k['tautan_bukti']) ?>" target="_blank" rel="noopener"><?= ikon('tautan', 13) ?> Bukti</a></span><?php endif; ?><?= tautan_foto_kegiatan((int) $k['id']) ?></td>
           <td><?= lencana_jenis($k['jenis']) ?></td>
           <td><?= e($k['satuan']) ?></td>
           <td><div class="aksi-baris">
@@ -363,7 +372,7 @@ $ringPeriode = ringkasan_kegiatan($pid, $timIds);
               <?php if ($k['kepanitiaan']): ?><span class="sub"><?= ikon('grup', 13) ?> <?= e($k['kepanitiaan']) ?></span><?php endif; ?>
               <?php if ($k['pemberi_tugas']): ?><span class="sub"><?= ikon('petir', 13) ?> <?= e($k['pemberi_tugas']) ?></span><?php endif; ?>
               <?php if ($k['hasil']): ?><span class="sub">Hasil: <?= e($k['hasil']) ?> (<?= e($k['satuan']) ?>)</span><?php endif; ?>
-              <?php if ($k['tautan_bukti']): ?><span class="sub"><a href="<?= e($k['tautan_bukti']) ?>" target="_blank" rel="noopener"><?= ikon('tautan', 13) ?> Bukti</a></span><?php endif; ?><?php if ($fotoK = foto_kegiatan((int) $k['id'])): ?><span class="sub"><a href="<?= e(url_berkas('kegiatan', $fotoK)) ?>" target="_blank" rel="noopener"><?= ikon('kamera', 13) ?> Foto bukti</a></span><?php endif; ?>
+              <?php if ($k['tautan_bukti']): ?><span class="sub"><a href="<?= e($k['tautan_bukti']) ?>" target="_blank" rel="noopener"><?= ikon('tautan', 13) ?> Bukti</a></span><?php endif; ?><?= tautan_foto_kegiatan((int) $k['id']) ?>
               <?php if ($k['catatan_atasan']): ?><span class="sub"><?= ikon('pesan', 13) ?> <?= e($k['catatan_atasan']) ?></span><?php endif; ?></td>
             <td><?= lencana_jenis($k['jenis']) ?></td>
             <td><?= lencana_status_kegiatan($k) ?></td>
@@ -450,6 +459,9 @@ $ringPeriode = ringkasan_kegiatan($pid, $timIds);
         if (cocok) tampil++;
       });
       info.textContent = kata === '' ? kartu.length + ' anggota' : tampil + ' dari ' + kartu.length + ' anggota';
+      Array.prototype.forEach.call(document.querySelectorAll('.kartu-tim-grup'), function (g) {
+        g.hidden = !g.querySelector('tbody tr:not([hidden])');
+      });
     });
   })();
 </script>

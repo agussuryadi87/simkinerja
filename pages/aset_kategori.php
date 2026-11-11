@@ -67,8 +67,8 @@ $daftar = rows(
     <div class="aksi no-cetak"><button class="btn btn-utama btn-kecil" type="button" data-buka="tiraiKategori" data-reset data-judul="Tambah kategori"
         data-isi='{"id":"","aktif":"1"}'><?= ikon('tambah', 15) ?> Tambah kategori</button></div>
   </div>
-  <div class="tabel-bungkus"><table class="tabel">
-    <thead><tr><th>Kode</th><th>Nama kategori</th><th class="angka">Umur ekonomis</th><th class="angka">Barang</th><th class="angka">Nilai perolehan</th><th>Status</th><th class="no-cetak kolom-aksi">Aksi</th></tr></thead>
+  <div class="tabel-bungkus"><table class="tabel tabel-kategori">
+    <thead><tr><th>Kode</th><th>Nama kategori</th><th>Umur ekonomis</th><th>Barang</th><th>Nilai perolehan</th><th>Status</th><th class="no-cetak kolom-aksi">Aksi</th></tr></thead>
     <tbody>
     <?php foreach ($daftar as $k): ?>
       <tr>
@@ -84,7 +84,7 @@ $daftar = rows(
           <?php if (!in_array($k['kode'], $dilindungi, true)): ?>
           <form method="post" data-konfirmasi="Hapus kategori <?= e($k['nama']) ?>?"><?= csrf_field() ?><input type="hidden" name="op" value="hapus"><input type="hidden" name="id" value="<?= (int) $k['id'] ?>">
             <button class="btn btn-hantu btn-ikon" type="submit" title="Hapus"><?= ikon('hapus', 15) ?></button></form>
-          <?php endif; ?>
+          <?php else: ?><span class="aksi-kosong" aria-hidden="true"></span><?php endif; ?>
         </div></td>
       </tr>
     <?php endforeach; ?>

@@ -53,8 +53,8 @@ html:where(.tema-kantor), :where(html.tema-kantor) body { color: var(--teks); ba
     linear-gradient(115deg, #6587b0 0%, #142e54 45%, #112749 100%); box-shadow: 0 12px 26px -18px rgba(14,33,61,.7); }
 :where(html.tema-kantor) .aset-bilah .sambut-latar::after { background: linear-gradient(180deg, rgba(14,32,60,.28), rgba(14,32,60,.16)); }
 :where(html.tema-kantor) .aset-bilah .sambut-latar .matahari { background: radial-gradient(circle at 80% 100%, rgba(255,214,130,.5) 0, rgba(255,214,130,0) 42%); }
-:where(html.tema-kantor) .aset-bilah .gambar { background: url("../img/aset-latar.svg") repeat-x center bottom / 640px 64px; }
-:where(html.tema-kantor) .aset-bilah .gambar.gambar-dosen { background-image: url("../img/dosen-latar.svg"); }
+:where(html.tema-kantor) .aset-bilah .gambar { background: url("../img/nusantara/gunungan.svg") repeat-x center bottom / auto 64px; }
+:where(html.tema-kantor) .aset-bilah .gambar.gambar-dosen { background-image: url("../img/nusantara/gunung.svg"); }
 :where(html.tema-kantor) .jad-bagian .tabel-bungkus { border: 1px solid var(--garis); }
 :where(html.tema-kantor) .tab-kecil a { border: 1px solid var(--garis-2); background: #fff; color: var(--teks-2); }
 :where(html.tema-kantor) .tab-kecil a:hover { border-color: var(--merek-700); color: var(--merek-800); }
@@ -149,7 +149,7 @@ html:where(.tema-kantor), :where(html.tema-kantor) body { color: var(--teks); ba
 :where(html.tema-kantor) .sambut-latar .awan { background-image: url("../img/nusantara/awan.svg"); }
 :where(html.tema-kantor) .sambut-latar .burung { background-image: url("../img/nusantara/burung.svg"); }
 :where(html.tema-kantor) .sambut-latar .gunung { background-image: url("../img/nusantara/gunung.svg"); }
-:where(html.tema-kantor) .sambut-latar .candi { background-image: url("../img/nusantara/candi.svg"); }
+:where(html.tema-kantor) .sambut-latar .candi { background-image: url("../img/nusantara/gunungan.svg"); }
 :where(html.tema-kantor) .sambut-latar .laut { background-image: url("../img/nusantara/laut.svg"); }
 :where(html.tema-kantor) .sambut-latar .laut2 { background-image: url("../img/nusantara/laut2.svg"); }
 :where(html.tema-kantor) .sambut-latar .batik { background-image: url("../img/nusantara/batik.svg"); }
@@ -553,7 +553,7 @@ html:where(.tema-kantor), :where(html.tema-kantor) body, :where(html.tema-kantor
 :where(html.tema-kantor) .aset-kpi > div:nth-child(n) { border-top: 1px solid var(--garis); }
 }
 :where(html.tema-kantor) .aset-kpi > div:nth-child(4) { --c: #7a4fd0; }
-:where(html.tema-kantor) .aset-bilah .gambar.gambar-rapat { background-image: url("../img/rapat-latar.svg"); }
+:where(html.tema-kantor) .aset-bilah .gambar.gambar-rapat { background-image: url("../img/nusantara/laut.svg"); }
 :where(html.tema-kantor) .aset-nav .bilah-hitung { background: rgba(255,255,255,.22); color: #fff; }
 :where(html.tema-kantor) .aset-nav a.aktif .bilah-hitung { background: #102544; color: #fff; }
 :where(html.tema-kantor) .aset-nav .bilah-hitung.emas { background: #c49a45; color: #fff; }
@@ -630,6 +630,12 @@ html:where(.tema-kantor), :where(html.tema-kantor) body, :where(html.tema-kantor
 :where(html.tema-kantor) .masuk-kaki { color: #fff; text-shadow: 0 1px 3px rgba(14,32,60,.6); }
 :where(html.tema-kantor) .masuk-kartu { background: rgba(255,255,255,.92); }
 :where(html.tema-kantor) .foto-bukti-pratinjau img, :where(html.tema-kantor) .foto-bukti-lama img { border: 1px solid var(--garis); }
+:where(html.tema-kantor) .foto-mini img { border: 1px solid var(--garis); }
+:where(html.tema-kantor) .foto-mini .foto-buang { background: rgba(0,0,0,.65); color: #fff; }
+:where(html.tema-kantor) .foto-galat { color: var(--bahaya, #b42318); }
+:where(html.tema-kantor) .foto-modal { background: rgba(0,0,0,.6); }
+:where(html.tema-kantor) .foto-modal-kotak { background: var(--kartu, #fff); }
+:where(html.tema-kantor) .foto-modal-kotak video { background: #000; }
 :where(html.tema-kantor) .rincian { border: 1px solid #ead9b0; border-left: 4px solid #c49a45; background: #fffaf0; }
 :where(html.tema-kantor) .rincian > summary { color: #7a5a1c; }
 :where(html.tema-kantor) .rincian[open] > summary { border-bottom: 1px solid #f0e3c4; }
@@ -1105,6 +1111,129 @@ html:where(.tema-kantor):not(#_) .notif.link-publik .btn-garis:hover { backgroun
 :where(html.tema-kantor) .arsip-buka { color: #1f5fbf; }
 :where(html.tema-kantor) .arsip-jumlah { border: 1px solid #dfe3e8; background: #f6f8fb; color: #374151; }
 :where(html.tema-kantor) .arsip-jumlah:hover { border-color: #1f5fbf; color: #1f5fbf; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi .langkah-kepala b { color: #111 !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi .langkah-kepala .wajib { color: #c62828 !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi .fl { color: #111 !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi :is(input:not([type=radio]):not([type=checkbox]):not([type=hidden]), select, textarea) { border: 1px solid #b4bac4 !important; background-color: #fff !important; color: #111 !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi :is(input, select, textarea):focus { border-color: #1f5fbf !important; box-shadow: 0 0 0 3px rgba(31,95,191,.14) !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi .pilih-hadir { border: 1px solid #b4bac4 !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi .pilih-jenis label { border: 1px solid #b4bac4 !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi .pilih-jenis label:has(input:checked) { border: 1.5px solid #1f5fbf !important; background: #f3f7fd !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi .pilih-jenis b { color: #111 !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi .pilih-jenis span { color: #444 !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi .rincian > summary { border: 1px solid #b4bac4 !important; color: #111 !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi .langkah-kepala i { color: #fff !important; background: #0b2545 !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi .kartu-isi > section.langkah:nth-of-type(1) .langkah-kepala i { background: #e8923c !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi .kartu-isi > section.langkah:nth-of-type(2) .langkah-kepala i { background: #2f9e6a !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi .kartu-isi > section.langkah:nth-of-type(3) .langkah-kepala i { background: #d9557a !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi .kartu-isi > section.langkah:nth-of-type(4) .langkah-kepala i { background: #7b5fd1 !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi .kartu-isi > section.langkah:nth-of-type(5) .langkah-kepala i { background: #c49a45 !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi table.tabel th, html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi table.tabel td { border-color: #d3d8df !important; }
+@media (min-width: 861px) {
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis input { accent-color: #0b2545; }
+}
+@media (min-width: 861px) {
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis .titik-rutin { background: #0b2545 !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis .titik-panitia { background: #1f5fbf !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis .titik-insidental { background: #c49a45 !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-rutin:has(input:checked) { border-color: #0b2545 !important; background: #eef2f8 !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-panitia:has(input:checked) { border-color: #1f5fbf !important; background: #f3f7fd !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-insidental:has(input:checked) { border-color: #c49a45 !important; background: #faf3e2 !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis input { accent-color: #0b2545 !important; }
+}
+@media (min-width: 861px) {
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label::before { background: var(--hc); }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label:nth-child(1) { --hc: #e8923c; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label:nth-child(2) { --hc: #2f9e6a; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label:nth-child(3) { --hc: #d9557a; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label:nth-child(4) { --hc: #7b5fd1; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label:nth-child(5) { --hc: #c49a45; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label:has(input:checked) { background: var(--hc) !important; color: #fff !important; box-shadow: 0 2px 6px rgba(0,0,0,.14); }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label:has(input:checked)::before { background: #fff; }
+}
+@media (min-width: 861px) {
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label span, html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label:has(input:checked) span { background: transparent !important; }
+}
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping ::placeholder { color: transparent !important; }
+@media (min-width: 861px) {
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-rutin { --c: #0b2545; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-panitia { --c: #1f5fbf; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-insidental { --c: #c49a45; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label::before { border: 2px solid var(--c); background: #fff; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label:has(input:checked)::before { background: radial-gradient(circle, #fff 0 3px, var(--c) 3.5px); }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label:has(input:checked) { border-color: var(--c) !important; background: #fff !important; box-shadow: 0 0 0 1px var(--c) inset !important; }
+}
+@media (min-width: 861px) {
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis { border: 1px solid #c9ced6; background: #eef0f3; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label { background: transparent !important; color: #111 !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-rutin { --c: #2f9e6a; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-panitia { --c: #e8923c; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-insidental { --c: #d9557a; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label::before { background: var(--c) !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label:has(input:checked) { background: var(--c) !important; color: #fff !important; box-shadow: 0 2px 6px rgba(0,0,0,.14) !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label:has(input:checked)::before { background: #fff !important; }
+}
+@media (min-width: 861px) {
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label:has(input:checked) { background-color: var(--c) !important; }
+}
+@media (min-width: 861px) {
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-rutin:has(input:checked) { background: #2f9e6a !important; border-color: transparent !important; color: #fff !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-panitia:has(input:checked) { background: #e8923c !important; border-color: transparent !important; color: #fff !important; }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-insidental:has(input:checked) { background: #d9557a !important; border-color: transparent !important; color: #fff !important; }
+}
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .kepala-nusantara h2 { text-shadow: 0 0 3px #0b2545, 0 0 6px #0b2545, 0 1px 3px rgba(4,20,45,.8) !important; }
+html:where(.tema-kantor):not(#_) .sambut-latar .candi, html:where(.tema-kantor):not(#_) .kepala-nusantara .sambut-latar .candi { background-size: auto var(--h) !important; }
+@media (min-width: 861px) {
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir, html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis { border: 1px solid #c9ced6 !important; }
+}
+html:where(.tema-kantor):not(#_) .kepala-nusantara .sambut-latar { background: radial-gradient(120% 160% at 15% 0%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 55%), radial-gradient(90% 140% at 100% 100%, rgba(120,200,255,.55) 0%, rgba(120,200,255,0) 60%), linear-gradient(120deg, #2f6fd0 0%, #5b9be6 35%, #9cc7f2 65%, #e6f1fc 100%) !important; }
+html:where(.tema-kantor):not(#_) .sambut-latar { background: radial-gradient(120% 160% at 15% 0%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 55%), radial-gradient(90% 140% at 100% 100%, rgba(120,200,255,.55) 0%, rgba(120,200,255,0) 60%), linear-gradient(120deg, #2f6fd0 0%, #5b9be6 35%, #9cc7f2 65%, #e6f1fc 100%) !important; }
+html:where(.tema-kantor):not(#_) .sambut-latar::before, html:where(.tema-kantor):not(#_) .sambut-latar::after { background: radial-gradient(circle, rgba(255,255,255,.7) 0%, rgba(255,255,255,0) 70%); }
+html:where(.tema-kantor):not(#_) .sambut-latar::after { background: radial-gradient(circle, rgba(200,235,255,.8) 0%, rgba(200,235,255,0) 70%); }
+html:where(.tema-kantor):not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian { background: transparent !important; }
+html:where(.tema-kantor):not(#_) .jam-digital { color: #f0c75a !important; }
+html:where(.tema-kantor):not(#_) .jam-digital .jd-hari, html:where(.tema-kantor):not(#_) .jam-digital .jd-tanggal, html:where(.tema-kantor):not(#_) .jam-digital .jd-zona { color: #f7dc92 !important; text-shadow: 0 1px 2px rgba(8,22,48,.75), 0 0 1px rgba(8,22,48,.9) !important; }
+html:where(.tema-kantor):not(#_) .jam-digital .jd-jam { background: linear-gradient(180deg, #fff1c2 0%, #f3cf6b 45%, #c9972a 100%); color: transparent !important; filter: drop-shadow(0 0 .6px rgba(8,22,48,.95)) drop-shadow(0 1px 2px rgba(8,22,48,.55)); }
+html:where(.tema-kantor):not(#_) .jam-digital .jd-detik { color: #f0c75a !important; text-shadow: 0 1px 2px rgba(8,22,48,.75), 0 0 1px rgba(8,22,48,.9) !important; }
+:where(html.tema-kantor) .pengajuan-daftar-kepala { border-top: 1px dashed var(--garis); }
+:where(html.tema-kantor) .pengajuan-item { border: 1px solid var(--garis); background: rgba(31,95,191,.03); }
+:where(html.tema-kantor) .pengajuan-item .pi-kepala b { color: #1f5fbf; }
+:where(html.tema-kantor) .form-cs-harian table.cs-checklist input[type="checkbox"] { accent-color: #1f8a4c; }
+:where(html.tema-kantor) .form-cs-harian table.cs-checklist tr:has(input:checked) { background: rgba(31,138,76,.07); }
+html:where(.tema-kantor):not(#_) .tabel-per-hari tr.baris-hari td { background: #fff !important; border-top: 1px solid #d9dde3 !important; border-bottom: 1px solid #e6e9ee !important; color: #1b2733 !important; }
+html:where(.tema-kantor):not(#_) .tabel-per-hari tr.baris-hari td .ikon { color: #5b6672 !important; }
+html:where(.tema-kantor):not(#_) .tabel-per-hari tbody tr.hari-genap td { background: #fff !important; }
+html:where(.tema-kantor):not(#_) .tabel-per-hari tfoot tr.baris-total td { background: #fff !important; border-top: 1px solid #d9dde3 !important; color: #1b2733 !important; }
+html:where(.tema-kantor):not(#_) .tabel-per-hari td.ab-durasi b { color: #1b2733; }
+html:where(.tema-kantor):not(#_) table.tabel.tabel-absensi th.ab-tgl.ab-akhir-pekan { background: #e6e9ee !important; color: #5b6672 !important; }
+html:where(.tema-kantor):not(#_) table.tabel.tabel-absensi td.ab-tgl.ab-akhir-pekan { background: #f2f4f7 !important; }
+@media print {
+html:where(.tema-kantor):not(#_) table.tabel.tabel-absensi th.ab-tgl.ab-akhir-pekan { background: #ddd !important; }
+html:where(.tema-kantor):not(#_) table.tabel.tabel-absensi td.ab-tgl.ab-akhir-pekan { background: #efefef !important; }
+}
+html:where(.tema-kantor):not(#_) .kk-cs-kepala { background: #f4f6f9; border-top: 1px solid #dfe3e8; border-bottom: 1px solid #dfe3e8; color: #5b6672; }
+html:where(.tema-kantor):not(#_) .kk-cs { border-bottom: 1px solid #e6e9ee; background: #fff; }
+html:where(.tema-kantor):not(#_) .kk-cs > summary { background: #fff !important; }
+html:where(.tema-kantor):not(#_) .kk-cs > summary:hover { background: #f7f9fc !important; }
+html:where(.tema-kantor):not(#_) .kk-cs[open] > summary { background: #f4f7fb !important; border-bottom: 1px solid #e1e6ee; }
+html:where(.tema-kantor):not(#_) .kk-sel { color: #1b2733; }
+html:where(.tema-kantor):not(#_) .kk-sel small { color: #6b7684; }
+html:where(.tema-kantor):not(#_) .kk-sel-nama small { color: #6b7684; }
+html:where(.tema-kantor):not(#_) .kk-besar { color: #12294c; }
+html:where(.tema-kantor):not(#_) .kk-bar { background: #e8ebf0; }
+html:where(.tema-kantor):not(#_) .kk-bar-hijau i { background: #2f9e6a; }
+html:where(.tema-kantor):not(#_) .kk-bar-emas i { background: #d9a441; }
+html:where(.tema-kantor):not(#_) .kk-bar-jingga i { background: #e08a3c; }
+html:where(.tema-kantor):not(#_) .kk-cs-akhir.aktif { color: #1c7a4f; }
+html:where(.tema-kantor):not(#_) .kk-panah { border-right: 2px solid #8b95a3; border-bottom: 2px solid #8b95a3; }
+html:where(.tema-kantor):not(#_) .kk-cs-isi { background: #fafbfc !important; border-bottom: 1px solid #e6e9ee; }
+html:where(.tema-kantor):not(#_) .kk-cs-kolom h4 { border-bottom: 1px solid #e6e9ee; color: #3a4654; }
+html:where(.tema-kantor):not(#_) .kk-cat { border: 1px solid #e3e7ec; background: #fff; }
+html:where(.tema-kantor):not(#_) .kk-cat-tgl { color: #3a4654; }
+html:where(.tema-kantor):not(#_) .kk-cat-isi small { color: #6b7684; }
+@media (max-width: 860px) {
+html:where(.tema-kantor):not(#_) .kk-sel[data-label]::before { color: #8b95a3; }
+}
 
 html.tema-kantor {
   --gelap: #0b2545; --ungu: #0b2545; --ungu-50: #eef2f8;
@@ -1145,7 +1274,7 @@ html.tema-kantor .tata-letak.ringkas .mac-cari { display: none; }
 html.tema-kantor .sisi { background: rgba(233,237,244,.72) !important; -webkit-backdrop-filter: saturate(180%) blur(30px); backdrop-filter: saturate(180%) blur(30px); color: #1d1d1f !important; box-shadow: inset -1px 0 0 rgba(0,0,0,.08) !important; }
 html.tema-kantor .sisi::-webkit-scrollbar-thumb { background: rgba(0,0,0,.15); }
 html.tema-kantor .sisi-merek { background: none !important; box-shadow: none !important; border-bottom: 0 !important; padding: 8px 18px 10px; }
-html.tema-kantor .sisi-merek img { animation: none; filter: none; width: 46px; height: 46px; flex-basis: 46px; padding: 5px; border-radius: 50%; background: linear-gradient(180deg, #fff, #e9edf3) !important; box-shadow: 0 1px 3px rgba(0,0,0,.18), inset 0 0 0 .5px rgba(0,0,0,.08); }
+html.tema-kantor .sisi-merek img { animation: putar-logo 6s ease-in-out infinite; backface-visibility: visible; filter: none; width: 46px; height: 46px; flex-basis: 46px; padding: 5px; border-radius: 50%; background: linear-gradient(180deg, #fff, #e9edf3) !important; box-shadow: 0 1px 3px rgba(0,0,0,.18), inset 0 0 0 .5px rgba(0,0,0,.08); }
 html.tema-kantor .sisi-merek .nm { color: #1d1d1f; font-weight: 650; font-size: 1rem; letter-spacing: -.01em; }
 html.tema-kantor .sisi-merek .nm span { color: var(--k-emas); }
 html.tema-kantor .sisi-merek .sub { color: #6e6e73; font-size: .76rem; }
@@ -1339,11 +1468,11 @@ html.tema-kantor .kepala-nusantara .btn { background: rgba(255,255,255,.95) !imp
 html.tema-kantor .catat-dua > .kartu > .kartu-kepala.kepala-nusantara { height: 96px; min-height: 96px; }
 html.tema-kantor .sambut-latar .awan { background-image: url("../img/nusantara/awan.svg"); opacity: .55; }
 html.tema-kantor .sambut-latar .burung { opacity: .6; }
-html.tema-kantor .sambut-latar .gunung { background-image: url("../img/kantor/gunung.svg") !important; opacity: .75 !important; }
-html.tema-kantor .sambut-latar .candi { background-image: url("../img/kantor/candi.svg") !important; opacity: .85 !important; }
-html.tema-kantor .sambut-latar .laut { background-image: url("../img/kantor/laut.svg") !important; opacity: .9 !important; }
-html.tema-kantor .sambut-latar .laut2 { background-image: url("../img/kantor/laut2.svg") !important; opacity: .9 !important; }
-html.tema-kantor .sambut-latar .batik { background-image: url("../img/kantor/batik.svg") !important; opacity: 1; }
+html.tema-kantor .sambut-latar .gunung { background-image: url("../img/nusantara/gunung.svg") !important; opacity: .75 !important; }
+html.tema-kantor .sambut-latar .candi { background-image: url("../img/nusantara/gunungan.svg") !important; opacity: .85 !important; }
+html.tema-kantor .sambut-latar .laut { background-image: url("../img/nusantara/laut.svg") !important; opacity: .9 !important; }
+html.tema-kantor .sambut-latar .laut2 { background-image: url("../img/nusantara/laut2.svg") !important; opacity: .9 !important; }
+html.tema-kantor .sambut-latar .batik { background-image: url("../img/nusantara/batik.svg") !important; opacity: 1; }
 html.tema-kantor .sambut-latar .matahari { background: radial-gradient(circle at 80% 100%, rgba(214,178,94,.45) 0, rgba(214,178,94,0) 45%) !important; }
 html.tema-kantor .sambut-latar::after { display: block; background: linear-gradient(90deg, rgba(8,27,51,.55) 0%, rgba(8,27,51,.2) 45%, rgba(8,27,51,0) 75%) !important; }
 html.tema-kantor .kepala-nusantara .sambut-latar::after { background: linear-gradient(90deg, rgba(8,27,51,.5) 0%, rgba(8,27,51,.15) 50%, rgba(8,27,51,0) 80%) !important; }
@@ -1381,8 +1510,8 @@ html.tema-kantor .sambut, html.tema-kantor .aset-bilah, html.tema-kantor .kartu-
 }
 @keyframes kantorKisi { from { background-position: 0 0, 0 0, center, center; } to { background-position: 28px 0, 28px 0, center, center; } }
 html.tema-kantor .sambut-latar .awan, html.tema-kantor .sambut-latar .burung, html.tema-kantor .sambut-latar .perahu, html.tema-kantor .sambut-latar .laut, html.tema-kantor .sambut-latar .laut2 { display: none !important; }
-html.tema-kantor .sambut-latar .gunung { background-image: url("../img/kantor/grafik.svg") !important; opacity: .95 !important; }
-html.tema-kantor .sambut-latar .candi { background-image: url("../img/kantor/gedung.svg") !important; opacity: 1 !important; }
+html.tema-kantor .sambut-latar .gunung { background-image: url("../img/nusantara/grafik.svg") !important; opacity: .95 !important; }
+html.tema-kantor .sambut-latar .candi { background-image: url("../img/nusantara/gedung.svg") !important; opacity: 1 !important; }
 html.tema-kantor .sambut .sambut-latar .gunung, html.tema-kantor .sambut .sambut-latar .candi { opacity: .9 !important; }
 html.tema-kantor .sambut-latar .matahari { background: radial-gradient(circle at 82% 110%, rgba(214,178,94,.35) 0, rgba(214,178,94,0) 42%) !important; }
 html.tema-kantor .sambut-latar::after { background: linear-gradient(90deg, rgba(8,27,51,.82) 0%, rgba(8,27,51,.55) 30%, rgba(8,27,51,.1) 65%, rgba(8,27,51,0) 100%) !important; }
@@ -1433,12 +1562,12 @@ html.bingkai-aktif, html.bingkai-aktif body { overflow: hidden !important; }
 html.dalam-bingkai .mac-lampu i.h { box-shadow: inset 0 0 0 .5px rgba(0,0,0,.2), 0 0 0 2px rgba(40,200,64,.4); }
 @media (min-width: 1000px) { html.dalam-bingkai body:not(.masuk) { padding: 0 !important; } html.dalam-bingkai .tata-letak { border-radius: 0 !important; box-shadow: none !important; } }
 
-html.tema-kantor .sambut-latar .candi { background-image: url("../img/kantor/lilin.svg") !important; filter: none !important; opacity: 1 !important; }
+html.tema-kantor .sambut-latar .candi { background-image: url("../img/nusantara/lilin.svg") !important; filter: none !important; opacity: 1 !important; }
 html.tema-kantor .sambut .sambut-latar .candi { --t: 1400px !important; --h: 70px !important; bottom: 20px !important; }
 html.tema-kantor .kepala-nusantara .sambut-latar .candi { --t: 1300px !important; --h: 56px !important; bottom: 14px !important; }
 html.tema-kantor .sambut .sambut-latar .gunung { --t: 1400px !important; --h: 84px !important; bottom: 14px !important; }
 html.tema-kantor .kepala-nusantara .sambut-latar .gunung { --t: 1300px !important; --h: 70px !important; bottom: 12px !important; }
-html.tema-kantor .sambut-latar::before { content: ""; position: absolute; z-index: 0; right: 150px; top: 50%; width: 300px; height: 300px; margin-top: -150px; background: url("../img/kantor/roset.svg") center / contain no-repeat; opacity: .5; animation: kantorRoset 160s linear infinite; pointer-events: none; }
+html.tema-kantor .sambut-latar::before { content: ""; position: absolute; z-index: 0; right: 150px; top: 50%; width: 300px; height: 300px; margin-top: -150px; background: none center / contain no-repeat; opacity: .5; animation: kantorRoset 160s linear infinite; pointer-events: none; }
 html.tema-kantor .kepala-nusantara .sambut-latar::before { right: 8%; width: 240px; height: 240px; margin-top: -120px; opacity: .4; }
 html.tema-kantor .aset-bilah .sambut-latar::before { right: 4%; width: 220px; height: 220px; margin-top: -110px; opacity: .35; }
 @keyframes kantorRoset { to { transform: rotate(360deg); } }
@@ -1484,7 +1613,7 @@ html.tema-kantor .sambut, html.tema-kantor .aset-bilah, html.tema-kantor .kartu-
 
 html.tema-kantor .sambut, html.tema-kantor .aset-bilah, html.tema-kantor .kartu-kepala.kepala-nusantara {
   background-image:
-    url("../img/kantor/pola.svg"),
+    url("../img/nusantara/batik.svg"),
     radial-gradient(45% 160% at 80% 50%, rgba(212,178,106,.18) 0%, rgba(212,178,106,0) 65%),
     radial-gradient(60% 120% at 0% 0%, rgba(255,255,255,.12) 0%, rgba(255,255,255,0) 60%),
     linear-gradient(115deg, #1a52a8 0%, #1f5fbf 50%, #2a6dcc 100%) !important;
@@ -1637,3 +1766,13 @@ html.tema-kantor .saring select, html.tema-kantor .saring input[type=text], html
   html.tema-kantor .rp-isi input { border: 0 !important; box-shadow: none !important; background: transparent !important; outline: none; }
   html.tema-kantor .rp-isi:focus-within { box-shadow: inset 0 -2px 0 #1f5fbf !important; }
 }
+
+@media (min-width: 1000px) {
+  html.tema-kantor body:not(.masuk) { padding: 0 !important; }
+  html.tema-kantor .tata-letak { border-radius: 0 !important; box-shadow: none !important; }
+}
+
+html.tema-kantor:not(#_) .jam-digital .jd-jam { -webkit-background-clip: text !important; background-clip: text !important; -webkit-text-fill-color: transparent !important; font-size: 1.9rem !important; font-weight: 600 !important; letter-spacing: .04em !important; }
+
+html.tema-kantor .sisi-merek:hover img { animation-duration: 2s; }
+@media (prefers-reduced-motion: reduce) { html.tema-kantor .sisi-merek img { animation: none; } }

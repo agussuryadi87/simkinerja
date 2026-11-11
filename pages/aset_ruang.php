@@ -256,6 +256,10 @@ $penginput = aset_penginput('aset_ruang', $daftar);
         <td><?= aset_sel_penginput($penginput[(int) $r['id']] ?? null) ?></td>
         <td class="no-cetak"><div class="aksi-baris">
           <a class="btn btn-hantu btn-ikon" href="<?= e(url('aset_ruang', ['aksi' => 'lihat', 'id' => $r['id']])) ?>" title="Lihat"><?= ikon('mata', 15) ?></a>
+          <button class="btn btn-hantu btn-ikon" type="button" title="Ubah" data-buka="tiraiRuang" data-judul="Ubah ruangan"
+            data-isi='<?= e(json_encode(['id' => (int) $r['id'], 'kode' => $r['kode'], 'nama' => $r['nama'], 'jenis' => $r['jenis'], 'gedung' => $r['gedung'],
+                'lantai' => $r['lantai'], 'kapasitas' => $r['kapasitas'], 'luas' => $r['luas'] !== null ? rtrim(rtrim((string) $r['luas'], '0'), '.') : '',
+                'penanggung_jawab' => $r['penanggung_jawab'], 'keterangan' => $r['keterangan'], 'aktif' => (string) $r['aktif']])) ?>'><?= ikon('sunting', 15) ?></button>
           <form method="post" data-konfirmasi="Hapus ruangan <?= e($r['nama']) ?> beserta semua fotonya? Barang di dalamnya tidak ikut terhapus."><?= csrf_field() ?>
             <input type="hidden" name="op" value="hapus"><input type="hidden" name="id" value="<?= (int) $r['id'] ?>">
             <button class="btn btn-hantu btn-ikon" type="submit" title="Hapus"><?= ikon('hapus', 15) ?></button></form>

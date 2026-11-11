@@ -253,7 +253,7 @@ function hari_kerja_antara(string $mulai, string $selesai): int
 
 function capaian_harian_rentang(int $periodeId, int $pegawaiId, string $mulai, string $selesai): array
 {
-    $hasil = ['persen' => null, 'hari_kerja' => 0, 'hari_tercatat' => 0, 'kegiatan_ok' => 0, 'kegiatan_total' => 0, 'jam' => 0.0];
+    $hasil = ['persen' => null, 'hari_kerja' => 0, 'hari_tercatat' => 0, 'kegiatan_ok' => 0, 'kegiatan_total' => 0, 'jam' => 0.0, 'jam_diakui' => 0.0];
     $akhir = min($selesai, date('Y-m-d'));
     $hasil['hari_kerja'] = $mulai <= $akhir ? hari_kerja_antara($mulai, $akhir) : 0;
     $r = row(
@@ -268,8 +268,15 @@ function capaian_harian_rentang(int $periodeId, int $pegawaiId, string $mulai, s
     $hasil['kegiatan_ok'] = (int) ($r['ok'] ?? 0);
     $hasil['kegiatan_total'] = (int) ($r['total'] ?? 0);
     $hasil['jam'] = (float) ($r['detik'] ?? 0) / 3600;
-    if ($hasil['hari_kerja'] > 0) {
-        $hasil['persen'] = min(100.0, $hasil['hari_tercatat'] / $hasil['hari_kerja'] * 100);
+    $hasil['jam_diakui'] = (float) val(
+        "SELECT COALESCE(SUM(CASE WHEN jam_mulai IS NOT NULL AND jam_selesai > jam_mulai THEN TIME_TO_SEC(TIMEDIFF(jam_selesai, jam_mulai)) ELSE 0 END), 0)
+           FROM kegiatan WHERE periode_id = ? AND pengguna_id = ? AND tanggal BETWEEN ? AND ?" . sql_bukan_draft(),
+        [$periodeId, $pegawaiId, $mulai, $selesai],
+        0
+    ) / 3600;
+    $hasil['target_jam'] = (float) target_jam_kerja($mulai, $selesai)['jam'];
+    if ($hasil['hari_kerja'] > 0 && $hasil['target_jam'] > 0) {
+        $hasil['persen'] = $hasil['jam_diakui'] / $hasil['target_jam'] * 100;
     }
     return $hasil;
 }
@@ -286,7 +293,7 @@ function capaian_harian(?array $periode, int $pegawaiId, int $tw): array
     return capaian_harian_rentang((int) $periode['id'], $pegawaiId, $mulai, $selesai);
 }
 
-const JAM_KERJA_HARIAN = 6;
+const JAM_KERJA_HARIAN = 5;
 const HARI_KERJA_SEPEKAN = 5;
 const PEKAN_SEBULAN = 4;
 const JAM_KERJA_BULANAN = JAM_KERJA_HARIAN * HARI_KERJA_SEPEKAN * PEKAN_SEBULAN;
@@ -302,10 +309,17 @@ function bulan_dalam_rentang(string $dari, string $sampai): int
     return $b - $a + 1;
 }
 
+function bulan_penuh_rentang(string $dari, string $sampai): int
+{
+    $a = (int) substr($dari, 0, 4) * 12 + (int) substr($dari, 5, 2);
+    $b = (int) substr($sampai, 0, 4) * 12 + (int) substr($sampai, 5, 2);
+    return max(0, $b - $a + 1);
+}
+
 function target_jam_kerja(string $dari, string $sampai): array
 {
-    $bulan = bulan_dalam_rentang($dari, $sampai);
-    return ['bulan' => $bulan, 'jam' => $bulan * JAM_KERJA_BULANAN];
+    $bulan = bulan_penuh_rentang($dari, $sampai);
+    return ['bulan' => $bulan, 'hari' => $bulan * HARI_KERJA_SEPEKAN * PEKAN_SEBULAN, 'jam' => $bulan * JAM_KERJA_BULANAN];
 }
 
 function keterangan_jam_kerja(float $jam, float $target): array
@@ -340,7 +354,7 @@ function capaian_evaluasi(?array $periode, int $pegawaiId, int $tw, ?array $ev =
 
 function capaian_rentang_evaluasi(?array $periode, int $pegawaiId, string $dari, string $sampai, array $evTw = []): array
 {
-    $hasil = ['persen' => null, 'hari_kerja' => 0, 'hari_tercatat' => 0, 'kegiatan_ok' => 0, 'kegiatan_total' => 0, 'jam' => 0.0];
+    $hasil = ['persen' => null, 'hari_kerja' => 0, 'hari_tercatat' => 0, 'kegiatan_ok' => 0, 'kegiatan_total' => 0, 'jam' => 0.0, 'jam_diakui' => 0.0];
     if (!$periode) {
         return $hasil;
     }
@@ -361,7 +375,7 @@ function capaian_rentang_evaluasi(?array $periode, int $pegawaiId, string $dari,
             continue;
         }
         $r = capaian_harian_rentang((int) $periode['id'], $pegawaiId, $awal, $akhir);
-        foreach (['hari_kerja', 'hari_tercatat', 'kegiatan_ok', 'kegiatan_total', 'jam'] as $k) {
+        foreach (['hari_kerja', 'hari_tercatat', 'kegiatan_ok', 'kegiatan_total', 'jam', 'jam_diakui'] as $k) {
             $hasil[$k] += $r[$k];
         }
         $ev = $evTw[$t] ?? null;
@@ -369,13 +383,13 @@ function capaian_rentang_evaluasi(?array $periode, int $pegawaiId, string $dari,
             $bobot += (float) $ev['nilai_capaian'] * $r['hari_kerja'];
             $hasil['final'] = true;
         } else {
-            $bobot += min(100.0, $r['hari_kerja'] > 0 ? $r['hari_tercatat'] / $r['hari_kerja'] * 100 : 0) * $r['hari_kerja'];
+            $bobot += (float) ($r['persen'] ?? 0) * $r['hari_kerja'];
         }
     }
     if ($bagian > 0 && $kosong === $bagian) {
         $hasil['dikosongkan'] = true;
     } elseif ($hasil['hari_kerja'] > 0) {
-        $hasil['persen'] = min(100.0, $bobot / $hasil['hari_kerja']);
+        $hasil['persen'] = $bobot / $hasil['hari_kerja'];
     }
     return $hasil;
 }
@@ -500,7 +514,7 @@ function kegiatan_rincian(array $k, string $namaPegawai = ''): string
 {
     $draft = kegiatan_draft((int) $k['id']);
     $durasi = durasi_jam($k['jam_mulai'], $k['jam_selesai']);
-    $foto = foto_kegiatan((int) $k['id']);
+    $foto = foto_kegiatan_semua((int) $k['id']);
     $verifikator = !$draft && $k['status'] === 'disetujui' && $k['diverifikasi_oleh']
         ? (string) val('SELECT nama FROM pengguna WHERE id = ?', [(int) $k['diverifikasi_oleh']], '') : '';
     $panitia = trim($k['kepanitiaan'] . ($k['peran_panitia'] !== '' ? ' · ' . $k['peran_panitia'] : ''), ' ·');
@@ -518,7 +532,9 @@ function kegiatan_rincian(array $k, string $namaPegawai = ''): string
         'lk_uraian'     => (string) $k['uraian'],
         'lk_hasil'      => $k['hasil'] !== '' ? $k['hasil'] . ($k['satuan'] !== '' ? ' (' . angka_ringkas((float) $k['volume'], 2) . ' ' . $k['satuan'] . ')' : '') : '',
         'lk_bukti'      => (string) $k['tautan_bukti'],
-        'lk_foto'       => $foto ? url_berkas('kegiatan', $foto) : '',
+        'lk_foto'       => isset($foto[0]) ? url_berkas('kegiatan', $foto[0]) : '',
+        'lk_foto2'      => isset($foto[1]) ? url_berkas('kegiatan', $foto[1]) : '',
+        'lk_foto3'      => isset($foto[2]) ? url_berkas('kegiatan', $foto[2]) : '',
         'lk_catatan'    => (string) $k['catatan_atasan'],
         'lk_verifikator' => $verifikator !== '' ? $verifikator . ($k['diverifikasi_pada'] ? ', ' . tanggal_pendek(substr($k['diverifikasi_pada'], 0, 10)) : '') : '',
     ];
@@ -543,6 +559,8 @@ function modal_rincian_kegiatan(): string
         . '<div class="rk-blok rk-catatan" data-baris="lk_catatan"><b>Catatan atasan</b><p data-teks="lk_catatan"></p></div>'
         . '<div class="rk-blok" data-baris="lk_bukti"><b>Tautan bukti dukung</b><p><a data-tautan="lk_bukti" target="_blank" rel="noopener"><span data-teks="lk_bukti"></span></a></p></div>'
         . '<div class="rk-blok" data-baris="lk_foto"><b>Foto bukti</b><a data-tautan="lk_foto" target="_blank" rel="noopener"><img class="rk-foto" data-gambar="lk_foto" alt="Foto bukti kegiatan"></a></div>'
+        . '<div class="rk-blok" data-baris="lk_foto2"><a data-tautan="lk_foto2" target="_blank" rel="noopener"><img class="rk-foto" data-gambar="lk_foto2" alt="Foto bukti kegiatan 2"></a></div>'
+        . '<div class="rk-blok" data-baris="lk_foto3"><a data-tautan="lk_foto3" target="_blank" rel="noopener"><img class="rk-foto" data-gambar="lk_foto3" alt="Foto bukti kegiatan 3"></a></div>'
         . '</div><div class="modal-kaki"><button type="button" class="btn btn-utama" data-tutup>Tutup</button></div></div></div>';
     return $h;
 }

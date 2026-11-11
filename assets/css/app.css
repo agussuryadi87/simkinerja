@@ -276,11 +276,11 @@ header.atas .kanan { margin-left: auto; display: flex; align-items: center; gap:
 .aset-bilah .sambut-latar::after { background: linear-gradient(180deg, rgba(2,34,34,.28), rgba(2,34,34,.16)); }
 .aset-bilah .sambut-latar .matahari { background: radial-gradient(circle at 80% 100%, rgba(255,214,130,.5) 0, rgba(255,214,130,0) 42%); }
 .aset-bilah { margin-top: -14px; }
-.aset-bilah .gambar { position: absolute; left: 0; right: 0; top: 0; bottom: 14px; background: url("../img/aset-latar.svg") repeat-x center bottom / 640px 64px;
+.aset-bilah .gambar { position: absolute; left: 0; right: 0; top: 0; bottom: 14px; background: url("../img/nusantara/gunungan.svg") repeat-x center bottom / auto 64px;
   -webkit-mask-image: linear-gradient(90deg, #000 0, #000 12%, rgba(0,0,0,.12) 30%, rgba(0,0,0,.12) 70%, #000 88%, #000 100%);
   mask-image: linear-gradient(90deg, #000 0, #000 12%, rgba(0,0,0,.12) 30%, rgba(0,0,0,.12) 70%, #000 88%, #000 100%); }
 @media (max-width: 860px) { .aset-bilah { margin-top: 0; } }
-.aset-bilah .gambar.gambar-dosen { background-image: url("../img/dosen-latar.svg"); }
+.aset-bilah .gambar.gambar-dosen { background-image: url("../img/nusantara/gunung.svg"); }
 .jad-bagian { display: grid; gap: 22px; grid-template-columns: minmax(280px, 1fr) minmax(0, 1.15fr); align-items: center; }
 .jad-bagian .tabel-bungkus { border: 1px solid var(--garis); border-radius: 10px; overflow: hidden; }
 @media (max-width: 900px) { .jad-bagian { grid-template-columns: minmax(0, 1fr); } }
@@ -502,7 +502,7 @@ img.avatar.foto { display: inline-block; object-fit: cover; background: #fff; bo
 .sambut-latar .awan    { --t: 900px;  --h: 80px;  --d: 150s; top: 8px; bottom: auto; background-position: left top; background-image: url("../img/nusantara/awan.svg"); }
 .sambut-latar .burung  { --t: 1200px; --h: 90px;  --d: 70s;  top: 12px; bottom: auto; background-position: left top; background-image: url("../img/nusantara/burung.svg"); }
 .sambut-latar .gunung  { --t: 720px;  --h: 130px; --d: 260s; bottom: 24px; background-image: url("../img/nusantara/gunung.svg"); }
-.sambut-latar .candi   { --t: 960px;  --h: 110px; --d: 180s; bottom: 26px; background-image: url("../img/nusantara/candi.svg"); }
+.sambut-latar .candi   { --t: 960px;  --h: 110px; --d: 180s; bottom: 26px; background-image: url("../img/nusantara/gunungan.svg"); }
 .sambut-latar .laut    { --t: 480px;  --h: 56px;  --d: 40s;  background-image: url("../img/nusantara/laut.svg"); }
 .sambut-latar .laut2   { --t: 480px;  --h: 56px;  --d: 26s;  background-image: url("../img/nusantara/laut2.svg"); }
 .sambut-latar .batik   { --t: 28px;   --h: 14px;  --d: 3s;   background-image: url("../img/nusantara/batik.svg"); }
@@ -1591,7 +1591,7 @@ main.isi:has(> .catat-dua) { padding-top: 6px; }
 
 .aset-kpi > div:nth-child(4) { --c: #7a4fd0; }
 
-.aset-bilah .gambar.gambar-rapat { background-image: url("../img/rapat-latar.svg"); }
+.aset-bilah .gambar.gambar-rapat { background-image: url("../img/nusantara/laut.svg"); }
 .aset-nav .bilah-hitung { display: inline-grid; place-items: center; min-width: 20px; height: 18px; padding: 0 6px; margin-left: 4px; border-radius: 99px; font-size: .68rem; font-weight: 700; background: rgba(255,255,255,.22); color: #fff; }
 .aset-nav a.aktif .bilah-hitung { background: #033e3e; color: #fff; }
 .aset-nav .bilah-hitung.emas { background: #c49a45; color: #fff; }
@@ -1790,7 +1790,20 @@ body.masuk::after {
 .foto-bukti-pratinjau[hidden] { display: none; }
 .foto-bukti-pratinjau img, .foto-bukti-lama img { width: 120px; height: 90px; object-fit: cover; border-radius: 10px; border: 1px solid var(--garis); display: block; }
 .foto-bukti small { display: block; margin-top: 6px; font-size: .74rem; }
-@media (hover: hover) and (pointer: fine) { .foto-bukti-tombol .foto-kamera { display: none; } }
+.foto-bukti-tombol .nonaktif { opacity: .45; pointer-events: none; }
+.foto-bukti-daftar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.foto-bukti-daftar:empty { display: none; }
+.foto-mini { position: relative; display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+.foto-mini img { width: 120px; height: 90px; object-fit: cover; border-radius: 10px; border: 1px solid var(--garis); display: block; }
+.foto-mini .cek { font-size: .74rem; }
+.foto-mini .foto-buang { position: absolute; top: 4px; right: 4px; width: 22px; height: 22px; border-radius: 50%; border: 0; background: rgba(0,0,0,.65); color: #fff; font-size: 15px; line-height: 22px; padding: 0; cursor: pointer; }
+.foto-galat { color: var(--bahaya, #b42318); }
+.foto-galat[hidden] { display: none; }
+.foto-modal { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,.6); display: flex; align-items: center; justify-content: center; padding: 16px; }
+.foto-modal-kotak { background: var(--kartu, #fff); border-radius: 14px; padding: 14px; width: min(640px, 100%); display: flex; flex-direction: column; gap: 10px; }
+.foto-modal-kotak video { width: 100%; max-height: 60vh; background: #000; border-radius: 10px; }
+.foto-modal-aksi { display: flex; gap: 8px; justify-content: center; }
+.foto-modal-info { text-align: center; min-height: 1em; }
 
 .rincian { margin-top: 12px; border: 1px solid #ead9b0; border-left: 4px solid #c49a45; background: #fffaf0; }
 .rincian > summary { color: #7a5a1c; padding: 11px 0; }
@@ -3193,3 +3206,486 @@ html:not(#_) .notif.link-publik .btn-garis:hover { background: #f3f6fa !importan
 @media print { .kk-kontrol form.unggah-aset { display: none !important; } }
 @media print { html:not(#_) .jad-grid { grid-template-columns: minmax(0, 1fr) !important; } html:not(#_) .jad-panel { break-inside: avoid; } }
 @media print { html:not(#_) .isi ul, html:not(#_) .isi ol, html:not(#_) .kk-peringatan-isi ul { max-height: none !important; overflow: visible !important; } }
+html:not(#_) body[data-hal="kegiatan"] .isi .langkah-kepala b { font-size: .92rem !important; font-weight: 700 !important; color: #111 !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi .langkah-kepala .wajib { color: #c62828 !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi .fl { font-weight: 650 !important; color: #111 !important; font-size: .8rem; }
+html:not(#_) body[data-hal="kegiatan"] .isi :is(input:not([type=radio]):not([type=checkbox]):not([type=hidden]), select, textarea) { border: 1px solid #b4bac4 !important; background-color: #fff !important; color: #111 !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi :is(input, select, textarea):focus { border-color: #1f5fbf !important; box-shadow: 0 0 0 3px rgba(31,95,191,.14) !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi .pilih-hadir { border: 1px solid #b4bac4 !important; border-radius: 10px; }
+html:not(#_) body[data-hal="kegiatan"] .isi .pilih-jenis label { border: 1px solid #b4bac4 !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi .pilih-jenis label:has(input:checked) { border: 1.5px solid #1f5fbf !important; background: #f3f7fd !important; box-shadow: none !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi .pilih-jenis b { font-weight: 700 !important; color: #111 !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi .pilih-jenis span { font-weight: 400 !important; color: #444 !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi .rincian > summary { border: 1px solid #b4bac4 !important; font-weight: 700 !important; color: #111 !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi .langkah-kepala i { width: 24px !important; height: 24px !important; flex: 0 0 24px; border-radius: 7px !important; border: 0 !important; box-shadow: none !important; font-size: .8rem !important; font-weight: 700 !important; color: #fff !important; background: #0b2545 !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi .kartu-isi > section.langkah:nth-of-type(1) .langkah-kepala i { background: #e8923c !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi .kartu-isi > section.langkah:nth-of-type(2) .langkah-kepala i { background: #2f9e6a !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi .kartu-isi > section.langkah:nth-of-type(3) .langkah-kepala i { background: #d9557a !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi .kartu-isi > section.langkah:nth-of-type(4) .langkah-kepala i { background: #7b5fd1 !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi .kartu-isi > section.langkah:nth-of-type(5) .langkah-kepala i { background: #c49a45 !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi table.tabel th, html:not(#_) body[data-hal="kegiatan"] .isi table.tabel td { border-color: #d3d8df !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .langkah { padding: 0 0 18px 0 !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .langkah::before { display: none !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .langkah-kepala { margin: 0 0 12px 0 !important; justify-content: space-between; }
+html:not(#_) body[data-hal="kegiatan"] .isi .langkah-kepala i { order: 2; margin-left: auto; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir { display: inline-flex !important; width: auto !important; max-width: 100%; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .rincian { display: inline-block; max-width: 100%; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .rincian > summary { display: inline-flex !important; width: auto !important; gap: 8px; padding: 8px 14px !important; border-radius: 8px; }
+@media (min-width: 861px) { html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis { display: flex !important; flex-wrap: wrap; gap: 10px; grid-template-columns: none !important; } html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label { flex: 0 1 auto; width: auto !important; max-width: 100%; padding: 9px 14px !important; } }
+@media (min-width: 861px) { html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label { padding-left: 14px !important; } html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis b { display: flex !important; align-items: center; gap: 7px; } html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis .titik { position: static !important; flex: 0 0 10px; } html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis input { position: absolute !important; opacity: 0 !important; width: 1px !important; height: 1px !important; margin: 0 !important; } }
+@media (min-width: 861px) { html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label { padding: 10px 14px 10px 40px !important; position: relative; } html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis input { position: absolute !important; left: 14px !important; top: 50% !important; transform: translateY(-50%); opacity: 1 !important; width: 15px !important; height: 15px !important; margin: 0 !important; accent-color: #0b2545; } html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis .titik { display: inline-block !important; width: 9px !important; height: 9px !important; } }
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis .titik-rutin { background: #0b2545 !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis .titik-panitia { background: #1f5fbf !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis .titik-insidental { background: #c49a45 !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-rutin:has(input:checked) { border-color: #0b2545 !important; background: #eef2f8 !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-panitia:has(input:checked) { border-color: #1f5fbf !important; background: #f3f7fd !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-insidental:has(input:checked) { border-color: #c49a45 !important; background: #faf3e2 !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis input { accent-color: #0b2545 !important; }
+}
+@media (min-width: 861px) { html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping :is(input:not([type=radio]):not([type=checkbox]):not([type=hidden]), select) { height: 32px !important; min-height: 0 !important; padding-top: 4px !important; padding-bottom: 4px !important; font-size: .84rem !important; } }
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label { position: relative; display: inline-flex !important; align-items: center; gap: 7px; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label::before { content: ""; width: 10px; height: 10px; border-radius: 3px; background: var(--hc); flex: 0 0 10px; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label:nth-child(1) { --hc: #e8923c; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label:nth-child(2) { --hc: #2f9e6a; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label:nth-child(3) { --hc: #d9557a; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label:nth-child(4) { --hc: #7b5fd1; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label:nth-child(5) { --hc: #c49a45; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label:has(input:checked) { background: var(--hc) !important; color: #fff !important; box-shadow: 0 2px 6px rgba(0,0,0,.14); }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label:has(input:checked)::before { background: #fff; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label span { color: inherit; }
+}
+@media (min-width: 861px) { html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label span, html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label:has(input:checked) span { background: transparent !important; box-shadow: none !important; color: inherit !important; border: 0 !important; } html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir input { position: absolute !important; opacity: 0 !important; width: 1px !important; height: 1px !important; margin: 0 !important; pointer-events: none; } }
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir { gap: 4px; padding: 3px; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label { display: inline-flex !important; width: auto !important; flex: 0 0 auto; gap: 5px; padding: 5px 11px !important; border-radius: 7px !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label::before { width: 7px !important; height: 7px !important; flex: 0 0 7px; border-radius: 2px; }
+}
+@media (min-width: 861px) { html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .langkah .form-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; } html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .langkah .form-grid-3 > .form-baris:first-child { grid-column: auto !important; } }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping ::placeholder { color: transparent !important; opacity: 1; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .rincian-petunjuk { display: none !important; }
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis { display: flex !important; flex-wrap: nowrap !important; gap: 8px; grid-template-columns: none !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label { flex: 1 1 0; min-width: 0; width: auto !important; padding: 10px 12px 10px 38px !important; position: relative; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-rutin { --c: #0b2545; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-panitia { --c: #1f5fbf; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-insidental { --c: #c49a45; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis input { position: absolute !important; opacity: 0 !important; width: 1px !important; height: 1px !important; left: 0; top: 0; margin: 0 !important; pointer-events: none; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis .titik { display: none !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label::before { content: ""; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--c); background: #fff; box-sizing: border-box; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label:has(input:checked)::before { background: radial-gradient(circle, #fff 0 3px, var(--c) 3.5px); }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label:has(input:checked) { border-color: var(--c) !important; background: #fff !important; box-shadow: 0 0 0 1px var(--c) inset !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label b { font-weight: 700 !important; }
+}
+@media (min-width: 1100px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping > .kartu-isi { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); column-gap: 28px; align-items: start; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping > .kartu-isi > section.langkah:nth-of-type(1) { grid-column: 1; grid-row: 1; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping > .kartu-isi > section.langkah:nth-of-type(2) { grid-column: 2; grid-row: 1; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping > .kartu-isi > section.langkah:nth-of-type(n+3) { grid-column: 1 / -1; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir { flex-wrap: wrap; }
+}
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis span { display: none !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis { justify-content: flex-start; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label { flex: 0 0 auto !important; white-space: nowrap; padding-right: 16px !important; }
+}
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .kartu-isi > section.langkah:nth-of-type(n+3) .langkah-kepala i { display: none !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .kartu-isi > section.langkah:nth-of-type(2) .langkah-kepala b { display: none !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .kartu-isi > section.langkah:nth-of-type(-n+2) > .langkah-kepala { display: none !important; }
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .langkah .form-grid-3 { align-items: start !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .langkah .form-grid-3 > .form-baris { display: flex; flex-direction: column; margin: 0 !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .langkah .form-grid-3 > .form-baris > label.fl { height: 16px; line-height: 16px; margin: 0 0 6px 0; display: block; white-space: nowrap; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .langkah .form-grid-3 input { box-sizing: border-box !important; height: 32px !important; margin: 0 !important; }
+}
+@media (min-width: 1100px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping > .kartu-isi > section.langkah:nth-of-type(3) { grid-column: 1; grid-row: 2; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping > .kartu-isi > section.langkah:nth-of-type(4) { grid-column: 1; grid-row: 3; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping > .kartu-isi > section.langkah:nth-of-type(n+5) { grid-column: 1 / -1; grid-row: 4; }
+}
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis { gap: 4px; padding: 3px; border: 1px solid #c9ced6; border-radius: 10px; background: #eef0f3; display: inline-flex !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label { display: inline-flex !important; align-items: center; gap: 5px; padding: 5px 11px !important; border: 0 !important; border-radius: 7px !important; background: transparent !important; box-shadow: none !important; color: #111 !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-rutin { --c: #2f9e6a; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-panitia { --c: #e8923c; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-insidental { --c: #d9557a; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label::before { position: static !important; transform: none !important; width: 7px !important; height: 7px !important; border-radius: 2px !important; border: 0 !important; background: var(--c) !important; flex: 0 0 7px; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label:has(input:checked) { background: var(--c) !important; color: #fff !important; box-shadow: 0 2px 6px rgba(0,0,0,.14) !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label:has(input:checked)::before { background: #fff !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label b { font-weight: 600 !important; color: inherit !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label:has(input:checked) b { font-weight: 700 !important; }
+}
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label { flex-direction: row !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label b { display: inline !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label:has(input:checked) { background-color: var(--c) !important; }
+}
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-rutin:has(input:checked) { background: #2f9e6a !important; border-color: transparent !important; color: #fff !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-panitia:has(input:checked) { background: #e8923c !important; border-color: transparent !important; color: #fff !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label.jenis-insidental:has(input:checked) { background: #d9557a !important; border-color: transparent !important; color: #fff !important; }
+}
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping > .kartu-kaki { padding-left: 0 !important; padding-right: 0 !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping > .kartu-isi > .kartu-kaki,
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .kartu-kaki { margin-left: 0 !important; }
+}
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping > .kartu-kaki { padding-left: 28px !important; padding-right: 28px !important; }
+}
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .kepala-nusantara h2 { text-shadow: 0 0 3px #0b2545, 0 0 6px #0b2545, 0 1px 3px rgba(4,20,45,.8) !important; }
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping > .kartu-isi { padding-left: 28px !important; padding-right: 28px !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping > .kartu-kaki { padding-left: 28px !important; padding-right: 28px !important; }
+}
+@media (min-width: 1100px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping > .kartu-isi { grid-template-columns: max-content minmax(0, 1fr) !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir { flex-wrap: nowrap !important; }
+}
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir,
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis { padding: 3px !important; height: 44px !important; box-sizing: border-box; align-items: center !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label,
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label { height: 36px !important; box-sizing: border-box; padding-top: 0 !important; padding-bottom: 0 !important; }
+}
+html:not(#_) .sambut-latar .candi, html:not(#_) .kepala-nusantara .sambut-latar .candi { background-size: auto var(--h) !important; background-repeat: repeat-x !important; background-position: center bottom !important; }
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir,
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis { height: auto !important; padding: 3px !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label,
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label { height: auto !important; padding-top: 5px !important; padding-bottom: 5px !important; line-height: 1.25; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label:focus-within,
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label:focus-within { outline: none !important; }
+}
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir,
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis { border: 1px solid #c9ced6 !important; border-radius: 10px !important; padding: 3px !important; margin: 0 !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label,
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label { padding-top: 4px !important; padding-bottom: 4px !important; line-height: 18px !important; margin: 0 !important; }
+}
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir label,
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-jenis label { height: 26px !important; min-height: 26px !important; display: inline-flex !important; align-items: center !important; padding-top: 0 !important; padding-bottom: 0 !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .pilih-hadir span { line-height: 1 !important; }
+}
+html:not(#_) .kepala-nusantara .sambut-latar { background: radial-gradient(120% 160% at 15% 0%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 55%), radial-gradient(90% 140% at 100% 100%, rgba(120,200,255,.55) 0%, rgba(120,200,255,0) 60%), linear-gradient(120deg, #2f6fd0 0%, #5b9be6 35%, #9cc7f2 65%, #e6f1fc 100%) !important; }
+html:not(#_) .kepala-nusantara .sambut-latar > * { display: none !important; }
+html:not(#_) .kepala-nusantara .sambut-latar::after { content: none !important; }
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .rincian { display: block !important; width: 100% !important; max-width: none !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .rincian > summary { display: flex !important; width: 100% !important; box-sizing: border-box; }
+}
+@keyframes macosBanner { 0% { background-position: 0% 50%, 100% 0%, 0% 0%; } 50% { background-position: 60% 40%, 40% 100%, 0% 0%; } 100% { background-position: 100% 50%, 0% 100%, 0% 0%; } }
+@keyframes macosBokeh { 0% { transform: translate(0, 0) scale(1); opacity: .55; } 50% { transform: translate(38px, -6px) scale(1.12); opacity: .85; } 100% { transform: translate(-22px, 5px) scale(.96); opacity: .5; } }
+html:not(#_) .sambut-latar { background: radial-gradient(120% 160% at 15% 0%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 55%), radial-gradient(90% 140% at 100% 100%, rgba(120,200,255,.55) 0%, rgba(120,200,255,0) 60%), linear-gradient(120deg, #2f6fd0 0%, #5b9be6 35%, #9cc7f2 65%, #e6f1fc 100%) !important; background-size: 160% 160%, 160% 160%, 200% 200% !important; animation: macosBanner 16s ease-in-out infinite alternate; }
+html:not(#_) .sambut-latar > * { display: none !important; }
+html:not(#_) .sambut-latar::before, html:not(#_) .sambut-latar::after { content: "" !important; display: block !important; position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.7) 0%, rgba(255,255,255,0) 70%); animation: macosBokeh 9s ease-in-out infinite alternate; pointer-events: none; }
+html:not(#_) .sambut-latar::before { width: 180px; height: 180px; left: 8%; top: -60px; }
+html:not(#_) .sambut-latar::after { width: 140px; height: 140px; right: 12%; bottom: -50px; animation-duration: 12s; animation-delay: -4s; background: radial-gradient(circle, rgba(200,235,255,.8) 0%, rgba(200,235,255,0) 70%); }
+@media (prefers-reduced-motion: reduce) { html:not(#_) .sambut-latar, html:not(#_) .sambut-latar::before, html:not(#_) .sambut-latar::after { animation: none !important; } }
+@media (min-width: 861px) {
+}
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] { display: grid !important; grid-template-columns: minmax(0, 1fr) 190px minmax(0, 1.3fr); gap: 0 14px; align-items: start; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan { display: contents; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > summary,
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .kartu-isi,
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .medan-foto { grid-column: 1 / -1; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris:has(> #hBukti) { grid-column: 3; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris:has(> #hHasil) { grid-column: 1; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris:has(> #hSatuan) { grid-column: 2; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris:has(> #hSk) { grid-column: 1 / -1; }
+}
+@media (min-width: 861px) { html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .foto-bukti { grid-column: 1 / -1; } }
+@media (min-width: 861px) { html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan { display: contents !important; } }
+@media (min-width: 861px) { html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris:has(> #hUraian) { grid-column: 1 / -1 !important; } }
+@media (min-width: 861px) { html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan { display: grid !important; grid-template-columns: minmax(0, 1fr) 190px minmax(0, 1.3fr); gap: 0 14px; grid-column: 1 / -1; align-items: start; } }
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan { display: flex !important; flex-wrap: wrap; align-items: flex-end; gap: 8px 12px; grid-column: 1 / -1; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris { grid-column: auto !important; width: auto !important; margin: 0 !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris input { width: 170px; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris:has(> #hSatuan) input { width: 110px; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris:has(> #hBukti) input { width: 240px; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris:has(> #hUraian) { width: auto !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping #hUraian { width: 440px; height: 58px; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .foto-bukti { margin-top: 2px !important; }
+}
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian > summary { display: none !important; }
+.aset-bilah, .aset-bilah:not(.x) { padding: 8px 16px !important; }
+.aset-bilah .aset-nav { min-height: 40px; align-items: center; }
+.aset-bilah .aset-nav { align-content: center; }
+.aset-bilah .aset-grup > a, .aset-bilah .aset-nav > a { display: inline-flex; align-items: center; line-height: 1; }
+@media (min-width: 1100px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping > .kartu-isi { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping #hJudul { width: 100% !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .langkah .form-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .langkah .form-grid-3 input { width: 100% !important; }
+}
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping #hUraian { width: 100% !important; height: 70px; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris { flex: 1 1 200px; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris input { width: 100% !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris:has(> #hSatuan) { flex: 0 0 160px; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris:has(> #hBukti) { flex: 2 1 320px; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan { gap: 8px 14px; }
+}
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian { border: 0 !important; background: transparent !important; box-shadow: none !important; border-radius: 0 !important; padding: 0 !important; margin: 0 !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] { padding-top: 4px !important; }
+@media (min-width: 1100px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping > .kartu-isi > section.langkah:nth-of-type(4) { grid-column: 2 !important; grid-row: 2 !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping > .kartu-isi > section.langkah:nth-of-type(n+5) { grid-column: 1 / -1 !important; grid-row: 3 !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping > .kartu-isi > section.langkah:nth-of-type(3) { grid-column: 1 !important; grid-row: 2 !important; }
+}
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .kartu-isi > section.langkah:nth-of-type(3) > .langkah-kepala,
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .kartu-isi > section.langkah:nth-of-type(4) > .langkah-kepala { display: none !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .kartu-isi > section.langkah:nth-of-type(5) > .langkah-kepala { display: none !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris,
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .foto-bukti,
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .hasil-satuan { margin-left: 0 !important; padding-left: 0 !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > * { margin-left: 0 !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .kartu-isi > section.langkah { padding-left: 0 !important; margin-left: 0 !important; }
+@media (min-width: 1100px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; column-gap: 28px !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris:has(> #hUraian) { grid-column: 1 !important; grid-row: 2 !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan { grid-column: 2 !important; grid-row: 2 !important; display: flex !important; flex-wrap: wrap; align-items: flex-end; gap: 8px 14px; align-content: start; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris:has(> #hHasil) { flex: 1 1 200px; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris:has(> #hSatuan) { flex: 0 0 150px; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris:has(> #hBukti) { flex: 1 1 100%; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .foto-bukti { grid-column: 1 / -1 !important; grid-row: 3 !important; }
+}
+@media (min-width: 1100px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] { display: flex !important; flex-wrap: wrap !important; align-items: flex-start; gap: 0 28px; grid-template-columns: none !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris:has(> #hUraian) { flex: 0 0 calc(50% - 14px) !important; max-width: calc(50% - 14px) !important; grid-column: auto !important; grid-row: auto !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan { flex: 0 0 calc(50% - 14px) !important; max-width: calc(50% - 14px) !important; display: flex !important; flex-wrap: wrap !important; align-items: flex-end; gap: 8px 14px; grid-column: auto !important; grid-row: auto !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris:has(> #hHasil) { flex: 1 1 180px !important; grid-column: auto !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris:has(> #hSatuan) { flex: 0 0 140px !important; grid-column: auto !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris:has(> #hBukti) { flex: 1 1 100% !important; grid-column: auto !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .foto-bukti { flex: 0 0 100% !important; grid-column: auto !important; grid-row: auto !important; }
+}
+@media (min-width: 1100px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .kartu-isi > section.langkah { padding-bottom: 6px !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .kartu-isi { row-gap: 6px !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .form-baris { margin-bottom: 6px !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .fl { margin-bottom: 3px !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] { row-gap: 4px !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris { margin-bottom: 4px !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping .langkah .form-grid-3 { row-gap: 0 !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping > .kartu-kaki { padding-top: 8px !important; padding-bottom: 8px !important; }
+}
+@media (min-width: 861px) and (max-width: 1099px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan { display: flex !important; flex-wrap: wrap !important; align-items: flex-end; gap: 8px 12px !important; width: 100% !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris { flex: 0 0 auto !important; width: auto !important; margin: 0 !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris input, html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris select { width: 170px !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris:has(> #hSatuan) input { width: 110px !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris:has(> #hBukti) input { width: 230px !important; }
+}
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] { display: flex !important; flex-direction: row !important; flex-wrap: wrap !important; align-items: flex-start !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan { display: flex !important; flex-direction: row !important; flex-wrap: wrap !important; align-items: flex-start !important; order: 0; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris:has(> #hHasil) { flex: 1 1 200px !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris:has(> #hUraian) { flex: 1 1 260px !important; max-width: none !important; }
+}
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan { flex: 1 1 340px !important; width: auto !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris input { width: 100% !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris:has(> #hHasil) { flex: 1 1 140px !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris:has(> #hSatuan) { flex: 0 0 120px !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris:has(> #hBukti) { flex: 1 1 100% !important; }
+}
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan { flex: 0 0 340px !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris:has(> #hUraian) { flex: 1 1 0 !important; min-width: 0; }
+}
+@media (min-width: 861px) {
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] { column-gap: 14px !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan { flex: 0 1 300px !important; min-width: 0; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris:has(> #hUraian) { flex: 1 1 0 !important; width: auto !important; }
+  html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping #hUraian { width: 100% !important; }
+}
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] { display: block !important; max-width: 560px; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan { display: block !important; width: 100% !important; max-width: none !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris,
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris { width: 100% !important; max-width: none !important; flex: none !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris input:not([type=file]),
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris select,
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris textarea,
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping #hUraian { width: 100% !important; box-sizing: border-box; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; gap: 8px 20px !important; max-width: none !important; align-items: start !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan { display: contents !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris { grid-column: auto !important; grid-row: auto !important; margin: 0 !important; min-width: 0 !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .foto-bukti { grid-column: 1 / -1 !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] #hUraian { height: 64px; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris:has(> #hUraian) { grid-column: 1 !important; grid-row: 1 !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris:has(> #hHasil) { grid-column: 2 !important; grid-row: 1 !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris:has(> #hSatuan) { grid-column: 1 !important; grid-row: 2 !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris:has(> #hBukti) { grid-column: 2 !important; grid-row: 2 !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .foto-bukti { grid-row: 3 !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris input:not([type=file]), html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris:has(> #hSatuan) input, html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris:has(> #hBukti) input { width: 100% !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] { display: block !important; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open]::details-content { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; gap: 8px 20px !important; align-items: start !important; content-visibility: visible; }
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris input,
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris:has(> #hSatuan) input,
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris:has(> #hBukti) input,
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] > .hasil-satuan > .form-baris:has(> #hHasil) input { width: 100% !important; box-sizing: border-box !important; }
+
+html:not(#_) .jam-digital { color: #f0c75a !important; text-align: center; }
+html:not(#_) .jam-digital .jd-hari,
+html:not(#_) .jam-digital .jd-tanggal,
+html:not(#_) .jam-digital .jd-zona { color: #f7dc92 !important; text-transform: uppercase; letter-spacing: .16em !important; font-weight: 600 !important; font-size: .6rem !important; -webkit-text-stroke: 0 !important; text-shadow: 0 1px 2px rgba(8,22,48,.75), 0 0 1px rgba(8,22,48,.9) !important; opacity: 1 !important; }
+html:not(#_) .jam-digital .jd-tanggal { letter-spacing: .12em !important; }
+html:not(#_) .jam-digital .jd-jam { font-size: 1.9rem !important; font-weight: 600 !important; letter-spacing: .04em !important; font-variant-numeric: tabular-nums; background: linear-gradient(180deg, #fff1c2 0%, #f3cf6b 45%, #c9972a 100%); -webkit-background-clip: text; background-clip: text; color: transparent !important; -webkit-text-fill-color: transparent; -webkit-text-stroke: 0 !important; text-shadow: none !important; filter: drop-shadow(0 0 .6px rgba(8,22,48,.95)) drop-shadow(0 1px 2px rgba(8,22,48,.55)); opacity: 1 !important; }
+html:not(#_) .jam-digital .jd-detik { color: #f0c75a !important; font-weight: 600 !important; font-size: .78rem !important; font-variant-numeric: tabular-nums; -webkit-text-stroke: 0 !important; text-shadow: 0 1px 2px rgba(8,22,48,.75), 0 0 1px rgba(8,22,48,.9) !important; opacity: 1 !important; }
+html:not(#_) .jam-digital .jd-waktu { gap: 6px; margin: 2px 0 3px; }
+
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris:has(> #hSatuan) select { width: 100% !important; box-sizing: border-box; }
+
+html:not(#_) body[data-hal="kegiatan"] .isi form.kegiatan-ramping details.rincian[open] .form-baris:has(> #hHasil) textarea { width: 100% !important; height: 64px !important; box-sizing: border-box; resize: vertical; }
+
+.pengajuan-daftar-kepala { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin: 16px 0 8px; padding-top: 12px; border-top: 1px dashed var(--garis); }
+.pengajuan-daftar-kepala b { font-size: .92rem; }
+.pengajuan-daftar-kepala span { font-size: .8rem; }
+.pengajuan-item { border: 1px solid var(--garis); border-radius: 12px; padding: 10px 12px 4px; margin-bottom: 10px; background: rgba(31,95,191,.03); }
+.pengajuan-item .pi-kepala { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.pengajuan-item .pi-kepala b { font-size: .82rem; color: #1f5fbf; }
+.pengajuan-item .pi-kepala [hidden] { display: none; }
+.pengajuan-item .pi-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 720px) { .pengajuan-item .pi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.pengajuan-tambah { margin: 2px 0 14px; }
+
+.penghapusan-tab { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+.hapus-detail { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; }
+.hapus-detail [data-medan][hidden] { display: none; }
+.hapus-detail [data-medan="rincian"] { grid-column: 1 / -1; }
+@media (max-width: 640px) { .hapus-detail { grid-template-columns: 1fr; } }
+
+.ba-ttd { align-items: stretch; }
+.ba-ttd > div { display: flex; flex-direction: column; }
+.ba-ttd > div > .ruang { flex: 1 0 70px; }
+.ba-ttd .ttd-nama { line-height: 1.25; }
+.ba-ttd-3 > div > div:not(.ruang) { line-height: 1.3; }
+
+.ba-ttd > div { justify-content: flex-start; }
+.ba-ttd > div > .ruang { flex: 0 0 70px; }
+.ba-ttd-3 > div > div:nth-child(2) { min-height: 2.6em; }
+
+html:not(#_) table.tabel-kategori { table-layout: fixed; width: 100%; }
+html:not(#_) table.tabel-kategori th:nth-child(1), html:not(#_) table.tabel-kategori td:nth-child(1) { width: 17%; text-align: left; padding-left: 18px; }
+html:not(#_) table.tabel-kategori th:nth-child(2), html:not(#_) table.tabel-kategori td:nth-child(2) { width: 27%; text-align: left; padding-left: 18px; }
+html:not(#_) table.tabel-kategori th:nth-child(3), html:not(#_) table.tabel-kategori td:nth-child(3) { width: 12%; text-align: center; }
+html:not(#_) table.tabel-kategori th:nth-child(4), html:not(#_) table.tabel-kategori td:nth-child(4) { width: 9%; text-align: center; }
+html:not(#_) table.tabel-kategori th:nth-child(5), html:not(#_) table.tabel-kategori td:nth-child(5) { width: 17%; text-align: right; padding-right: 28px; }
+html:not(#_) table.tabel-kategori th:nth-child(6), html:not(#_) table.tabel-kategori td:nth-child(6) { width: 11%; text-align: center; }
+html:not(#_) table.tabel-kategori th:nth-child(7), html:not(#_) table.tabel-kategori td:nth-child(7) { width: 7%; min-width: 96px; text-align: center; }
+html:not(#_) table.tabel-kategori th:nth-child(1), html:not(#_) table.tabel-kategori th:nth-child(2) { text-align: left; }
+html:not(#_) table.tabel-kategori th:nth-child(5) { text-align: right; padding-right: 28px; }
+html:not(#_) table.tabel-kategori .aksi-baris { display: flex; justify-content: center; align-items: center; gap: 4px; }
+html:not(#_) table.tabel-kategori .aksi-baris form { margin: 0; }
+html:not(#_) table.tabel-kategori .aksi-kosong { display: inline-block; width: 34px; height: 34px; }
+html:not(#_) table.tabel-kategori td:nth-child(6) .status-titik { display: inline-flex; justify-content: center; }
+
+html:not(#_) .aksi-pengajuan { display: flex; align-items: center; justify-content: center; gap: 4px; }
+html:not(#_) .aksi-pengajuan form { margin: 0; }
+html:not(#_) .aksi-pengajuan .aksi-utama { display: inline-flex; align-items: center; justify-content: center; width: 112px; margin-right: 6px; }
+html:not(#_) .aksi-pengajuan .aksi-utama .btn { width: 100%; justify-content: center; white-space: nowrap; }
+html:not(#_) .aksi-pengajuan .aksi-utama form { width: 100%; }
+html:not(#_) .aksi-pengajuan .aksi-kosong { display: inline-block; width: 34px; height: 34px; }
+
+html:not(#_) td.status-pengajuan { text-align: center; vertical-align: middle; }
+
+.form-cs-harian .cs-baris-atas { display: grid; grid-template-columns: 1.1fr 1.6fr .7fr .7fr; gap: 12px 16px; margin-bottom: 14px; }
+@media (max-width: 860px) { .form-cs-harian .cs-baris-atas { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.form-cs-harian .cs-checklist-kepala { display: flex; align-items: center; gap: 12px; margin: 4px 0 8px; flex-wrap: wrap; }
+.form-cs-harian .cs-checklist-kepala b { font-size: .95rem; }
+.form-cs-harian .cs-checklist-kepala [data-cs-hitung] { margin-right: auto; font-size: .82rem; }
+html:not(#_) .form-cs-harian table.cs-checklist { table-layout: fixed; width: 100%; }
+html:not(#_) .form-cs-harian table.cs-checklist th.kolom-no, html:not(#_) .form-cs-harian table.cs-checklist td.kolom-no { width: 64px; text-align: center; }
+html:not(#_) .form-cs-harian table.cs-checklist th:nth-child(2), html:not(#_) .form-cs-harian table.cs-checklist td:nth-child(2) { text-align: left; padding-left: 18px; }
+html:not(#_) .form-cs-harian table.cs-checklist .cs-kolom-cek { width: 150px; text-align: center; }
+.form-cs-harian table.cs-checklist td label { display: block; cursor: pointer; padding: 6px 0; }
+.form-cs-harian table.cs-checklist input[type="checkbox"] { width: 22px; height: 22px; cursor: pointer; accent-color: #1f8a4c; }
+.form-cs-harian table.cs-checklist tr:has(input:checked) { background: rgba(31,138,76,.07); }
+.form-cs-harian .foto-bukti { margin-top: 16px; }
+.form-cs-harian .kartu-kaki { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+
+.form-cs-harian .tabel-bungkus { margin-bottom: 16px; }
+
+@media (max-width: 640px) {
+  html:not(#_) .form-cs-harian .cs-baris-atas { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 12px; }
+  html:not(#_) .form-cs-harian .cs-baris-atas .form-baris:nth-child(1), html:not(#_) .form-cs-harian .cs-baris-atas .form-baris:nth-child(2) { grid-column: 1 / -1; }
+  html:not(#_) .form-cs-harian input:not([type="checkbox"]):not([type="file"]), html:not(#_) .form-cs-harian select, html:not(#_) .form-cs-harian textarea { font-size: .9rem !important; min-height: 42px; }
+  html:not(#_) .form-cs-harian .fl, html:not(#_) .form-cs-harian label.fl { font-size: .9rem !important; }
+  html:not(#_) .form-cs-harian .cs-checklist-kepala { gap: 8px; }
+  html:not(#_) .form-cs-harian .cs-checklist-kepala b { font-size: .9rem; }
+  html:not(#_) .form-cs-harian .cs-checklist-kepala [data-cs-hitung] { font-size: .9rem; }
+  html:not(#_) .form-cs-harian table.cs-checklist th, html:not(#_) .form-cs-harian table.cs-checklist td { font-size: .9rem !important; padding: 8px 6px; }
+  html:not(#_) .form-cs-harian table.cs-checklist th { font-size: .9rem !important; white-space: normal; }
+  html:not(#_) .form-cs-harian table.cs-checklist th.kolom-no, html:not(#_) .form-cs-harian table.cs-checklist td.kolom-no { width: 38px; }
+  html:not(#_) .form-cs-harian table.cs-checklist th:nth-child(2), html:not(#_) .form-cs-harian table.cs-checklist td:nth-child(2) { padding-left: 8px; text-align: left; }
+  html:not(#_) .form-cs-harian table.cs-checklist .cs-kolom-cek { width: 92px; }
+  html:not(#_) .form-cs-harian table.cs-checklist td label { padding: 2px 0; line-height: 1.3; }
+  html:not(#_) .form-cs-harian table.cs-checklist input[type="checkbox"] { width: 24px; height: 24px; }
+  html:not(#_) .form-cs-harian .foto-bukti-tombol .btn { font-size: .9rem; }
+  html:not(#_) .form-cs-harian .kartu-kaki .btn { width: 100%; justify-content: center; }
+}
+
+.kartu-tim-grup + .kartu-tim-grup { margin-top: 22px; }
+.kartu-tim-grup > .kartu-kepala h2 { font-size: 1rem; }
+
+html:not(#_) .tabel-per-hari tr.baris-hari td { background: #fff !important; border-top: 1px solid #d9dde3 !important; border-bottom: 1px solid #e6e9ee !important; color: #1b2733 !important; }
+html:not(#_) .tabel-per-hari tr.baris-hari td .ikon { color: #5b6672 !important; }
+html:not(#_) .tabel-per-hari tbody tr.hari-genap td { background: #fff !important; }
+html:not(#_) .tabel-per-hari tfoot tr.baris-total td { background: #fff !important; border-top: 1px solid #d9dde3 !important; color: #1b2733 !important; }
+html:not(#_) .tabel-per-hari td.ab-durasi b { color: #1b2733; }
+
+html:not(#_) table.tabel.tabel-absensi th.ab-tgl.ab-akhir-pekan { background: #e6e9ee !important; color: #5b6672 !important; }
+html:not(#_) table.tabel.tabel-absensi td.ab-tgl.ab-akhir-pekan { background: #f2f4f7 !important; }
+@media print { html:not(#_) table.tabel.tabel-absensi th.ab-tgl.ab-akhir-pekan { background: #ddd !important; } html:not(#_) table.tabel.tabel-absensi td.ab-tgl.ab-akhir-pekan { background: #efefef !important; } }
+
+html:not(#_) .aset-bilah.rapb-subbilah, html:not(#_) .aset-bilah.rapb-subbilah:not(.x) { padding: 3px !important; min-height: 0 !important; height: auto !important; }
+html:not(#_) .aset-bilah.rapb-subbilah .aset-nav, html:not(#_) .aset-bilah.rapb-subbilah .rapb-subnav { min-height: 0 !important; margin: 0 !important; padding: 0 !important; align-items: center; }
+html:not(#_) .aset-bilah.rapb-subbilah .aset-grup { margin: 0; }
+html:not(#_) .aset-bilah.rapb-subbilah .aset-nav a { padding: 5px 14px !important; line-height: 1.25 !important; }
+
+html:not(#_) .kk-cs-kepala, html:not(#_) .kk-cs > summary { display: grid !important; grid-template-columns: minmax(190px, 1.5fr) minmax(110px, 1fr) minmax(130px, 1.3fr) minmax(130px, 1.3fr) minmax(80px, .7fr) minmax(110px, 1fr) 22px; gap: 14px; align-items: center; }
+html:not(#_) .kk-cs-kepala { padding: 10px 18px; background: #f4f6f9; border-top: 1px solid #dfe3e8; border-bottom: 1px solid #dfe3e8; font-size: .72rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: #5b6672; }
+html:not(#_) .kk-cs { border-top: 0; border-bottom: 1px solid #e6e9ee; background: #fff; }
+html:not(#_) .kk-cs > summary { padding: 13px 18px; background: #fff !important; }
+html:not(#_) .kk-cs > summary:hover { background: #f7f9fc !important; }
+html:not(#_) .kk-cs[open] > summary { background: #f4f7fb !important; border-bottom: 1px solid #e1e6ee; }
+html:not(#_) .kk-sel { display: flex; flex-direction: column; gap: 3px; min-width: 0; font-size: .88rem; color: #1b2733; }
+html:not(#_) .kk-sel small { font-size: .74rem; color: #6b7684; }
+html:not(#_) .kk-sel-nama { display: flex; flex-direction: row; align-items: center; gap: 10px; }
+html:not(#_) .kk-sel-nama > span:last-child { display: flex; flex-direction: column; min-width: 0; }
+html:not(#_) .kk-sel-nama b { font-size: .92rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+html:not(#_) .kk-sel-nama small { font-size: .74rem; color: #6b7684; }
+html:not(#_) .kk-besar { font-size: 1.1rem; font-weight: 700; color: #12294c; }
+html:not(#_) .kk-bar { display: block; width: 100%; max-width: 150px; height: 7px; border-radius: 99px; background: #e8ebf0; overflow: hidden; }
+html:not(#_) .kk-bar i { display: block; height: 100%; border-radius: 99px; }
+html:not(#_) .kk-bar-hijau i { background: #2f9e6a; }
+html:not(#_) .kk-bar-emas i { background: #d9a441; }
+html:not(#_) .kk-bar-jingga i { background: #e08a3c; }
+html:not(#_) .kk-cs-akhir { text-align: left; font-size: .8rem; }
+html:not(#_) .kk-cs-akhir.aktif { color: #1c7a4f; font-weight: 650; }
+html:not(#_) .kk-panah { width: 9px; height: 9px; border-right: 2px solid #8b95a3; border-bottom: 2px solid #8b95a3; transform: rotate(45deg); transition: transform .15s; justify-self: center; margin-top: -3px; }
+html:not(#_) .kk-cs[open] .kk-panah { transform: rotate(-135deg); margin-top: 3px; }
+html:not(#_) .kk-cs-isi { background: #fafbfc !important; padding: 8px 18px 18px; gap: 28px; border-bottom: 1px solid #e6e9ee; }
+html:not(#_) .kk-cs-kolom h4 { margin: 16px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #e6e9ee; font-size: .74rem; letter-spacing: .06em; color: #3a4654; }
+html:not(#_) .kk-cat { display: grid; grid-template-columns: 70px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 8px 10px; margin-bottom: 6px; border: 1px solid #e3e7ec; border-radius: 10px; background: #fff; }
+html:not(#_) .kk-cat-tgl { font-size: .78rem; font-weight: 650; color: #3a4654; }
+html:not(#_) .kk-cat-isi { display: flex; flex-direction: column; min-width: 0; font-size: .86rem; }
+html:not(#_) .kk-cat-isi small { color: #6b7684; font-size: .74rem; }
+html:not(#_) .kk-cat-foto { display: flex; flex-wrap: wrap; gap: 4px 10px; justify-content: flex-end; font-size: .78rem; }
+html:not(#_) .kk-cat-foto .sub { margin: 0; }
+@media (max-width: 860px) {
+  html:not(#_) .kk-cs-kepala { display: none !important; }
+  html:not(#_) .kk-cs > summary { grid-template-columns: 1fr 1fr 22px; gap: 10px 14px; }
+  html:not(#_) .kk-cs > summary .kk-sel-nama { grid-column: 1 / 3; }
+  html:not(#_) .kk-cs > summary .kk-panah { grid-column: 3; grid-row: 1; }
+  html:not(#_) .kk-sel[data-label]::before { content: attr(data-label); font-size: .68rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: #8b95a3; }
+  html:not(#_) .kk-cs-isi { grid-template-columns: 1fr !important; }
+  html:not(#_) .kk-cat { grid-template-columns: 62px minmax(0, 1fr); }
+  html:not(#_) .kk-cat-foto { grid-column: 1 / -1; justify-content: flex-start; }
+}
+
+.saring .pilih-bulan { margin-left: auto; }

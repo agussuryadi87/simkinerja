@@ -173,6 +173,7 @@ function aset_sel_penginput(?array $p): string
 }
 
 const ASET_KABID = ['nama' => 'dr. Andi Khairunnisa', 'nup' => '777 0313 556'];
+const ASET_KABIRO = ['nama' => 'Andi Hidayatul Fadlilah, SE., M.Si., AK.', 'nomor' => 'NUP. 777 1111 520'];
 const ASET_WAREK2 = ['nama' => 'Dr. Andi Auliya Ramadhany, S.E., M.Ak', 'nomor' => 'NUP. 777 0913 593'];
 const ASET_REKTOR = ['nama' => 'Dr. Ir. Larisang, S.T., MT., IPU', 'nomor' => 'NIP. 196505132005011001'];
 const ASET_NAV_SEMBUNYI = ['rawat_lama'];
@@ -300,6 +301,100 @@ function aset_publik_boleh_kirim(string $ip, int $batas = 5, int $detik = 3600):
         return true;
     });
     return $boleh === true;
+}
+
+const ASET_PENGAJUAN_ITEM_BERKAS = 'pengajuan-item.json';
+const ASET_PENGAJUAN_ITEM_MAKS = 50;
+
+function aset_pengajuan_item_tambahan_semua(): array
+{
+    return aset_publik_baca(ASET_PENGAJUAN_ITEM_BERKAS);
+}
+
+function aset_pengajuan_item_normal(array $i): array
+{
+    return [
+        'nama_barang'    => (string) ($i['nama_barang'] ?? ''),
+        'kategori'       => (string) ($i['kategori'] ?? 'lainnya'),
+        'jumlah'         => max(1, (int) ($i['jumlah'] ?? 1)),
+        'satuan'         => (string) (($i['satuan'] ?? '') !== '' ? $i['satuan'] : 'unit'),
+        'estimasi_harga' => isset($i['estimasi_harga']) && $i['estimasi_harga'] !== null && $i['estimasi_harga'] !== '' ? (float) $i['estimasi_harga'] : null,
+    ];
+}
+
+function aset_pengajuan_semua_item(array $p, ?array $semuaTambahan = null): array
+{
+    $semuaTambahan = $semuaTambahan ?? aset_pengajuan_item_tambahan_semua();
+    $hasil = [aset_pengajuan_item_normal($p)];
+    foreach ((array) ($semuaTambahan[(string) $p['id']] ?? []) as $i) {
+        if (is_array($i) && trim((string) ($i['nama_barang'] ?? '')) !== '') {
+            $hasil[] = aset_pengajuan_item_normal($i);
+        }
+    }
+    return $hasil;
+}
+
+function aset_pengajuan_total_item(array $items): ?float
+{
+    $total = 0.0;
+    $ada = false;
+    foreach ($items as $i) {
+        if ($i['estimasi_harga'] !== null) {
+            $total += $i['estimasi_harga'] * $i['jumlah'];
+            $ada = true;
+        }
+    }
+    return $ada ? $total : null;
+}
+
+function aset_pengajuan_item_dari_post(): array
+{
+    $nama = $_POST['item_nama'] ?? [];
+    if (!is_array($nama)) {
+        return [];
+    }
+    $kategori = aset_kategori(true);
+    $hasil = [];
+    foreach ($nama as $i => $n) {
+        $n = mb_substr(trim((string) $n), 0, 200);
+        if ($n === '' || count($hasil) >= ASET_PENGAJUAN_ITEM_MAKS) {
+            continue;
+        }
+        $k = (string) ($_POST['item_kategori'][$i] ?? 'lainnya');
+        $harga = str_replace(['.', ','], ['', '.'], trim((string) ($_POST['item_harga'][$i] ?? '')));
+        $hasil[] = [
+            'nama_barang'    => $n,
+            'kategori'       => array_key_exists($k, $kategori) ? $k : 'lainnya',
+            'jumlah'         => max(1, min(100000, (int) ($_POST['item_jumlah'][$i] ?? 1))),
+            'satuan'         => mb_substr(trim((string) ($_POST['item_satuan'][$i] ?? '')) ?: 'unit', 0, 20),
+            'estimasi_harga' => $harga !== '' && is_numeric($harga) && (float) $harga >= 0 ? (float) $harga : null,
+        ];
+    }
+    return $hasil;
+}
+
+function aset_pengajuan_item_simpan(int $id, array $tambahan): void
+{
+    aset_publik_ubah(ASET_PENGAJUAN_ITEM_BERKAS, static function (array &$data) use ($id, $tambahan): void {
+        if ($tambahan) {
+            $data[(string) $id] = array_values($tambahan);
+        } else {
+            unset($data[(string) $id]);
+        }
+    });
+}
+
+function aset_pengajuan_isi(array $p, ?array $semuaTambahan = null): array
+{
+    $items = [];
+    foreach (aset_pengajuan_semua_item($p, $semuaTambahan) as $i) {
+        $items[] = [
+            'nama_barang' => $i['nama_barang'], 'kategori' => $i['kategori'], 'jumlah' => $i['jumlah'], 'satuan' => $i['satuan'],
+            'harga' => $i['estimasi_harga'] !== null ? (string) (int) round($i['estimasi_harga']) : '',
+        ];
+    }
+    return ['id' => (int) $p['id'], 'tanggal' => $p['tanggal'], 'prioritas' => $p['prioritas'], 'ruang_id' => $p['ruang_id'] ?? '',
+        'pemohon' => $p['pemohon'], 'alasan' => $p['alasan'], 'items' => $items];
 }
 
 function aset_pengajuan_publik_info(int $id): ?array
@@ -563,6 +658,74 @@ const ASET_ALASAN_HAPUS = [
     'rusak_berat' => 'Rusak berat', 'hilang' => 'Hilang', 'usang' => 'Usang / tidak layak pakai',
     'dijual' => 'Dijual', 'dihibahkan' => 'Dihibahkan', 'lainnya' => 'Lainnya',
 ];
+
+const ASET_HAPUS_MEDAN = [
+    'dijual'      => ['pihak' => 'Nama pembeli', 'harga_jual' => 'Harga jual (Rp)', 'dokumen' => 'No. kuitansi / berita acara jual', 'rincian' => 'Keterangan penjualan'],
+    'dihibahkan'  => ['pihak' => 'Penerima hibah', 'dokumen' => 'No. berita acara hibah', 'rincian' => 'Keperluan / catatan hibah'],
+    'hilang'      => ['pihak' => 'Pelapor / penanggung jawab', 'dokumen' => 'No. laporan kehilangan', 'rincian' => 'Kronologi dan lokasi terakhir'],
+    'rusak_berat' => ['dokumen' => 'No. berita acara kerusakan', 'rincian' => 'Rincian kerusakan'],
+    'usang'       => ['dokumen' => 'No. berita acara', 'rincian' => 'Kondisi dan usia pakai'],
+    'lainnya'     => ['dokumen' => 'No. dokumen pendukung', 'rincian' => 'Penjelasan alasan'],
+];
+
+const ASET_HAPUS_BERKAS = 'penghapusan-detail.json';
+
+function aset_hapus_detail_semua(): array
+{
+    return aset_publik_baca(ASET_HAPUS_BERKAS);
+}
+
+function aset_hapus_detail_dari_post(string $alasan): array
+{
+    $d = [];
+    foreach (array_keys(ASET_HAPUS_MEDAN[$alasan] ?? []) as $kunci) {
+        if ($kunci === 'harga_jual') {
+            $h = aset_angka_atau_null('harga_jual');
+            $d['harga_jual'] = $h;
+        } else {
+            $d[$kunci] = mb_substr($kunci === 'rincian' ? post_teks($kunci) : post($kunci), 0, $kunci === 'rincian' ? 1000 : 150);
+        }
+    }
+    return $d;
+}
+
+function aset_hapus_detail_simpan(int $id, array $detail): void
+{
+    aset_publik_ubah(ASET_HAPUS_BERKAS, static function (array &$data) use ($id, $detail): void {
+        if ($detail) {
+            $data[(string) $id] = $detail;
+        } else {
+            unset($data[(string) $id]);
+        }
+    });
+}
+
+function aset_hapus_detail_buang(int $id): void
+{
+    aset_hapus_detail_simpan($id, []);
+}
+
+function aset_hapus_detail_isi(array $detail): array
+{
+    return [
+        'pihak'      => (string) ($detail['pihak'] ?? ''),
+        'dokumen'    => (string) ($detail['dokumen'] ?? ''),
+        'rincian'    => (string) ($detail['rincian'] ?? ''),
+        'harga_jual' => isset($detail['harga_jual']) && $detail['harga_jual'] !== null ? (string) (int) round((float) $detail['harga_jual']) : '',
+    ];
+}
+
+function aset_hapus_ringkas(string $alasan, array $detail): string
+{
+    $h = '';
+    foreach (ASET_HAPUS_MEDAN[$alasan] ?? [] as $kunci => $label) {
+        if ($kunci === 'harga_jual' || trim((string) ($detail[$kunci] ?? '')) === '') {
+            continue;
+        }
+        $h .= '<div class="kecil"><span class="lemah">' . e($label) . ':</span> ' . e((string) $detail[$kunci]) . '</div>';
+    }
+    return $h !== '' ? $h : '<span class="lemah">-</span>';
+}
 
 function aset_kategori(bool $semua = false): array
 {

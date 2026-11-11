@@ -231,6 +231,9 @@ function izin_pengguna(int $penggunaId, int $peranId, ?array $penyesuaian = null
             $izin[] = $kode;
         }
     }
+    if ((string) val('SELECT kode FROM peran WHERE id = ?', [$peranId], '') === 'cs') {
+        $izin[] = 'kegiatan_isi';
+    }
     foreach ($penyesuaian ?? izin_penyesuaian($penggunaId) as $kode => $boleh) {
         if ($boleh) {
             $izin[] = $kode;

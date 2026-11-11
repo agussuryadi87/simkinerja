@@ -74,7 +74,7 @@ function kirim_header_aman(): void
     if ($https) {
         header('Strict-Transport-Security: max-age=31536000; includeSubDomains');
     }
-    header("Content-Security-Policy: default-src 'self'; img-src 'self' data:; font-src 'self' data:; "
+    header("Content-Security-Policy: default-src 'self'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self' data:; "
          . "style-src 'self' 'unsafe-inline'; script-src 'self' 'nonce-" . csp_nonce() . "'; connect-src 'self'; "
          . "object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; manifest-src 'self'"
          . ($https ? '; upgrade-insecure-requests' : ''));

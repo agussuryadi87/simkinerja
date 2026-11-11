@@ -353,7 +353,10 @@ $penginput = aset_penginput('aset_kerusakan', $daftar);
         <td><?= lencana_dari(ASET_TINGKAT, $k['tingkat']) ?></td>
         <td><?= lencana_dari(ASET_STATUS_RUSAK, $k['status']) ?></td>
         <td><?= aset_sel_penginput($penginput[(int) $k['id']] ?? null) ?></td>
-        <td class="no-cetak"><div class="aksi-baris"><a class="btn btn-hantu btn-ikon" href="<?= e(url($h, ['aksi' => 'lihat', 'id' => $k['id']])) ?>" title="Buka"><?= ikon('mata', 15) ?></a></div></td>
+        <td class="no-cetak"><div class="aksi-baris"><a class="btn btn-hantu btn-ikon" href="<?= e(url($h, ['aksi' => 'lihat', 'id' => $k['id']])) ?>" title="Buka"><?= ikon('mata', 15) ?></a>
+          <?php if ($penuh || $milikCs($k)): ?><button class="btn btn-hantu btn-ikon" type="button" title="Ubah" data-buka="tiraiRusak" data-judul="Ubah laporan" data-isi='<?= $dataModal($k) ?>'><?= ikon('sunting', 15) ?></button><?php endif; ?>
+          <?php if ($penuh): ?><form method="post" data-konfirmasi="Hapus laporan <?= e($k['nomor']) ?> beserta foto buktinya?"><?= csrf_field() ?><input type="hidden" name="op" value="hapus"><input type="hidden" name="id" value="<?= (int) $k['id'] ?>">
+            <button class="btn btn-hantu btn-ikon" type="submit" title="Hapus"><?= ikon('hapus', 15) ?></button></form><?php endif; ?></div></td>
       </tr>
     <?php endforeach; ?>
     </tbody></table></div>

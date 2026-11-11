@@ -17,17 +17,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($op === 'simpan') {
         if ($lama && !in_array($lama['status'], ['diajukan', 'disetujui'], true)) {
-            flash('Pengajuan yang sudah dibeli atau diterima tidak dapat diubah.', 'warn');
+            flash($lama['status'] === 'ditolak' ? 'Pengajuan yang ditolak dibuka kembali dulu (Ajukan ulang) sebelum diubah.' : 'Pengajuan yang sudah dibeli atau diterima tidak dapat diubah.', 'warn');
             $balik($pid);
         }
         $tgl = post('tanggal');
+        $items = aset_pengajuan_item_dari_post();
+        $utama = $items[0] ?? ['nama_barang' => '', 'kategori' => 'lainnya', 'jumlah' => 1, 'satuan' => 'unit', 'estimasi_harga' => null];
         $data = [
             'tanggal'        => $tgl,
-            'nama_barang'    => mb_substr(post('nama_barang'), 0, 200),
-            'kategori'       => array_key_exists(post('kategori'), aset_kategori(true)) ? post('kategori') : 'lainnya',
-            'jumlah'         => max(1, min(100000, (int) post('jumlah', '1'))),
-            'satuan'         => mb_substr(post('satuan') ?: 'unit', 0, 20),
-            'estimasi_harga' => aset_angka_atau_null('estimasi_harga'),
+            'nama_barang'    => $utama['nama_barang'],
+            'kategori'       => $utama['kategori'],
+            'jumlah'         => $utama['jumlah'],
+            'satuan'         => $utama['satuan'],
+            'estimasi_harga' => $utama['estimasi_harga'],
             'ruang_id'       => (int) post('ruang_id') ?: null,
             'alasan'         => mb_substr(post_teks('alasan'), 0, 5000),
             'prioritas'      => array_key_exists(post('prioritas'), ASET_PRIORITAS) ? post('prioritas') : 'sedang',
@@ -35,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ];
         $galat = [];
         if ($data['nama_barang'] === '') {
-            $galat[] = 'Nama barang wajib diisi.';
+            $galat[] = 'Isi minimal satu nama barang.';
         }
         if (!tanggal_sah($tgl)) {
             $galat[] = 'Tanggal pengajuan tidak sah.';
@@ -52,9 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             flash('Pengajuan <b>' . e($lama['nomor']) . '</b> diperbarui.');
         } else {
             $pid = insert('aset_pengajuan', $data + ['nomor' => aset_nomor_dokumen('aset_pengajuan', 'PBR', 'tanggal', $tgl), 'dibuat_oleh' => uid()]);
-            flash('Pengajuan barang dicatat.');
+            flash(count($items) > 1 ? 'Pengajuan ' . count($items) . ' barang dicatat dalam satu nomor.' : 'Pengajuan barang dicatat.');
         }
-        catat_log('simpan_aset_pengajuan', 'aset_pengajuan', $pid, $data['nama_barang']);
+        aset_pengajuan_item_simpan((int) $pid, array_slice($items, 1));
+        catat_log('simpan_aset_pengajuan', 'aset_pengajuan', $pid, $data['nama_barang'] . (count($items) > 1 ? ' (+' . (count($items) - 1) . ' barang)' : ''));
         $balik($pid);
     }
 
@@ -79,16 +82,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         catat_log('beli_aset_pengajuan', 'aset_pengajuan', $pid, $lama['nomor']);
         flash('Pembelian dicatat. Unggah foto kwitansi / nota di bawah.');
     } elseif ($op === 'diterima' && in_array($st, ['dibeli', 'disetujui'], true)) {
-        $jumlah = max(1, (int) $lama['jumlah']);
-        $perUnit = $lama['nilai_realisasi'] !== null ? (float) $lama['nilai_realisasi'] / $jumlah : ($lama['estimasi_harga'] !== null ? (float) $lama['estimasi_harga'] : null);
-        $bid = insert('aset_barang', [
-            'kode' => aset_kode_barang_baru(), 'nama' => $lama['nama_barang'], 'kategori' => $lama['kategori'], 'ruang_id' => $lama['ruang_id'],
-            'jumlah' => $jumlah, 'satuan' => $lama['satuan'], 'tahun' => (int) date('Y'), 'harga' => $perUnit, 'sumber_dana' => $lama['penyedia'] !== '' ? 'Pembelian: ' . $lama['penyedia'] : '',
-            'kondisi' => 'baik', 'keterangan' => 'Dari pengajuan ' . $lama['nomor'] . ($lama['no_kwitansi'] !== '' ? ', kwitansi ' . $lama['no_kwitansi'] : ''),
-        ]);
-        update('aset_pengajuan', ['status' => 'diterima', 'barang_id' => $bid, 'diubah' => date('Y-m-d H:i:s')], 'id = ?', [$pid]);
+        $semuaItem = aset_pengajuan_semua_item($lama);
+        $totalEstimasi = aset_pengajuan_total_item($semuaItem);
+        $totalUnit = array_sum(array_column($semuaItem, 'jumlah'));
+        $realisasi = $lama['nilai_realisasi'] !== null ? (float) $lama['nilai_realisasi'] : null;
+        $bidPertama = null;
+        db()->beginTransaction();
+        foreach ($semuaItem as $i) {
+            $jumlah = max(1, (int) $i['jumlah']);
+            if ($realisasi !== null && $totalEstimasi !== null && $totalEstimasi > 0) {
+                $perUnit = ($i['estimasi_harga'] ?? 0) * ($realisasi / $totalEstimasi);
+            } elseif ($realisasi !== null && $totalUnit > 0) {
+                $perUnit = $realisasi / $totalUnit;
+            } else {
+                $perUnit = $i['estimasi_harga'];
+            }
+            $bid = insert('aset_barang', [
+                'kode' => aset_kode_barang_baru(), 'nama' => $i['nama_barang'], 'kategori' => $i['kategori'], 'ruang_id' => $lama['ruang_id'],
+                'jumlah' => $jumlah, 'satuan' => $i['satuan'], 'tahun' => (int) date('Y'), 'harga' => $perUnit !== null ? round((float) $perUnit, 2) : null, 'sumber_dana' => $lama['penyedia'] !== '' ? 'Pembelian: ' . $lama['penyedia'] : '',
+                'kondisi' => 'baik', 'keterangan' => 'Dari pengajuan ' . $lama['nomor'] . ($lama['no_kwitansi'] !== '' ? ', kwitansi ' . $lama['no_kwitansi'] : ''),
+            ]);
+            $bidPertama = $bidPertama ?? $bid;
+        }
+        update('aset_pengajuan', ['status' => 'diterima', 'barang_id' => $bidPertama, 'diubah' => date('Y-m-d H:i:s')], 'id = ?', [$pid]);
+        db()->commit();
         catat_log('terima_aset_pengajuan', 'aset_pengajuan', $pid, $lama['nomor']);
-        flash('Barang diterima dan sudah dicatat di Inventaris.');
+        flash(count($semuaItem) > 1 ? count($semuaItem) . ' barang diterima dan sudah dicatat di Inventaris.' : 'Barang diterima dan sudah dicatat di Inventaris.');
     } elseif ($op === 'ajukan_ulang' && $st === 'ditolak') {
         update('aset_pengajuan', ['status' => 'diajukan', 'diubah' => date('Y-m-d H:i:s')], 'id = ?', [$pid]);
         flash('Pengajuan dibuka kembali.', 'info');
@@ -116,6 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         aset_publik_ubah('pengajuan-publik.json', static function (array &$d) use ($pid): void {
             unset($d[(string) $pid]);
         });
+        aset_pengajuan_item_simpan((int) $pid, []);
         catat_log('hapus_aset_pengajuan', 'aset_pengajuan', $pid, $lama['nomor']);
         flash('Pengajuan dihapus.');
         kembali_ke('aset_pengajuan');
@@ -133,17 +153,26 @@ $modalForm = static function (): void { ?>
       <div class="modal-kepala"><h2>Pengajuan barang</h2>
         <button type="button" class="tutup" data-tutup aria-label="Tutup"><?= ikon('tutup', 16) ?></button></div>
       <div class="modal-isi">
-        <div class="form-baris"><label class="fl" for="pNama">Nama barang <span class="wajib">*</span></label><input type="text" id="pNama" name="nama_barang" maxlength="200" required></div>
         <div class="form-grid">
           <div class="form-baris"><label class="fl" for="pTgl">Tanggal pengajuan <span class="wajib">*</span></label><input type="date" id="pTgl" name="tanggal" required></div>
-          <div class="form-baris"><label class="fl" for="pKat">Kategori</label><select id="pKat" name="kategori"><?= pilihan(aset_kategori_formulir(), 'lainnya') ?></select></div>
-          <div class="form-baris"><label class="fl" for="pJml">Jumlah</label><input type="number" id="pJml" name="jumlah" min="1" max="100000" value="1"></div>
-          <div class="form-baris"><label class="fl" for="pSat">Satuan</label><input type="text" id="pSat" name="satuan" maxlength="20" value="unit"></div>
-          <div class="form-baris"><label class="fl" for="pHarga">Estimasi harga per unit (Rp)</label><input type="text" id="pHarga" name="estimasi_harga" inputmode="numeric" maxlength="18"></div>
           <div class="form-baris"><label class="fl" for="pPri">Prioritas</label><select id="pPri" name="prioritas"><?php foreach (ASET_PRIORITAS as $k => $d): ?><option value="<?= $k ?>"><?= e($d['label']) ?></option><?php endforeach; ?></select></div>
           <div class="form-baris"><label class="fl" for="pRuang">Ruangan tujuan</label><select id="pRuang" name="ruang_id"><?= opsi_ruang(0, '— Belum ditentukan —') ?></select></div>
           <div class="form-baris"><label class="fl" for="pPemohon">Pemohon</label><input type="text" id="pPemohon" name="pemohon" maxlength="150" placeholder="Nama / unit pemohon"></div>
         </div>
+        <div class="pengajuan-daftar-kepala"><b>Daftar barang yang diajukan</b><span class="lemah" data-item-total></span></div>
+        <div data-item-wadah>
+          <div class="pengajuan-item" data-item>
+            <div class="pi-kepala"><b data-item-nomor>Barang 1</b><button type="button" class="btn btn-hantu btn-kecil" data-item-hapus><?= ikon('hapus', 14) ?> Hapus</button></div>
+            <div class="form-baris"><label class="fl">Nama barang <span class="wajib">*</span></label><input type="text" name="item_nama[]" maxlength="200" data-item-nama></div>
+            <div class="form-grid pi-grid">
+              <div class="form-baris"><label class="fl">Kategori</label><select name="item_kategori[]"><?= pilihan(aset_kategori_formulir(), 'lainnya') ?></select></div>
+              <div class="form-baris"><label class="fl">Jumlah</label><input type="number" name="item_jumlah[]" min="1" max="100000" value="1"></div>
+              <div class="form-baris"><label class="fl">Satuan</label><input type="text" name="item_satuan[]" maxlength="20" value="unit"></div>
+              <div class="form-baris"><label class="fl">Estimasi harga per unit (Rp)</label><input type="text" name="item_harga[]" inputmode="numeric" maxlength="18"></div>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-garis btn-kecil pengajuan-tambah" data-item-tambah><?= ikon('tambah', 14) ?> Tambah barang lagi</button>
         <div class="form-baris"><label class="fl" for="pAlasan">Alasan / kebutuhan</label><textarea id="pAlasan" name="alasan" rows="3" maxlength="5000"></textarea></div>
       </div>
       <div class="modal-kaki">
@@ -163,7 +192,8 @@ if ($aksi === 'formulir') {
     }
     $subjudul = 'Formulir ' . $p['nomor'];
     $pub = aset_pengajuan_publik_info((int) $p['id']);
-    $total = $p['estimasi_harga'] !== null ? (float) $p['estimasi_harga'] * (int) $p['jumlah'] : null;
+    $semuaItem = aset_pengajuan_semua_item($p);
+    $total = aset_pengajuan_total_item($semuaItem);
     $kabiro = row("SELECT p.nama FROM pengguna p JOIN peran pr ON pr.id = p.peran_id WHERE pr.kode = 'kabiro' AND p.aktif = 1 ORDER BY p.id LIMIT 1");
     $namaPemohon = $pub['nama'] ?? trim(explode('·', (string) $p['pemohon'])[0]);
     $ttd = static function (string $atas, string $jabatan, string $nama, string $bawah = ''): string {
@@ -197,8 +227,13 @@ if ($aksi === 'formulir') {
         </table>
         <table class="ba-tabel">
           <thead><tr><th style="width:30px">No</th><th>Nama barang</th><th>Kategori</th><th style="width:80px">Jumlah</th><th style="width:120px">Harga satuan</th><th style="width:130px">Jumlah harga</th></tr></thead>
-          <tbody><tr><td style="text-align:center">1</td><td><?= e($p['nama_barang']) ?></td><td><?= e(aset_kategori(true)[$p['kategori']] ?? '-') ?></td>
-            <td style="text-align:center"><?= angka($p['jumlah']) ?> <?= e($p['satuan']) ?></td><td style="text-align:right"><?= e(aset_rupiah($p['estimasi_harga'])) ?></td><td style="text-align:right"><?= e(aset_rupiah($total)) ?></td></tr></tbody>
+          <tbody>
+          <?php foreach ($semuaItem as $no => $it): ?>
+            <tr><td style="text-align:center"><?= $no + 1 ?></td><td><?= e($it['nama_barang']) ?></td><td><?= e(aset_kategori(true)[$it['kategori']] ?? '-') ?></td>
+              <td style="text-align:center"><?= angka($it['jumlah']) ?> <?= e($it['satuan']) ?></td><td style="text-align:right"><?= e(aset_rupiah($it['estimasi_harga'])) ?></td><td style="text-align:right"><?= e(aset_rupiah($it['estimasi_harga'] !== null ? $it['estimasi_harga'] * $it['jumlah'] : null)) ?></td></tr>
+          <?php endforeach; ?>
+          <?php if (count($semuaItem) > 1): ?><tr><td colspan="5" style="text-align:right"><b>Total estimasi</b></td><td style="text-align:right"><b><?= e(aset_rupiah($total)) ?></b></td></tr><?php endif; ?>
+          </tbody>
         </table>
         <p style="margin:10px 0 4px"><b>Alasan / kebutuhan:</b></p>
         <p style="margin:0;white-space:pre-line"><?= e($p['alasan'] ?: '-') ?></p>
@@ -209,7 +244,7 @@ if ($aksi === 'formulir') {
         </div>
         <div class="ba-ttd-judul">Menyetujui,</div>
         <div class="ba-ttd ba-ttd-3">
-          <?= $ttd('&nbsp;', 'Kepala Biro Administrasi Umum dan Keuangan', (string) ($kabiro['nama'] ?? '')) ?>
+          <?= $ttd('&nbsp;', 'Kepala Biro Administrasi Umum dan Keuangan', (string) ($kabiro['nama'] ?? ASET_KABIRO['nama']), ASET_KABIRO['nomor']) ?>
           <?= $ttd('&nbsp;', 'Wakil Rektor II', ASET_WAREK2['nama'], ASET_WAREK2['nomor']) ?>
           <?= $ttd('&nbsp;', 'Rektor', ASET_REKTOR['nama'], ASET_REKTOR['nomor']) ?>
         </div>
@@ -228,7 +263,8 @@ if ($aksi === 'lihat') {
     $subjudul = $p['nomor'];
     $fotos = aset_foto_daftar('pengajuan_id', $id);
     $st = $p['status'];
-    $total = $p['estimasi_harga'] !== null ? (float) $p['estimasi_harga'] * (int) $p['jumlah'] : null;
+    $semuaItem = aset_pengajuan_semua_item($p);
+    $total = aset_pengajuan_total_item($semuaItem);
     $langkah = ['diajukan', 'disetujui', 'dibeli', 'diterima'];
     ?>
     <div class="no-cetak" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
@@ -236,9 +272,7 @@ if ($aksi === 'lihat') {
       <a class="btn btn-utama" href="<?= e(url('aset_pengajuan', ['aksi' => 'formulir', 'id' => $id])) ?>"><?= ikon('cetak', 15) ?> Cetak formulir</a>
       <?php if (in_array($st, ['diajukan', 'disetujui'], true)): ?>
         <button class="btn btn-garis" type="button" data-buka="tiraiPengajuan" data-judul="Ubah pengajuan"
-          data-isi='<?= e(json_encode(['id' => (int) $p['id'], 'nama_barang' => $p['nama_barang'], 'tanggal' => $p['tanggal'], 'kategori' => $p['kategori'], 'jumlah' => $p['jumlah'], 'satuan' => $p['satuan'],
-              'estimasi_harga' => $p['estimasi_harga'] !== null ? (string) (int) round((float) $p['estimasi_harga']) : '', 'prioritas' => $p['prioritas'], 'ruang_id' => $p['ruang_id'] ?? '',
-              'pemohon' => $p['pemohon'], 'alasan' => $p['alasan']])) ?>'><?= ikon('sunting', 15) ?> Ubah</button>
+          data-isi='<?= e(json_encode(aset_pengajuan_isi($p))) ?>'><?= ikon('sunting', 15) ?> Ubah</button>
       <?php endif; ?>
       <?php if ($st !== 'diterima'): ?>
         <form method="post" data-konfirmasi="Hapus pengajuan ini beserta foto kwitansinya?"><?= csrf_field() ?><input type="hidden" name="op" value="hapus"><input type="hidden" name="id" value="<?= $id ?>">
@@ -255,14 +289,21 @@ if ($aksi === 'lihat') {
     </div>
 
     <div class="kartu">
-      <div class="kartu-kepala"><div><h2><?= e($p['nama_barang']) ?></h2><p class="ket"><code><?= e($p['nomor']) ?></code> · diajukan <?= e(tanggal_id($p['tanggal'])) ?></p></div>
+      <div class="kartu-kepala"><div><h2><?= e($p['nama_barang']) ?><?= count($semuaItem) > 1 ? ' <span class="lemah">+ ' . (count($semuaItem) - 1) . ' barang lainnya</span>' : '' ?></h2><p class="ket"><code><?= e($p['nomor']) ?></code> · diajukan <?= e(tanggal_id($p['tanggal'])) ?></p></div>
         <div><?= lencana_dari(ASET_PRIORITAS, $p['prioritas']) ?> <?= lencana_dari(ASET_STATUS_PENGAJUAN, $st) ?></div></div>
       <div class="kartu-isi">
+        <div class="tabel-bungkus" style="margin-bottom:14px"><table class="tabel tabel-aset">
+          <thead><tr><th class="kolom-no">No</th><th>Nama barang</th><th>Kategori</th><th class="angka">Jumlah</th><th class="angka">Estimasi per unit</th><th class="angka">Estimasi total</th></tr></thead>
+          <tbody>
+          <?php foreach ($semuaItem as $no => $it): ?>
+            <tr><td class="kolom-no"><?= $no + 1 ?></td><td><b><?= e($it['nama_barang']) ?></b></td><td><?= e(aset_kategori(true)[$it['kategori']] ?? '-') ?></td>
+              <td class="angka"><?= angka($it['jumlah']) ?> <?= e($it['satuan']) ?></td><td class="angka uang"><?= e(aset_rupiah($it['estimasi_harga'])) ?></td>
+              <td class="angka uang"><?= e(aset_rupiah($it['estimasi_harga'] !== null ? $it['estimasi_harga'] * $it['jumlah'] : null)) ?></td></tr>
+          <?php endforeach; ?>
+          </tbody>
+          <?php if (count($semuaItem) > 1): ?><tfoot><tr><td colspan="5" style="text-align:right"><b>Total estimasi</b></td><td class="angka uang"><b><?= e(aset_rupiah($total)) ?></b></td></tr></tfoot><?php endif; ?>
+        </table></div>
         <div class="info-aset">
-          <div><span>Kategori</span><b><?= e(aset_kategori(true)[$p['kategori']] ?? '-') ?></b></div>
-          <div><span>Jumlah</span><b><?= angka($p['jumlah']) ?> <?= e($p['satuan']) ?></b></div>
-          <div><span>Estimasi per unit</span><b><?= e(aset_rupiah($p['estimasi_harga'])) ?></b></div>
-          <div><span>Estimasi total</span><b><?= e(aset_rupiah($total)) ?></b></div>
           <div><span>Ruangan tujuan</span><b><?= e($p['ruang_nama'] ?: '-') ?></b></div>
           <div><span>Pemohon</span><b><?= e($p['pemohon'] ?: '-') ?></b></div>
           <?php if ($pubInfo = aset_pengajuan_publik_info((int) $p['id'])): ?>
@@ -292,6 +333,7 @@ if ($aksi === 'lihat') {
         <button class="btn btn-garis" type="submit" name="putusan" value="ditolak">Tolak</button>
       </form></div></div>
     <?php elseif ($st === 'disetujui'): ?>
+    <span id="pembelian"></span>
     <div class="kartu no-cetak"><div class="kartu-kepala"><div><h2>Catat pembelian</h2></div></div><div class="kartu-isi">
       <form method="post"><?= csrf_field() ?><input type="hidden" name="op" value="dibeli"><input type="hidden" name="id" value="<?= $id ?>">
         <div class="form-grid">
@@ -354,6 +396,7 @@ $daftar = rows(
     $par
 );
 $penginput = aset_penginput('aset_pengajuan', $daftar);
+$itemTambahan = aset_pengajuan_item_tambahan_semua();
 ?>
 
 <?php $linkPublik = aset_url_mutlak('index.php?h=ajukan_barang'); ?>
@@ -387,31 +430,48 @@ $penginput = aset_penginput('aset_pengajuan', $daftar);
   <div class="kartu-kepala">
     <div><h2>Pengajuan barang</h2><p class="ket"><?= count($daftar) ?> pengajuan</p></div>
     <div class="aksi no-cetak"><button class="btn btn-utama btn-kecil" type="button" data-buka="tiraiPengajuan" data-reset data-judul="Ajukan barang"
-        data-isi='<?= e(json_encode(['id' => '', 'tanggal' => $sekarang, 'jumlah' => '1', 'satuan' => 'unit', 'kategori' => 'lainnya', 'prioritas' => 'sedang', 'pemohon' => user()['nama'] ?? '', 'ruang_id' => ''])) ?>'><?= ikon('tambah', 15) ?> Ajukan barang</button></div>
+        data-isi='<?= e(json_encode(['id' => '', 'tanggal' => $sekarang, 'prioritas' => 'sedang', 'pemohon' => user()['nama'] ?? '', 'ruang_id' => '', 'alasan' => '', 'items' => []])) ?>'><?= ikon('tambah', 15) ?> Ajukan barang</button></div>
   </div>
   <?php if (!$daftar): ?><?= sel_kosong('Belum ada pengajuan') ?>
   <?php else: ?>
   <div class="tabel-bungkus"><table class="tabel">
     <thead><tr><th>Nomor / tanggal</th><th>Barang</th><th class="angka">Jumlah</th><th class="angka">Estimasi total</th><th>Prioritas</th><th>Pemohon</th><th>Status</th><th>Diinput oleh</th><th class="no-cetak kolom-aksi">Aksi</th></tr></thead>
     <tbody>
-    <?php foreach ($daftar as $p): ?>
+    <?php foreach ($daftar as $p): $semuaItem = aset_pengajuan_semua_item($p, $itemTambahan); $totalItem = aset_pengajuan_total_item($semuaItem); ?>
       <tr>
         <td class="nowrap"><a href="<?= e(url('aset_pengajuan', ['aksi' => 'lihat', 'id' => $p['id']])) ?>"><code><?= e($p['nomor']) ?></code></a><div class="kecil lemah"><?= e(tanggal_pendek($p['tanggal'])) ?></div></td>
-        <td><b><?= e($p['nama_barang']) ?></b><div class="kecil lemah"><?= e(aset_kategori(true)[$p['kategori']] ?? '-') ?><?= $p['ruang_nama'] ? ' · ' . e($p['ruang_nama']) : '' ?></div></td>
-        <td class="angka"><?= angka($p['jumlah']) ?> <?= e($p['satuan']) ?></td>
-        <td class="angka uang"><?= $p['estimasi_harga'] !== null ? e(aset_rupiah((float) $p['estimasi_harga'] * (int) $p['jumlah'])) : '-' ?></td>
+        <td><b><?= e($p['nama_barang']) ?></b><?= count($semuaItem) > 1 ? ' <span class="lencana lencana-biru">+' . (count($semuaItem) - 1) . ' barang</span>' : '' ?><div class="kecil lemah"><?= e(aset_kategori(true)[$p['kategori']] ?? '-') ?><?= $p['ruang_nama'] ? ' · ' . e($p['ruang_nama']) : '' ?></div></td>
+        <td class="angka"><?= count($semuaItem) > 1 ? count($semuaItem) . ' jenis<div class="kecil lemah">' . angka(array_sum(array_column($semuaItem, 'jumlah'))) . ' unit</div>' : angka($p['jumlah']) . ' ' . e($p['satuan']) ?></td>
+        <td class="angka uang"><?= $totalItem !== null ? e(aset_rupiah($totalItem)) : '-' ?></td>
         <td><?= lencana_dari(ASET_PRIORITAS, $p['prioritas']) ?></td>
         <td class="kecil"><?= e($p['pemohon'] ?: '-') ?></td>
-        <td><?= lencana_dari(ASET_STATUS_PENGAJUAN, $p['status']) ?>
-          <?php if ($p['catatan_keputusan'] !== ''): ?><div class="kecil pengajuan-umpan" title="Umpan balik untuk pemohon"><?= ikon('pesan', 12) ?> <?= e(mb_strimwidth($p['catatan_keputusan'], 0, 70, '…')) ?></div><?php endif; ?></td>
+        <td class="status-pengajuan"><?= lencana_dari(ASET_STATUS_PENGAJUAN, $p['status']) ?></td>
         <td><?= aset_sel_penginput($penginput[(int) $p['id']] ?? null) ?></td>
-        <td class="no-cetak kolom-aksi"><div class="aksi-baris">
-          <a class="btn btn-hantu btn-ikon" href="<?= e(url('aset_pengajuan', ['aksi' => 'lihat', 'id' => $p['id']])) ?>" title="Lihat detail"><?= ikon('mata', 15) ?></a>
+        <td class="no-cetak kolom-aksi"><div class="aksi-baris aksi-pengajuan">
+          <span class="aksi-utama">
           <?php if ($p['status'] === 'diajukan'): ?>
             <button class="btn btn-sukses btn-kecil" type="button" data-buka="tiraiTanggapi" title="Setujui atau tolak, beri umpan balik"
-              data-isi='<?= e(json_encode(['id' => (int) $p['id'], 'judul_teks' => $p['nomor'] . ' · ' . $p['nama_barang'] . ' · ' . ($p['pemohon'] ?: '-'), 'catatan_keputusan' => $p['catatan_keputusan'], 'putusan' => 'disetujui'])) ?>'><?= ikon('pesan', 14) ?> Tanggapi</button>
+              data-isi='<?= e(json_encode(['id' => (int) $p['id'], 'judul_teks' => $p['nomor'] . ' · ' . $p['nama_barang'] . (count($semuaItem) > 1 ? ' (+' . (count($semuaItem) - 1) . ' barang)' : '') . ' · ' . ($p['pemohon'] ?: '-'), 'catatan_keputusan' => $p['catatan_keputusan'], 'putusan' => 'disetujui'])) ?>'><?= ikon('pesan', 14) ?> Tanggapi</button>
+          <?php elseif ($p['status'] === 'disetujui'): ?>
+            <a class="btn btn-utama btn-kecil" href="<?= e(url('aset_pengajuan', ['aksi' => 'lihat', 'id' => $p['id']]) . '#pembelian') ?>" title="Catat nota / kwitansi pembelian"><?= ikon('kirim', 14) ?> Catat beli</a>
+          <?php elseif ($p['status'] === 'dibeli'): ?>
+            <form method="post" data-konfirmasi="Barang sudah diterima? Semua barang pada <?= e($p['nomor']) ?> akan dicatat ke Inventaris."><?= csrf_field() ?><input type="hidden" name="op" value="diterima"><input type="hidden" name="id" value="<?= (int) $p['id'] ?>"><input type="hidden" name="kembali" value="daftar"><input type="hidden" name="f_status" value="<?= e($fStatus) ?>">
+              <button class="btn btn-utama btn-kecil" type="submit" title="Catat barang diterima ke Inventaris"><?= ikon('centang', 14) ?> Terima</button></form>
+          <?php elseif ($p['status'] === 'ditolak'): ?>
+            <form method="post"><?= csrf_field() ?><input type="hidden" name="op" value="ajukan_ulang"><input type="hidden" name="id" value="<?= (int) $p['id'] ?>"><input type="hidden" name="kembali" value="daftar"><input type="hidden" name="f_status" value="<?= e($fStatus) ?>">
+              <button class="btn btn-garis btn-kecil" type="submit" title="Buka kembali pengajuan"><?= ikon('ulang', 14) ?> Ajukan ulang</button></form>
           <?php endif; ?>
+          </span>
+          <a class="btn btn-hantu btn-ikon" href="<?= e(url('aset_pengajuan', ['aksi' => 'lihat', 'id' => $p['id']])) ?>" title="Lihat detail"><?= ikon('mata', 15) ?></a>
+          <?php if (in_array($p['status'], ['diajukan', 'disetujui'], true)): ?>
+            <button class="btn btn-hantu btn-ikon" type="button" title="Ubah" data-buka="tiraiPengajuan" data-judul="Ubah pengajuan"
+              data-isi='<?= e(json_encode(aset_pengajuan_isi($p, $itemTambahan))) ?>'><?= ikon('sunting', 15) ?></button>
+          <?php else: ?><span class="aksi-kosong" aria-hidden="true"></span><?php endif; ?>
           <a class="btn btn-hantu btn-ikon" href="<?= e(url('aset_pengajuan', ['aksi' => 'formulir', 'id' => $p['id']])) ?>" title="Cetak formulir"><?= ikon('cetak', 15) ?></a>
+          <?php if ($p['status'] !== 'diterima'): ?>
+            <form method="post" data-konfirmasi="Hapus pengajuan <?= e($p['nomor']) ?> beserta foto kwitansinya?"><?= csrf_field() ?><input type="hidden" name="op" value="hapus"><input type="hidden" name="id" value="<?= (int) $p['id'] ?>"><input type="hidden" name="kembali" value="daftar"><input type="hidden" name="f_status" value="<?= e($fStatus) ?>">
+              <button class="btn btn-hantu btn-ikon" type="submit" title="Hapus"><?= ikon('hapus', 15) ?></button></form>
+          <?php else: ?><span class="aksi-kosong" aria-hidden="true"></span><?php endif; ?>
         </div></td>
       </tr>
     <?php endforeach; ?>

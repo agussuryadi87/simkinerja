@@ -916,3 +916,29 @@ Stack trace:
 [08-Nov-2026 00:37:37 Asia/Jakarta] PHP Warning:  Undefined array key "Belum diisi" in C:\xampp\htdocs\simkinerja\pages\jad.php on line 105
 [08-Nov-2026 00:37:37 Asia/Jakarta] PHP Warning:  Undefined array key "Belum diisi" in C:\xampp\htdocs\simkinerja\pages\jad.php on line 105
 [08-Nov-2026 00:37:37 Asia/Jakarta] PHP Warning:  Undefined array key "Belum diisi" in C:\xampp\htdocs\simkinerja\pages\jad.php on line 105
+[10-Nov-2026 09:40:42 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[11-Nov-2026 07:36:25 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Undefined constant "KK_HALAMAN" in C:\xampp\htdocs\simkinerja\lib\aset.php:513
+Stack trace:
+#0 C:\Users\USER\AppData\Local\Temp\claude\bd0271cfc44c1315\5010ccf5-c8b0-469b-9be8-41392bfaabae\scratchpad\uji_cs.php(7): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\simkinerja\lib\aset.php on line 513
+[11-Nov-2026 07:36:31 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Undefined constant "KK_HALAMAN" in C:\xampp\htdocs\simkinerja\lib\aset.php:513
+Stack trace:
+#0 C:\Users\USER\AppData\Local\Temp\claude\bd0271cfc44c1315\5010ccf5-c8b0-469b-9be8-41392bfaabae\scratchpad\uji_cs.php(7): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\simkinerja\lib\aset.php on line 513
+[11-Nov-2026 07:36:35 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Undefined constant "KK_HALAMAN" in C:\xampp\htdocs\simkinerja\lib\aset.php:513
+Stack trace:
+#0 C:\Users\USER\AppData\Local\Temp\claude\bd0271cfc44c1315\5010ccf5-c8b0-469b-9be8-41392bfaabae\scratchpad\uji_cs.php(7): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\simkinerja\lib\aset.php on line 513
+[11-Nov-2026 07:36:40 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Undefined constant "KK_HALAMAN" in C:\xampp\htdocs\simkinerja\lib\aset.php:513
+Stack trace:
+#0 C:\Users\USER\AppData\Local\Temp\claude\bd0271cfc44c1315\5010ccf5-c8b0-469b-9be8-41392bfaabae\scratchpad\uji_cs.php(7): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\simkinerja\lib\aset.php on line 513
+[11-Nov-2026 08:00:15 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to undefined function ikon() in C:\xampp\htdocs\simkinerja\lib\helpers.php:482
+Stack trace:
+#0 C:\Users\USER\AppData\Local\Temp\claude\bd0271cfc44c1315\5010ccf5-c8b0-469b-9be8-41392bfaabae\scratchpad\cek_foto_cs.php(6): tautan_foto_kegiatan(301)
+#1 {main}
+  thrown in C:\xampp\htdocs\simkinerja\lib\helpers.php on line 482

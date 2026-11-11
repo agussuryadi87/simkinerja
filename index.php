@@ -47,6 +47,7 @@ $daftarHalaman = [
     'aset_ruang'      => ['Ruangan & Foto',             null],
     'aset_barang'     => ['Inventaris Barang',          null],
     'aset_pindai'     => ['Pindai QR Barang',           null],
+    'aset_foto_cek'   => ['Cek Foto Aset',              null],
     'aset_kk_ruang'   => ['Kartu Kontrol Kebersihan Ruangan', null],
     'aset_kk_ac'      => ['Kartu Pemeliharaan AC',      null],
     'aset_kk_sarana'  => ['Kartu Kontrol Inventaris Sarana', null],
