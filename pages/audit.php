@@ -296,8 +296,9 @@ $jendela = [$jendelaDok('tiraiDokAudit', 'Dokumen laporan audit', $dokumen, keu_
   <?php if (!$temuan): ?>
     <?= sel_kosong('Belum ada temuan', 'Tambahkan temuan dan rekomendasi dari laporan audit.') ?>
   <?php else: ?>
+  <?php $jejak = aset_penginput('keu_temuan', $temuan); ?>
   <div class="tabel-bungkus"><table class="tabel judul-tengah tabel-audit">
-    <thead><tr><th>Kode</th><th>Temuan dan rekomendasi</th><th>Risiko</th><th>Penanggung jawab</th><th>Tenggat</th><th>Status</th><th>Dokumen</th><th class="no-cetak kolom-aksi">Aksi</th></tr></thead>
+    <thead><tr><th>Kode</th><th>Temuan dan rekomendasi</th><th>Risiko</th><th>Penanggung jawab</th><th>Tenggat</th><th>Status</th><th class="no-cetak">Dokumen</th><th class="no-cetak kolom-aksi">Aksi</th><th class="no-cetak kolom-jejak">Diinput oleh</th></tr></thead>
     <tbody>
     <?php foreach ($temuan as $t): $r = KEU_RISIKO[$t['risiko']]; $s = KEU_STATUS_TEMUAN[$t['status']]; $dokT = keu_dok_daftar((int) $t['id'], 't'); $linkT = keu_tautan('t' . $t['id']); ?>
       <tr>
@@ -309,7 +310,7 @@ $jendela = [$jendelaDok('tiraiDokAudit', 'Dokumen laporan audit', $dokumen, keu_
         <td><?= e($t['unit_nama'] ?? '-') ?></td>
         <td class="nowrap"<?= $terlambat($t) ? ' style="color:var(--merah);font-weight:700"' : '' ?>><?= $t['tenggat'] ? e(tanggal_pendek($t['tenggat'])) : '-' ?></td>
         <td><?= lencana($s['label'], $s['warna']) ?></td>
-        <td class="sel-dok tengah"><?php $jendela[] = $jendelaDok('tiraiDokT' . (int) $t['id'], 'Dokumen temuan ' . $t['kode'], $dokT, $linkT, 'hapus_dok_temuan', (int) $t['id']); ?>
+        <td class="sel-dok tengah no-cetak"><?php $jendela[] = $jendelaDok('tiraiDokT' . (int) $t['id'], 'Dokumen temuan ' . $t['kode'], $dokT, $linkT, 'hapus_dok_temuan', (int) $t['id']); ?>
           <?= $dokT ? '<b>' . count($dokT) . '</b> dokumen' : '' ?><?= $dokT && $linkT !== '' ? ' &middot; ' : '' ?><?= $linkT !== '' ? 'link' : '' ?><?= !$dokT && $linkT === '' ? '<span class="lemah">-</span>' : '' ?>
         </td>
         <td class="no-cetak"><div class="aksi-baris" style="justify-content:center">
@@ -319,6 +320,7 @@ $jendela = [$jendelaDok('tiraiDokAudit', 'Dokumen laporan audit', $dokumen, keu_
           <form method="post" class="sebaris" data-konfirmasi="Hapus temuan ini?"><?= csrf_field() ?><input type="hidden" name="op" value="hapus_temuan"><input type="hidden" name="id" value="<?= $id ?>"><input type="hidden" name="temuan_id" value="<?= (int) $t['id'] ?>">
             <button class="btn btn-hantu btn-ikon" type="submit" title="Hapus"><?= ikon('hapus', 15) ?></button></form>
         </div></td>
+        <td class="no-cetak kecil sel-penginput"><?= aset_sel_penginput($jejak[(int) $t['id']] ?? null) ?></td>
       </tr>
     <?php endforeach; ?>
     </tbody>
@@ -390,8 +392,9 @@ else:
   <?php if (!$daftar): ?>
     <?= sel_kosong('Belum ada laporan audit tahun ' . $tahun) ?>
   <?php else: ?>
+  <?php $jejak = aset_penginput('keu_audit', $daftar); ?>
   <div class="tabel-bungkus"><table class="tabel judul-tengah tabel-audit">
-    <thead><tr><th>No</th><th>Audit</th><th>Nomor laporan</th><th>Tanggal</th><th>Opini</th><th>Tindak lanjut</th><th>Status</th><th>Link drive</th><th class="no-cetak kolom-aksi">Aksi</th></tr></thead>
+    <thead><tr><th>No</th><th>Audit</th><th>Nomor laporan</th><th>Tanggal</th><th>Opini</th><th>Tindak lanjut</th><th>Status</th><th class="no-cetak">Link drive</th><th class="no-cetak kolom-aksi">Aksi</th><th class="no-cetak kolom-jejak">Diinput oleh</th></tr></thead>
     <tbody>
     <?php foreach ($daftar as $i => $a): $n = (int) $a['n']; $sl = (int) $a['selesai']; ?>
       <tr>
@@ -402,13 +405,14 @@ else:
         <td><?= $a['opini'] !== '' ? lencana(strtoupper($a['opini']), $a['opini'] === 'wtp' ? 'hijau' : ($a['opini'] === 'wdp' ? 'emas' : 'merah')) : '<span class="lemah">-</span>' ?></td>
         <td><?= $n ? $sl . '/' . $n . ' selesai' . ((int) $a['lewat'] ? ' <span class="sub" style="color:var(--merah)">' . (int) $a['lewat'] . ' lewat tenggat</span>' : '') : '<span class="lemah">belum ada temuan</span>' ?></td>
         <td><?= lencana($a['status'] === 'selesai' ? 'Selesai' : 'Berjalan', $a['status'] === 'selesai' ? 'hijau' : 'biru') ?></td>
-        <td><?php $linkA = keu_tautan('a' . $a['id']); ?><?= $linkA !== '' ? '<a class="chip-dok chip-link" href="' . e($linkA) . '" target="_blank" rel="noopener">' . ikon('tautan', 12) . ' Buka</a>' : '<span class="lemah">-</span>' ?></td>
+        <td class="no-cetak"><?php $linkA = keu_tautan('a' . $a['id']); ?><?= $linkA !== '' ? '<a class="chip-dok chip-link" href="' . e($linkA) . '" target="_blank" rel="noopener">' . ikon('tautan', 12) . ' Buka</a>' : '<span class="lemah">-</span>' ?></td>
         <td class="no-cetak"><div class="aksi-baris">
           <a class="btn btn-garis btn-ikon" href="<?= e(url('audit', ['aksi' => 'lihat', 'id' => $a['id']])) ?>" title="Buka"><?= ikon('mata', 15) ?></a>
           <button class="btn btn-garis btn-ikon" type="button" title="Edit" data-buka="tiraiAudit" data-judul="Ubah audit" data-isi='<?= e(json_encode($nilaiAudit($a) + ['dari' => 'daftar'])) ?>'><?= ikon('sunting', 15) ?></button>
           <form method="post" class="sebaris" data-konfirmasi="Hapus audit <?= e($a['judul']) ?> beserta seluruh temuan dan dokumennya?"><?= csrf_field() ?><input type="hidden" name="op" value="hapus_audit"><input type="hidden" name="id" value="<?= (int) $a['id'] ?>">
             <button class="btn btn-hantu btn-ikon" type="submit" title="Hapus"><?= ikon('hapus', 15) ?></button></form>
         </div></td>
+        <td class="no-cetak kecil sel-penginput"><?= aset_sel_penginput($jejak[(int) $a['id']] ?? null) ?></td>
       </tr>
     <?php endforeach; ?>
     </tbody>

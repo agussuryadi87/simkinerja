@@ -1,0 +1,34 @@
+[
+    {
+        "id": "862ba3c27128",
+        "dibuat": "2026-11-14 09:38:56",
+        "dibuat_oleh": "Administrator",
+        "diubah": "2026-11-14 09:38:56",
+        "diubah_oleh": "Administrator",
+        "nama": "Hibah Penelitian Dosen Pemula",
+        "sumber": "Kemendiktisaintek",
+        "tahun": 2025,
+        "ketua": "Dr. Andi Contoh Pratama, M.Kom",
+        "diusulkan": 150000000,
+        "disetujui": 120000000,
+        "status": "selesai",
+        "tautan": "https://drive.google.com/",
+        "keterangan": "[CONTOH] Penelitian sistem informasi kinerja pegawai perguruan tinggi."
+    },
+    {
+        "id": "540b1f710fd2",
+        "dibuat": "2026-11-14 09:38:56",
+        "dibuat_oleh": "Administrator",
+        "diubah": "2026-11-14 09:38:56",
+        "diubah_oleh": "Administrator",
+        "nama": "Hibah Pengabdian Kepada Masyarakat Skema Pemberdayaan",
+        "sumber": "LLDIKTI Wilayah X",
+        "tahun": 2026,
+        "ketua": "Nurmayunita Contoh, S.E., M.M",
+        "diusulkan": 85000000,
+        "disetujui": 75000000,
+        "status": "berjalan",
+        "tautan": "https://drive.google.com/",
+        "keterangan": "[CONTOH] Pendampingan UMKM di wilayah Batam Kota."
+    }
+]

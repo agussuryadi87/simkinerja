@@ -129,7 +129,7 @@ function rapat_navigasi(string $aktif, ?int $jumlahRapat = null, int $rtlTerbuka
         'rapat_dokumen' => ['Dokumen', url('rapat_dokumen'), ''],
     ];
     $o = '<div class="aset-bilah no-cetak"><div class="sambut-latar" aria-hidden="true"><div class="matahari"></div><div class="gambar gambar-rapat"></div><div class="lapis batik"></div></div>'
-       . '<nav class="aset-nav" aria-label="Menu Tata Usaha Universitas">';
+       . '<nav class="aset-nav" aria-label="Menu Administrasi Surat">';
     foreach ($item as $kunci => [$label, $tautan, $tambahan]) {
         $o .= '<div class="aset-grup"><a href="' . e($tautan) . '"' . ($kunci === $aktif ? ' class="aktif" aria-current="page"' : '') . '>' . e($label) . $tambahan . '</a></div>';
     }

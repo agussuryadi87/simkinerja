@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $tautan[$kode] = $url;
             }
         }
+        $lamaJejak = rapb_data_prodi($ta, $prodi);
         $per = isset($_POST['realisasi_per']) ? post('realisasi_per') : (rapb_data_prodi($ta, $prodi)['realisasi_per'] ?? '');
         $ok = rapb_simpan_prodi($ta, $prodi, [
             'nilai' => $nilai,
@@ -55,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'oleh' => $oleh,
         ]);
         if ($ok) {
+            rapb_jejak_catat('p|' . $ta . '|' . $prodi, rapb_jejak_peta_prodi($lamaJejak), rapb_jejak_peta_prodi(['nilai' => $nilai, 'tautan' => $tautan]));
             catat_log('simpan_rapb_prodi', 'rapb_format', 0, $prodiInfo['nama'] . ' ' . rapb_ta_label($ta));
             flash('RAPB ' . $prodiInfo['nama'] . ' tahun anggaran ' . rapb_ta_label($ta) . ' tersimpan.');
         } else {
@@ -66,6 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             kembali_ke($h, $param);
         }
         rapb_simpan_prodi($ta, $prodi, null);
+        rapb_jejak_hapus('p|' . $ta . '|' . $prodi);
         catat_log('hapus_rapb_prodi', 'rapb_format', 0, $prodiInfo['nama'] . ' ' . rapb_ta_label($ta));
         flash('Data RAPB ' . $prodiInfo['nama'] . ' tahun anggaran ' . rapb_ta_label($ta) . ' dihapus.');
     } elseif ($op === 'salin_rapb') {
@@ -81,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             $tujuan = rapb_data_prodi($ta, $prodi) ?? [];
             rapb_simpan_prodi($ta, $prodi, ['nilai' => $nilai, 'tautan' => (array) ($tujuan['tautan'] ?? []), 'realisasi_per' => '', 'diubah' => date('Y-m-d H:i:s'), 'oleh' => $oleh]);
+            rapb_jejak_catat('p|' . $ta . '|' . $prodi, rapb_jejak_peta_prodi($tujuan ?: null), rapb_jejak_peta_prodi(['nilai' => $nilai, 'tautan' => (array) ($tujuan['tautan'] ?? [])]));
             catat_log('salin_rapb_prodi', 'rapb_format', 0, $prodiInfo['nama'] . ' ' . rapb_ta_label($ta));
             flash('Jumlah anggaran disalin dari tahun anggaran ' . rapb_ta_label(rapb_ta_geser($ta, -1)) . '. Silakan sesuaikan lalu isi realisasinya.');
             kembali_ke('rapb_prodi', $param + ['mode' => 'ubah']);
@@ -98,13 +102,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $manual[$kunci] = $v;
             }
         }
+        $lamaManual = rapb_rekap_manual($ta, $kunciRekap, $basis);
         if (rapb_rekap_simpan_manual($ta, $kunciRekap, $basis, $manual)) {
+            rapb_jejak_catat('r|' . $ta . '|' . $kunciRekap . '|' . $basis, $lamaManual, $manual);
             catat_log('simpan_rekap_upps', 'rapb_format', 0, $fakInfo['singkat'] . ' ' . rapb_ta_label($ta));
             flash('Rekap RAPB ' . $fakInfo['nama'] . ' tahun anggaran ' . rapb_ta_label($ta) . ' tersimpan.');
         } else {
             flash('Rekap tidak dapat disimpan di server.', 'galat');
         }
     } elseif ($op === 'reset_rekap') {
+        rapb_jejak_hapus('r|' . $ta . '|' . $kunciRekap . '|' . $basis);
         rapb_rekap_simpan_manual($ta, $kunciRekap, $basis, []);
         catat_log('reset_rekap_upps', 'rapb_format', 0, $fakInfo['singkat'] . ' ' . rapb_ta_label($ta));
         flash('Rekap dikembalikan ke hasil penjumlahan RAPB program studi.');
@@ -131,6 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             $tautan = array_intersect_key(rapb_impor_tautan($baca['data']) + (array) ($lama['tautan'] ?? []), rapb_item_semua());
             rapb_simpan_prodi($ta, $prodi, ['nilai' => $nilai, 'tautan' => $tautan, 'realisasi_per' => $lama['realisasi_per'] ?? '', 'diubah' => date('Y-m-d H:i:s'), 'oleh' => $oleh]);
+            rapb_jejak_catat('p|' . $ta . '|' . $prodi, rapb_jejak_peta_prodi($lama ?: null), rapb_jejak_peta_prodi(['nilai' => $nilai, 'tautan' => $tautan]));
             catat_log('impor_rapb_prodi', 'rapb_format', 0, $prodiInfo['nama'] . ' ' . rapb_ta_label($ta) . ' (' . count($impor) . ' baris)');
             flash(count($impor) . ' mata anggaran berhasil diimpor ke RAPB ' . $prodiInfo['nama'] . ' tahun anggaran ' . rapb_ta_label($ta) . '.');
         } elseif ($h === 'rapb_upps') {
@@ -148,7 +156,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     unset($manual[$kunci]);
                 }
             }
+            $lamaManualImpor = rapb_rekap_manual($ta, $kunciRekap, $basis);
             rapb_rekap_simpan_manual($ta, $kunciRekap, $basis, $manual);
+            rapb_jejak_catat('r|' . $ta . '|' . $kunciRekap . '|' . $basis, $lamaManualImpor, $manual);
             catat_log('impor_rekap_upps', 'rapb_format', 0, $fakInfo['singkat'] . ' ' . rapb_ta_label($ta) . ' (' . count($impor) . ' baris)');
             flash(count($impor) . ' baris rekap berhasil diimpor untuk ' . $fakInfo['nama'] . ' tahun anggaran ' . rapb_ta_label($ta) . '.');
         } else {
@@ -158,6 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 kembali_ke($h, $param);
             }
             $semua = lkps_data();
+            $lamaLkps = $semua;
             $jumlahBaris = 0;
             foreach (['upps' => 'f:' . $fak, 'ps' => 'p:' . $prodi] as $sisi => $unit) {
                 foreach ((array) ($impor[$sisi] ?? []) as $baris => $nilaiTs) {
@@ -176,11 +187,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
             lkps_simpan($semua);
+            foreach (['f:' . $fak, 'p:' . $prodi] as $unitJ) {
+                rapb_jejak_catat('l|' . $unitJ, rapb_jejak_peta_lkps($lamaLkps, $unitJ, $taDaftarLkps), rapb_jejak_peta_lkps($semua, $unitJ, $taDaftarLkps));
+            }
             catat_log('impor_lkps', 'rapb_format', 0, $prodiInfo['nama'] . ' TS ' . rapb_ta_label($ta));
             flash('Data LKPS berhasil diimpor (' . intdiv($jumlahBaris, 2) . ' jenis penggunaan) untuk ' . $prodiInfo['nama'] . ', TS ' . rapb_ta_label($ta) . '.');
         }
     } elseif ($op === 'simpan_lkps') {
         $semua = lkps_data();
+        $lamaLkps = $semua;
         $masuk = ['f:' . $fak => (array) ($_POST['upps'] ?? []), 'p:' . $prodi => (array) ($_POST['ps'] ?? [])];
         foreach ($masuk as $unit => $isi) {
             foreach ($taDaftarLkps as $i => $taL) {
@@ -201,6 +216,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
         if (lkps_simpan($semua)) {
+            foreach (['f:' . $fak, 'p:' . $prodi] as $unitJ) {
+                rapb_jejak_catat('l|' . $unitJ, rapb_jejak_peta_lkps($lamaLkps, $unitJ, $taDaftarLkps), rapb_jejak_peta_lkps($semua, $unitJ, $taDaftarLkps));
+            }
             catat_log('simpan_lkps', 'rapb_format', 0, $prodiInfo['nama'] . ' TS ' . rapb_ta_label($ta));
             flash('Data LKPS penggunaan dana tersimpan.');
         } else {
@@ -208,10 +226,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } elseif ($op === 'kosongkan_lkps') {
         $semua = lkps_data();
+        $lamaLkps = $semua;
         foreach ($taDaftarLkps as $taL) {
             unset($semua[$taL]['p:' . $prodi]);
         }
         lkps_simpan($semua);
+        rapb_jejak_catat('l|p:' . $prodi, rapb_jejak_peta_lkps($lamaLkps, 'p:' . $prodi, $taDaftarLkps), []);
         catat_log('kosongkan_lkps', 'rapb_format', 0, $prodiInfo['nama'] . ' TS ' . rapb_ta_label($ta));
         flash('Data LKPS program studi ' . $prodiInfo['nama'] . ' (TS-2 s.d. TS) dikosongkan.');
     }
@@ -289,7 +309,8 @@ $taLabel = rapb_ta_label($ta);
 $sel = static function (?float $n, string $kelas = ''): string {
     return '<td class="uang' . ($kelas ? ' ' . $kelas : '') . '">' . rapb_uang($n, true) . '</td>';
 };
-$barisItem = static function (string $kode, string $nama, string $grupKode) use ($data, $ubah, $sel): string {
+$jejakProdi = rapb_jejak_ruang('p|' . $ta . '|' . $prodi);
+$barisItem = static function (string $kode, string $nama, string $grupKode) use ($data, $ubah, $sel, $jejakProdi): string {
     $n = rapb_nilai_item($data, $kode);
     $o = '<tr class="r-item lipat" data-grup="' . e($grupKode) . '"><td class="r-kode">' . e($kode) . '</td><td class="r-nama">' . e($nama) . '</td>';
     if ($ubah) {
@@ -305,10 +326,11 @@ $barisItem = static function (string $kode, string $nama, string $grupKode) use 
         $o .= $sel($n['jumlah']) . $sel($n['realisasi']) . $sel($n['sisa'], $n['sisa'] < 0 ? 'minus' : '') . $sel($n['gasal']) . $sel($n['genap']);
     }
     $link = (string) ($data['tautan'][$kode] ?? '');
-    $o .= '<td class="r-link"><div class="link-isi"><input type="text" inputmode="url" autocomplete="off" spellcheck="false" name="tautan[' . e($kode) . ']" value="' . e($link) . '" placeholder="https://..." maxlength="500" data-tautan aria-label="Link dokumen ' . e($kode) . '">'
+    $o .= '<td class="r-link no-cetak"><div class="link-isi"><input type="text" inputmode="url" autocomplete="off" spellcheck="false" name="tautan[' . e($kode) . ']" value="' . e($link) . '" placeholder="https://..." maxlength="500" data-tautan aria-label="Link dokumen ' . e($kode) . '">'
         . ($link !== '' ? '<a class="link-buka" href="' . e($link) . '" target="_blank" rel="noopener" title="Buka dokumen">' . ikon('tautan', 14) . '</a>' : '') . '</div>'
         . '<span class="link-cetak">' . e($link) . '</span></td>';
-    return $o . '</tr>';
+    $adaIsi = $link !== '' || isset($data['nilai'][$kode]);
+    return $o . rapb_jejak_sel($jejakProdi[$kode] ?? null, $adaIsi) . '</tr>';
 };
 $barisTotal = static function (string $label, array $grupDaftar, string $kelas) use ($grup): string {
     $t = rapb_jumlah_grup($grup, $grupDaftar);
@@ -316,7 +338,7 @@ $barisTotal = static function (string $label, array $grupDaftar, string $kelas) 
     foreach (['jumlah', 'realisasi', 'sisa', 'gasal', 'genap'] as $k) {
         $o .= '<td class="uang" data-keluar="' . $k . '">' . rapb_rp($t[$k]) . '</td>';
     }
-    return $o . '<td class="r-link"></td></tr>';
+    return $o . '<td class="r-link no-cetak"></td><td class="no-cetak"></td></tr>';
 };
 $barisGrup = static function (string $gkey, string $kode, string $nama, int $jumlahItem) use ($grup): string {
     $t = rapb_jumlah_grup($grup, [$gkey]);
@@ -325,7 +347,7 @@ $barisGrup = static function (string $gkey, string $kode, string $nama, int $jum
     foreach (['jumlah', 'realisasi', 'sisa', 'gasal', 'genap'] as $k) {
         $o .= '<td class="uang" data-keluar="' . $k . '">' . rapb_rp($t[$k]) . '</td>';
     }
-    return $o . '<td class="r-link"></td></tr>';
+    return $o . '<td class="r-link no-cetak"></td><td class="no-cetak"></td></tr>';
 };
 ?>
 <div class="kartu rapb-alat no-cetak">
@@ -363,19 +385,19 @@ $barisGrup = static function (string $gkey, string $kode, string $nama, int $jum
     <div class="tabel-bungkus"><table class="tabel tabel-rapb-format">
       <thead>
         <tr><th>Kode Mata Anggaran</th><th>Nama Mata Anggaran</th><th>Jumlah (Rp)</th><th>Realisasi<span class="sub-judul"><?= $per ? 'per ' . e(tanggal_pendek($per)) : 'Gasal + Genap' ?></span></th>
-          <th>Sisa Anggaran</th><th>Gasal<span class="sub-judul"><?= e($taLabel) ?></span></th><th>Genap<span class="sub-judul"><?= e($taLabel) ?></span></th><th class="kolom-link">Link Dokumen</th></tr>
+          <th>Sisa Anggaran</th><th>Gasal<span class="sub-judul"><?= e($taLabel) ?></span></th><th>Genap<span class="sub-judul"><?= e($taLabel) ?></span></th><th class="kolom-link no-cetak">Link Dokumen</th><th class="no-cetak kolom-jejak">Diinput oleh</th></tr>
       </thead>
       <tbody>
-        <tr class="r-bab"><td colspan="8">PENDAPATAN</td></tr>
+        <tr class="r-bab"><td colspan="9">PENDAPATAN</td></tr>
         <?php foreach (RAPB_PENDAPATAN as [$g, $kodeG, $namaG, , $items]): ?>
           <?= $barisGrup($g, $kodeG, $namaG, count($items)) ?>
           <?php foreach ($items as [$kode, $nama]): ?><?= $barisItem($kode, $nama, $g) ?><?php endforeach; ?>
         <?php endforeach; ?>
         <?= $barisTotal('TOTAL PENDAPATAN', RAPB_KELOMPOK_TOTAL['pendapatan'], 'r-total-besar') ?>
-        <tr class="r-bab"><td colspan="8">BELANJA</td></tr>
+        <tr class="r-bab"><td colspan="9">BELANJA</td></tr>
         <?php foreach (RAPB_BELANJA as $b): ?>
           <?php if ($b[0] === 'h'): ?>
-            <tr class="r-kepala"><td class="r-kode"><?= e($b[1]) ?></td><td colspan="7"><?= e($b[2]) ?></td></tr>
+            <tr class="r-kepala"><td class="r-kode"><?= e($b[1]) ?></td><td colspan="8"><?= e($b[2]) ?></td></tr>
           <?php elseif ($b[0] === 'g'): ?>
             <?= $barisGrup($b[1], $b[2], $b[3], count($b[4])) ?>
             <?php foreach ($b[4] as [$kode, $nama]): ?><?= $barisItem($kode, $nama, $b[1]) ?><?php endforeach; ?>
@@ -409,6 +431,27 @@ $barisGrup = static function (string $gkey, string $kode, string $nama, int $jum
 $sus = rapb_rekap_susun($ta, $fak, $basis, $prodiRekap);
 $gab = ['terisi' => $sus['terisi']];
 $manual = rapb_rekap_manual($ta, $kunciRekap, $basis);
+$jejakRekap = rapb_jejak_ruang('r|' . $ta . '|' . $kunciRekap . '|' . $basis);
+$selRekap = static function (?array $kr, ?array $kn) use ($jejakRekap): string {
+    $kunci = [];
+    foreach ([$kr, $kn] as $r) {
+        if ($r && $r[0] === 'item') {
+            $kunci[] = $r[3];
+        }
+    }
+    if (!$kunci) {
+        return '<td class="no-cetak kecil sel-penginput"></td>';
+    }
+    $terbaru = null;
+    foreach ($kunci as $k) {
+        $e = $jejakRekap[$k] ?? null;
+        $w = $e ? (string) (($e['ubah']['waktu'] ?? '') ?: ($e['tambah']['waktu'] ?? '')) : '';
+        if ($e && ($terbaru === null || $w > $terbaru[0])) {
+            $terbaru = [$w, $e];
+        }
+    }
+    return $terbaru ? '<td class="no-cetak kecil sel-penginput">' . aset_sel_penginput($terbaru[1]) . '</td>' : '<td class="no-cetak kecil sel-penginput"><span class="lemah kecil">Otomatis</span></td>';
+};
 $nilai = [];
 foreach ($sus['hitung'] as $k => $v) {
     $nilai[$k] = array_key_exists($k, $manual) ? (float) $manual[$k] : $v;
@@ -475,14 +518,14 @@ $sisi = static function (?array $r) use ($nilai, $manual, $kotakJumlah): string 
 <div class="kartu lembar-rapb">
   <?= rapb_kop('RENCANA ANGGARAN PENDAPATAN DAN BELANJA', [mb_strtoupper($fakInfo['nama']) . ($prodiRekap !== '' ? ' (PRODI: ' . mb_strtoupper(RAPB_PRODI[$prodiRekap]['nama']) . ')' : ''), 'TAHUN ANGGARAN ' . rapb_ta_label($ta), $basis === 'realisasi' ? '(BERDASARKAN REALISASI)' : '']) ?>
   <div class="tabel-bungkus"><table class="tabel tabel-rekap-upps">
-    <thead><tr><th>No.</th><th>U R A I A N</th><th>JUMLAH</th><th>No.</th><th>U R A I A N</th><th>JUMLAH</th></tr></thead>
+    <thead><tr><th>No.</th><th>U R A I A N</th><th>JUMLAH</th><th>No.</th><th>U R A I A N</th><th>JUMLAH</th><th class="no-cetak kolom-jejak">Diinput oleh</th></tr></thead>
     <tbody>
       <?php for ($i = 0; $i < $barisMaks; $i++): ?>
-        <tr><?= $sisi($kiri[$i] ?? null) ?><?= preg_replace('/^<td/', '<td data-sisi-kanan', $sisi($kanan[$i] ?? null)) ?></tr>
+        <tr><?= $sisi($kiri[$i] ?? null) ?><?= preg_replace('/^<td/', '<td data-sisi-kanan', $sisi($kanan[$i] ?? null)) ?><?= $selRekap($kiri[$i] ?? null, $kanan[$i] ?? null) ?></tr>
       <?php endfor; ?>
     </tbody>
     <tfoot><tr><td colspan="2" class="u-gabung">T o t a l &nbsp; P e n d a p a t a n</td><?= $kotakJumlah($sus['kunci_kiri'], 'u-total') ?>
-      <td colspan="2" class="u-gabung" data-sisi-kanan>T o t a l &nbsp; B e l a n j a</td><?= $kotakJumlah($sus['kunci_kanan'], 'u-total') ?></tr></tfoot>
+      <td colspan="2" class="u-gabung" data-sisi-kanan>T o t a l &nbsp; B e l a n j a</td><?= $kotakJumlah($sus['kunci_kanan'], 'u-total') ?><td class="no-cetak"></td></tr></tfoot>
   </table></div>
   <div class="rapb-ttd">
     <div>Batam, ..............................</div>
@@ -502,7 +545,7 @@ $sisi = static function (?array $r) use ($nilai, $manual, $kotakJumlah): string 
 <div class="kartu no-cetak">
   <div class="kartu-kepala"><h2><?= ikon('rekap', 18) ?> Rincian per program studi</h2></div>
   <div class="tabel-bungkus"><table class="tabel judul-tengah tabel-rekap-tengah">
-    <thead><tr><th class="kolom-no">No</th><th>Program studi</th><th>Total pendapatan</th><th>Total belanja</th><th>Selisih</th><th>Realisasi belanja</th><th>Status</th><th class="kolom-aksi">Aksi</th></tr></thead>
+    <thead><tr><th class="kolom-no">No</th><th>Program studi</th><th>Total pendapatan</th><th>Total belanja</th><th>Selisih</th><th>Realisasi belanja</th><th>Status</th><th class="kolom-aksi">Aksi</th><th>Diinput oleh</th></tr></thead>
     <tbody>
     <?php foreach ($prodiFak as $n => $k): $dp = rapb_data_prodi($ta, $k); $gp = rapb_hitung_grup($dp);
         $tp = rapb_jumlah_grup($gp, RAPB_KELOMPOK_TOTAL['pendapatan']); $tb = rapb_jumlah_grup($gp, RAPB_KELOMPOK_TOTAL['belanja']); $selisih = $tp['jumlah'] - $tb['jumlah']; ?>
@@ -515,6 +558,7 @@ $sisi = static function (?array $r) use ($nilai, $manual, $kotakJumlah): string 
         <td><?= $tb['jumlah'] > 0 ? angka($tb['realisasi'] / $tb['jumlah'] * 100, 1) . '%' : '-' ?></td>
         <td><?= $dp ? lencana('Sudah diisi', 'hijau') : lencana('Belum diisi', 'abu') ?></td>
         <td><a class="btn btn-garis btn-kecil" href="<?= e(url('rapb_prodi', ['fakultas' => $fak, 'prodi' => $k, 'ta' => $ta])) ?>">Buka <?= ikon('kanan', 13) ?></a></td>
+        <td class="kecil sel-penginput"><?php if ($dp && !empty($dp['oleh'])): ?><b><?= e($dp['oleh']) ?></b><div class="kecil lemah"><?= e(tanggal_pendek(substr((string) $dp['diubah'], 0, 10)) . ' ' . substr((string) $dp['diubah'], 11, 5)) ?></div><?php endif; ?></td>
       </tr>
     <?php endforeach; ?>
     </tbody>
@@ -526,6 +570,26 @@ $sisi = static function (?array $r) use ($nilai, $manual, $kotakJumlah): string 
 $semuaLkps = lkps_data();
 $hUpps = lkps_hitung($semuaLkps, $taDaftarLkps, 'f:' . $fak);
 $hPs = lkps_hitung($semuaLkps, $taDaftarLkps, 'p:' . $prodi);
+$jejakF = rapb_jejak_ruang('l|f:' . $fak);
+$jejakP = rapb_jejak_ruang('l|p:' . $prodi);
+$selJejakLkps = static function (string $baris) use ($jejakF, $jejakP, $semuaLkps, $taDaftarLkps, $fak, $prodi): string {
+    $ada = false;
+    foreach ($taDaftarLkps as $taL) {
+        if (isset($semuaLkps[$taL]['f:' . $fak][$baris]) || isset($semuaLkps[$taL]['p:' . $prodi][$baris])) {
+            $ada = true;
+        }
+    }
+    if (!$ada) {
+        return '<td class="no-cetak kecil sel-penginput"></td>';
+    }
+    $w = static function (?array $e): string {
+        return $e ? (string) (($e['ubah']['waktu'] ?? '') ?: ($e['tambah']['waktu'] ?? '')) : '';
+    };
+    $f = $jejakF[$baris] ?? null;
+    $p = $jejakP[$baris] ?? null;
+    $pilih = $f && (!$p || $w($f) > $w($p)) ? $f : $p;
+    return '<td class="no-cetak kecil sel-penginput">' . aset_sel_penginput($pilih) . '</td>';
+};
 $adaLkps = false;
 foreach ($taDaftarLkps as $taL) {
     if (!empty($semuaLkps[$taL]['p:' . $prodi]) || !empty($semuaLkps[$taL]['f:' . $fak])) {
@@ -582,7 +646,7 @@ foreach (LKPS_BARIS as $b) {
     <?= rapb_kop('PENGGUNAAN DANA', [mb_strtoupper($fakInfo['nama']) . ' (PRODI: ' . mb_strtoupper($prodiInfo['nama']) . ')', 'TS = TAHUN AKADEMIK ' . rapb_ta_label($ta)]) ?>
     <div class="tabel-bungkus"><table class="tabel tabel-lkps">
       <thead>
-        <tr><th rowspan="2">No.</th><th rowspan="2">Jenis Penggunaan</th><th colspan="4">Unit Pengelola Program Studi (Rupiah)</th><th colspan="4">Program Studi (Rupiah)</th></tr>
+        <tr><th rowspan="2">No.</th><th rowspan="2">Jenis Penggunaan</th><th colspan="4">Unit Pengelola Program Studi (Rupiah)</th><th colspan="4">Program Studi (Rupiah)</th><th rowspan="3" class="no-cetak kolom-jejak">Diinput oleh</th></tr>
         <tr>
           <?php for ($s = 0; $s < 2; $s++): ?>
             <?php foreach (['TS-2', 'TS-1', 'TS'] as $i => $lbl): ?><th><?= $lbl ?><span class="sub-judul"><?= e(rapb_ta_label($taDaftarLkps[$i])) ?></span></th><?php endforeach; ?><th>Rata-rata</th>
@@ -607,13 +671,13 @@ foreach (LKPS_BARIS as $b) {
         ?>
         <?php foreach (LKPS_BARIS as $i => $b): ?>
           <?php if ($b[0] === 'judul'): $ikutJudul = $rentangNo[$i] - 1; ?>
-            <tr class="l-judul"><td class="tengah l-no"<?= $rentangNo[$i] > 1 ? ' rowspan="' . $rentangNo[$i] . '"' : '' ?>><?= e($b[1]) ?></td><td colspan="9"><?= e($b[2]) ?></td></tr>
+            <tr class="l-judul"><td class="tengah l-no"<?= $rentangNo[$i] > 1 ? ' rowspan="' . $rentangNo[$i] . '"' : '' ?>><?= e($b[1]) ?></td><td colspan="9"><?= e($b[2]) ?></td><td class="no-cetak"></td></tr>
           <?php elseif ($b[0] === 'item'): $gabung = $ikutJudul > 0 && empty($b[3]); if ($gabung) { $ikutJudul--; } else { $ikutJudul = 0; } ?>
             <tr><?php if (!$gabung): ?><td class="tengah l-no"><?= e($b[3] ?? '') ?></td><?php endif; ?><td class="l-uraian"><?= e($b[2]) ?></td>
-              <?= $selLkps($hUpps, $b[1], 'upps', true) ?><?= $selLkps($hPs, $b[1], 'ps', true) ?></tr>
+              <?= $selLkps($hUpps, $b[1], 'upps', true) ?><?= $selLkps($hPs, $b[1], 'ps', true) ?><?= $selJejakLkps($b[1]) ?></tr>
           <?php else: ?>
             <tr class="<?= $b[0] === 'total' ? 'l-total' : 'l-jumlah' ?>"><td colspan="2"><?= e($b[2]) ?></td>
-              <?= $selLkps($hUpps, $b[1], 'upps', false) ?><?= $selLkps($hPs, $b[1], 'ps', false) ?></tr>
+              <?= $selLkps($hUpps, $b[1], 'upps', false) ?><?= $selLkps($hPs, $b[1], 'ps', false) ?><td class="no-cetak"></td></tr>
           <?php endif; ?>
         <?php endforeach; ?>
       </tbody>

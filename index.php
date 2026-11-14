@@ -14,6 +14,7 @@ require __DIR__ . '/lib/qr_sederhana.php';
 require __DIR__ . '/lib/jad.php';
 require __DIR__ . '/lib/keu.php';
 require __DIR__ . '/lib/dokumen.php';
+require __DIR__ . '/lib/hibah.php';
 require __DIR__ . '/lib/xlsx_sederhana.php';
 require __DIR__ . '/lib/rapb_format.php';
 
@@ -29,8 +30,8 @@ $daftarHalaman = [
     'pengembangan' => ['Penghargaan & Pengembangan',     'menu_pengembangan'],
     'laporan'      => ['Laporan Kinerja',                'menu_laporan'],
     'absensi'      => ['Laporan Absensi',                'menu_absensi'],
-    'rapat'        => ['Tata Usaha Universitas',        'menu_rapat'],
-    'rapat_dokumen' => ['Dokumen Tata Usaha Universitas', 'menu_rapat'],
+    'rapat'        => ['Administrasi Surat',        'menu_rapat'],
+    'rapat_dokumen' => ['Dokumen Administrasi Surat', 'menu_rapat'],
     'keu_dokumen'  => ['Dokumen Bidang Keuangan',        null],
     'jad_dokumen'  => ['Dokumen Kepegawaian & BKD',      null],
     'jad'          => ['Rekap Perkembangan Data Dosen',           null],
@@ -38,6 +39,8 @@ $daftarHalaman = [
     'jad_karyawan' => ['Data Karyawan',                           null],
     'jad_eligible' => ['Dosen Eligible',                          null],
     'hibah'        => ['Perencanaan dan Hibah',       'menu_hibah'],
+    'hibah_rekap'  => ['Rekap Hibah',                 'menu_hibah'],
+    'hibah_dokumen' => ['Dokumen Perencanaan dan Hibah', 'menu_hibah'],
     'rapb'         => ['RAPB',                                    null],
     'rapb_prodi'   => ['RAPB Program Studi',                      null],
     'rapb_upps'    => ['Rekap RAPB UPPS',                         null],
@@ -143,9 +146,7 @@ if ($izin !== null) {
 $subjudul = '';
 $aksiJudul = '';
 $berkasHalaman = $h;
-if ($h === 'hibah') {
-    $berkasHalaman = 'segera';
-} elseif (in_array($h, keu_halaman_aktif(), true)) {
+if (in_array($h, keu_halaman_aktif(), true)) {
     wajib_keu();
 } elseif (in_array($h, jad_halaman_aktif(), true)) {
     wajib_jad();

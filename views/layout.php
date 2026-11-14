@@ -76,7 +76,7 @@ $menuAdmin = can_salah_satu(['pengguna_kelola', 'peran_kelola', 'unit_kelola', '
   (function () { var t = 'kantor'; try { t = localStorage.getItem('simkin.tema') || 'kantor'; } catch (e) {} if (t !== 'hijau') document.documentElement.classList.add('tema-kantor'); try { localStorage.removeItem('simkin.penuh'); } catch (e) {} if (window.top !== window.self) document.documentElement.classList.add('layar-penuh', 'dalam-bingkai'); })();
 </script>
 </head>
-<body data-hal="<?= e($h) ?>" class="<?= in_array($h, ['kegiatan', 'pantau', 'evaluasi', 'pengembangan', 'pengguna', 'peran', 'unit', 'periode', 'absensi', 'laporan', 'rapb_lkps', 'jad_data', 'jad_eligible', 'aset_kk_rekap'], true) ? 'lanskap' : (in_array($h, ['rapb_prodi', 'rapb_upps'], true) ? 'rapb-a4' : '') ?>">
+<body data-hal="<?= e($h) ?>" class="<?= in_array($h, ['kegiatan', 'pantau', 'evaluasi', 'pengembangan', 'pengguna', 'peran', 'unit', 'periode', 'absensi', 'laporan', 'rapb_lkps', 'hibah', 'hibah_rekap', 'hibah_dokumen', 'jad_data', 'jad_eligible', 'aset_kk_rekap'], true) ? 'lanskap' : (in_array($h, ['rapb_prodi', 'rapb_upps'], true) ? 'rapb-a4' : '') ?>">
 <div class="tata-letak" id="tataLetak">
 <script nonce="<?= csp_nonce() ?>">
   try { if (localStorage.getItem('simkin.ciut') === '1') document.getElementById('tataLetak').classList.add('ringkas'); } catch (e) {}
@@ -123,7 +123,7 @@ $menuAdmin = can_salah_satu(['pengguna_kelola', 'peran_kelola', 'unit_kelola', '
 
     <?php $bolehKk = !$bolehAset && kk_boleh(); ?>
     <?php if ($bolehAset || $bolehKk || $bolehKeu || $bolehJad || can_salah_satu(['menu_rapat', 'menu_hibah'])): ?>
-    <?php grup_awal('Modul Layanan', 'terintegrasi', array_merge(['rapat', 'rapat_dokumen', 'hibah'], keu_halaman_aktif(), jad_halaman_aktif(), aset_halaman_aktif())); ?>
+    <?php grup_awal('Modul Layanan', 'terintegrasi', array_merge(['rapat', 'rapat_dokumen', 'hibah', 'hibah_rekap', 'hibah_dokumen'], keu_halaman_aktif(), jad_halaman_aktif(), aset_halaman_aktif())); ?>
       <?php $keuAktif = in_array($h, keu_halaman_aktif(), true); ?>
       <?php if ($bolehKeu): ?>
       <a href="<?= e(url('rapb')) ?>"<?= $keuAktif ? ' class="aktif"' : '' ?> title="Bidang Keuangan"><?= ikon('audit', 18) ?><span>Bidang Keuangan</span></a>
@@ -138,9 +138,9 @@ $menuAdmin = can_salah_satu(['pengguna_kelola', 'peran_kelola', 'unit_kelola', '
       <a href="<?= e(url('aset')) ?>"<?= in_array($h, aset_halaman_aktif(), true) ? ' class="aktif"' : '' ?> title="Sarana dan Prasarana"><?= ikon('aset', 18) ?><span>Sarana dan Prasarana</span></a>
       <?php endif; ?>
       <?php if (can('menu_rapat')): ?>
-      <a href="<?= e(url('rapat')) ?>"<?= in_array($h, ['rapat', 'rapat_dokumen'], true) ? ' class="aktif"' : '' ?> title="Tata Usaha Universitas"><?= ikon('grup', 18) ?><span>Tata Usaha Universitas</span><?= $rtlTerbukaMenu > 0 ? '<span class="lencana">' . $rtlTerbukaMenu . '</span>' : '' ?></a>
+      <a href="<?= e(url('rapat')) ?>"<?= in_array($h, ['rapat', 'rapat_dokumen'], true) ? ' class="aktif"' : '' ?> title="Administrasi Surat"><?= ikon('grup', 18) ?><span>Administrasi Surat</span><?= $rtlTerbukaMenu > 0 ? '<span class="lencana">' . $rtlTerbukaMenu . '</span>' : '' ?></a>
       <?php endif; ?>
-      <?php if (can('menu_hibah')) menu('hibah', 'Perencanaan dan Hibah', 'hibah'); ?>
+      <?php if (can('menu_hibah')): ?><a href="<?= e(url('hibah')) ?>"<?= in_array($h, ['hibah', 'hibah_rekap', 'hibah_dokumen'], true) ? ' class="aktif"' : '' ?> title="Perencanaan dan Hibah"><?= ikon('hibah', 18) ?><span>Perencanaan dan Hibah</span></a><?php endif; ?>
     </nav>
     <?php endif; ?>
 

@@ -4,7 +4,8 @@ const DOKUMEN_MODUL = [
     'keu_dokumen'   => ['kode' => 'keu',   'nama' => 'Bidang Keuangan'],
     'jad_dokumen'   => ['kode' => 'jad',   'nama' => 'Kepegawaian & BKD'],
     'aset_dokumen'  => ['kode' => 'aset',  'nama' => 'Sarana dan Prasarana'],
-    'rapat_dokumen' => ['kode' => 'rapat', 'nama' => 'Tata Usaha Universitas'],
+    'rapat_dokumen' => ['kode' => 'rapat', 'nama' => 'Administrasi Surat'],
+    'hibah_dokumen' => ['kode' => 'hibah', 'nama' => 'Perencanaan dan Hibah'],
 ];
 
 const DOKUMEN_KATEGORI = [
@@ -42,6 +43,7 @@ function dokumen_boleh(string $kode): bool
         case 'jad':   return boleh_jad();
         case 'aset':  return boleh_aset();
         case 'rapat': return can('menu_rapat');
+        case 'hibah': return can('menu_hibah');
     }
     return false;
 }

@@ -138,6 +138,8 @@ $warnaJenis = ['pdf' => 'merah', 'doc' => 'biru', 'docx' => 'biru', 'xls' => 'hi
 $subjudul = 'Dokumen ' . $modul['nama'];
 if ($kode === 'rapat') {
     echo rapat_navigasi($h);
+} elseif ($kode === 'hibah') {
+    echo hibah_navigasi($h);
 }
 ?>
 
@@ -172,7 +174,7 @@ if ($kode === 'rapat') {
     <?= sel_kosong($semua ? 'Tidak ada dokumen yang cocok' : 'Belum ada dokumen', $semua ? 'Coba kata kunci lain atau hapus filter.' : 'Klik "Tambah dokumen" untuk mengunggah pedoman, SOP, panduan, atau tautan dokumen pertama.') ?>
   <?php else: ?>
   <div class="tabel-bungkus"><table class="tabel tabel-dokumen">
-    <thead><tr><th>No</th><th>Dokumen</th><th>Kategori</th><th>Tahun</th><th>Berkas / Link</th><th>Diperbarui</th><th class="no-cetak kolom-aksi">Aksi</th></tr></thead>
+    <thead><tr><th>No</th><th>Dokumen</th><th>Kategori</th><th>Tahun</th><th<?= $kode === 'keu' ? ' class="no-cetak"' : '' ?>>Berkas / Link</th><th>Diperbarui</th><th class="no-cetak kolom-aksi">Aksi</th><?php if ($kode === 'keu'): ?><th class="no-cetak kolom-jejak">Diinput oleh</th><?php endif; ?></tr></thead>
     <tbody>
     <?php foreach ($hasil as $i => $d):
         $urlBerkas = !empty($d['berkas']) ? base_url('index.php?' . http_build_query(['h' => 'berkas', 'j' => 'dok_' . $kode, 'n' => $d['berkas']])) : '';
@@ -189,7 +191,7 @@ if ($kode === 'rapat') {
         </td>
         <td class="tengah"><span class="dok-kat dok-kat-<?= e($d['kategori'] ?? 'lainnya') ?>"><?= e(DOKUMEN_KATEGORI[$d['kategori'] ?? 'lainnya'] ?? 'Lainnya') ?></span></td>
         <td class="tengah"><?= !empty($d['tahun']) ? (int) $d['tahun'] : '-' ?></td>
-        <td class="tengah nowrap">
+        <td class="tengah nowrap<?= $kode === 'keu' ? ' no-cetak' : '' ?>">
           <?php if ($urlBerkas): ?><a href="<?= e($urlBerkas) ?>" target="_blank" rel="noopener" class="dok-berkas"><?= lencana(DOKUMEN_JENIS[$d['ext']] ?? strtoupper((string) $d['ext']), $warnaJenis[$d['ext']] ?? 'abu') ?><small><?= angka(((int) ($d['ukuran'] ?? 0)) / 1048576, ((int) ($d['ukuran'] ?? 0)) < 1048576 ? 2 : 1) ?> MB</small></a><?php endif; ?>
           <?php if (($d['tautan'] ?? '') !== ''): ?><a href="<?= e($d['tautan']) ?>" target="_blank" rel="noopener" class="chip-dok chip-link"><?= ikon('tautan', 12) ?> Link</a><?php endif; ?>
         </td>
@@ -208,6 +210,7 @@ if ($kode === 'rapat') {
             <input type="hidden" name="f_q" value="<?= e($q) ?>"><input type="hidden" name="f_kategori" value="<?= e($fKategori) ?>"><input type="hidden" name="f_tahun" value="<?= $fTahun ?: '' ?>">
             <button class="btn btn-hantu btn-ikon" type="submit" title="Hapus"><?= ikon('hapus', 15) ?></button></form>
         </div></td>
+        <?php if ($kode === 'keu'): $wk = static function (string $w): string { return strlen($w) >= 16 ? tanggal_pendek(substr($w, 0, 10)) . ' ' . substr($w, 11, 5) : ''; }; ?><td class="no-cetak kecil sel-penginput"><b><?= e($d['dibuat_oleh'] ?? 'Data awal') ?></b><div class="kecil lemah"><?= e($wk((string) ($d['dibuat'] ?? ''))) ?></div><?php if (($d['diubah'] ?? '') !== ($d['dibuat'] ?? '') && !empty($d['diubah_oleh'])): ?><div class="kecil lemah">Diubah: <?= e($d['diubah_oleh']) ?>, <?= e($wk((string) $d['diubah'])) ?></div><?php endif; ?></td><?php endif; ?>
       </tr>
     <?php endforeach; ?>
     </tbody>

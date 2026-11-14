@@ -315,6 +315,94 @@ function rapb_tulis_json(string $nama, array $data): bool
     return true;
 }
 
+function rapb_jejak_norm($v)
+{
+    if (is_array($v)) {
+        return array_map('rapb_jejak_norm', $v);
+    }
+    return is_numeric($v) ? round((float) $v, 2) : $v;
+}
+
+function rapb_jejak_ruang(string $ruang): array
+{
+    $semua = rapb_baca_json('jejak.json');
+    return is_array($semua[$ruang] ?? null) ? $semua[$ruang] : [];
+}
+
+function rapb_jejak_catat(string $ruang, array $lama, array $baru): void
+{
+    $semua = rapb_baca_json('jejak.json');
+    $ada = is_array($semua[$ruang] ?? null) ? $semua[$ruang] : [];
+    $info = ['nama' => (string) (user()['nama'] ?? 'Pengguna'), 'waktu' => date('Y-m-d H:i:s')];
+    $berubah = false;
+    foreach ($baru as $k => $v) {
+        $k = (string) $k;
+        if (!array_key_exists($k, $lama)) {
+            $ada[$k] = ['tambah' => $info];
+            $berubah = true;
+        } elseif (json_encode(rapb_jejak_norm($lama[$k])) !== json_encode(rapb_jejak_norm($v))) {
+            $ada[$k] = ($ada[$k] ?? []) + [];
+            $ada[$k]['ubah'] = $info;
+            $berubah = true;
+        }
+    }
+    foreach ($lama as $k => $_) {
+        if (!array_key_exists($k, $baru) && isset($ada[(string) $k])) {
+            unset($ada[(string) $k]);
+            $berubah = true;
+        }
+    }
+    if (!$berubah) {
+        return;
+    }
+    if ($ada) {
+        $semua[$ruang] = $ada;
+    } else {
+        unset($semua[$ruang]);
+    }
+    rapb_tulis_json('jejak.json', $semua);
+}
+
+function rapb_jejak_hapus(string $ruang): void
+{
+    $semua = rapb_baca_json('jejak.json');
+    if (isset($semua[$ruang])) {
+        unset($semua[$ruang]);
+        rapb_tulis_json('jejak.json', $semua);
+    }
+}
+
+function rapb_jejak_peta_prodi(?array $d): array
+{
+    $p = [];
+    foreach ((array) ($d['nilai'] ?? []) as $k => $v) {
+        $p[(string) $k]['n'] = $v;
+    }
+    foreach ((array) ($d['tautan'] ?? []) as $k => $u) {
+        $p[(string) $k]['t'] = $u;
+    }
+    return $p;
+}
+
+function rapb_jejak_peta_lkps(array $semua, string $unit, array $taDaftar): array
+{
+    $p = [];
+    foreach ($taDaftar as $i => $ta) {
+        foreach ((array) ($semua[$ta][$unit] ?? []) as $baris => $v) {
+            $p[(string) $baris][$i] = $v;
+        }
+    }
+    return $p;
+}
+
+function rapb_jejak_sel(?array $e, bool $adaData = true): string
+{
+    if (!$adaData && !$e) {
+        return '<td class="no-cetak kecil sel-penginput"></td>';
+    }
+    return '<td class="no-cetak kecil sel-penginput">' . aset_sel_penginput($e) . '</td>';
+}
+
 function rapb_data_ta(string $ta): array
 {
     return rapb_ta_sah($ta) ? rapb_baca_json('rapb-' . $ta . '.json') : [];
