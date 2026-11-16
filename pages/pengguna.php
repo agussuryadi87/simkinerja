@@ -51,11 +51,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $galat[] = 'Pengguna tidak ditemukan.';
         } elseif ($id && $id !== $saya && !boleh_kelola_akun($id)) {
             $galat[] = 'Anda tidak berwenang mengubah akun dengan hak akses melebihi hak akses Anda.';
-        } elseif ($id && $id !== $saya && akun_terkunci($id)) {
-            $galat[] = 'Akun administrator hanya dapat diubah oleh pemiliknya sendiri.';
+        } elseif ($id && $id !== $saya && akun_terkunci($id) && !akun_terkunci($saya)) {
+            $galat[] = 'Akun administrator hanya dapat diubah oleh sesama administrator atau pemiliknya sendiri.';
         } else {
             if ($id && akun_terkunci($id)) {
                 $username = $data['username'] = $lamaUser['username'];
+            }
+            if ($lamaUser && $id === $saya) {
+                $data['peran_id'] = (int) $lamaUser['peran_id'];
             }
             $peranBerubah = !$lamaUser || (int) $lamaUser['peran_id'] !== $data['peran_id'];
             if ($peranBerubah && !peran_boleh_diberikan($data['peran_id'])) {

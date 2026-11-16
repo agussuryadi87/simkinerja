@@ -1240,6 +1240,9 @@ html:where(.tema-kantor):not(#_) table.tabel thead th, html:where(.tema-kantor):
 html:where(.tema-kantor):not(#_) table.tabel thead th.sub-kolom { background: #1d4278 !important; }
 html:where(.tema-kantor):not(#_) table.tabel.tabel-absensi thead th.ab-tgl.ab-akhir-pekan { background: #c9d4e3 !important; color: #14305a !important; }
 }
+@media print {
+html:where(.tema-kantor):not(#_):not(#_) body a.bukti-link, html:where(.tema-kantor):not(#_):not(#_) body .sub a[href] { color: #1f5fbf !important; }
+}
 
 html.tema-kantor {
   --gelap: #0b2545; --ungu: #0b2545; --ungu-50: #eef2f8;
@@ -1866,3 +1869,8 @@ html.tema-kantor body td.sel-penginput > b, html.tema-kantor body td.sel-penginp
 html.tema-kantor body .aset-bilah:not(.rapb-subbilah) { padding: 4px 16px 5px !important; min-height: 0 !important; }
 html.tema-kantor body .aset-bilah:not(.rapb-subbilah) .aset-nav { min-height: 0 !important; margin: 0 !important; padding: 0 !important; align-items: center; }
 html.tema-kantor body .aset-bilah:not(.rapb-subbilah) .aset-nav a { padding: 4px 14px !important; line-height: 1.25 !important; }
+.bukti-url { display: none; }
+@media print {
+  html.tema-kantor body a.bukti-link, html.tema-kantor body .sub a[href] { color: #1f5fbf !important; text-decoration: underline !important; }
+  html.tema-kantor body a.bukti-link .bukti-url { display: inline !important; font-size: .9em; word-break: break-all; overflow-wrap: anywhere; }
+}

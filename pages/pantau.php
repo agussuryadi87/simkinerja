@@ -288,7 +288,7 @@ $ringPeriode = ringkasan_kegiatan($pid, $timIds);
             <?php if ($k['kepanitiaan']): ?><span class="sub"><?= ikon('grup', 13) ?> <?= e($k['kepanitiaan']) ?></span><?php endif; ?>
             <?php if ($k['pemberi_tugas']): ?><span class="sub"><?= ikon('petir', 13) ?> <?= e($k['pemberi_tugas']) ?></span><?php endif; ?>
             <?php if ($k['hasil']): ?><span class="sub">Hasil: <?= e($k['hasil']) ?></span><?php endif; ?>
-            <?php if ($k['tautan_bukti']): ?><span class="sub"><a href="<?= e($k['tautan_bukti']) ?>" target="_blank" rel="noopener"><?= ikon('tautan', 13) ?> Bukti</a></span><?php endif; ?><?= tautan_foto_kegiatan((int) $k['id']) ?></td>
+            <?php if ($k['tautan_bukti']): ?><span class="sub"><?= tautan_bukti_html((string) $k['tautan_bukti']) ?></span><?php endif; ?><?= tautan_foto_kegiatan((int) $k['id']) ?></td>
           <td><?= lencana_jenis($k['jenis']) ?></td>
           <td><?= e($k['satuan']) ?></td>
           <td><div class="aksi-baris">
@@ -372,7 +372,7 @@ $ringPeriode = ringkasan_kegiatan($pid, $timIds);
               <?php if ($k['kepanitiaan']): ?><span class="sub"><?= ikon('grup', 13) ?> <?= e($k['kepanitiaan']) ?></span><?php endif; ?>
               <?php if ($k['pemberi_tugas']): ?><span class="sub"><?= ikon('petir', 13) ?> <?= e($k['pemberi_tugas']) ?></span><?php endif; ?>
               <?php if ($k['hasil']): ?><span class="sub">Hasil: <?= e($k['hasil']) ?> (<?= e($k['satuan']) ?>)</span><?php endif; ?>
-              <?php if ($k['tautan_bukti']): ?><span class="sub"><a href="<?= e($k['tautan_bukti']) ?>" target="_blank" rel="noopener"><?= ikon('tautan', 13) ?> Bukti</a></span><?php endif; ?><?= tautan_foto_kegiatan((int) $k['id']) ?>
+              <?php if ($k['tautan_bukti']): ?><span class="sub"><?= tautan_bukti_html((string) $k['tautan_bukti']) ?></span><?php endif; ?><?= tautan_foto_kegiatan((int) $k['id']) ?>
               <?php if ($k['catatan_atasan']): ?><span class="sub"><?= ikon('pesan', 13) ?> <?= e($k['catatan_atasan']) ?></span><?php endif; ?></td>
             <td><?= lencana_jenis($k['jenis']) ?></td>
             <td><?= lencana_status_kegiatan($k) ?></td>

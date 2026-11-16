@@ -966,3 +966,43 @@ Stack trace:
 [11-Nov-2026 15:22:55 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
 [11-Nov-2026 15:22:57 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
 [14-Nov-2026 09:30:02 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[16-Nov-2026 11:48:57 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[16-Nov-2026 11:51:54 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[16-Nov-2026 11:53:12 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [1044] Access denied for user 'simkinerja_app'@'localhost' to database 'simkinerja_bauk'
+[16-Nov-2026 11:53:48 Asia/Jakarta] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000]: General error: 2006 MySQL server has gone away in C:\xampp\htdocs\simkinerja\lib\db.php:37
+Stack trace:
+#0 C:\xampp\htdocs\simkinerja\lib\db.php(37): PDO->prepare('INSERT INTO `pe...')
+#1 C:\xampp\htdocs\simkinerja\lib\db.php(64): q('INSERT INTO `pe...', Array)
+#2 C:\Users\USER\AppData\Local\Temp\claude\bd0271cfc44c1315\5010ccf5-c8b0-469b-9be8-41392bfaabae\scratchpad\uji_izin.php(15): insert('peran_izin', Array)
+#3 {main}
+  thrown in C:\xampp\htdocs\simkinerja\lib\db.php on line 37
+[16-Nov-2026 11:53:54 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[16-Nov-2026 11:54:56 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2006] MySQL server has gone away
+[16-Nov-2026 11:54:58 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[16-Nov-2026 11:55:07 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[16-Nov-2026 11:55:37 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[16-Nov-2026 11:55:45 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[16-Nov-2026 11:56:07 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[16-Nov-2026 11:56:37 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[16-Nov-2026 11:57:03 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[16-Nov-2026 11:57:07 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[16-Nov-2026 11:57:14 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[16-Nov-2026 11:57:37 Asia/Jakarta] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000]: General error: 2006 MySQL server has gone away in C:\xampp\htdocs\simkinerja\lib\db.php:38
+Stack trace:
+#0 C:\xampp\htdocs\simkinerja\lib\db.php(38): PDOStatement->execute(Array)
+#1 C:\Users\USER\AppData\Local\Temp\claude\bd0271cfc44c1315\5010ccf5-c8b0-469b-9be8-41392bfaabae\scratchpad\uji_izin.php(53): q('DELETE FROM log...', Array)
+#2 {main}
+  thrown in C:\xampp\htdocs\simkinerja\lib\db.php on line 38
+[16-Nov-2026 11:57:42 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[16-Nov-2026 11:57:45 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[16-Nov-2026 11:58:03 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[16-Nov-2026 11:58:08 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[16-Nov-2026 11:58:30 Asia/Jakarta] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000]: General error: 2006 MySQL server has gone away in C:\xampp\htdocs\simkinerja\lib\db.php:37
+Stack trace:
+#0 C:\xampp\htdocs\simkinerja\lib\db.php(37): PDO->prepare('SELECT id FROM ...')
+#1 C:\xampp\htdocs\simkinerja\lib\db.php(44): q('SELECT id FROM ...', Array)
+#2 C:\Users\USER\AppData\Local\Temp\claude\bd0271cfc44c1315\5010ccf5-c8b0-469b-9be8-41392bfaabae\scratchpad\uji_izin.php(42): rows('SELECT id FROM ...')
+#3 {main}
+  thrown in C:\xampp\htdocs\simkinerja\lib\db.php on line 37
+[16-Nov-2026 11:58:33 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[16-Nov-2026 11:59:03 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it

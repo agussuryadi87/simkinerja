@@ -3769,3 +3769,8 @@ html:not(#_) td.sel-penginput > b, html:not(#_) td.sel-penginput > div:first-of-
 html:not(#_):not(#_) .aset-bilah:not(.rapb-subbilah) { padding: 4px 16px 5px !important; min-height: 0 !important; }
 html:not(#_):not(#_) .aset-bilah:not(.rapb-subbilah) .aset-nav { min-height: 0 !important; margin: 0 !important; padding: 0 !important; align-items: center; }
 html:not(#_):not(#_) .aset-bilah:not(.rapb-subbilah) .aset-nav a { padding: 4px 14px !important; line-height: 1.25 !important; }
+.bukti-url { display: none; }
+@media print {
+  html:not(#_):not(#_) body a.bukti-link, html:not(#_):not(#_) body .sub a[href] { color: #1f5fbf !important; text-decoration: underline !important; }
+  html:not(#_):not(#_) body a.bukti-link .bukti-url { display: inline !important; font-size: .9em; word-break: break-all; overflow-wrap: anywhere; }
+}

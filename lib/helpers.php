@@ -238,6 +238,18 @@ function tautan_sah(string $url): bool
     return $url === '' || (filter_var($url, FILTER_VALIDATE_URL) && preg_match('~^https?://~i', $url));
 }
 
+function tautan_bukti_html(string $url, string $label = 'Bukti'): string
+{
+    $url = trim($url);
+    if ($url === '') {
+        return '';
+    }
+    if (!preg_match('~^https?://~i', $url)) {
+        $url = 'https://' . ltrim($url, '/');
+    }
+    return '<a class="bukti-link" href="' . e($url) . '" target="_blank" rel="noopener">' . ikon('tautan', 13) . ' ' . e($label) . '<span class="bukti-url"> ' . e($url) . '</span></a>';
+}
+
 function lencana(string $label, string $warna = 'abu'): string
 {
     return '<span class="lc lc-' . e($warna) . '">' . e($label) . '</span>';
