@@ -210,7 +210,7 @@ if ($kode === 'rapat') {
             <input type="hidden" name="f_q" value="<?= e($q) ?>"><input type="hidden" name="f_kategori" value="<?= e($fKategori) ?>"><input type="hidden" name="f_tahun" value="<?= $fTahun ?: '' ?>">
             <button class="btn btn-hantu btn-ikon" type="submit" title="Hapus"><?= ikon('hapus', 15) ?></button></form>
         </div></td>
-        <?php if ($kode === 'keu'): $wk = static function (string $w): string { return strlen($w) >= 16 ? tanggal_pendek(substr($w, 0, 10)) . ' ' . substr($w, 11, 5) : ''; }; ?><td class="no-cetak kecil sel-penginput"><b><?= e($d['dibuat_oleh'] ?? 'Data awal') ?></b><div class="kecil lemah"><?= e($wk((string) ($d['dibuat'] ?? ''))) ?></div><?php if (($d['diubah'] ?? '') !== ($d['dibuat'] ?? '') && !empty($d['diubah_oleh'])): ?><div class="kecil lemah">Diubah: <?= e($d['diubah_oleh']) ?>, <?= e($wk((string) $d['diubah'])) ?></div><?php endif; ?></td><?php endif; ?>
+        <?php if ($kode === 'keu'): $ij = !empty($d['diubah_oleh']) ? ['nama' => $d['diubah_oleh'], 'waktu' => (string) ($d['diubah'] ?? '')] : ['nama' => (string) ($d['dibuat_oleh'] ?? ''), 'waktu' => (string) ($d['dibuat'] ?? '')]; ?><td class="no-cetak kecil sel-penginput"><?= $ij['nama'] !== '' ? keu_sel_terakhir(['tambah' => $ij]) : keu_sel_terakhir(null) ?></td><?php endif; ?>
       </tr>
     <?php endforeach; ?>
     </tbody>

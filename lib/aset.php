@@ -131,7 +131,7 @@ function aset_penginput(string $objek, array $daftar): array
             $nama[(int) $p['id']] = $p['nama'];
         }
     }
-    $publik = $objek === 'aset_pengajuan' ? aset_publik_baca('pengajuan-publik.json') : [];
+    $publik = $objek === 'aset_pengajuan' ? aset_publik_baca('pengajuan-publik.json') : ($objek === 'aset_kerusakan' ? aset_publik_baca('kerusakan-publik.json') : []);
     foreach ($daftar as $b) {
         if (!empty($b['dibuat_oleh'])) {
             $hasil[(int) $b['id']]['tambah'] = ['nama' => $nama[(int) $b['dibuat_oleh']] ?? 'Pengguna terhapus', 'waktu' => (string) ($b['dibuat'] ?? '')];

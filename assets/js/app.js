@@ -1335,3 +1335,44 @@
   }
   [tgl, ruang].forEach(function (el) { if (el) el.addEventListener('change', muat); });
 })();
+
+(function () {
+  var ths = document.querySelectorAll('th.kolom-jejak');
+  if (!ths.length) return;
+  var kunci = 'simkin.jejak.tutup';
+  var tutup = false;
+  try { tutup = localStorage.getItem(kunci) === '1'; } catch (e) {}
+  var tombolSemua = [];
+  var terapkan = function () {
+    document.querySelectorAll('table').forEach(function (t) {
+      if (t.querySelector('th.kolom-jejak')) t.classList.toggle('jejak-tutup', tutup);
+    });
+    tombolSemua.forEach(function (b) {
+      b.setAttribute('aria-expanded', tutup ? 'false' : 'true');
+      b.title = tutup ? 'Tampilkan kolom Diinput oleh' : 'Sembunyikan kolom Diinput oleh';
+      b.querySelector('.jejak-panah').textContent = tutup ? '\u25C2' : '\u25B8';
+    });
+  };
+  ths.forEach(function (th) {
+    var teks = th.textContent.trim();
+    th.textContent = '';
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'jejak-tombol';
+    var s = document.createElement('span');
+    s.className = 'jejak-teks';
+    s.textContent = teks;
+    var p = document.createElement('span');
+    p.className = 'jejak-panah';
+    b.appendChild(s);
+    b.appendChild(p);
+    b.addEventListener('click', function () {
+      tutup = !tutup;
+      try { localStorage.setItem(kunci, tutup ? '1' : '0'); } catch (e) {}
+      terapkan();
+    });
+    th.appendChild(b);
+    tombolSemua.push(b);
+  });
+  terapkan();
+})();

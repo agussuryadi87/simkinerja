@@ -320,7 +320,7 @@ $jendela = [$jendelaDok('tiraiDokAudit', 'Dokumen laporan audit', $dokumen, keu_
           <form method="post" class="sebaris" data-konfirmasi="Hapus temuan ini?"><?= csrf_field() ?><input type="hidden" name="op" value="hapus_temuan"><input type="hidden" name="id" value="<?= $id ?>"><input type="hidden" name="temuan_id" value="<?= (int) $t['id'] ?>">
             <button class="btn btn-hantu btn-ikon" type="submit" title="Hapus"><?= ikon('hapus', 15) ?></button></form>
         </div></td>
-        <td class="no-cetak kecil sel-penginput"><?= aset_sel_penginput($jejak[(int) $t['id']] ?? null) ?></td>
+        <td class="no-cetak kecil sel-penginput"><?= keu_sel_terakhir($jejak[(int) $t['id']] ?? null) ?></td>
       </tr>
     <?php endforeach; ?>
     </tbody>
@@ -412,7 +412,7 @@ else:
           <form method="post" class="sebaris" data-konfirmasi="Hapus audit <?= e($a['judul']) ?> beserta seluruh temuan dan dokumennya?"><?= csrf_field() ?><input type="hidden" name="op" value="hapus_audit"><input type="hidden" name="id" value="<?= (int) $a['id'] ?>">
             <button class="btn btn-hantu btn-ikon" type="submit" title="Hapus"><?= ikon('hapus', 15) ?></button></form>
         </div></td>
-        <td class="no-cetak kecil sel-penginput"><?= aset_sel_penginput($jejak[(int) $a['id']] ?? null) ?></td>
+        <td class="no-cetak kecil sel-penginput"><?= keu_sel_terakhir($jejak[(int) $a['id']] ?? null) ?></td>
       </tr>
     <?php endforeach; ?>
     </tbody>

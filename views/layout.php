@@ -73,7 +73,7 @@ $menuAdmin = can_salah_satu(['pengguna_kelola', 'peran_kelola', 'unit_kelola', '
 <link rel="stylesheet" href="<?= e(aset('assets/css/app.css')) ?>">
 <link rel="stylesheet" href="<?= e(aset('assets/css/tema-kantor.css')) ?>">
 <script nonce="<?= csp_nonce() ?>">
-  (function () { var t = 'kantor'; try { t = localStorage.getItem('simkin.tema') || 'kantor'; } catch (e) {} if (t !== 'hijau') document.documentElement.classList.add('tema-kantor'); try { localStorage.removeItem('simkin.penuh'); } catch (e) {} if (window.top !== window.self) document.documentElement.classList.add('layar-penuh', 'dalam-bingkai'); })();
+  (function () { var t = 'kantor'; try { t = localStorage.getItem('simkin.tema') || 'kantor'; } catch (e) {} if (t !== 'hijau') document.documentElement.classList.add('tema-kantor'); try { localStorage.removeItem('simkin.penuh'); } catch (e) {} if (window.top !== window.self) document.documentElement.classList.add('layar-penuh', 'dalam-bingkai'); try { var sk = Math.min(1.2, Math.max(0.68, (window.screen.width || 1536) / 1920)); document.documentElement.style.setProperty('--skala', sk.toFixed(3)); } catch (e) {} })();
 </script>
 </head>
 <body data-hal="<?= e($h) ?>" class="<?= in_array($h, ['kegiatan', 'pantau', 'evaluasi', 'pengembangan', 'pengguna', 'peran', 'unit', 'periode', 'absensi', 'laporan', 'rapb_lkps', 'hibah', 'hibah_rekap', 'hibah_dokumen', 'jad_data', 'jad_eligible', 'aset_kk_rekap'], true) ? 'lanskap' : (in_array($h, ['rapb_prodi', 'rapb_upps'], true) ? 'rapb-a4' : '') ?>">

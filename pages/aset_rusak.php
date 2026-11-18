@@ -320,7 +320,24 @@ $daftar = rows(
     $par
 );
 $penginput = aset_penginput('aset_kerusakan', $daftar);
+$linkPublik = aset_url_mutlak('index.php?h=lapor_rusak');
 ?>
+<div class="notif notif-info no-cetak link-publik"><?= ikon('tautan', 17) ?>
+  <div><b>Link formulir pelaporan kerusakan untuk pelapor</b>
+    <div class="link-publik-baris"><input type="text" readonly value="<?= e($linkPublik) ?>" id="linkPublik" aria-label="Link formulir pelaporan kerusakan">
+      <button class="btn btn-garis btn-kecil" type="button" id="salinLinkPublik"><?= ikon('tautan', 14) ?> Salin</button>
+      <a class="btn btn-garis btn-kecil" href="<?= e($linkPublik) ?>" target="_blank" rel="noopener"><?= ikon('mata', 14) ?> Buka</a></div></div></div>
+<script nonce="<?= csp_nonce() ?>">
+  (function () {
+    var t = document.getElementById('salinLinkPublik'), i = document.getElementById('linkPublik');
+    if (!t || !i) return;
+    t.addEventListener('click', function () {
+      var ok = function () { var a = t.innerHTML; t.textContent = 'Tersalin'; setTimeout(function () { t.innerHTML = a; }, 1600); };
+      if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(i.value).then(ok); }
+      else { i.select(); try { document.execCommand('copy'); ok(); } catch (e) {} }
+    });
+  })();
+</script>
 <form method="get" class="saring">
   <input type="hidden" name="h" value="<?= e($h) ?>">
   <div class="form-baris" style="flex:1"><label class="fl">Cari</label><input type="search" name="cari" value="<?= e($cari) ?>" placeholder="Nomor, ringkasan, <?= $jenis === 'sarana' ? 'barang' : 'ruangan' ?>, atau pelapor"></div>

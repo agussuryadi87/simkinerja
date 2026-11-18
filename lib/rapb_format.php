@@ -395,12 +395,23 @@ function rapb_jejak_peta_lkps(array $semua, string $unit, array $taDaftar): arra
     return $p;
 }
 
+function keu_sel_terakhir(?array $e): string
+{
+    $i = $e['ubah'] ?? ($e['tambah'] ?? null);
+    if (!$i) {
+        return '<span class="lemah kecil">Data awal</span>';
+    }
+    $w = (string) ($i['waktu'] ?? '');
+    $waktu = strlen($w) >= 16 ? tanggal_pendek(substr($w, 0, 10)) . ' ' . substr($w, 11, 5) : '';
+    return '<b>' . e((string) ($i['nama'] ?? '')) . '</b><div class="kecil lemah">' . e($waktu) . '</div>';
+}
+
 function rapb_jejak_sel(?array $e, bool $adaData = true): string
 {
     if (!$adaData && !$e) {
         return '<td class="no-cetak kecil sel-penginput"></td>';
     }
-    return '<td class="no-cetak kecil sel-penginput">' . aset_sel_penginput($e) . '</td>';
+    return '<td class="no-cetak kecil sel-penginput">' . keu_sel_terakhir($e) . '</td>';
 }
 
 function rapb_data_ta(string $ta): array

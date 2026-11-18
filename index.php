@@ -107,6 +107,11 @@ if ($h === 'ajukan_barang') {
     exit;
 }
 
+if ($h === 'lapor_rusak') {
+    require __DIR__ . '/pages/lapor_rusak.php';
+    exit;
+}
+
 wajib_masuk();
 
 if (!is_string($h)) {

@@ -1006,3 +1006,18 @@ Stack trace:
   thrown in C:\xampp\htdocs\simkinerja\lib\db.php on line 37
 [16-Nov-2026 11:58:33 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
 [16-Nov-2026 11:59:03 Asia/Jakarta] Gagal terhubung ke basis data: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[18-Nov-2026 15:17:16 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Undefined constant "KK_HALAMAN" in C:\xampp\htdocs\simkinerja\lib\aset.php:513
+Stack trace:
+#0 C:\Users\USER\AppData\Local\Temp\claude\bd0271cfc44c1315\5010ccf5-c8b0-469b-9be8-41392bfaabae\scratchpad\bersih_rusak.php(5): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\simkinerja\lib\aset.php on line 513
+[18-Nov-2026 15:17:19 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Undefined constant "KK_HALAMAN" in C:\xampp\htdocs\simkinerja\lib\aset.php:513
+Stack trace:
+#0 C:\Users\USER\AppData\Local\Temp\claude\bd0271cfc44c1315\5010ccf5-c8b0-469b-9be8-41392bfaabae\scratchpad\bersih_rusak.php(5): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\simkinerja\lib\aset.php on line 513
+[18-Nov-2026 15:17:23 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Undefined constant "KK_HALAMAN" in C:\xampp\htdocs\simkinerja\lib\aset.php:513
+Stack trace:
+#0 C:\Users\USER\AppData\Local\Temp\claude\bd0271cfc44c1315\5010ccf5-c8b0-469b-9be8-41392bfaabae\scratchpad\bersih_rusak.php(5): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\simkinerja\lib\aset.php on line 513

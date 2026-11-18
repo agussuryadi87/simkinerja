@@ -450,7 +450,7 @@ $selRekap = static function (?array $kr, ?array $kn) use ($jejakRekap): string {
             $terbaru = [$w, $e];
         }
     }
-    return $terbaru ? '<td class="no-cetak kecil sel-penginput">' . aset_sel_penginput($terbaru[1]) . '</td>' : '<td class="no-cetak kecil sel-penginput"><span class="lemah kecil">Otomatis</span></td>';
+    return $terbaru ? '<td class="no-cetak kecil sel-penginput">' . keu_sel_terakhir($terbaru[1]) . '</td>' : '<td class="no-cetak kecil sel-penginput"><span class="lemah kecil">Otomatis</span></td>';
 };
 $nilai = [];
 foreach ($sus['hitung'] as $k => $v) {
@@ -588,7 +588,7 @@ $selJejakLkps = static function (string $baris) use ($jejakF, $jejakP, $semuaLkp
     $f = $jejakF[$baris] ?? null;
     $p = $jejakP[$baris] ?? null;
     $pilih = $f && (!$p || $w($f) > $w($p)) ? $f : $p;
-    return '<td class="no-cetak kecil sel-penginput">' . aset_sel_penginput($pilih) . '</td>';
+    return '<td class="no-cetak kecil sel-penginput">' . keu_sel_terakhir($pilih) . '</td>';
 };
 $adaLkps = false;
 foreach ($taDaftarLkps as $taL) {
